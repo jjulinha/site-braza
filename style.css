@@ -1,15 +1,16 @@
-/* style.css (DEBUG VERSION) */
+/* style.css (FINAL VERSION) */
 
 /* --- Variáveis de Cor e Fontes --- */
 :root {
     --cor-fundo: #111111;
-    --cor-primaria-vermelho: #E53935; /* Vermelho mais vibrante */
-    --cor-acento-amarelo: #FFB300; /* Amarelo/Laranja mais "aceso" */
+    --cor-primaria-vermelho: #E53935;
+    --cor-acento-amarelo: #FFB300;
     --cor-texto-principal: #F5F5F5;
+    --cor-texto-secundario: #aaaaaa;
 
-    /* Novas fontes */
-    --fonte-headline: 'Thunder', sans-serif;
-    --fonte-subheadline: 'Big Shoulders Display', cursive;
+    /* Hierarquia final de fontes */
+    --fonte-splash: 'Thunder', sans-serif;
+    --fonte-headline: 'Anton', sans-serif;
     --fonte-corpo: 'Inter', sans-serif;
 }
 
@@ -22,7 +23,7 @@
     transition: opacity 1s ease-out;
 }
 .splash-logo {
-    font-family: var(--fonte-headline);
+    font-family: var(--fonte-splash);
     font-size: clamp(3rem, 15vw, 8rem);
     color: var(--cor-texto-principal);
     letter-spacing: 8px;
@@ -32,9 +33,7 @@
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
         text-shadow:
         0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
-        0 0 40px var(--cor-primaria-vermelho), 0 0 80px var(--cor-primaria-vermelho),
-        0 0 90px var(--cor-primaria-vermelho), 0 0 100px var(--cor-primaria-vermelho),
-        0 0 150px var(--cor-primaria-vermelho);
+        0 0 40px var(--cor-primaria-vermelho), 0 0 80px var(--cor-primaria-vermelho);
     }
     20%, 24%, 55% { text-shadow: none; }
 }
@@ -52,7 +51,12 @@ body {
 body.no-scroll { overflow: hidden; }
 a { color: var(--cor-texto-principal); text-decoration: none; }
 
-/* --- ANIMAÇÃO DE SCROLL REMOVIDA PARA DEBUG --- */
+/* --- Animação de Scroll REATIVADA --- */
+.reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 /* --- Layout Principal --- */
 header, section, footer { padding: 100px 6%; max-width: 1600px; margin: 0 auto; position: relative; }
@@ -60,10 +64,9 @@ header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
     padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.8), transparent);
 }
-header .logo h1 { font-family: var(--fonte-headline); font-size: 3rem; color: var(--cor-acento-amarelo); }
-header nav ul { display: flex; list-style: none; gap: 30px; }
-header nav ul li a { font-family: var(--fonte-subheadline); font-size: 1.2rem; letter-spacing: 1px; }
-header nav ul li a:hover { color: var(--cor-acento-amarelo); text-shadow: 0 0 5px var(--cor-acento-amarelo); }
+header .logo h1 { font-family: var(--fonte-splash); font-size: 3rem; color: var(--cor-acento-amarelo); }
+header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 
 /* --- Seção Hero --- */
 #hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
@@ -79,8 +82,9 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); text-shadow: 0 0 5p
 .hero-content { z-index: 2; }
 .hero-title {
     font-family: var(--fonte-headline);
-    font-size: clamp(3.5rem, 10vw, 9rem);
-    line-height: 0.9;
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 1.1;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--cor-texto-principal);
 }
@@ -88,8 +92,8 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); text-shadow: 0 0 5p
 
 /* --- Títulos de Seção --- */
 .section-title {
-    font-family: var(--fonte-subheadline);
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-family: var(--fonte-headline);
+    font-size: clamp(2.5rem, 8vw, 5rem);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 50px;
@@ -99,46 +103,43 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); text-shadow: 0 0 5p
 
 /* --- Seção Serviços --- */
 .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.servico-item {
-    background: #1a1a1a; padding: 25px;
-    transition: transform 0.3s;
-}
-.servico-item:hover { transform: skewX(-5deg); background: var(--cor-primaria-vermelho); }
-.servico-item h3 { font-family: var(--fonte-subheadline); font-size: 1.8rem; }
+.servico-item { background: #1a1a1a; padding: 25px; transition: transform 0.3s; }
+.servico-item:hover { transform: scale(1.05); background: var(--cor-primaria-vermelho); }
+.servico-item h3 { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1.5rem; }
 
 /* --- Portfólio --- */
-.portfolio-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
 .portfolio-item { position: relative; cursor: pointer; overflow: hidden; }
-.portfolio-item:nth-child(2) { margin-top: 100px; }
-.portfolio-item:nth-child(3) { margin-top: 50px; }
-.portfolio-item img { width: 100%; display: block; filter: grayscale(1); transition: 0.4s; }
+.portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: 0.4s; }
 .portfolio-item:hover img { filter: grayscale(0); transform: scale(1.05); }
-.portfolio-item .overlay h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; }
+.portfolio-item .overlay h3 { font-family: var(--fonte-headline); font-size: 2rem; letter-spacing: 1px; position: absolute; bottom: 20px; left: 20px; }
 
 /* --- Seção Planos --- */
 .planos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 .plano-card {
-    background-color: var(--cor-fundo); border: 2px solid #333;
+    background-color: #1a1a1a; border: 2px solid #333;
     padding: 30px; display: flex; flex-direction: column;
 }
 .plano-card:hover { border-color: var(--cor-acento-amarelo); }
-.plano-header h3 { font-family: var(--fonte-subheadline); font-size: 2.5rem; color: var(--cor-acento-amarelo); }
+.plano-header h3 { font-family: var(--fonte-headline); font-size: 2.2rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); }
 .plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin-bottom: 30px; }
-.plano-features { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+.plano-features { list-style: none; margin-bottom: 30px; flex-grow: 1; font-family: var(--fonte-corpo); }
 .plano-features li { padding: 10px 0; border-bottom: 1px dashed #444; }
-.plano-preco { font-family: var(--fonte-subheadline); font-size: 3rem; text-align: right; }
+.plano-preco { font-family: var(--fonte-headline); font-size: 2.5rem; text-align: right; }
 
 /* --- Footer --- */
 footer { text-align: center; }
 .social-links a {
-    font-family: var(--fonte-subheadline);
-    font-size: 1.5rem; padding: 15px 30px; letter-spacing: 2px;
+    font-family: var(--fonte-corpo);
+    font-weight: 700;
+    font-size: 1.2rem; padding: 15px 30px; letter-spacing: 2px;
+    text-transform: uppercase;
     background: var(--cor-acento-amarelo); color: var(--cor-fundo);
-    display: inline-block; margin: 0 10px; transition: 0.3s;
+    display: inline-block; margin: 10px; transition: 0.3s;
 }
-.social-links a:hover { background: var(--cor-texto-principal); transform: scale(1.1) rotate(-3deg); }
+.social-links a:hover { background: var(--cor-texto-principal); transform: scale(1.1); }
 .copyright { margin-top: 80px; font-family: var(--fonte-corpo); color: #666; }
 
 /* --- Modal --- */
 .modal-content { background: var(--cor-fundo); }
-.close-button { color: var(--cor-primaria-vermelho); }
+.close-button { color: var(--cor-primaria-vermelho); font-size: 40px; }
