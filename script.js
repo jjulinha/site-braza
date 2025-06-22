@@ -2,9 +2,28 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA ANIMAÇÃO DE SCROLL ---
-    const revealElements = document.querySelectorAll('.reveal');
+    // --- LÓGICA PARA A SPLASH SCREEN ---
+    const splashScreen = document.getElementById('splash-screen');
+    const body = document.body;
 
+    // Impede o scroll enquanto a splash screen está visível
+    body.classList.add('no-scroll');
+
+    setTimeout(() => {
+        splashScreen.classList.add('hidden');
+        // Libera o scroll
+        body.classList.remove('no-scroll');
+
+        // Opcional: remove o elemento da DOM após a transição para performance
+        splashScreen.addEventListener('transitionend', () => {
+            splashScreen.remove();
+        });
+
+    }, 3000); // 3000 milissegundos = 3 segundos
+
+
+    // --- LÓGICA PARA ANIMAÇÃO DE SCROLL (continua igual) ---
+    const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -12,15 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.1 // O elemento é revelado quando 10% dele está visível
+        threshold: 0.1
     });
-
     revealElements.forEach(elem => {
         revealObserver.observe(elem);
     });
 
 
-    // --- LÓGICA PARA O MODAL DE VÍDEO ---
+    // --- LÓGICA PARA O MODAL DE VÍDEO (continua igual) ---
     const modal = document.getElementById('video-modal');
     const iframe = document.getElementById('video-iframe');
     const closeButton = document.querySelector('.close-button');
@@ -30,8 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             const videoId = item.getAttribute('data-video-id');
             if (videoId) {
-                // Monta a URL para o embed do YouTube com autoplay
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                iframe.src = `https://www.youtube.com/embed/$${videoId}?autoplay=1&rel=0`;
                 modal.classList.add('active');
             }
         });
@@ -39,13 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeModal = () => {
         modal.classList.remove('active');
-        // Importante: para o vídeo de tocar quando o modal for fechado
         iframe.src = "";
     }
 
     closeButton.addEventListener('click', closeModal);
 
-    // Fecha o modal se o usuário clicar fora do conteúdo do vídeo
     modal.addEventListener('click', (event) => {
         if (event.target === modal) {
             closeModal();
