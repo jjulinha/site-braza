@@ -1,1 +1,19 @@
-
+<script src="three.r134.min.js"></script>
+<script src="vanta.fog.min.js"></script>
+<script>
+VANTA.FOG({
+  el: "#your-element-selector",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  highlightColor: 0x3f0000,
+  midtoneColor: 0x560500,
+  lowlightColor: 0x472d2d,
+  baseColor: 0x0,
+  blurFactor: 0.63,
+  speed: 0.50,
+  zoom: 1.30
+})
+</script>
