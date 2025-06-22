@@ -1,6 +1,4 @@
-/* style.css (ATUALIZAÇÃO GERAL DE ESTILO) */
-
-/* ... (Variáveis, Splash, Reset, Animação, Layout, Header, Hero e Títulos continuam iguais) ... */
+/* style.css (VERSÃO COMPLETA E CORRIGIDA) */
 :root {
     --cor-fundo: #111111;
     --cor-primaria-vermelho: #E53935;
@@ -64,8 +62,12 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .hero-title .highlight {
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
-    padding: 0 0.2em;
+    padding: 0.1em 0.3em;
+    display: inline-block;
 }
+.highlight.highlight-1 { clip-path: polygon(0 0, 100% 15%, 95% 100%, 0 85%); }
+.highlight.highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
+.highlight.highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 .no-wrap { white-space: nowrap; }
 .section-title {
     font-family: var(--fonte-headline);
@@ -76,8 +78,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
-
-/* --- Seção Serviços (NOVO ESTILO) --- */
 #servicos { background-color: #1a1a1a; }
 .servicos-lista { display: flex; flex-direction: column; counter-reset: servicos; }
 .servico-item-lista {
@@ -97,8 +97,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .servico-item-lista:hover { background-color: rgba(0,0,0,0.2); }
 .servico-texto h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-texto-principal); margin-bottom: 10px; }
 .servico-texto p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
-
-/* --- Portfólio (NOVO ESTILO DE HOVER) --- */
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
 .portfolio-grid:hover .portfolio-item:not(:hover) { opacity: 0.4; transform: scale(0.98); }
 .portfolio-item { position: relative; cursor: pointer; overflow: hidden; transition: opacity 0.4s, transform 0.4s; }
@@ -111,8 +109,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 }
 .portfolio-item:hover .overlay { transform: translateY(0); }
 .portfolio-item .overlay h3 { font-family: var(--fonte-headline); font-size: 2rem; letter-spacing: 1px; text-transform: uppercase; }
-
-/* --- Seção Clientes (LETREIRO ANIMADO) --- */
 #clientes { padding: 60px 0; }
 .clientes-scroller {
     max-width: 100vw;
@@ -133,8 +129,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
 }
-
-/* --- Seção Planos (ESTILO ATUALIZADO) --- */
 #planos { background-color: #1a1a1a; }
 .planos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
 .plano-card {
@@ -155,8 +149,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin: 10px 0 30px 0; }
 .plano-features { list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23FFB300'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E"); margin: 0 0 30px 20px; flex-grow: 1; }
 .plano-features li { padding: 10px 0; }
-
-/* --- Seção Feedbacks (NOVO ESTILO) --- */
 #feedbacks { background-color: var(--cor-fundo); }
 .feedbacks-container { display: grid; grid-template-columns: 1fr; gap: 60px; max-width: 900px; margin: 0 auto; }
 .feedback-card { padding: 30px; position: relative; }
@@ -166,8 +158,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 }
 .feedback-texto { font-size: 1.5rem; font-weight: 300; line-height: 1.5; font-style: italic; color: var(--cor-texto-secundario); margin-bottom: 20px; position: relative; z-index: 2; }
 .feedback-autor { font-family: var(--fonte-corpo); font-weight: 700; color: var(--cor-acento-amarelo); position: relative; z-index: 2; }
-
-/* --- Footer --- */
 footer { text-align: center; }
 .social-links a {
     font-family: var(--fonte-corpo); font-weight: 700;
