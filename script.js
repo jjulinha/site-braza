@@ -1,88 +1,64 @@
-// script.js (FINAL VERSION)
+// script.js (VERSÃO DE DEPURAÇÃO)
+
+// 1. O navegador vai registrar esta mensagem assim que começar a ler o arquivo.
+console.log("-> PASSO 1: Script.js carregado.");
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 2. Esta mensagem só aparece se a estrutura básica da página (HTML) estiver pronta.
+    console.log("-> PASSO 2: Página pronta (DOMContentLoaded). O script principal vai começar.");
 
-    // --- LÓGICA PARA A SPLASH SCREEN ---
-    const splashScreen = document.getElementById('splash-screen');
-    const body = document.body;
+    try {
+        // 3. Tentando encontrar os elementos da tela de abertura.
+        console.log("-> PASSO 3: Procurando a splash-screen...");
+        const splashScreen = document.getElementById('splash-screen');
+        const body = document.body;
 
-    body.classList.add('no-scroll');
-
-    setTimeout(() => {
-        splashScreen.style.opacity = '0';
-        body.classList.remove('no-scroll');
+        if (splashScreen && body) {
+            // 4. Se encontrou, registrará e irá travar o scroll.
+            console.log("-> PASSO 4: Elementos da splash encontrados. Travando o scroll.");
+            body.classList.add('no-scroll');
+        } else {
+            // Se não encontrou, veremos este erro.
+            console.error("-> ERRO: Não foi possível encontrar #splash-screen ou o body da página.");
+            return;
+        }
         
+        // 5. Agendando o desaparecimento.
+        console.log("-> PASSO 5: Agendando o desaparecimento da splash para daqui a 3 segundos.");
         setTimeout(() => {
-            splashScreen.style.display = 'none';
-        }, 1000); 
+            // 6. Esta é a primeira ação após os 3 segundos.
+            console.log("-> PASSO 6: 3 segundos se passaram. Dando fade out na splash e liberando o scroll.");
+            splashScreen.style.opacity = '0';
+            body.classList.remove('no-scroll');
+            
+            // 7. Agendando a remoção final.
+            setTimeout(() => {
+                // 8. Esta é a última ação do script da splash.
+                console.log("-> PASSO 7: 1 segundo de transição passou. Removendo a splash da tela (display: none).");
+                splashScreen.style.display = 'none';
+                console.log("-> FIM: O site deveria estar visível agora.");
+            }, 1000); 
 
-    }, 3000); 
+        }, 3000);
 
-    // --- LÓGICA PARA ANIMAÇÃO DE SCROLL ---
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-    revealElements.forEach(elem => {
-        revealObserver.observe(elem);
-    });
-
-    // --- NOVO: EFEITO DE TILT 3D NOS PLANOS ---
-    const planoCards = document.querySelectorAll('.plano-card');
-
-    planoCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / centerY) * -7; // Rotação máxima de 7 graus
-            const rotateY = ((x - centerX) / centerX) * 7;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        });
-    });
-
-
-    // --- LÓGICA PARA O MODAL DE VÍDEO ---
-    const modal = document.getElementById('video-modal');
-    const iframe = document.getElementById('video-iframe');
-    const closeButton = document.querySelector('.close-button');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    portfolioItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const videoId = item.getAttribute('data-video-id');
-            if (videoId) {
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-                modal.classList.add('active');
-            }
-        });
-    });
-
-    const closeModal = () => {
-        modal.classList.remove('active');
-        iframe.src = "";
+    } catch (error) {
+        // Se qualquer coisa dentro do 'try' der um erro inesperado, veremos esta mensagem.
+        console.error("-> ERRO INESPERADO:", error);
     }
 
-    closeButton.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            closeModal();
-        }
-    });
+    // A lógica do Vanta.js continua aqui para vermos se ela causa algum conflito.
+    try {
+        console.log("-> VANTA: Tentando inicializar a animação de fundo...");
+        VANTA.FOG({
+            el: "#hero",
+            mouseControls: true, touchControls: true, gyroControls: false,
+            minHeight: 200.00, minWidth: 200.00,
+            highlightColor: 0xffb300, midtoneColor: 0xe53935,
+            lowlightColor: 0x150202, baseColor: 0x111111,
+            blurFactor: 0.50, speed: 0.80, zoom: 1.00
+        });
+        console.log("-> VANTA: Animação inicializada com sucesso.");
+    } catch(error) {
+        console.error("-> ERRO NO VANTA.JS:", error);
+    }
 });
