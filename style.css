@@ -18,7 +18,9 @@
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--cor-fundo);
     display: flex; justify-content: center; align-items: center;
-    z-index: 2000; transition: opacity 1s ease-out, visibility 1s;
+    z-index: 2000;
+    /* Transição apenas na opacidade agora */
+    transition: opacity 1s ease-out;
 }
 .splash-logo {
     font-family: var(--fonte-headline);
@@ -37,7 +39,6 @@
     }
     20%, 24%, 55% { text-shadow: none; }
 }
-#splash-screen.hidden { opacity: 0; visibility: hidden; }
 
 /* --- Reset e Estilo Grunge --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
