@@ -1,4 +1,4 @@
-/* style.css (FINAL COM CORREÇÕES) */
+/* style.css (FINAL COM VANTA.JS) */
 
 /* --- Variáveis de Cor e Fontes --- */
 :root {
@@ -12,9 +12,7 @@
     --fonte-corpo: 'Inter', sans-serif;
 }
 
-/* ... (Todo o CSS anterior de Splash, Reset, Animação, Layout, Header e Hero continua o mesmo) ... */
-
-/* --- Estilo da Splash Screen --- */
+/* ... (Splash Screen CSS continua igual) ... */
 #splash-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--cor-fundo);
@@ -34,11 +32,13 @@
     to { text-shadow: 0 0 20px #fff, 0 0 40px var(--cor-primaria-vermelho); }
 }
 
+
 /* --- Reset e Estilo Grunge --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     background-color: var(--cor-fundo);
-    background-image: url('assets/noise.png');
+    /* REMOVIDA a textura de ruído para dar lugar ao Vanta.js */
+    /* background-image: url('assets/noise.png'); */
     color: var(--cor-texto-principal);
     font-family: var(--fonte-corpo);
     scroll-behavior: smooth;
@@ -70,19 +70,17 @@ header nav ul { display: flex; list-style: none; gap: 30px; align-items: center;
 header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
 header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 
-/* --- Seção Hero --- */
-#hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
-.video-background {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -2; background-color: #000;
+/* --- Seção Hero (Atualizada para Vanta.js) --- */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--cor-texto-principal); /* Garante que o texto seja visível sobre o fundo Vanta */
 }
-.video-background video { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.8); }
-#hero::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(17, 17, 17, 0.5); z-index: -1;
-}
+/* REMOVIDO o vídeo de fundo e a sobreposição, que agora são controlados pelo Vanta.js */
 .hero-content {
-    z-index: 2;
+    z-index: 2; /* Mantém o conteúdo acima da animação de fundo */
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -98,7 +96,7 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .hero-title .highlight { color: var(--cor-primaria-vermelho); }
 .no-wrap { white-space: nowrap; }
 
-/* --- Títulos de Seção --- */
+/* ... (O restante do CSS continua o mesmo) ... */
 .section-title {
     font-family: var(--fonte-headline);
     font-size: clamp(2.5rem, 8vw, 5rem);
@@ -108,8 +106,6 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
-
-/* --- Seção Serviços (Atualizada) --- */
 #servicos { background-color: #1a1a1a; }
 .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 .servico-item {
@@ -120,107 +116,48 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .servico-item:hover { transform: translateY(-5px); border-color: var(--cor-acento-amarelo); }
 .servico-item h3 { font-family: var(--fonte-headline); font-size: 1.8rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); margin-bottom: 15px; }
 .servico-item p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
-
-
-/* --- Portfólio --- */
-/* ... (sem alterações) ... */
-
-/* --- NOVA SEÇÃO: Clientes --- */
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+.portfolio-item { position: relative; cursor: pointer; overflow: hidden; }
+.portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: 0.4s; }
+.portfolio-item:hover img { filter: grayscale(0); transform: scale(1.05); }
+.portfolio-item .overlay h3 { font-family: var(--fonte-headline); font-size: 2rem; letter-spacing: 1px; position: absolute; bottom: 20px; left: 20px; text-transform: uppercase; }
 #clientes { text-align: center; }
-.clientes-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-}
-.cliente-logo {
-    flex-basis: 180px;
-    opacity: 0.6;
-    transition: opacity 0.3s, transform 0.3s;
-}
-.cliente-logo:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-.cliente-logo img {
-    max-width: 100%;
-    filter: grayscale(1) contrast(0) brightness(2); /* Efeito de logo branco */
-}
-
-
-/* --- Seção Planos (REDESENHADA) --- */
+.clientes-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
+.cliente-logo { flex-basis: 180px; opacity: 0.6; transition: opacity 0.3s, transform 0.3s; }
+.cliente-logo:hover { opacity: 1; transform: scale(1.1); }
+.cliente-logo img { max-width: 100%; filter: grayscale(1) contrast(0) brightness(2); }
 #planos { background-color: #1a1a1a; }
 .planos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
 .plano-card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    /* Efeito Glassmorphism */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s, box-shadow 0.4s;
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 40px; display: flex; flex-direction: column; position: relative; overflow: hidden;
+    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); transition: transform 0.4s, box-shadow 0.4s;
 }
-.plano-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-/* Efeito de brilho no fundo */
+.plano-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px rgba(0,0,0,0.5); }
 .plano-card::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: radial-gradient(circle, var(--cor-primaria-vermelho), transparent, transparent);
-    opacity: 0;
-    transition: opacity 0.6s;
-    z-index: -1;
-    animation: rotate 10s linear infinite;
+    opacity: 0; transition: opacity 0.6s; z-index: -1; animation: rotate 10s linear infinite;
 }
 .plano-card:hover::before { opacity: 0.1; }
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
 .plano-header h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); }
 .plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin: 10px 0 30px 0; }
 .plano-features { list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23FFB300'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E"); margin: 0 0 30px 20px; flex-grow: 1; }
 .plano-features li { padding: 10px 0; }
-.plano-preco {
-    font-family: var(--fonte-headline); font-size: 3rem;
-    text-align: right; border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px; color: var(--cor-texto-principal);
-}
-
-
-/* --- NOVA SEÇÃO: Feedbacks --- */
+.plano-preco { font-family: var(--fonte-headline); font-size: 3rem; text-align: right; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; color: var(--cor-texto-principal); }
 #feedbacks { background-color: var(--cor-fundo); }
-.feedbacks-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    max-width: 900px;
-    margin: 0 auto;
+.feedbacks-container { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
+.feedback-card { border-left: 5px solid var(--cor-primaria-vermelho); padding-left: 30px; }
+.feedback-texto { font-size: 1.5rem; font-weight: 300; line-height: 1.5; font-style: italic; color: var(--cor-texto-secundario); margin-bottom: 20px; }
+.feedback-autor { font-family: var(--fonte-corpo); font-weight: 700; color: var(--cor-texto-principal); }
+footer { text-align: center; }
+.social-links a {
+    font-family: var(--fonte-corpo); font-weight: 700;
+    font-size: 1.2rem; padding: 15px 30px; letter-spacing: 2px;
+    text-transform: uppercase; background: var(--cor-acento-amarelo);
+    color: var(--cor-fundo); display: inline-block; margin: 10px; transition: 0.3s;
 }
-.feedback-card {
-    border-left: 5px solid var(--cor-primaria-vermelho);
-    padding-left: 30px;
-}
-.feedback-texto {
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 1.5;
-    font-style: italic;
-    color: var(--cor-texto-secundario);
-    margin-bottom: 20px;
-}
-.feedback-autor {
-    font-family: var(--fonte-corpo);
-    font-weight: 700;
-    color: var(--cor-texto-principal);
-}
-
-
-/* ... (Footer e Modal continuam os mesmos) ... */
+.social-links a:hover { background: var(--cor-texto-principal); transform: scale(1.1); }
+.copyright { margin-top: 80px; font-family: var(--fonte-corpo); color: #666; }
+.modal-content { background: var(--cor-fundo); }
+.close-button { color: var(--cor-primaria-vermelho); font-size: 40px; }
