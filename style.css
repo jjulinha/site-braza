@@ -1,4 +1,4 @@
-/* style.css (EFEITO MARCA-TEXTO) */
+/* style.css (CORREÇÃO DO MARCA-TEXTO) */
 
 /* --- Variáveis de Cor e Fontes --- */
 :root {
@@ -61,7 +61,6 @@ header nav ul { display: flex; list-style: none; gap: 30px; align-items: center;
 header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
 header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 
-
 /* --- Seção Hero --- */
 #hero {
     min-height: 100vh;
@@ -80,16 +79,16 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .hero-title {
     font-family: var(--fonte-headline);
     font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 1;
+    /* AUMENTADO o espaçamento entre linhas para dar espaço ao marca-texto */
+    line-height: 1.2;
     text-transform: uppercase;
     color: var(--cor-texto-principal);
 }
-
-/* ESTILO DO MARCA-TEXTO APLICADO AQUI */
 .hero-title .highlight {
-    color: var(--cor-fundo); /* Texto escuro para contraste */
-    background-color: var(--cor-acento-amarelo); /* Fundo amarelo */
-    padding: 0.05em 0.2em; /* Preenchimento para criar o bloco de cor */
+    color: var(--cor-fundo);
+    background-color: var(--cor-acento-amarelo);
+    /* AJUSTADO o padding vertical para não ser tão alto */
+    padding: 0.02em 0.2em;
 }
 .no-wrap { white-space: nowrap; }
 
