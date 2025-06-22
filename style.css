@@ -1,4 +1,4 @@
-/* style.css (CORREÇÃO ESTRUTURAL) */
+/* style.css (ATUALIZAÇÃO GERAL DE ESTILO 3.0) */
 
 :root {
     --cor-fundo: #111111;
@@ -10,18 +10,7 @@
     --fonte-headline: 'Anton', sans-serif;
     --fonte-corpo: 'Inter', sans-serif;
 }
-
-/* --- NOVO FUNDO ANIMADO --- */
-#vanta-background {
-    position: fixed; /* Fica fixo no fundo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Garante que fique atrás de todo o conteúdo */
-}
-
-/* ... (Splash Screen, Reset, etc. continuam iguais) ... */
+/* ... (Splash Screen, Reset, Animação de Scroll continuam iguais) ... */
 #splash-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--cor-fundo);
@@ -56,30 +45,24 @@ a { color: var(--cor-texto-principal); text-decoration: none; }
 }
 .reveal.active { opacity: 1; transform: translateY(0); }
 header, section, footer { padding: 120px 6%; max-width: 1600px; margin: 0 auto; position: relative; }
+
+/* HEADER COM EFEITO DE SUMIR/APARECER */
 header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-    padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.1), transparent);
+    padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.8), transparent);
+    transition: transform 0.4s ease-in-out;
+}
+header.header-hidden {
+    transform: translateY(-100%);
 }
 header .logo h1 { font-family: var(--fonte-headline); font-size: 2.5rem; color: var(--cor-acento-amarelo); letter-spacing: 2px; }
 header nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
 header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
 header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 
-/* --- Seção Hero (ESTRUTURA CORRIGIDA) --- */
-#hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: transparent; /* Fundo transparente para ver a animação por trás */
-}
-.hero-content {
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    padding-top: 60px;
-}
+/* SEÇÃO HERO COM MARCA-TEXTO AJUSTADO */
+#hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
+.hero-content { z-index: 2; display: flex; flex-direction: column; gap: 0.8rem; padding-top: 60px; }
 .hero-title {
     font-family: var(--fonte-headline);
     font-size: clamp(2.5rem, 7.2vw, 6.5rem);
@@ -89,11 +72,10 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .hero-title .highlight {
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
-    padding: 0 0.2em;
+    padding: 0 0.2em; /* Estilo de bloco sólido, mas justo ao texto */
 }
 .no-wrap { white-space: nowrap; }
 
-/* ... (O restante do CSS continua o mesmo) ... */
 .section-title {
     font-family: var(--fonte-headline);
     font-size: clamp(2.5rem, 8vw, 5rem);
@@ -103,25 +85,39 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
-#servicos, #planos { background-color: rgba(26, 26, 26, 0.8); backdrop-filter: blur(5px); }
+
+/* SEÇÃO SERVIÇOS (NOVO ESTILO) */
+#servicos { background-color: #1a1a1a; }
 .servicos-lista { display: flex; flex-direction: column; counter-reset: servicos; }
 .servico-item-lista {
     display: flex; align-items: center; gap: 40px;
     padding: 40px 0; border-bottom: 1px solid #333;
     transition: background-color 0.4s; position: relative;
+    overflow: hidden;
 }
 .servico-item-lista::before {
     counter-increment: servicos;
     content: "0" counter(servicos);
     font-family: var(--fonte-headline);
-    font-size: 5rem;
+    font-size: 8rem;
     color: rgba(255,255,255,0.05);
     position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: color 0.4s, left 0.4s;
+}
+.servico-item-lista:hover::before {
+    color: var(--cor-primaria-vermelho);
+    opacity: 0.2;
     left: 0;
 }
-.servico-item-lista:hover { background-color: rgba(0,0,0,0.2); }
+.servico-texto { position: relative; z-index: 2; }
 .servico-texto h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-texto-principal); margin-bottom: 10px; }
 .servico-texto p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
+
+/* ... (Estilos de Portfólio, Clientes, Planos, Feedbacks e Footer continuam os mesmos da versão anterior) ... */
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
 .portfolio-grid:hover .portfolio-item:not(:hover) { opacity: 0.4; transform: scale(0.98); }
 .portfolio-item { position: relative; cursor: pointer; overflow: hidden; transition: opacity 0.4s, transform 0.4s; }
@@ -154,6 +150,7 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
 }
+#planos { background-color: #1a1a1a; }
 .planos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
 .plano-card {
     border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 40px;
@@ -173,7 +170,7 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin: 10px 0 30px 0; }
 .plano-features { list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23FFB300'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E"); margin: 0 0 30px 20px; flex-grow: 1; }
 .plano-features li { padding: 10px 0; }
-#feedbacks { background-color: rgba(17, 17, 17, 0.8); backdrop-filter: blur(5px); }
+#feedbacks { background-color: var(--cor-fundo); }
 .feedbacks-container { display: grid; grid-template-columns: 1fr; gap: 60px; max-width: 900px; margin: 0 auto; }
 .feedback-card { padding: 30px; position: relative; }
 .feedback-card::before {
