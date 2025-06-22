@@ -43,12 +43,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     background-color: var(--cor-fundo);
-    /* Aplica a textura de ruído */
     background-image: url('assets/noise.png');
     color: var(--cor-texto-principal);
     font-family: var(--fonte-corpo);
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Previne scroll horizontal */
+    overflow-x: hidden;
 }
 body.no-scroll { overflow: hidden; }
 a { color: var(--cor-texto-principal); text-decoration: none; }
