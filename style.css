@@ -1,6 +1,6 @@
-/* style.css (EFEITO CLIP-PATH) */
+/* style.css (AJUSTE DE ZOOM) */
 
-/* ... (Variáveis e a maior parte do CSS permanecem os mesmos) ... */
+/* ... (A maior parte do CSS permanece a mesma) ... */
 :root {
     --cor-fundo: #111111;
     --cor-primaria-vermelho: #E53935;
@@ -54,32 +54,25 @@ header nav ul { display: flex; list-style: none; gap: 30px; align-items: center;
 header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
 header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 #hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
-.hero-content { z-index: 2; display: flex; flex-direction: column; gap: 1rem; padding-top: 60px; }
+.hero-content { z-index: 2; display: flex; flex-direction: column; gap: 0.8rem; padding-top: 60px; }
 .hero-title {
     font-family: var(--fonte-headline);
-    font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 1.2;
+    /* VALORES AJUSTADOS PARA RESPONDER AO ZOOM */
+    font-size: clamp(2.5rem, 7.2vw, 6.5rem);
+    line-height: 1.1;
     text-transform: uppercase;
     color: var(--cor-texto-principal);
 }
-.no-wrap { white-space: nowrap; }
-
-/* NOVO EFEITO MARCA-TEXTO COM CLIP-PATH */
 .hero-title .highlight {
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
     padding: 0.1em 0.3em;
-    display: inline-block; /* Necessário para o clip-path funcionar corretamente */
+    display: inline-block;
 }
-.highlight.highlight-1 {
-    clip-path: polygon(0 0, 100% 15%, 95% 100%, 0 85%);
-}
-.highlight.highlight-2 {
-    clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%);
-}
-.highlight.highlight-3 {
-    clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%);
-}
+.highlight.highlight-1 { clip-path: polygon(0 0, 100% 15%, 95% 100%, 0 85%); }
+.highlight.highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
+.highlight.highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
+.no-wrap { white-space: nowrap; }
 
 .section-title {
     font-family: var(--fonte-headline);
