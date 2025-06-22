@@ -2,24 +2,28 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA A SPLASH SCREEN ---
+    // --- LÓGICA PARA A SPLASH SCREEN (VERSÃO À PROVA DE FALHAS) ---
     const splashScreen = document.getElementById('splash-screen');
     const body = document.body;
 
     // Impede o scroll enquanto a splash screen está visível
     body.classList.add('no-scroll');
 
+    // Define o tempo que a splash screen fica visível
     setTimeout(() => {
-        splashScreen.classList.add('hidden');
-        // Libera o scroll
+        // Inicia a animação de fade out
+        splashScreen.style.opacity = '0';
+        
+        // Libera o scroll da página principal
         body.classList.remove('no-scroll');
 
-        // Opcional: remove o elemento da DOM após a transição para performance
-        splashScreen.addEventListener('transitionend', () => {
-            splashScreen.remove();
-        });
+        // Define um tempo para remover completamente a splash screen APÓS a animação
+        // O tempo deve ser igual à duração da transição no CSS (1s = 1000ms)
+        setTimeout(() => {
+            splashScreen.style.display = 'none';
+        }, 1000); 
 
-    }, 3000); // 3000 milissegundos = 3 segundos
+    }, 3000); // Tempo total visível = 3 segundos
 
 
     // --- LÓGICA PARA ANIMAÇÃO DE SCROLL (continua igual) ---
@@ -48,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             const videoId = item.getAttribute('data-video-id');
             if (videoId) {
-                iframe.src = `https://www.youtube.com/embed/$${videoId}?autoplay=1&rel=0`;
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
                 modal.classList.add('active');
             }
         });
