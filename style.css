@@ -1,5 +1,4 @@
-/* style.css (ATUALIZAÇÃO GERAL DE ESTILO 3.0) */
-
+/* style.css (CORREÇÃO DE ALINHAMENTO 2.0) */
 :root {
     --cor-fundo: #111111;
     --cor-primaria-vermelho: #E53935;
@@ -108,14 +107,13 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 .servico-texto { position: relative; z-index: 2; }
 .servico-texto h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-texto-principal); margin-bottom: 10px; }
 .servico-texto p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
-
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
 .portfolio-grid:hover .portfolio-item:not(:hover) { opacity: 0.4; transform: scale(0.98); }
 .portfolio-item { 
     position: relative; cursor: pointer; overflow: hidden; 
     transition: opacity 0.4s, transform 0.4s;
     background-color: #1a1a1a;
-    min-height: 250px; /* Garante que o item tenha altura mesmo sem imagem */
+    min-height: 250px;
 }
 .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: 0.4s; }
 .portfolio-item:hover img { filter: grayscale(0); transform: scale(1.05); }
@@ -139,15 +137,29 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     gap: 80px;
     animation: scroll 40s linear infinite;
 }
-.cliente-logo { flex: 0 0 auto; width: 180px; opacity: 0.6; transition: opacity 0.3s; }
-.cliente-logo:hover { opacity: 1; }
-.cliente-logo img { max-width: 100%; filter: grayscale(1) contrast(0) brightness(2); }
-@keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+/* AJUSTE PARA O PLACEHOLDER SÓLIDO */
+.cliente-logo { 
+    flex: 0 0 auto; 
+    width: 180px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a2a2a; /* Fundo sólido */
+    border: 1px dashed #444; /* Borda para delinear */
+    color: #777;
+    font-family: var(--fonte-corpo);
+    font-weight: 700;
 }
+.cliente-logo img { display: none; } /* Esconde a tag de imagem quebrada */
+
 #planos { background-color: #1a1a1a; }
-.planos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+/* AJUSTE PARA FORÇAR 3 COLUNAS */
+.planos-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* Força 3 colunas */
+    gap: 30px;
+}
 .plano-card {
     border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 40px;
     display: flex; flex-direction: column; position: relative; overflow: hidden;
