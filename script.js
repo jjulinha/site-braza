@@ -1,8 +1,8 @@
-// script.js (DEBUG VERSION)
+// script.js (FINAL VERSION)
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA A SPLASH SCREEN (VERSÃO À PROVA DE FALHAS) ---
+    // --- LÓGICA PARA A SPLASH SCREEN ---
     const splashScreen = document.getElementById('splash-screen');
     const body = document.body;
 
@@ -18,11 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }, 3000); 
 
+    // --- LÓGICA PARA ANIMAÇÃO DE SCROLL REATIVADA ---
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    revealElements.forEach(elem => {
+        revealObserver.observe(elem);
+    });
 
-    // --- LÓGICA PARA ANIMAÇÃO DE SCROLL FOI REMOVIDA PARA ESTE TESTE ---
-
-
-    // --- LÓGICA PARA O MODAL DE VÍDEO (continua igual) ---
+    // --- LÓGICA PARA O MODAL DE VÍDEO ---
     const modal = document.getElementById('video-modal');
     const iframe = document.getElementById('video-iframe');
     const closeButton = document.querySelector('.close-button');
