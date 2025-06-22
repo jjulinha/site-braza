@@ -1,4 +1,4 @@
-/* style.css (FINAL VERSION) */
+/* style.css (FINAL COM CORREÇÕES) */
 
 /* --- Variáveis de Cor e Fontes --- */
 :root {
@@ -7,14 +7,12 @@
     --cor-acento-amarelo: #FFB300;
     --cor-texto-principal: #F5F5F5;
     --cor-texto-secundario: #aaaaaa;
-
-    /* Hierarquia final de fontes */
     --fonte-splash: 'Thunder', sans-serif;
     --fonte-headline: 'Anton', sans-serif;
     --fonte-corpo: 'Inter', sans-serif;
 }
 
-/* --- Estilo da Splash Screen --- */
+/* --- Estilo da Splash Screen CORRIGIDO --- */
 #splash-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--cor-fundo);
@@ -27,15 +25,17 @@
     font-size: clamp(3rem, 15vw, 8rem);
     color: var(--cor-texto-principal);
     letter-spacing: 8px;
-    animation: flicker 2s infinite alternate;
+    /* ANIMAÇÃO SUBSTITUÍDA por uma mais confiável */
+    animation: neon-glow 2s infinite alternate;
 }
-@keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        text-shadow:
-        0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
-        0 0 40px var(--cor-primaria-vermelho), 0 0 80px var(--cor-primaria-vermelho);
+/* NOVA ANIMAÇÃO para garantir o efeito de duas cores */
+@keyframes neon-glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px var(--cor-acento-amarelo);
     }
-    20%, 24%, 55% { text-shadow: none; }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 40px var(--cor-primaria-vermelho);
+    }
 }
 
 /* --- Reset e Estilo Grunge --- */
@@ -51,7 +51,7 @@ body {
 body.no-scroll { overflow: hidden; }
 a { color: var(--cor-texto-principal); text-decoration: none; }
 
-/* --- Animação de Scroll REATIVADA --- */
+/* --- Animação de Scroll --- */
 .reveal {
     opacity: 0; transform: translateY(40px);
     transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
@@ -65,10 +65,11 @@ header {
     padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.8), transparent);
 }
 header .logo h1 { font-family: var(--fonte-splash); font-size: 3rem; color: var(--cor-acento-amarelo); }
+header nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
 header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
 header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 
-/* --- Seção Hero --- */
+/* --- Seção Hero CORRIGIDA --- */
 #hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
 .video-background {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -79,12 +80,17 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(17, 17, 17, 0.5); z-index: -1;
 }
-.hero-content { z-index: 2; }
+/* NOVO LAYOUT FLEXBOX para corrigir sobreposição */
+.hero-content {
+    z-index: 2;
+    display: flex;
+    flex-direction: column; /* Força os títulos a ficarem um abaixo do outro */
+    gap: 1rem; /* Adiciona um espaço entre as linhas do título */
+}
 .hero-title {
     font-family: var(--fonte-headline);
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 1.1;
-    letter-spacing: 1px;
+    font-size: clamp(3rem, 9vw, 8rem); /* Ajustado levemente */
+    line-height: 1; /* O espaçamento agora é controlado pelo 'gap' do flexbox */
     text-transform: uppercase;
     color: var(--cor-texto-principal);
 }
@@ -101,6 +107,8 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     display: inline-block;
 }
 
+/* ... (O restante do CSS continua o mesmo) ... */
+
 /* --- Seção Serviços --- */
 .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .servico-item { background: #1a1a1a; padding: 25px; transition: transform 0.3s; }
@@ -116,10 +124,7 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 
 /* --- Seção Planos --- */
 .planos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-.plano-card {
-    background-color: #1a1a1a; border: 2px solid #333;
-    padding: 30px; display: flex; flex-direction: column;
-}
+.plano-card { background-color: #1a1a1a; border: 2px solid #333; padding: 30px; display: flex; flex-direction: column; }
 .plano-card:hover { border-color: var(--cor-acento-amarelo); }
 .plano-header h3 { font-family: var(--fonte-headline); font-size: 2.2rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); }
 .plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin-bottom: 30px; }
@@ -130,12 +135,10 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 /* --- Footer --- */
 footer { text-align: center; }
 .social-links a {
-    font-family: var(--fonte-corpo);
-    font-weight: 700;
+    font-family: var(--fonte-corpo); font-weight: 700;
     font-size: 1.2rem; padding: 15px 30px; letter-spacing: 2px;
-    text-transform: uppercase;
-    background: var(--cor-acento-amarelo); color: var(--cor-fundo);
-    display: inline-block; margin: 10px; transition: 0.3s;
+    text-transform: uppercase; background: var(--cor-acento-amarelo);
+    color: var(--cor-fundo); display: inline-block; margin: 10px; transition: 0.3s;
 }
 .social-links a:hover { background: var(--cor-texto-principal); transform: scale(1.1); }
 .copyright { margin-top: 80px; font-family: var(--fonte-corpo); color: #666; }
