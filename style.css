@@ -382,3 +382,19 @@ footer p {
     max-width: 100%;
   }
 }
+
+/* --- MONITOR DE DEBUG --- */
+#debug-monitor {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 15px;
+  z-index: 99999;
+  font-family: monospace;
+  font-size: 14px;
+  border: 2px solid var(--cor-acento-amarelo);
+  border-radius: 5px;
+  max-width: 300px;
+}
