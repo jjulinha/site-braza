@@ -76,10 +76,13 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
 .hero-title .highlight {
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
-    padding: 0 0.2em; /* Estilo de bloco sólido, mas justo ao texto */
+    padding: 0.1em 0.3em;
+    display: inline-block;
 }
+.highlight.highlight-1 { clip-path: polygon(0 0, 100% 15%, 95% 100%, 0 85%); }
+.highlight.highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
+.highlight.highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 .no-wrap { white-space: nowrap; }
-
 .section-title {
     font-family: var(--fonte-headline);
     font-size: clamp(2.5rem, 8vw, 5rem);
@@ -89,6 +92,7 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
+    
 /* --- Seção Serviços (NOVO ESTILO ACORDEÃO) --- */
 #servicos { background-color: #1a1a1a; }
 .accordion-container {
