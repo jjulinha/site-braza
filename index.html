@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRAZA - Marketing em Chamas (TESTE DE DEBUG)</title>
+    <title>BRAZA - Marketing em Chamas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
         <div class="splash-logo">BRAZA</div>
     </div>
 
-    <header class="header-hidden">
+    <header>
         <div class="logo"><h1>BRAZA</h1></div>
         <nav>
             <ul>
@@ -38,22 +38,35 @@
             </div>
         </section>
 
-        <section id="clientes">
-            <h2 class="section-title reveal">QUEM CONFIA NA NOSSA CHAMA</h2>
-            <div class="clientes-scroller reveal">
-                <div class="clientes-grid">
-                    <div class="cliente-logo">TOYOTA</div>
-                    <div class="cliente-logo">GALLPACK</div>
-                    <div class="cliente-logo">PROPOSTA VERDE</div>
-                    <div class="cliente-logo">ENGEMÜLLER</div>
-                    <div class="cliente-logo">TOYOTA</div>
-                    <div class="cliente-logo">GALLPACK</div>
-                    <div class="cliente-logo">PROPOSTA VERDE</div>
-                    <div class="cliente-logo">ENGEMÜLLER</div>
-                </div>
+        <section id="servicos">
+            <h2 class="section-title reveal">O QUE A GENTE FAZ?</h2>
+            <div class="servicos-grid reveal">
+                <div class="servico-item"><h3>Estratégia de Marca</h3><p>Auditoria, posicionamento e criação de identidade de marca.</p></div>
+                <div class="servico-item"><h3>Produção Audiovisual</h3><p>Roteiro, captação e edição de vídeos para todas as plataformas.</p></div>
+                <div class="servico-item"><h3>Gestão de Redes Sociais</h3><p>Criação de conteúdo estratégico, posts, reels e monitoramento.</p></div>
+                <div class="servico-item"><h3>Tráfego Pago</h3><p>Campanhas de alta performance em Meta Ads, Google Ads e TikTok Ads.</p></div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2 class="section-title reveal">TRABALHOS NA BRAZA</h2>
+            <div class="portfolio-grid reveal">
+                <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_TOYOTA"><img src="assets/thumb-toyota.jpg" alt="Projeto Toyota"><div class="overlay"><h3>TOYOTA HILUX</h3></div></div>
+                <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_MULLER"><img src="assets/thumb-muller.jpg" alt="Projeto Müller"><div class="overlay"><h3>MÜLLER</h3></div></div>
+                <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_GALLPACK"><img src="assets/thumb-gallpack.jpg" alt="Projeto Gallpack"><div class="overlay"><h3>GALLPACK</h3></div></div>
             </div>
         </section>
         
+        <section id="clientes">
+            <h2 class="section-title reveal">QUEM CONFIA NA NOSSA CHAMA</h2>
+            <div class="clientes-grid reveal">
+                <div class="cliente-logo-placeholder">TOYOTA</div>
+                <div class="cliente-logo-placeholder">GALLPACK</div>
+                <div class="cliente-logo-placeholder">PROPOSTA VERDE</div>
+                <div class="cliente-logo-placeholder">ENGEMÜLLER</div>
+            </div>
+        </section>
+
         <section id="planos">
             <h2 class="section-title reveal">NOSSOS COMBOS</h2>
             <div class="planos-grid reveal">
@@ -62,6 +75,7 @@
                 <div class="plano-card"><div class="plano-header"><h3>PACOTE SUPERNOVA</h3><p>"Preciso que meu marketing chegue a níveis ESTRATOSFÉRICOS"</p></div><ul class="plano-features"><li>Gestão Full</li><li>Sessões de fotos profissionais recorrentes</li><li>Captação SEM LIMITE</li><li>Motion Avançado</li><li>Consultoria de Branding constante</li><li>Tráfego Pago Plus</li><li>Relatórios Quinzenais</li></ul><div class="plano-footer"><div class="plano-preco">R$ 8.900</div><a href="#contato" class="plano-cta">QUERO ESSE!</a></div></div>
             </div>
         </section>
+
     </main>
     
     <script src="script.js" defer></script>
