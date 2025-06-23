@@ -93,56 +93,34 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     display: inline-block;
 }
     
-/* --- Seção Serviços (NOVO ESTILO ACORDEÃO) --- */
+/* --- Seção Serviços (ESTILO DE LISTA RESTAURADO) --- */
 #servicos { background-color: #1a1a1a; }
-.accordion-container {
-    border-top: 1px solid #333;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.accordion-item {
-    border-bottom: 1px solid #333;
-}
-.accordion-header {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 30px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    text-align: left;
-    font-family: var(--fonte-headline);
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: var(--cor-texto-principal);
-    transition: background-color 0.3s;
-}
-.accordion-header:hover {
-    background-color: var(--cor-primaria-vermelho);
-}
-.accordion-header .icon {
-    font-size: 2.5rem;
-    font-weight: 700;
-    transition: transform 0.4s ease;
-}
-.accordion-header.active .icon {
-    transform: rotate(45deg);
-}
-.accordion-content {
-    max-height: 0;
+.servicos-lista { display: flex; flex-direction: column; counter-reset: servicos; }
+.servico-item-lista {
+    display: flex; align-items: center; gap: 40px;
+    padding: 40px 0; border-bottom: 1px solid #333;
+    transition: background-color 0.4s; position: relative;
     overflow: hidden;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
 }
-.accordion-content p {
-    font-family: var(--fonte-corpo);
-    color: var(--cor-texto-secundario);
-    line-height: 1.7;
-    font-size: 1.1rem;
-    padding: 0 20px 30px 20px;
+.servico-item-lista::before {
+    counter-increment: servicos;
+    content: "0" counter(servicos);
+    font-family: var(--fonte-headline);
+    font-size: 8rem;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: color 0.4s, left 0.4s;
 }
-.accordion-content.active {
-    max-height: 200px; /* Altura suficiente para o conteúdo */
+.servico-item-lista:hover::before {
+    color: var(--cor-primaria-vermelho);
+    opacity: 0.2;
+    left: 0;
 }
-
+.servico-texto { position: relative; z-index: 2; padding-left: 100px; }
+.servico-texto h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-texto-principal); margin-bottom: 10px; }
+.servico-texto p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
 /* ... (Restante do CSS continua igual) ... */
