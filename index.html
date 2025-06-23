@@ -19,6 +19,36 @@
   </video>
 </div>
 
+<!-- Conteúdo principal -->
+<main>
+  <h1>Conteúdo do site</h1>
+</main>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const splash = document.getElementById('splash-screen');
+    const video = document.getElementById('splash-video');
+
+    function removeSplash() {
+      if (splash) {
+        splash.classList.add('swoosh-out');
+        setTimeout(() => splash.remove(), 1000);
+      }
+    }
+
+    if (video) {
+      video.addEventListener('ended', removeSplash);
+
+      // fallback caso autoplay falhe ou vídeo trave
+      setTimeout(() => {
+        if (document.body.contains(splash)) removeSplash();
+      }, 3000);
+    } else {
+      removeSplash(); // caso o vídeo nem carregue
+    }
+  });
+</script>
+
     <header class="header-hidden">
         <div class="logo"><h1>BRAZA</h1></div>
         <nav>
