@@ -64,12 +64,22 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     line-height: 1.1;
     text-transform: uppercase;
 }
+/* SEÇÃO HERO COM MARCA-TEXTO AJUSTADO */
+#hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
+.hero-content { z-index: 2; display: flex; flex-direction: column; gap: 0.8rem; padding-top: 60px; }
+.hero-title {
+    font-family: var(--fonte-headline);
+    font-size: clamp(2.5rem, 7.2vw, 6.5rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+}
 .hero-title .highlight {
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
-    padding: 0 0.2em;
+    padding: 0 0.2em; /* Estilo de bloco sólido, mas justo ao texto */
 }
 .no-wrap { white-space: nowrap; }
+
 .section-title {
     font-family: var(--fonte-headline);
     font-size: clamp(2.5rem, 8vw, 5rem);
@@ -79,7 +89,6 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
-
 /* --- Seção Serviços (NOVO ESTILO ACORDEÃO) --- */
 #servicos { background-color: #1a1a1a; }
 .accordion-container {
