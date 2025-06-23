@@ -1,5 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Splash Screen
+  let lastScrollTop = 0;
+  const header = document.querySelector('header');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentScroll > lastScrollTop && currentScroll > 100) {
+      header.classList.add('header-hidden');
+    } else {
+      header.classList.remove('header-hidden');
+    }
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+});
+// Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
   if (splash && video) {
