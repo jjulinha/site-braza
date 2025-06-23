@@ -1,22 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA PARA A SPLASH SCREEN ---
-  <script>
+<script>
   window.addEventListener('DOMContentLoaded', () => {
     const splash = document.getElementById('splash-screen');
+    const video = document.getElementById('splash-video');
 
-    setTimeout(() => {
+    if (!splash || !video) {
+      console.error('Splash screen ou elemento de vídeo não encontrado.');
+      return;
+    }
+
+    video.addEventListener('ended', () => {
       splash.classList.add('swoosh-out');
+      setTimeout(() => splash.remove(), 1000);
+    });
 
-      setTimeout(() => {
-        splash.remove(); // remove da DOM após a transição
-      }, 1000); // tempo da transição em ms
-    }, 3000); // duração do vídeo em ms
+    // Se vídeo não carregar ou bloquear no autoplay, force após 3 s
+    setTimeout(() => {
+      if (document.body.contains(splash)) {
+        video.dispatchEvent(new Event('ended'));
+      }
+    }, 3000);
   });
 </script>
-
-
-    }, 3000); 
 
     // --- LÓGICA DO MENU QUE SOME AO ROLAR ---
     let lastScrollTop = 0;
