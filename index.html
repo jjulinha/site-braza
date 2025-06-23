@@ -21,7 +21,7 @@
         <nav>
             <ul>
                 <li><a href="#servicos">O QUE A GENTE FAZ?</a></li>
-                <li><a href="#portfolio">TRABALHOS NA BRAZA</a></li>
+                <li><a href="#portfolio">TRABALHOS NA BRASA</a></li>
                 <li><a href="#clientes">CLIENTES</a></li>
                 <li><a href="#planos">NOSSOS COMBOS</a></li>
                 <li><a href="#contato">BORA FAZER FOGO?</a></li>
@@ -40,48 +40,36 @@
 
         <section id="servicos">
             <h2 class="section-title reveal">O QUE A GENTE FAZ?</h2>
-            <div class="accordion-container reveal">
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Estratégia de Marca
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Da criação da identidade visual ao posicionamento no mercado, definimos a voz e a cara da sua marca para que ela fale diretamente com o público certo.</p>
+            <div class="servicos-lista reveal">
+                <div class="servico-item-lista">
+                    <div class="servico-texto">
+                        <h3>Estratégia de Marca</h3>
+                        <p>Auditoria, posicionamento e criação de identidade de marca.</p>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Produção Audiovisual
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Roteiro, captação e edição de vídeos de alto impacto para campanhas, redes sociais e projetos institucionais. Transformamos ideias em cinema.</p>
+                <div class="servico-item-lista">
+                    <div class="servico-texto">
+                        <h3>Produção Audiovisual</h3>
+                        <p>Roteiro, captação e edição de vídeos para todas as plataformas.</p>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Gestão de Redes Sociais
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Criação de conteúdo estratégico, posts, reels, stories e o monitoramento completo para construir uma comunidade engajada em torno da sua marca.</p>
+                <div class="servico-item-lista">
+                    <div class="servico-texto">
+                        <h3>Gestão de Redes Sociais</h3>
+                        <p>Criação de conteúdo estratégico, posts, reels e monitoramento.</p>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Tráfego Pago
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Planejamento e execução de campanhas de alta performance em Meta Ads, Google Ads e TikTok Ads, focadas em gerar leads e conversões reais.</p>
+                <div class="servico-item-lista">
+                    <div class="servico-texto">
+                        <h3>Tráfego Pago</h3>
+                        <p>Campanhas de alta performance em Meta Ads, Google Ads e TikTok Ads.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="portfolio">
-            <h2 class="section-title reveal">TRABALHOS NA BRAZA</h2>
+            <h2 class="section-title reveal">TRABALHOS NA BRASA</h2>
             <div class="portfolio-grid reveal">
                 <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_TOYOTA"><img src="assets/thumb-toyota.jpg" alt="Projeto Toyota"><div class="overlay"><h3>TOYOTA HILUX</h3></div></div>
                 <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_MULLER"><img src="assets/thumb-muller.jpg" alt="Projeto Müller"><div class="overlay"><h3>MÜLLER</h3></div></div>
@@ -114,7 +102,22 @@
             </div>
         </section>
 
+        <section id="feedbacks">
+            <h2 class="section-title reveal">O QUE DIZEM DA GENTE</h2>
+            <div class="feedbacks-container reveal">
+                <div class="feedback-card"><p class="feedback-texto">"A BRAZA transformou nossa presença digital. A criatividade e o foco em resultados são incomparáveis. Recomendo de olhos fechados!"</p><span class="feedback-autor">- NOME DO CLIENTE, Empresa Exemplo</span></div>
+                <div class="feedback-card"><p class="feedback-texto">"O que mais impressiona é a capacidade de entregar um audiovisual de altíssima qualidade que realmente conecta com nosso público. Uma parceria de sucesso."</p><span class="feedback-autor">- OUTRO CLIENTE, Outra Empresa</span></div>
+            </div>
+        </section>
     </main>
+
+    <footer id="contato" class="reveal">
+        <h2 class="hero-title">BORA BOTAR FOGO?</h2>
+        <div class="social-links"><a href="mailto:contato@braza.com">MANDA UM EMAIL</a><a href="#">SEGUE A GENTE</a></div>
+        <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
+    </footer>
+
+    <div id="video-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div class="video-container"><iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div></div>
     
     <script src="script.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
