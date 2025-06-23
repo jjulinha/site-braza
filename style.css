@@ -1,4 +1,6 @@
+/* style.css (NOVO ESTILO DE SERVIÇOS) */
 
+/* ... (Variáveis e a maior parte do CSS permanecem os mesmos) ... */
 :root {
     --cor-fundo: #111111;
     --cor-primaria-vermelho: #E53935;
@@ -9,8 +11,6 @@
     --fonte-headline: 'Anton', sans-serif;
     --fonte-corpo: 'Inter', sans-serif;
 }
-
-/* Splash */
 #splash-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--cor-fundo);
@@ -29,8 +29,6 @@
     from { text-shadow: 0 0 10px #fff, 0 0 20px var(--cor-acento-amarelo); }
     to { text-shadow: 0 0 20px #fff, 0 0 40px var(--cor-primaria-vermelho); }
 }
-
-/* Geral */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     background-color: var(--cor-fundo);
@@ -41,46 +39,25 @@ body {
 }
 body.no-scroll { overflow: hidden; }
 a { color: var(--cor-texto-principal); text-decoration: none; }
-
-/* Header */
+.reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+header, section, footer { padding: 120px 6%; max-width: 1600px; margin: 0 auto; position: relative; }
 header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-    padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.1), transparent);
-    transition: transform 0.3s ease;
+    padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.8), transparent);
+    transition: transform 0.4s ease-in-out;
 }
-header.header-hidden { transform: translateY(-100%); }
-header .logo h1 {
-    font-family: var(--fonte-headline);
-    font-size: 2.5rem;
-    color: var(--cor-acento-amarelo);
-    letter-spacing: 2px;
+header.header-hidden {
+    transform: translateY(-100%);
 }
-header nav ul {
-    display: flex; list-style: none; gap: 30px; align-items: center;
-}
-header nav ul li a {
-    position: relative;
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-header nav ul li a::after {
-    content: ''; position: absolute; left: 0; bottom: -4px;
-    width: 0%; height: 2px; background: var(--cor-acento-amarelo);
-    transition: width 0.3s ease;
-}
-header nav ul li a:hover {
-    color: var(--cor-acento-amarelo);
-}
-header nav ul li a:hover::after {
-    width: 100%;
-}
-
-/* Hero */
-#hero { min-height: 100vh; display: flex; align-items: center; }
-.hero-content { display: flex; flex-direction: column; gap: 0.8rem; padding-top: 60px; }
+header .logo h1 { font-family: var(--fonte-headline); font-size: 2.5rem; color: var(--cor-acento-amarelo); letter-spacing: 2px; }
+header nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+#hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
+.hero-content { z-index: 2; display: flex; flex-direction: column; gap: 0.8rem; padding-top: 60px; }
 .hero-title {
     font-family: var(--fonte-headline);
     font-size: clamp(2.5rem, 7.2vw, 6.5rem);
@@ -88,74 +65,71 @@ header nav ul li a:hover::after {
     text-transform: uppercase;
 }
 .hero-title .highlight {
-    color: var(--cor-acento-amarelo);
-    background: none;
-    position: relative;
+    color: var(--cor-fundo);
+    background-color: var(--cor-acento-amarelo);
+    padding: 0 0.2em;
 }
-.hero-title .highlight::before {
-    content: '';
-    position: absolute;
-    left: 0; bottom: 0;
+.no-wrap { white-space: nowrap; }
+.section-title {
+    font-family: var(--fonte-headline);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    border-bottom: 4px solid var(--cor-primaria-vermelho);
+    display: inline-block;
+}
+
+/* --- Seção Serviços (NOVO ESTILO ACORDEÃO) --- */
+#servicos { background-color: #1a1a1a; }
+.accordion-container {
+    border-top: 1px solid #333;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.accordion-item {
+    border-bottom: 1px solid #333;
+}
+.accordion-header {
     width: 100%;
-    height: 12px;
-    background: var(--cor-acento-amarelo);
-    z-index: -1;
-    transform: skew(-15deg);
-    border-radius: 4px;
-}
-
-/* Botão voltar ao topo */
-#back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--cor-acento-amarelo);
-    color: var(--cor-fundo);
+    background: none;
     border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: 500;
-}
-#back-to-top.show {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Modal de vídeo */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    z-index: 2000;
-}
-.modal.active { display: flex; }
-.modal-content {
-    position: relative;
-    background: #000;
-    border: 2px solid var(--cor-acento-amarelo);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px var(--cor-acento-amarelo);
-}
-.close-button {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: var(--cor-acento-amarelo);
-    color: var(--cor-fundo);
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
     cursor: pointer;
+    text-align: left;
+    font-family: var(--fonte-headline);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--cor-texto-principal);
+    transition: background-color 0.3s;
 }
+.accordion-header:hover {
+    background-color: var(--cor-primaria-vermelho);
+}
+.accordion-header .icon {
+    font-size: 2.5rem;
+    font-weight: 700;
+    transition: transform 0.4s ease;
+}
+.accordion-header.active .icon {
+    transform: rotate(45deg);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+}
+.accordion-content p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-secundario);
+    line-height: 1.7;
+    font-size: 1.1rem;
+    padding: 0 20px 30px 20px;
+}
+.accordion-content.active {
+    max-height: 200px; /* Altura suficiente para o conteúdo */
+}
+
+/* ... (Restante do CSS continua igual) ... */
