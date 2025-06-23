@@ -133,8 +133,7 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     font-size: clamp(2.5rem, 7.2vw, 6.5rem);
     line-height: 1.1;
     text-transform: uppercase;
-}.hero-title {
-  color: white;
+    color: white;
 }
 
 /* SEÇÃO HERO COM MARCA-TEXTO AJUSTADO */
@@ -197,7 +196,3 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
 .servico-texto h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-texto-principal); margin-bottom: 10px; }
 .servico-texto p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
 /* ... (Restante do CSS continua igual) ... */
-.hero-title {
-    color: white !important;
-}
-
