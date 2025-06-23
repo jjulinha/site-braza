@@ -1,4 +1,4 @@
-// script.js (COM LÓGICA DO ACORDEÃO)
+// script.js (LÓGICA DO ACORDEÃO REMOVIDA)
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -47,24 +47,26 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(elem);
     });
 
-    // --- NOVO: LÓGICA DO ACORDEÃO DE SERVIÇOS ---
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    // --- EFEITO DE TILT 3D NOS PLANOS ---
+    const planoCards = document.querySelectorAll('.plano-card');
 
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-            
-            // Fecha todos os outros itens abertos
-            accordionHeaders.forEach(otherHeader => {
-                if (otherHeader !== header) {
-                    otherHeader.classList.remove('active');
-                    otherHeader.nextElementSibling.classList.remove('active');
-                }
-            });
+    planoCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
-            // Abre ou fecha o item clicado
-            header.classList.toggle('active');
-            content.classList.toggle('active');
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -7;
+            const rotateY = ((x - centerX) / centerX) * 7;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
     });
 
