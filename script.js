@@ -1,30 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA PARA A SPLASH SCREEN ---
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const splash = document.getElementById('splash-screen');
-    const video = document.getElementById('splash-video');
+document.addEventListener('DOMContentLoaded', () => {
+  const splash = document.getElementById('splash-screen');
+  const video = document.getElementById('splash-video');
 
-    if (!splash || !video) {
-      console.error('Splash screen ou elemento de vídeo não encontrado.');
-      return;
-    }
+  if (!splash || !video) {
+    console.error('Splash screen ou elemento de vídeo não encontrado.');
+    return;
+  }
 
-    video.addEventListener('ended', () => {
-      splash.classList.add('swoosh-out');
-      setTimeout(() => splash.remove(), 1000);
-    });
-
-    // Se vídeo não carregar ou bloquear no autoplay, force após 3 s
-    setTimeout(() => {
-      if (document.body.contains(splash)) {
-        video.dispatchEvent(new Event('ended'));
-      }
-    }, 3000);
+  video.addEventListener('ended', () => {
+    splash.classList.add('swoosh-out');
+    setTimeout(() => splash.remove(), 1000);
   });
-</script>
 
+  // Fallback de segurança após 3 segundos
+  setTimeout(() => {
+    if (document.body.contains(splash)) {
+      video.dispatchEvent(new Event('ended'));
+    }
+  }, 3000);
+});
     // --- LÓGICA DO MENU QUE SOME AO ROLAR ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
