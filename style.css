@@ -205,4 +205,64 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
 .hero-title .highlight {
   color: var(--cor-fundo) !important;
   background-color: var(--cor-acento-amarelo);
+
+    .plano-card {
+  position: relative;
+  padding: 40px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+}
+.plano-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 40px rgba(255, 179, 0, 0.2);
+}
+.etiqueta-topo {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: var(--cor-acento-amarelo);
+  color: #111;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  box-shadow: 0 0 10px rgba(255, 179, 0, 0.4);
+}
+
+.plano-footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.plano-investimento {
+  font-family: var(--fonte-corpo);
+  color: var(--cor-texto-secundario);
+  margin-bottom: 10px;
+}
+.plano-investimento strong {
+  font-size: 2rem;
+  color: var(--cor-texto-principal);
+}
+
+.plano-cta {
+  display: inline-block;
+  background: var(--cor-acento-amarelo);
+  color: #111;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+}
+.plano-cta:hover {
+  background: #ffc107;
+}
+.plano-cta.destaque {
+  box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+}
+
 }
