@@ -2,19 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
+if (splash && video) {
+  const removeSplash = () => {
+    splash.classList.add('swoosh-out');
+    setTimeout(() => splash.remove(), 1000);
+  };
 
-  if (splash && video) {
-    video.addEventListener('ended', () => {
-      splash.classList.add('swoosh-out');
-      setTimeout(() => splash.remove(), 1000);
-    });
+  video.addEventListener('ended', removeSplash);
 
-    setTimeout(() => {
-      if (document.body.contains(splash)) {
-        video.dispatchEvent(new Event('ended'));
-      }
-    }, 3000);
-  }
+  // Fallback total: vídeo bloqueado ou falhou
+  setTimeout(() => {
+    if (document.body.contains(splash)) removeSplash();
+  }, 4000);
+}
+
 
   // Background VANTA FOG
   VANTA.FOG({
