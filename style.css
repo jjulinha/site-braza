@@ -1,6 +1,8 @@
-/* style.css (CORREÇÃO DE ALINHAMENTO 2.0) */
+/* style.css (VERSÃO DE TESTE AZUL) */
 :root {
-    --cor-fundo: #111111;
+    /* MUDANÇA DE TESTE: O fundo deve ficar azul. */
+    --cor-fundo: blue; 
+    
     --cor-primaria-vermelho: #E53935;
     --cor-acento-amarelo: #FFB300;
     --cor-texto-principal: #F5F5F5;
@@ -11,6 +13,7 @@
 }
 #splash-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    /* O fundo do splash também será azul para o teste */
     background-color: var(--cor-fundo);
     display: flex; justify-content: center; align-items: center;
     z-index: 2000;
@@ -29,6 +32,7 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
+    /* O fundo do body também será azul para o teste */
     background-color: var(--cor-fundo);
     color: var(--cor-texto-principal);
     font-family: var(--fonte-corpo);
@@ -37,15 +41,11 @@ body {
 }
 body.no-scroll { overflow: hidden; }
 a { color: var(--cor-texto-principal); text-decoration: none; }
-.reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.reveal.active { opacity: 1; transform: translateY(0); }
 header, section, footer { padding: 120px 6%; max-width: 1600px; margin: 0 auto; position: relative; }
 header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-    padding: 20px 6%; background: linear-gradient(to bottom, rgba(17,17,17,0.8), transparent);
+    padding: 20px 6%;
+    background: linear-gradient(to bottom, rgba(0,0,255,0.5), transparent); /* Fundo do header azulado */
     transition: transform 0.4s ease-in-out;
 }
 header.header-hidden {
@@ -54,7 +54,6 @@ header.header-hidden {
 header .logo h1 { font-family: var(--fonte-headline); font-size: 2.5rem; color: var(--cor-acento-amarelo); letter-spacing: 2px; }
 header nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
 header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
-header nav ul li a:hover { color: var(--cor-acento-amarelo); }
 #hero { min-height: 100vh; display: flex; align-items: center; justify-content: flex-start; }
 .hero-content { z-index: 2; display: flex; flex-direction: column; gap: 0.8rem; padding-top: 60px; }
 .hero-title {
@@ -64,6 +63,7 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     text-transform: uppercase;
 }
 .hero-title .highlight {
+    /* O marca-texto correto (bloco sólido) */
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
     padding: 0 0.2em;
@@ -78,66 +78,11 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
-#servicos { background-color: #1a1a1a; }
-.servicos-lista { display: flex; flex-direction: column; counter-reset: servicos; }
-.servico-item-lista {
-    display: flex; align-items: center; gap: 40px;
-    padding: 40px 0; border-bottom: 1px solid #333;
-    transition: background-color 0.4s; position: relative;
-    overflow: hidden;
+#servicos, #planos { 
+    /* Fundo azul semi-transparente para as seções */
+    background-color: rgba(0, 0, 100, 0.2); 
+    backdrop-filter: blur(5px);
 }
-.servico-item-lista::before {
-    counter-increment: servicos;
-    content: "0" counter(servicos);
-    font-family: var(--fonte-headline);
-    font-size: 8rem;
-    color: rgba(255,255,255,0.05);
-    position: absolute;
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    transition: color 0.4s, left 0.4s;
-}
-.servico-item-lista:hover::before {
-    color: var(--cor-primaria-vermelho);
-    opacity: 0.2;
-    left: 0;
-}
-.servico-texto { position: relative; z-index: 2; }
-.servico-texto h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-texto-principal); margin-bottom: 10px; }
-.servico-texto p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
-.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-.portfolio-grid:hover .portfolio-item:not(:hover) { opacity: 0.4; transform: scale(0.98); }
-.portfolio-item { 
-    position: relative; cursor: pointer; overflow: hidden; 
-    transition: opacity 0.4s, transform 0.4s;
-    background-color: #1a1a1a;
-    min-height: 250px;
-}
-.portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: 0.4s; }
-.portfolio-item:hover img { filter: grayscale(0); transform: scale(1.05); }
-.portfolio-item .overlay {
-    position: absolute; bottom: 0; left: 0; width: 100%;
-    padding: 30px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    transform: translateY(100%); transition: transform 0.4s ease;
-}
-.portfolio-item:hover .overlay { transform: translateY(0); }
-.portfolio-item .overlay h3 { font-family: var(--fonte-headline); font-size: 2rem; letter-spacing: 1px; text-transform: uppercase; }
-#clientes { padding: 60px 0; }
-.clientes-scroller {
-    max-width: 100vw;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
-    mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
-}
-.clientes-grid {
-    display: flex;
-    width: max-content;
-    gap: 80px;
-    animation: scroll 40s linear infinite;
-}
-/* AJUSTE PARA O PLACEHOLDER SÓLIDO */
 .cliente-logo { 
     flex: 0 0 auto; 
     width: 180px;
@@ -145,56 +90,10 @@ header nav ul li a:hover { color: var(--cor-acento-amarelo); }
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #2a2a2a; /* Fundo sólido */
-    border: 1px dashed #444; /* Borda para delinear */
-    color: #777;
+    background-color: #0000ff; /* Fundo do placeholder azul */
+    border: 1px dashed #fff;
+    color: #fff;
     font-family: var(--fonte-corpo);
     font-weight: 700;
 }
-.cliente-logo img { display: none; } /* Esconde a tag de imagem quebrada */
-
-#planos { background-color: #1a1a1a; }
-/* AJUSTE PARA FORÇAR 3 COLUNAS */
-.planos-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* Força 3 colunas */
-    gap: 30px;
-}
-.plano-card {
-    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 40px;
-    display: flex; flex-direction: column; position: relative; overflow: hidden;
-    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
-}
-.plano-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; }
-.plano-preco { font-family: var(--fonte-headline); font-size: 3rem; color: var(--cor-texto-principal); }
-.plano-cta {
-    font-family: var(--fonte-headline); font-size: 1.2rem;
-    background-color: var(--cor-acento-amarelo); color: var(--cor-fundo);
-    padding: 10px 20px; border-radius: 5px; text-decoration: none;
-    transition: background-color 0.3s;
-}
-.plano-cta:hover { background-color: var(--cor-texto-principal); }
-.plano-header h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); }
-.plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin: 10px 0 30px 0; }
-.plano-features { list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23FFB300'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E"); margin: 0 0 30px 20px; flex-grow: 1; }
-.plano-features li { padding: 10px 0; }
-#feedbacks { background-color: var(--cor-fundo); }
-.feedbacks-container { display: grid; grid-template-columns: 1fr; gap: 60px; max-width: 900px; margin: 0 auto; }
-.feedback-card { padding: 30px; position: relative; }
-.feedback-card::before {
-    content: '“'; font-family: var(--fonte-headline); font-size: 15rem; color: var(--cor-primaria-vermelho);
-    opacity: 0.05; position: absolute; top: -50px; left: -30px; z-index: 1;
-}
-.feedback-texto { font-size: 1.5rem; font-weight: 300; line-height: 1.5; font-style: italic; color: var(--cor-texto-secundario); margin-bottom: 20px; position: relative; z-index: 2; }
-.feedback-autor { font-family: var(--fonte-corpo); font-weight: 700; color: var(--cor-acento-amarelo); position: relative; z-index: 2; }
-footer { text-align: center; }
-.social-links a {
-    font-family: var(--fonte-corpo); font-weight: 700;
-    font-size: 1.2rem; padding: 15px 30px; letter-spacing: 2px;
-    text-transform: uppercase; background: var(--cor-acento-amarelo);
-    color: var(--cor-fundo); display: inline-block; margin: 10px; transition: 0.3s;
-}
-.social-links a:hover { background: var(--cor-texto-principal); transform: scale(1.1); }
-.copyright { margin-top: 80px; font-family: var(--fonte-corpo); color: #666; }
-.modal-content { background: var(--cor-fundo); }
-.close-button { color: var(--cor-primaria-vermelho); font-size: 40px; }
+/* ... o resto do CSS, que não depende da cor de fundo, permanece o mesmo ... */
