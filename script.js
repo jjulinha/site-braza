@@ -34,35 +34,21 @@ if (splash && video) {
     zoom: 1.00
   });
 
-  // Header Escondido ao Rolar
+  /// Header Escondido ao Rolar
   let lastScrollTop = 0;
   const header = document.querySelector('header');
 
   window.addEventListener('scroll', function () {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (scrollTop > lastScrollTop && scrollTop > 100) {
+      // Rolando para baixo
       header.classList.add('header-hidden');
     } else {
+      // Rolando para cima
       header.classList.remove('header-hidden');
     }
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-  });
-
-  // Scroll Reveal
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-  revealElements.forEach(elem => {
-    revealObserver.observe(elem);
-  });
-// Lógica do Acordeão (para Serviços e FAQ)
+  });// Lógica do Acordeão (para Serviços e FAQ)
   const accordionHeaders = document.querySelectorAll('.accordion-header');
 
   accordionHeaders.forEach(header => {
