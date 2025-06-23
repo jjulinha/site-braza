@@ -1,4 +1,6 @@
-/* style.css (VERSÃO DE ESTABILIDADE) */
+/* style.css (NOVO ESTILO DE SERVIÇOS) */
+
+/* ... (Variáveis e a maior parte do CSS permanecem os mesmos) ... */
 :root {
     --cor-fundo: #111111;
     --cor-primaria-vermelho: #E53935;
@@ -62,7 +64,6 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     line-height: 1.1;
     text-transform: uppercase;
 }
-/* MARCA-TEXTO RESTAURADO PARA O ESTILO DE BLOCO SÓLIDO */
 .hero-title .highlight {
     color: var(--cor-fundo);
     background-color: var(--cor-acento-amarelo);
@@ -78,61 +79,57 @@ header nav ul li a { font-family: var(--fonte-corpo); font-weight: 700; font-siz
     border-bottom: 4px solid var(--cor-primaria-vermelho);
     display: inline-block;
 }
+
+/* --- Seção Serviços (NOVO ESTILO ACORDEÃO) --- */
 #servicos { background-color: #1a1a1a; }
-.servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-.servico-item {
-    background: var(--cor-fundo); padding: 30px;
-    border: 1px solid #333;
-    transition: transform 0.3s, border-color 0.3s;
+.accordion-container {
+    border-top: 1px solid #333;
+    max-width: 1000px;
+    margin: 0 auto;
 }
-.servico-item:hover { transform: translateY(-5px); border-color: var(--cor-acento-amarelo); }
-.servico-item h3 { font-family: var(--fonte-headline); font-size: 1.8rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); margin-bottom: 15px; }
-.servico-item p { font-family: var(--fonte-corpo); color: var(--cor-texto-secundario); line-height: 1.6; }
-
-/* SEÇÃO DE CLIENTES COM GRADE ESTÁTICA E PLACEHOLDERS */
-#clientes { text-align: center; }
-.clientes-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
-    gap: 20px;
-    align-items: center;
+.accordion-item {
+    border-bottom: 1px solid #333;
 }
-.cliente-logo-placeholder { 
-    height: 100px;
+.accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 30px 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    background-color: #2a2a2a;
-    border: 1px dashed #444;
-    color: #777;
-    font-family: var(--fonte-corpo);
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-/* SEÇÃO DE PLANOS COM 3 COLUNAS FIXAS */
-#planos { background-color: #1a1a1a; }
-.planos-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* Força 3 colunas */
-    gap: 30px;
-}
-.plano-card {
-    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 40px;
-    display: flex; flex-direction: column; position: relative; overflow: hidden;
-    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
-}
-.plano-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; }
-.plano-preco { font-family: var(--fonte-headline); font-size: 3rem; color: var(--cor-texto-principal); }
-.plano-cta {
-    font-family: var(--fonte-headline); font-size: 1.2rem;
-    background-color: var(--cor-acento-amarelo); color: var(--cor-fundo);
-    padding: 10px 20px; border-radius: 5px; text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--fonte-headline);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--cor-texto-principal);
     transition: background-color 0.3s;
 }
-.plano-cta:hover { background-color: var(--cor-texto-principal); }
-.plano-header h3 { font-family: var(--fonte-headline); font-size: 2.5rem; letter-spacing: 1px; color: var(--cor-acento-amarelo); }
-.plano-header p { font-family: var(--fonte-corpo); font-style: italic; color: #aaa; margin: 10px 0 30px 0; }
-.plano-features { list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23FFB300'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E"); margin: 0 0 30px 20px; flex-grow: 1; }
-.plano-features li { padding: 10px 0; }
-/* ... restante do CSS continua igual ... */
+.accordion-header:hover {
+    background-color: var(--cor-primaria-vermelho);
+}
+.accordion-header .icon {
+    font-size: 2.5rem;
+    font-weight: 700;
+    transition: transform 0.4s ease;
+}
+.accordion-header.active .icon {
+    transform: rotate(45deg);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+}
+.accordion-content p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-secundario);
+    line-height: 1.7;
+    font-size: 1.1rem;
+    padding: 0 20px 30px 20px;
+}
+.accordion-content.active {
+    max-height: 200px; /* Altura suficiente para o conteúdo */
+}
+
+/* ... (Restante do CSS continua igual) ... */
