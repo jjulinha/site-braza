@@ -3,18 +3,16 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA PARA A SPLASH SCREEN ---
-    const splashScreen = document.getElementById('splash-screen');
-    const body = document.body;
-
-    body.classList.add('no-scroll');
-
-    setTimeout(() => {
-        splashScreen.style.opacity = '0';
-        body.classList.remove('no-scroll');
-        
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const splash = document.getElementById('splash-screen');
         setTimeout(() => {
-            splashScreen.style.display = 'none';
-        }, 1000); 
+            splash.style.opacity = 0;
+            setTimeout(() => splash.remove(), 1000); // espera a transição acabar
+        }, 3000); // 3 segundos
+    });
+</script>
+
 
     }, 3000); 
 
