@@ -48,29 +48,38 @@ html, body {
 }
 
 /* HEADER */
+/* HEADER */
 header {
-   
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 20px 6%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out; /* Suaviza entrada e saída do header */
 }
+
+header.header-hidden {
+  transform: translateY(-100%); /* Esconde o header para cima */
+}
+
 header .logo h1 {
   font-family: var(--fonte-headline);
   font-size: 2.2rem;
   color: var(--cor-acento-amarelo);
 }
+
 header nav ul {
   list-style: none;
   display: flex;
   gap: 24px;
 }
+
 header nav ul li a {
   color: var(--cor-texto-principal);
   font-weight: 700;
@@ -79,9 +88,7 @@ header nav ul li a {
   letter-spacing: 1px;
   text-decoration: none;
 }
-header.header-hidden {
-  transform: translateY(-100%);
-}
+
 /* GERAL */
 section, footer {
   padding: 100px 6%;
