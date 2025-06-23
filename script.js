@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA PARA A SPLASH SCREEN ---
-   <script>
+  <script>
   window.addEventListener('DOMContentLoaded', () => {
     const splash = document.getElementById('splash-screen');
 
-    // Após 4s (duração do vídeo), inicia a transição
     setTimeout(() => {
       splash.classList.add('swoosh-out');
 
-      // Remove da DOM após 1s de animação
-      setTimeout(() => splash.remove(), 1000);
-    }, 4000);
+      setTimeout(() => {
+        splash.remove(); // remove da DOM após a transição
+      }, 1000); // tempo da transição em ms
+    }, 3000); // duração do vídeo em ms
   });
 </script>
 
