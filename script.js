@@ -34,21 +34,49 @@ if (splash && video) {
     zoom: 1.00
   });
 
-  /// Header Escondido ao Rolar
-  let lastScrollTop = 0;
-  const header = document.querySelector('header');
+  // SCRIPT DE DEPURAÇÃO PARA O HEADER
 
-  window.addEventListener('scroll', function () {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      // Rolando para baixo
-      header.classList.add('header-hidden');
-    } else {
-      // Rolando para cima
-      header.classList.remove('header-hidden');
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleciona os elementos que vamos usar
+    const debugMonitor = document.getElementById('debug-monitor');
+    const header = document.querySelector('header');
+    
+    // Verifica se os elementos essenciais existem
+    if (!debugMonitor || !header) {
+        console.error("ERRO: O monitor de debug ou o header não foram encontrados.");
+        if(debugMonitor) debugMonitor.innerHTML = "ERRO: Header não encontrado.";
+        return;
     }
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-  });// Lógica do Acordeão (para Serviços e FAQ)
+
+    // Escreve o status inicial no monitor
+    debugMonitor.innerHTML = "Status: INICIALIZADO<br>Posição do Scroll: 0<br>Header: VISÍVEL";
+    
+    let lastScrollTop = 0;
+
+    // Adiciona o listener de scroll
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Atualiza o monitor com a posição atual
+        debugMonitor.innerHTML = "Status: ROLANDO...<br>Posição do Scroll: " + Math.round(scrollTop);
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Adiciona a classe para esconder
+            header.classList.add('header-hidden');
+            // Informa no monitor
+            debugMonitor.innerHTML += "<br>Header: ESCONDIDO";
+        } else {
+            // Remove a classe para mostrar
+            header.classList.remove('header-hidden');
+            // Informa no monitor
+            debugMonitor.innerHTML += "<br>Header: VISÍVEL";
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, false);
+
+});
+  // Lógica do Acordeão (para Serviços e FAQ)
   const accordionHeaders = document.querySelectorAll('.accordion-header');
 
   accordionHeaders.forEach(header => {
