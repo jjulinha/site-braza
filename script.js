@@ -62,7 +62,28 @@ if (splash && video) {
   revealElements.forEach(elem => {
     revealObserver.observe(elem);
   });
+// Lógica do Acordeão (para Serviços e FAQ)
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
 
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const isActive = header.classList.contains('active');
+
+      // Fecha todos os outros itens dentro do mesmo container
+      const container = header.closest('.accordion-container');
+      container.querySelectorAll('.accordion-header').forEach(otherHeader => {
+        otherHeader.classList.remove('active');
+        otherHeader.nextElementSibling.classList.remove('active');
+      });
+      
+      // Abre ou fecha o item clicado (se não estava ativo, abre. Se estava, fecha)
+      if (!isActive) {
+        header.classList.add('active');
+        content.classList.add('active');
+      }
+    });
+  });
   // Tilt 3D nos Cards
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
