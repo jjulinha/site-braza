@@ -51,27 +51,19 @@ html, body {
 /* HEADER FIXO COM DESAPARECIMENTO */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  border-radius: 0 0 30px 30px;
+  top: 20px;
+  left: 40px;
+  background: transparent;
   display: flex;
-  justify-content: space-between;
+  gap: 60px;
   align-items: center;
-  padding: 20px 6%;
   z-index: 1000;
   transition: transform 0.4s ease-in-out;
 }
 
-header.header-hidden {
-  transform: translateY(-100%);
-}
-
 header .logo h1 {
   font-family: var(--fonte-headline);
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   color: var(--cor-acento-amarelo);
 }
 
@@ -79,8 +71,6 @@ header nav ul {
   list-style: none;
   display: flex;
   gap: 32px;
-  margin: 0;
-  padding: 0;
 }
 
 header nav ul li a {
@@ -91,6 +81,10 @@ header nav ul li a {
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 1px;
+}
+
+header.header-hidden {
+  transform: translateY(-150%);
 }
 
 /* GERAL */
