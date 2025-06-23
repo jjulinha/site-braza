@@ -385,6 +385,16 @@ footer p {
   transform: translateY(0);
 }
 
+/* Adiciona a transição suave para o efeito de esconder */
+header {
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Esconde o header movendo-o para cima */
+header.header-hidden {
+  transform: translateY(-100%);
+}
+
 /* RESPONSIVO */
 @media (max-width: 768px) {
   .hero-title {
