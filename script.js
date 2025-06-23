@@ -33,22 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
     zoom: 1.00
   });
 
-  // --- HEADER ESCONDIDO AO ROLAR ---
-  let lastScrollTop = 0;
-  const header = document.querySelector('header');
+ // --- HEADER ESCONDIDO AO ROLAR ---
+let lastScrollTop = 0;
+const header = document.querySelector('header');
 
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (currentScroll > lastScrollTop && currentScroll > 100) {
-      header.classList.add('header-hidden');
-    } else {
-      header.classList.remove('header-hidden');
-    }
+  if (currentScroll > lastScrollTop && currentScroll > 100) {
+    // Rolando para baixo
+    header.classList.add('header-hidden');
+  } else {
+    // Rolando para cima
+    header.classList.remove('header-hidden');
+  }
 
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
-
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+  
   // --- SCROLL REVEAL DAS SEÇÕES ---
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
