@@ -1,7 +1,6 @@
-// script.js
-document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA A SPLASH SCREEN ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Splash Screen
     const splashScreen = document.getElementById('splash-screen');
     const body = document.body;
     body.classList.add('no-scroll');
@@ -10,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.remove('no-scroll');
         setTimeout(() => {
             splashScreen.style.display = 'none';
-        }, 1000); 
-    }, 3000); 
+        }, 1000);
+    }, 3000);
 
-    // --- LÓGICA DO MENU QUE SOME AO ROLAR ---
+    // Menu que some ao rolar
     let lastScrollTop = 0;
     const header = document.querySelector('header');
     window.addEventListener('scroll', function() {
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
 
-    // --- LÓGICA PARA ANIMAÇÃO DE SCROLL ---
+    // Animação de scroll
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -34,14 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.classList.add('active');
             }
         });
-    }, {
-        threshold: 0.1
-    });
+    }, { threshold: 0.1 });
     revealElements.forEach(elem => {
         revealObserver.observe(elem);
     });
 
-    // --- LÓGICA PARA O MODAL DE VÍDEO ---
+    // Modal de vídeo
     const modal = document.getElementById('video-modal');
     const iframe = document.getElementById('video-iframe');
     const closeButton = document.querySelector('.close-button');
@@ -57,12 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const closeModal = () => {
         modal.classList.remove('active');
-        iframe.src = "";
-    }
+        iframe.src = '';
+    };
     closeButton.addEventListener('click', closeModal);
     modal.addEventListener('click', (event) => {
         if (event.target === modal) {
             closeModal();
         }
+    });
+
+    // Botão voltar ao topo
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
