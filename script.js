@@ -18,8 +18,9 @@ if (splash && video) {
 
 
   // Background VANTA FOG
-  VANTA.FOG({
-    el: "body",
+  <script>
+    VANTA.FOG({
+      el: "#fundo-animado",
     mouseControls: true,
     touchControls: true,
     gyroControls: false,
