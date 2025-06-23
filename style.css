@@ -15,7 +15,7 @@
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: black; /* fundo neutro */
+  background-color: black; /* fundo de segurança */
   display: flex; justify-content: center; align-items: center;
   z-index: 2000;
   overflow: hidden;
@@ -26,9 +26,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
   transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 }
 
+/* Transição para cima */
 #splash-screen.swoosh-out #splash-video {
   transform: translateY(-100%);
   opacity: 0;
