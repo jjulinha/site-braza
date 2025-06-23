@@ -12,30 +12,20 @@
     --fonte-corpo: 'Inter', sans-serif;
 }
 #splash-screen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-color: var(--cor-fundo);
     display: flex; justify-content: center; align-items: center;
     z-index: 2000;
     transition: opacity 1s ease-out;
+    overflow: hidden;
 }
-.splash-logo {
-    font-family: var(--fonte-splash);
-    font-size: clamp(3rem, 15vw, 8rem);
-    color: var(--cor-texto-principal);
-    letter-spacing: 8px;
-    animation: neon-glow 2s infinite alternate;
-}
-@keyframes neon-glow {
-    from { text-shadow: 0 0 10px #fff, 0 0 20px var(--cor-acento-amarelo); }
-    to { text-shadow: 0 0 20px #fff, 0 0 40px var(--cor-primaria-vermelho); }
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-principal);
-    font-family: var(--fonte-corpo);
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+
+#splash-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 body.no-scroll { overflow: hidden; }
 a { color: var(--cor-texto-principal); text-decoration: none; }
