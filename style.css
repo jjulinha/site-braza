@@ -15,11 +15,14 @@ html, body {
 
 /* Faz o canvas do Vanta ocupar toda a tela sem bordas */
 canvas {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: -1;
     display: block;
+    pointer-events: none;
 }
 
 /* Estilo das seções sobre a névoa */
