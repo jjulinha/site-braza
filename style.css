@@ -151,16 +151,44 @@ section, footer {
     flex-direction: column; 
     border-top: 1px solid #333; /* Adiciona uma linha no topo */
 }
-.servico-item-lista {
-    display: flex; 
-    align-items: center; 
-    padding: 30px 20px; 
-    border-bottom: 1px solid #333;
-    position: relative; /* Essencial para o efeito de fundo */
-    overflow: hidden; /* Esconde a "pincelada" antes da animação */
-    cursor: pointer;
+/* SERVIÇOS - ESTILO ATUALIZADO */
+#servicos { 
+    background-color: transparent; /* Remove o fundo para integrar com a animação */
 }
-
+.servicos-lista { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+.servico-item-lista {
+    background: rgba(255,255,255,0.03);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.servico-item-lista:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,0.08);
+}
+.servico-texto h3 { 
+    font-family: var(--fonte-headline); 
+    font-size: clamp(1.5rem, 4vw, 1.8rem); 
+    color: var(--cor-acento-amarelo); 
+    margin-bottom: 15px;
+}
+.servico-texto h3::before {
+    content: ''; /* Remove o emoji daqui para um visual mais limpo */
+}
+.servico-texto p { 
+    font-family: 'Inter', sans-serif; 
+    color: var(--cor-texto-secundario); 
+    line-height: 1.6; 
+}
+.cta-servicos {
+    text-align: center;
+    margin-top: 50px;
+}
 /* A "pincelada" vermelha que aparece no hover */
 .servico-item-lista::after {
     content: '';
