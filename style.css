@@ -141,103 +141,67 @@ section, footer {
 .highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 
 /* SERVIÇOS */
-/* --- Seção Serviços (NOVO ESTILO INTERATIVO) --- */
+/* SERVIÇOS */
 #servicos { 
-    background-color: #1a1a1a;
-    padding-bottom: 80px; /* Adiciona um respiro no final da lista */
+    background-color: var(--cor-fundo);
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
 }
-.servicos-lista { 
-    display: flex; 
-    flex-direction: column; 
-    border-top: 1px solid #333; /* Adiciona uma linha no topo */
+.accordion-container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
-/* SERVIÇOS - ESTILO ATUALIZADO */
-#servicos { 
-    background-color: transparent; /* Remove o fundo para integrar com a animação */
+.accordion-item {
+    border-bottom: 1px solid #333;
 }
-.servicos-lista { 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+.accordion-item:first-child {
+    border-top: 1px solid #333;
 }
-.servico-item-lista {
-    background: rgba(255,255,255,0.03);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-.servico-item-lista:hover {
-    transform: translateY(-10px);
-    background: rgba(255,255,255,0.08);
-}
-.servico-texto h3 { 
-    font-family: var(--fonte-headline); 
-    font-size: clamp(1.5rem, 4vw, 1.8rem); 
-    color: var(--cor-acento-amarelo); 
-    margin-bottom: 15px;
-}
-.servico-texto h3::before {
-    content: ''; /* Remove o emoji daqui para um visual mais limpo */
-}
-.servico-texto p { 
-    font-family: 'Inter', sans-serif; 
-    color: var(--cor-texto-secundario); 
-    line-height: 1.6; 
-}
-.cta-servicos {
-    text-align: center;
-    margin-top: 50px;
-}
-/* A "pincelada" vermelha que aparece no hover */
-.servico-item-lista::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+.accordion-header {
     width: 100%;
-    height: 100%;
-    background-color: var(--cor-primaria-vermelho);
-    z-index: 1; /* Fica atrás do texto */
-    transform: translateX(-101%); /* Começa fora da tela, à esquerda */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    background: none;
+    border: none;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--fonte-headline);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--cor-texto-secundario);
+    transition: all 0.3s ease;
 }
-
-/* Animação da "pincelada" ao passar o mouse */
-.servico-item-lista:hover::after {
-    transform: translateX(0);
+.accordion-header:hover, .accordion-header.active {
+    color: var(--cor-texto-principal);
+    background-color: rgba(255, 255, 255, 0.03);
+    padding-left: 40px;
 }
-
-.servico-texto { 
-    position: relative; 
-    z-index: 2; /* Garante que o texto fique sempre na frente */
+.accordion-header .icon {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--cor-acento-amarelo);
     transition: transform 0.4s ease;
 }
-
-.servico-item-lista:hover .servico-texto {
-    transform: translateX(10px); /* Move o texto um pouco para a direita no hover */
+.accordion-header.active .icon {
+    transform: rotate(45deg);
 }
-
-.servico-texto h3 { 
-    font-family: var(--fonte-headline); 
-    font-size: clamp(2rem, 5vw, 3rem); 
-    letter-spacing: 1px; 
-    color: var(--cor-texto-principal); 
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
 }
-
-/* Título muda de cor no hover para criar contraste */
-.servico-item-lista:hover .servico-texto h3 {
-    color: var(--cor-texto-principal);
+.accordion-content.active {
+    max-height: 200px;
 }
-
-.servico-texto p { 
-    font-family: var(--fonte-corpo); 
-    color: var(--cor-texto-secundario); 
-    line-height: 1.6; 
-    max-width: 800px; /* Limita a largura do texto para melhor leitura */
-}/* PROCESSO */
+.accordion-content p {
+    font-family: 'Inter', sans-serif;
+    color: var(--cor-texto-secundario);
+    line-height: 1.7;
+    font-size: 1.1rem;
+    padding: 0 20px 30px 40px;
+    max-width: 80%;
+}}/* PROCESSO */
 .processo-grid {
   display: flex;
   gap: 40px;
@@ -308,82 +272,67 @@ section, footer {
 }
 
 /* PLANOS */
-.planos-grid {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-}
+/* PLANOS */
 .plano-card {
-  flex: 1;
-  background: rgba(255,255,255,0.02);
-  padding: 30px;
-  border-radius: 15px;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+    flex: 1;
+    background: linear-gradient(145deg, #1e1e1e, #111);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
-.plano-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 40px rgba(255,179,0,0.2);
+.plano-card.destaque {
+    border-color: var(--cor-acento-amarelo);
+    box-shadow: 0 0 30px rgba(255,179,0,0.2);
 }
 .etiqueta-topo {
   position: absolute;
-  top: -12px;
-  left: 20px;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--cor-acento-amarelo);
   color: #111;
-  padding: 6px 12px;
-  font-size: 0.75rem;
+  padding: 6px 15px;
+  font-size: 0.8rem;
   font-weight: bold;
   border-radius: 20px;
 }
-.plano-header h3 {
-  font-size: 1.6rem;
-}
-.plano-header p {
-  color: var(--cor-texto-secundario);
-  font-size: 0.95rem;
-  margin-top: 5px;
-}
+.plano-header h3 { font-size: 1.8rem; }
 .plano-features {
   list-style: none;
-  margin: 20px 0;
+  margin: 25px 0;
   padding: 0;
+  flex-grow: 1;
 }
-.plano-features li {
-  margin-bottom: 10px;
+.plano-features li { margin-bottom: 12px; }
+.plano-footer {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+.plano-investimento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 .plano-investimento span {
   font-size: 0.9rem;
   color: var(--cor-texto-secundario);
 }
 .plano-investimento strong {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-family: var(--fonte-headline);
   color: white;
 }
-.plano-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-.plano-cta {
-  background: var(--cor-acento-amarelo);
-  color: #111;
-  padding: 10px 24px;
-  font-weight: bold;
-  border-radius: 30px;
-  text-decoration: none;
-  display: inline-block;
-  transition: background 0.3s ease;
-  text-transform: uppercase;
-}
-.plano-cta:hover {
-  background: #ffc107;
-}
 .plano-cta.destaque {
-  box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
-}
-
-/* FAQ */
+    box-shadow: 0 0 15px rgba(255, 179, 0, 0.5);
+    transform: scale(1.05);
+}/* FAQ */
 .faq-grid {
   display: flex;
   flex-direction: column;
