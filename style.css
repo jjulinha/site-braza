@@ -1,4 +1,16 @@
 /* style.css (NOVO ESTILO DE SERVIÇOS) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-fundo);
+}
+
 
 /* ... (Variáveis e a maior parte do CSS permanecem os mesmos) ... */
 :root {
