@@ -280,3 +280,75 @@ section, footer {
 .plano-footer {
   text-align: center;
   margin-top: 20px;
+}
+.plano-cta {
+  background: var(--cor-acento-amarelo);
+  color: #111;
+  padding: 10px 24px;
+  font-weight: bold;
+  border-radius: 30px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+}
+.plano-cta:hover {
+  background: #ffc107;
+}
+.plano-cta.destaque {
+  box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
+}
+
+/* FAQ */
+.faq-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.faq-item h3 {
+  font-size: 1.3rem;
+}
+.faq-item p {
+  color: var(--cor-texto-secundario);
+  margin-top: 5px;
+}
+
+/* CONTATO */
+footer .social-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+footer p {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--cor-texto-secundario);
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .planos-grid,
+  .processo-grid,
+  .portfolio-grid {
+    flex-direction: column;
+  }
+  .plano-card {
+    max-width: 100%;
+  }
+}
