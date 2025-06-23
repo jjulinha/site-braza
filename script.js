@@ -1,16 +1,19 @@
-// script.js (LÓGICA DO ACORDEÃO REMOVIDA)
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA PARA A SPLASH SCREEN ---
     <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const splash = document.getElementById('splash-screen');
-        setTimeout(() => {
-            splash.style.opacity = 0;
-            setTimeout(() => splash.remove(), 1000); // espera a transição acabar
-        }, 3000); // 3 segundos
-    });
+  window.addEventListener('DOMContentLoaded', () => {
+    const splash = document.getElementById('splash-screen');
+    const video = document.getElementById('splash-video');
+
+    // Após 4 segundos (duração do vídeo), ativa a animação de saída
+    setTimeout(() => {
+      splash.classList.add('swoosh-out');
+
+      // Espera a transição terminar para remover o elemento
+      setTimeout(() => splash.remove(), 1000); // 1s = duração da transição
+    }, 4000);
+  });
 </script>
 
 
