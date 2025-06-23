@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,7 +17,7 @@
         <div class="splash-logo">BRAZA</div>
     </div>
 
-    <header>
+    <header class="header-hidden">
         <div class="logo"><h1>BRAZA</h1></div>
         <nav>
             <ul>
@@ -38,33 +39,72 @@
             </div>
         </section>
 
-        <button id="back-to-top" title="Voltar ao topo">⬆️</button>
+        <section id="servicos">
+            <h2 class="section-title reveal">O QUE A GENTE FAZ?</h2>
+            <div class="servicos-lista reveal">
+                <div class="servico-item-lista"><div class="servico-texto"><h3>Estratégia de Marca</h3><p>Auditoria, posicionamento e criação de identidade de marca.</p></div></div>
+                <div class="servico-item-lista"><div class="servico-texto"><h3>Produção Audiovisual</h3><p>Roteiro, captação e edição de vídeos para todas as plataformas.</p></div></div>
+                <div class="servico-item-lista"><div class="servico-texto"><h3>Gestão de Redes Sociais</h3><p>Criação de conteúdo estratégico, posts, reels e monitoramento.</p></div></div>
+                <div class="servico-item-lista"><div class="servico-texto"><h3>Tráfego Pago</h3><p>Campanhas de alta performance em Meta Ads, Google Ads e TikTok Ads.</p></div></div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2 class="section-title reveal">TRABALHOS NA BRAZA</h2>
+            <div class="portfolio-grid reveal">
+                <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_TOYOTA"><img src="assets/thumb-toyota.jpg" alt="Projeto Toyota"><div class="overlay"><h3>TOYOTA HILUX</h3></div></div>
+                <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_MULLER"><img src="assets/thumb-muller.jpg" alt="Projeto Müller"><div class="overlay"><h3>MÜLLER</h3></div></div>
+                <div class="portfolio-item" data-video-id="SEU_ID_YOUTUBE_GALLPACK"><img src="assets/thumb-gallpack.jpg" alt="Projeto Gallpack"><div class="overlay"><h3>GALLPACK</h3></div></div>
+            </div>
+        </section>
+        
+        <section id="clientes">
+            <h2 class="section-title reveal">QUEM CONFIA NA NOSSA CHAMA</h2>
+            <div class="clientes-scroller reveal">
+                <div class="clientes-grid">
+                    <div class="cliente-logo">TOYOTA</div>
+                    <div class="cliente-logo">GALLPACK</div>
+                    <div class="cliente-logo">PROPOSTA VERDE</div>
+                    <div class="cliente-logo">ENGEMÜLLER</div>
+                    <div class="cliente-logo">TOYOTA</div>
+                    <div class="cliente-logo">GALLPACK</div>
+                    <div class="cliente-logo">PROPOSTA VERDE</div>
+                    <div class="cliente-logo">ENGEMÜLLER</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="planos">
+            <h2 class="section-title reveal">NOSSOS COMBOS</h2>
+            <div class="planos-grid reveal">
+                <div class="plano-card"><div class="plano-header"><h3>PACOTE SPARK</h3><p>"Preciso acender a chama do meu negócio!"</p></div><ul class="plano-features"><li>Gestão básica de redes sociais</li><li>4 Posts Mensais</li><li>1 Diária de Captação / Mês</li><li>Estruturação de LP ou Site Base</li><li>Tráfego Pago Base</li></ul><div class="plano-footer"><div class="plano-preco">R$ 2.800</div><a href="#contato" class="plano-cta">QUERO ESSE!</a></div></div>
+                <div class="plano-card"><div class="plano-header"><h3>PACOTE EMBER</h3><p>"Preciso manter minha chama acesa e tentar deixar ela mais forte"</p></div><ul class="plano-features"><li>16 Posts Mensais</li><li>Consultoria estratégica mensal</li><li>3 Diárias de Captação / Mês</li><li>Estruturação de LP ou Site Ouro</li><li>Fortalecimento de Marca</li><li>Tráfego Pago Ouro</li></ul><div class="plano-footer"><div class="plano-preco">R$ 5.500</div><a href="#contato" class="plano-cta">QUERO ESSE!</a></div></div>
+                <div class="plano-card"><div class="plano-header"><h3>PACOTE SUPERNOVA</h3><p>"Preciso que meu marketing chegue a níveis ESTRATOSFÉRICOS"</p></div><ul class="plano-features"><li>Gestão Full</li><li>Sessões de fotos profissionais recorrentes</li><li>Captação SEM LIMITE</li><li>Motion Avançado</li><li>Consultoria de Branding constante</li><li>Tráfego Pago Plus</li><li>Relatórios Quinzenais</li></ul><div class="plano-footer"><div class="plano-preco">R$ 8.900</div><a href="#contato" class="plano-cta">QUERO ESSE!</a></div></div>
+            </div>
+        </section>
+
+        <section id="feedbacks">
+            <h2 class="section-title reveal">O QUE DIZEM DA GENTE</h2>
+            <div class="feedbacks-container reveal">
+                <div class="feedback-card"><p class="feedback-texto">"A BRAZA transformou nossa presença digital. A criatividade e o foco em resultados são incomparáveis. Recomendo de olhos fechados!"</p><span class="feedback-autor">- NOME DO CLIENTE, Empresa Exemplo</span></div>
+                <div class="feedback-card"><p class="feedback-texto">"O que mais impressiona é a capacidade de entregar um audiovisual de altíssima qualidade que realmente conecta com nosso público. Uma parceria de sucesso."</p><span class="feedback-autor">- OUTRO CLIENTE, Outra Empresa</span></div>
+            </div>
+        </section>
     </main>
 
-    <div id="video-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <iframe id="video-iframe" width="100%" height="500px" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-    </div>
+    <footer id="contato" class="reveal">
+        <h2 class="hero-title">BORA BOTAR FOGO?</h2>
+        <div class="social-links"><a href="mailto:contato@braza.com">MANDA UM EMAIL</a><a href="#">SEGUE A GENTE</a></div>
+        <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
+    </footer>
 
+    <div id="video-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div class="video-container"><iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div></div>
+    
     <script src="script.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
     <script>
-    VANTA.FOG({ el: "body", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, highlightColor: 0xffb300, midtoneColor: 0xe53935, lowlightColor: 0x150202, baseColor: 0x111111, blurFactor: 0.50, speed: 0.80, zoom: 1.00 });
-
-    const backToTopButton = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.add('show');
-        } else {
-            backToTopButton.classList.remove('show');
-        }
-    });
-    backToTopButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    VANTA.FOG({ el: "#hero", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, highlightColor: 0xffb300, midtoneColor: 0xe53935, lowlightColor: 0x150202, baseColor: 0x111111, blurFactor: 0.50, speed: 0.80, zoom: 1.00 })
     </script>
 </body>
 </html>
