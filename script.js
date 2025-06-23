@@ -26,19 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     //Backgoung VANTA 
     
 VANTA.FOG({
-  el: "body",
-  mouseControls: true,
-  touchControls: true,
-  gyroControls: false,
-  minHeight: 200.00,
-  minWidth: 200.00,
-  highlightColor: 0xffb300,
-  midtoneColor: 0xe53935,
-  lowlightColor: 0x150202,
-  baseColor: 0x111111,
-  blurFactor: 0.50,
-  speed: 0.80,
-  zoom: 1.00
+    el: "body",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    highlightColor: 0xffb300,
+    midtoneColor: 0xe53935,
+    lowlightColor: 0x150202,
+    baseColor: 0x111111,
+    blurFactor: 0.50,
+    speed: 0.80,
+    zoom: 1.00
 });
     // --- LÓGICA DO MENU QUE SOME AO ROLAR ---
     let lastScrollTop = 0;
