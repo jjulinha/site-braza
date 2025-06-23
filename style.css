@@ -15,14 +15,13 @@ html, body {
 }
 
 /* VARIÁVEIS */
+
 :root {
   --cor-fundo: #111;
   --cor-texto-principal: #f5f5f5;
-  --cor-texto-secundario: #aaaaaa;
   --cor-acento-amarelo: #FFB300;
-  --cor-vermelho: #E53935;
   --fonte-headline: 'Anton', sans-serif;
-  --fonte-splash: 'Thunder', sans-serif;
+  --fonte-corpo: 'Inter', sans-serif;
 }
 
 /* SPLASH */
@@ -48,14 +47,6 @@ html, body {
 }
 
 /* HEADER */
-
-:root {
-  --cor-fundo: #111;
-  --cor-texto-principal: #f5f5f5;
-  --cor-acento-amarelo: #FFB300;
-  --fonte-headline: 'Anton', sans-serif;
-  --fonte-corpo: 'Inter', sans-serif;
-}
 
 /* HEADER FIXO COM DESAPARECIMENTO */
 header {
