@@ -453,4 +453,82 @@ footer p {
   .plano-card {
     max-width: 100%;
   }
+}/* --- NOVOS ESTILOS PARA A SEÇÃO DE SERVIÇOS 'STICKY' --- */
+
+.servicos-container {
+  display: flex;
+  gap: 60px; /* Espaço entre a coluna de texto e a de imagem */
+  margin-top: 80px;
+}
+
+/* Coluna da esquerda com os textos */
+.servicos-lista-texto {
+  flex: 1; /* Ocupa metade do espaço */
+  display: flex;
+  flex-direction: column;
+  gap: 150px; /* Espaço generoso entre cada serviço para dar efeito no scroll */
+}
+
+.servico-item-texto {
+  padding: 20px;
+  opacity: 0.4; /* Itens não ativos ficam com menos destaque */
+  transition: opacity 0.4s ease;
+}
+
+/* Estilo que o JavaScript vai aplicar ao item visível */
+.servico-item-texto.is-active {
+  opacity: 1;
+}
+
+.servico-item-texto h2 {
+  font-family: var(--fonte-headline);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 15px;
+  color: var(--cor-acento-amarelo);
+}
+
+.servico-item-texto p {
+  color: var(--cor-texto-secundario);
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* Coluna da direita com a imagem */
+.servicos-imagem-sticky {
+  flex: 1.2; /* Ocupa a outra metade, um pouco maior */
+  height: 100vh; /* Altura total da tela */
+  position: sticky; /* A mágica acontece aqui! */
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicos-imagem-sticky img {
+  width: 100%;
+  height: 70%;
+  max-height: 600px;
+  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+  border-radius: 15px;
+  transition: opacity 0.5s ease-in-out; /* Para o efeito de fade na troca */
+}
+
+/* Removemos o estilo antigo para não haver conflito */
+#servicos .servicos-lista, #servicos .servico-item-lista {
+  display: none;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 900px) {
+  .servicos-container {
+    flex-direction: column; /* Em telas pequenas, uma coluna fica em cima da outra */
+  }
+  .servicos-imagem-sticky {
+    position: static; /* Desativa o efeito sticky */
+    height: auto;
+    margin-top: 40px;
+  }
+  .servicos-lista-texto {
+    gap: 80px;
+  }
 }
