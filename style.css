@@ -205,8 +205,9 @@ section, footer {
 .servico-bloco.reveal.active .servico-grafico svg path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: draw-svg 2s ease-out forwards;
-  animation-delay: 0.2s;
+ /* Duração de 5 segundos para um desenho bem suave e detalhado */
+animation: draw-svg 5s ease-out forwards;
+  animation-delay: 1s;
 }
 
 /* PROCESSO */
