@@ -435,4 +435,88 @@ footer p {
   z-index: 1000;
   left: 0;
   top: 0;
-  width:
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+.modal.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.close-button {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.5s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .processo-timeline::after {
+    left: 30px;
+  }
+  .passo-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+    text-align: left;
+  }
+  .passo-item:nth-child(odd) {
+    align-self: auto;
+    text-align: left;
+  }
+  .passo-item::after {
+    left: 15.5px;
+  }
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .planos-grid,
+  .portfolio-grid {
+    flex-direction: column;
+  }
+  .plano-card {
+    max-width: 100%;
+  }
+}
