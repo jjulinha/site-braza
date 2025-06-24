@@ -101,7 +101,6 @@ section, footer {
   text-transform: uppercase;
   margin-bottom: 40px;
   border-bottom: 4px solid var(--cor-vermelho);
-  /* Ajustes para centralização */
   display: table;
   margin-left: auto;
   margin-right: auto;
@@ -142,90 +141,104 @@ section, footer {
 .highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
 .highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 
-/* SERVIÇOS - NOVO LAYOUT CENTRALIZADO */
+/* SERVIÇOS - LAYOUT EDITORIAL */
 #servicos {
   position: relative;
   z-index: 1;
-  background-color: #1a1a1a; /* Um tom de cinza escuro para diferenciar sutilmente do fundo */
+  background-color: #1a1a1a;
   padding-top: 120px;
   padding-bottom: 120px;
+  overflow: hidden; 
 }
 .servicos-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 100px; /* Espaço entre cada bloco de serviço */
+  gap: 120px; 
   margin-top: 60px;
 }
 .servico-bloco {
-  text-align: center;
-  max-width: 800px; /* Limita a largura do texto para melhor leitura */
-  margin: 0 auto; /* Centraliza o bloco */
+  max-width: 700px; 
+  margin: 0 auto;
+  position: relative;
+  padding: 20px;
+}
+.servico-numero {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  font-family: var(--fonte-headline);
+  font-size: 16rem; 
+  color: #fff;
+  opacity: 0.05; 
+  z-index: -1; 
+  user-select: none;
 }
 .servico-bloco h2 {
   font-family: var(--fonte-headline);
   font-size: clamp(2.2rem, 6vw, 4rem);
   color: var(--cor-acento-amarelo);
-  margin-bottom: 20px;
   letter-spacing: 1px;
+  text-align: center;
+}
+.servico-bloco hr {
+  border: none;
+  height: 3px;
+  width: 80px;
+  background-color: var(--cor-vermelho);
+  margin: 20px auto 30px auto;
 }
 .servico-bloco p {
   color: var(--cor-texto-secundario);
   line-height: 1.7;
   font-size: 1.1rem;
+  text-align: left;
 }
-/* Posição: style.css */
-/* Adicione estas novas regras */
 
+/* Animações de Ícones */
 .servico-grafico {
   height: 80px;
   width: 80px;
   margin: 0 auto 30px auto;
   opacity: 0.8;
 }
-
 .servico-grafico svg {
   width: 100%;
   height: 100%;
 }
-
-/* Animação Genérica para Desenhar o SVG */
-@keyframes draw-svg {
-  from {
-    stroke-dashoffset: 1000;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Aplica a animação quando o bloco entra na tela */
-.servico-bloco.reveal.active .servico-grafico svg path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw-svg 2s ease-out forwards;
-  animation-delay: 0.3s; /* Um pequeno atraso para a animação começar */
-}
-
-/* Animação específica para a engrenagem (rotação) */
 @keyframes rotate-svg {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-/* Animação específica para as barras do gráfico */
-@keyframes rise-bar {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+@keyframes pulse-effect {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
 }
-
-.servico-bloco:nth-child(1).reveal.active .servico-grafico svg {
-  animation: rotate-svg 10s linear infinite;
+@keyframes rise-and-fall {
+    0% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+    100% { transform: scaleY(0.3); }
 }
-
+.servico-bloco.reveal.active .servico-grafico svg {
+  animation: rotate-svg 20s linear infinite;
+}
+.servico-bloco:nth-child(2).reveal.active .servico-grafico svg {
+  animation: pulse-effect 3s ease-in-out infinite alternate;
+}
+.servico-bloco:nth-child(3).reveal.active .servico-grafico svg {
+  animation: pulse-effect 4s ease-in-out infinite alternate;
+  animation-delay: 0.5s;
+}
 .servico-bloco:nth-child(4).reveal.active .servico-grafico svg path {
   transform-origin: bottom;
-  animation: rise-bar 1s ease-out forwards, draw-svg 2s ease-out forwards;
+  animation: rise-and-fall 2.5s ease-in-out infinite alternate;
+}
+.servico-bloco:nth-child(4).reveal.active .servico-grafico svg path:nth-child(2) {
   animation-delay: 0.3s;
+}
+.servico-bloco:nth-child(4).reveal.active .servico-grafico svg path:nth-child(3) {
+  animation-delay: 0.6s;
 }
 
 /* PROCESSO */
@@ -308,166 +321,4 @@ section, footer {
   flex: 1;
   background: rgba(255,255,255,0.02);
   padding: 30px;
-  border-radius: 15px;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-}
-.plano-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 40px rgba(255,179,0,0.2);
-}
-.etiqueta-topo {
-  position: absolute;
-  top: -12px;
-  left: 20px;
-  background: var(--cor-acento-amarelo);
-  color: #111;
-  padding: 6px 12px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border-radius: 20px;
-}
-.plano-header h3 {
-  font-size: 1.6rem;
-}
-.plano-header p {
-  color: var(--cor-texto-secundario);
-  font-size: 0.95rem;
-  margin-top: 5px;
-}
-.plano-features {
-  list-style: none;
-  margin: 20px 0;
-  padding: 0;
-}
-.plano-features li {
-  margin-bottom: 10px;
-}
-.plano-investimento span {
-  font-size: 0.9rem;
-  color: var(--cor-texto-secundario);
-}
-.plano-investimento strong {
-  font-size: 2rem;
-  color: white;
-}
-.plano-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-.plano-cta {
-  background: var(--cor-acento-amarelo);
-  color: #111;
-  padding: 10px 24px;
-  font-weight: bold;
-  border-radius: 30px;
-  text-decoration: none;
-  display: inline-block;
-  transition: background 0.3s ease;
-  text-transform: uppercase;
-}
-.plano-cta:hover {
-  background: #ffc107;
-}
-.plano-cta.destaque {
-  box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
-}
-
-/* FAQ */
-.faq-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.faq-item h3 {
-  font-size: 1.3rem;
-}
-.faq-item p {
-  color: var(--cor-texto-secundario);
-  margin-top: 5px;
-}
-
-/* CONTATO */
-footer .social-links {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
-footer p {
-  text-align: center;
-  margin-top: 20px;
-  color: var(--cor-texto-secundario);
-}
-
-/* MODAL DE VÍDEO */
-.modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-.modal.active {
-  display: flex;
-}
-.modal-content {
-  position: relative;
-  width: 90%;
-  max-width: 900px;
-}
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-}
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.close-button {
-  position: absolute;
-  top: -30px;
-  right: 0;
-  color: #fff;
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  /* Aumentamos de 1s para 1.5s para um efeito mais suave e elegante */
-  transition: all 1.5s ease;
-}}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-    text-align: center;
-  }
-  .planos-grid,
-  .processo-grid,
-  .portfolio-grid {
-    flex-direction: column;
-  }
-  .plano-card {
-    max-width: 100%;
-  }
-} 
+  border-
