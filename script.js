@@ -5,26 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const video = document.getElementById('splash-video');
   if (splash && video) {
     const removeSplash = () => {
-      // Verifica se o splash ainda existe antes de tentar removê-lo
       if (document.body.contains(splash)) {
         splash.classList.add('swoosh-out');
         setTimeout(() => {
           if (splash.parentNode) {
               splash.parentNode.removeChild(splash);
           }
-        }, 1000); // Tempo da animação CSS
+        }, 1000);
       }
     };
-
-    // Evento para quando o vídeo termina
     video.addEventListener('ended', removeSplash);
-
-    // Fallback de 4 segundos para remover o splash caso o vídeo falhe ou não dispare o evento
     setTimeout(removeSplash, 4000);
   }
 
   // Background VANTA FOG
-  // Verifica se o elemento 'body' existe antes de aplicar o efeito
   if (document.querySelector('body')) {
     VANTA.FOG({
       el: "body",
@@ -59,25 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // SCROLL REVEAL DAS SEÇÕES
-const revealElements = document.querySelectorAll('.reveal');
-if (revealElements.length > 0) {
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Se o elemento está na tela, adiciona a classe para animar
-        entry.target.classList.add('active');
-      } else {
-        // <<-- AQUI A MÁGICA: Se o elemento saiu da tela, remove a classe para "resetar" a animação
-        entry.target.classList.remove('active');
-      }
+  const revealElements = document.querySelectorAll('.reveal');
+  if (revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active');
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  }, {
-    threshold: 0.1
-  });
-  revealElements.forEach(elem => {
-    revealObserver.observe(elem);
-  });
-}
+    revealElements.forEach(elem => {
+      revealObserver.observe(elem);
+    });
+  }
+  
   // TILT 3D NOS CARDS DE PLANOS
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
@@ -103,27 +96,29 @@ if (revealElements.length > 0) {
   const portfolioItems = document.querySelectorAll('.portfolio-item');
   
   if (modal && iframe && closeButton && portfolioItems.length > 0) {
-      portfolioItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const videoId = item.getAttribute('data-video-id');
-          if (videoId) {
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-            modal.classList.add('active');
-          }
-        });
-      });
-
-      const closeModal = () => {
-        modal.classList.remove('active');
-        iframe.src = "";
-      };
-
-      closeButton.addEventListener('click', closeModal);
-      modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          closeModal();
+    portfolioItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const videoId = item.getAttribute('data-video-id');
+        if (videoId && videoId.trim() !== "" && videoId.includes("YOUTUBE_ID") === false) {
+          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+          modal.classList.add('active');
         }
       });
+    });
+
+    const closeModal = () => {
+      modal.classList.remove('active');
+      setTimeout(() => {
+        iframe.src = "";
+      }, 300); 
+    };
+
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
   }
 
   // ANIMAÇÃO DOS TÍTULOS HERO
