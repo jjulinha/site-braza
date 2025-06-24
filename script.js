@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ... (código do Splash, Vanta e Header continua o mesmo) ...
+
   // Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
@@ -37,24 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
     zoom: 1.00
   });
 
-  // --- HEADER ESCONDIDO AO ROLAR ---
+  // HEADER ESCONDIDO AO ROLAR
   let lastScrollTop = 0;
   const header = document.querySelector('header');
-
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Esconde o header ao rolar para baixo, depois de rolar um pouco (100px)
     if (currentScroll > lastScrollTop && currentScroll > 100) {
       header.classList.add('header-hidden');
     } else {
-      // Mostra o header ao rolar para cima
       header.classList.remove('header-hidden');
     }
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
   
-  // --- SCROLL REVEAL DAS SEÇÕES ---
+  // SCROLL REVEAL DAS SEÇÕES
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -69,7 +67,41 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(elem);
   });
 
-  // Tilt 3D nos Cards
+  // --- LÓGICA PARA A SEÇÃO DE SERVIÇOS STICKY ---
+  const servicosTextos = document.querySelectorAll('.servico-item-texto');
+  const imagemServico = document.querySelector('.servicos-imagem-sticky img');
+
+  if (servicosTextos.length > 0 && imagemServico) {
+    const servicosObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // Se o item de texto estiver visível na tela
+        if (entry.isIntersecting) {
+          // Adiciona a classe 'is-active' para dar destaque ao texto
+          entry.target.classList.add('is-active');
+          const novaImagem = entry.target.getAttribute('data-image');
+          
+          // Troca a imagem com um efeito de fade
+          imagemServico.style.opacity = '0';
+          setTimeout(() => {
+            imagemServico.src = novaImagem;
+            imagemServico.style.opacity = '1';
+          }, 300); // tempo para o fade-out
+
+        } else {
+          // Remove a classe de destaque quando o texto sai da tela
+          entry.target.classList.remove('is-active');
+        }
+      });
+    }, {
+      threshold: 0.6 // Ação é disparada quando 60% do item estiver visível
+    });
+
+    // Pede ao observador para "assistir" a cada um dos itens de texto
+    servicosTextos.forEach(item => servicosObserver.observe(item));
+  }
+
+
+  // --- (Restante do código: Tilt 3D, Modal de Vídeo, etc.) ---
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -87,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Modal de Vídeo
   const modal = document.getElementById('video-modal');
   const iframe = document.getElementById('video-iframe');
   const closeButton = document.querySelector('.close-button');
@@ -112,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Animação dos Títulos HERO
   const heroTitles = document.querySelectorAll('.hero-title');
   heroTitles.forEach((el, i) => {
     setTimeout(() => el.classList.add('active'), i * 400);
