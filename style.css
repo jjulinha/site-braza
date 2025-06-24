@@ -101,7 +101,6 @@ section, footer {
   text-transform: uppercase;
   margin-bottom: 40px;
   border-bottom: 4px solid var(--cor-vermelho);
-  /* Ajustes para centralização */
   display: table;
   margin-left: auto;
   margin-right: auto;
@@ -164,8 +163,8 @@ section, footer {
   padding: 20px;
 }
 .servico-grafico {
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
   margin: 0 auto 30px auto;
   opacity: 0.8;
 }
@@ -205,9 +204,8 @@ section, footer {
 .servico-bloco.reveal.active .servico-grafico svg path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
- /* Duração de 5 segundos para um desenho bem suave e detalhado */
-animation: draw-svg 5s ease-out forwards;
-  animation-delay: 1s;
+  animation: draw-svg 5s ease-out forwards;
+  animation-delay: 0.2s;
 }
 
 /* PROCESSO */
