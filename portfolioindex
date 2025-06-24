@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio - Braza</title>
+  
+    <link rel="stylesheet" href="styleportifa.css"> 
+  </head>
+
+<body>
+    <header>
+    <nav class="main-nav">
+        <a href="index.html" class="logo">BRAZA</a>
+        <ul>
+            <li><a href="index.html#servicos">Serviços</a></li>
+            <li><a href="portfolio.html">Portfólio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+    </nav>
+    <h1>Nosso Portfólio</h1>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="institucional">Institucional</button>
+    <button class="filter-btn" data-filter="eventos">Eventos</button>
+    <button class="filter-btn" data-filter="publicidade">Publicidade</button>
+  </div>
+
+  <section class="gallery" id="gallery">
+        <div class="gallery-item" data-category="institucional">
+      <img src="images/portfolio/imagem1.png" alt="Vídeo institucional com foco em branding">
+      <div class="gallery-info">
+        <h3>Institucional 1</h3>
+        <p>Vídeo institucional com foco em branding.</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="eventos">
+      <img src="images/portfolio/imagem2.png" alt="Captura de evento ao vivo para cliente X">
+      <div class="gallery-info">
+        <h3>Evento 1</h3>
+        <p>Captura de evento ao vivo para cliente X.</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="publicidade">
+      <img src="images/portfolio/imagem3.png" alt="Campanha digital para lançamento de produto">
+      <div class="gallery-info">
+        <h3>Publicidade 1</h3>
+        <p>Campanha digital para lançamento de produto.</p>
+      </div>
+    </div>
+class="gallery" id="gallery">
+        <div class="gallery-item" data-category="institucional">
+      <img src="images/portfolio/imagem1.png" alt="Vídeo institucional com foco em branding">
+      <div class="gallery-info">
+        <h3>Institucional 1</h3>
+        <p>Vídeo institucional com foco em branding.</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="eventos">
+      <img src="images/portfolio/imagem2.png" alt="Captura de evento ao vivo para cliente X">
+      <div class="gallery-info">
+        <h3>Evento 1</h3>
+        <p>Captura de evento ao vivo para cliente X.</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-category="publicidade">
+      <img src="images/portfolio/imagem3.png" alt="Campanha digital para lançamento de produto">
+      <div class="gallery-info">
+        <h3>Publicidade 1</h3>
+        <p>Campanha digital para lançamento de produto.</p>
+      </div>
+    </div>w
+      </section>
+
+  <footer>
+    © 2025 Braza Produções - Todos os direitos reservados
+  </footer>
+  
+  </body>
+</html>
