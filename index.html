@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BRAZA</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-</head>
 <body>
-  <div id="vanta-bg"></div>
 
   <div id="splash-screen">
     <video id="splash-video" autoplay muted playsinline>
@@ -17,6 +9,30 @@
     </video>
   </div>
 
+  <header>
+    <div class="logo"><h1>BRAZA</h1></div>
+    <nav>
+      <ul>
+        <li><a href="#servicos">O QUE FAZEMOS</a></li>
+        <li><a href="#portfolio">PORTFÓLIO</a></li>
+        <li><a href="#clientes">CLIENTES</a></li>
+        <li><a href="#planos">COMBOS</a></li>
+        <li><a href="#contato">CONTATO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <head>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRAZA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
   <header>
     <div class="logo"><h1>BRAZA</h1></div>
     <nav>
@@ -30,7 +46,14 @@
     </nav>
   </header>
 
-  <main>
+  <main style="padding-top: 100px;">
+    <section style="height: 2000px; color: white; font-family: sans-serif;">
+      <h2>Role a página para ver o efeito de esconder o menu</h2>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
     <!-- HERO -->
     <section id="hero">
       <div class="hero-content">
@@ -121,8 +144,6 @@
     </section>
   </main>
 
-  </main>
-
   <footer id="contato" class="reveal">
     <h2 class="hero-title">BORA BOTAR FOGO?</h2>
     <div class="social-links">
@@ -141,8 +162,8 @@
     </div>
   </div>
 
-  <script src="three.r134.min.js"></script>
-  <script src="vanta.fog.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
   <script src="script.js" defer></script>
 </body>
 </html>
