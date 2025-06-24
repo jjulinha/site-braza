@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   // Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
@@ -14,40 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   }
 
-  // Background VANTA FOG
-  VANTA.FOG({
-    el: "body",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    highlightColor: 0xffb300,
-    midtoneColor: 0xe53935,
-    lowlightColor: 0x150202,
-    baseColor: 0x111111,
-    blurFactor: 0.50,
-    speed: 0.80,
-    zoom: 1.00
-  });
+  // A inicialização do VANTA FOG foi movida para o index.html
+  // para garantir a ordem de carregamento correta.
 
   // HEADER ESCONDIDO AO ROLAR
   let lastScrollTop = 0;
   const header = document.querySelector('header');
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (currentScroll > lastScrollTop && currentScroll > 80) {
-      // Rolando para baixo
-      header.classList.add('header-hidden');
-    } else {
-      // Rolando para cima
-      header.classList.remove('header-hidden');
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScrollTop && currentScroll > 80) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+  }
 
   // Scroll Reveal das Seções
   const revealElements = document.querySelectorAll('.reveal');
@@ -60,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {
     threshold: 0.1
   });
-
   revealElements.forEach(elem => {
     revealObserver.observe(elem);
   });
@@ -78,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const rotateY = ((x - centerX) / centerX) * 7;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
-
     card.addEventListener('mouseleave', () => {
       card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
     });
@@ -89,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const iframe = document.getElementById('video-iframe');
   const closeButton = document.querySelector('.close-button');
   const portfolioItems = document.querySelectorAll('.portfolio-item');
-
   portfolioItems.forEach(item => {
     item.addEventListener('click', () => {
       const videoId = item.getAttribute('data-video-id');
@@ -99,14 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
   const closeModal = () => {
     modal.classList.remove('active');
     iframe.src = "";
   };
-
-  closeButton.addEventListener('click', closeModal);
-  modal.addEventListener('click', (event) => {
+  if(closeButton) closeButton.addEventListener('click', closeModal);
+  if(modal) modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       closeModal();
     }
