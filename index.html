@@ -1,61 +1,169 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+<body>
+
+  <div id="splash-screen">
+    <video id="splash-video" autoplay muted playsinline>
+      <source src="assets/splash.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+  </div>
+
+  <header>
+    <div class="logo"><h1>BRAZA</h1></div>
+    <nav>
+      <ul>
+        <li><a href="#servicos">O QUE FAZEMOS</a></li>
+        <li><a href="#portfolio">PORTFÓLIO</a></li>
+        <li><a href="#clientes">CLIENTES</a></li>
+        <li><a href="#planos">COMBOS</a></li>
+        <li><a href="#contato">CONTATO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <head>
+  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BRAZA - Marketing em Chamas</title>
-  <meta name="description" content="Agência BRAZA: experiências visuais, estratégias que vendem, conteúdos que conectam e combos criativos sob medida." />
+  <title>BRAZA</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/thunder" rel="stylesheet">
 </head>
 <body>
-<body>
+  <header>
+    <div class="logo"><h1>BRAZA</h1></div>
+    <nav>
+      <ul>
+        <li><a href="#servicos">O QUE A GENTE FAZ?</a></li>
+        <li><a href="#portfolio">TRABALHOS NA BRAZA</a></li>
+        <li><a href="#clientes">CLIENTES</a></li>
+        <li><a href="#planos">NOSSOS COMBOS</a></li>
+        <li><a href="#contato">BORA FAZER FOGO?</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div id="fundo-vanta"></div>
+  <main style="padding-top: 100px;">
+    <section style="height: 2000px; color: white; font-family: sans-serif;">
+      <h2>Role a página para ver o efeito de esconder o menu</h2>
+    </section>
+  </main>
 
-  <div id="wrapper-conteudo">
+  <script src="script.js"></script>
 
-    <div id="splash-screen">
-      <video id="splash-video" autoplay muted playsinline>
-        <source src="assets/splash.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo.
-      </video>
-    </div>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <div class="no-wrap"><h2 class="hero-title">A GENTE CRIA <span class="highlight highlight-1">EXPERIÊNCIAS</span></h2></div>
+        <div><h2 class="hero-title">ESTRATÉGIAS QUE <span class="highlight highlight-2">VENDEM</span></h2></div>
+        <div class="no-wrap"><h2 class="hero-title">CONTEÚDOS QUE <span class="highlight highlight-3">CONECTAM</span></h2></div>
+      </div>
+    </section>
 
-    <header>
-      <div class="logo"><h1>BRAZA</h1></div>
-      <nav>
-        <ul>
-          <li><a href="#servicos">O QUE FAZEMOS</a></li>
-          <li><a href="#portfolio">PORTFÓLIO</a></li>
-          <li><a href="#clientes">CLIENTES</a></li>
-          <li><a href="#planos">COMBOS</a></li>
-          <li><a href="#contato">CONTATO</a></li>
-        </ul>
-      </nav>
-    </header>
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="reveal">
+      <h2 class="section-title">O QUE A GENTE FAZ?</h2>
+      <div class="servicos-lista">
+        <div class="servico-item-lista"><div class="servico-texto"><h3>🎯 Estratégia de Marca</h3><p>Auditoria, posicionamento e identidade de marca.</p></div></div>
+        <div class="servico-item-lista"><div class="servico-texto"><h3>🎥 Produção Audiovisual</h3><p>Roteiro, captação e edição para todas as plataformas.</p></div></div>
+        <div class="servico-item-lista"><div class="servico-texto"><h3>📱 Redes Sociais</h3><p>Reels, posts, stories e gerenciamento estratégico.</p></div></div>
+        <div class="servico-item-lista"><div class="servico-texto"><h3>💰 Tráfego Pago</h3><p>Campanhas Meta Ads, Google Ads e TikTok Ads.</p></div></div>
+      </div>
+      <div class="cta-servicos"><a href="#planos" class="plano-cta destaque">QUERO FAZER ISSO!</a></div>
+    </section>
 
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-              <div class="no-wrap"><h2 class="hero-title">A GENTE CRIA <span class="highlight highlight-1">EXPERIÊNCIAS</span></h2></div>
-              <div><h2 class="hero-title">ESTRATÉGIAS QUE <span class="highlight highlight-2">VENDEM</span></h2></div>
-              <div class="no-wrap"><h2 class="hero-title">CONTEÚDOS QUE <span class="highlight highlight-3">CONECTAM</span></h2></div>
-            </div>
-        </section>
-        
-        </main>
+    <!-- PROCESSO -->
+    <section id="como-fazemos" class="reveal">
+      <h2 class="section-title">NOSSO PROCESSO</h2>
+      <div class="processo-grid">
+        <div class="passo"><h3>1. Diagnóstico 🔍</h3><p>Entendemos sua marca e mercado.</p></div>
+        <div class="passo"><h3>2. Criação Criativa 🎨</h3><p>Desenhamos a estratégia ideal e visual cativante.</p></div>
+        <div class="passo"><h3>3. Execução 🚀</h3><p>Executamos com performance e criatividade.</p></div>
+      </div>
+    </section>
 
-    <footer id="contato" class="reveal">
-        </footer>
+    <!-- PORTFÓLIO -->
+    <section id="portfolio" class="reveal">
+      <h2 class="section-title">TRABALHOS NA BRAZA</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item" data-video-id="YOUTUBE_ID_1"><img src="assets/thumb-toyota.jpg" alt="Toyota"><div class="overlay"><h3>TOYOTA</h3></div></div>
+        <div class="portfolio-item" data-video-id="YOUTUBE_ID_2"><img src="assets/thumb-muller.jpg" alt="Müller"><div class="overlay"><h3>MÜLLER</h3></div></div>
+        <div class="portfolio-item" data-video-id="YOUTUBE_ID_3"><img src="assets/thumb-gallpack.jpg" alt="Gallpack"><div class="overlay"><h3>GALLPACK</h3></div></div>
+      </div>
+    </section>
 
-    <div id="video-modal" class="modal">
+    <!-- CLIENTES -->
+    <section id="clientes" class="reveal">
+      <h2 class="section-title">QUEM JÁ ASCENDEU COM A GENTE</h2>
+      <p class="descricao-clientes">Algumas marcas que confiaram na nossa criatividade:</p>
+      <div class="clientes-grid">
+        <div class="cliente-logo">TOYOTA</div>
+        <div class="cliente-logo">GALLPACK</div>
+        <div class="cliente-logo">PROPOSTA VERDE</div>
+        <div class="cliente-logo">ENGEMÜLLER</div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="planos" class="reveal">
+      <h2 class="section-title">NOSSOS COMBOS</h2>
+      <div class="planos-grid">
+        <div class="plano-card destaque">
+          <div class="etiqueta-topo">MAIS ESCOLHIDO</div>
+          <div class="plano-header">
+            <h3>PACOTE EMBER</h3>
+            <p>"Preciso manter minha chama acesa e crescer mais!"</p>
+          </div>
+          <ul class="plano-features">
+            <li>🔥 16 Posts Mensais</li>
+            <li>📈 Consultoria estratégica</li>
+            <li>🎥 3 Captações</li>
+            <li>💻 Site Ouro</li>
+            <li>🚀 Marca forte + tráfego ouro</li>
+          </ul>
+          <div class="plano-footer">
+            <div class="plano-investimento"><span>Investimento</span><strong>R$ 5.500</strong></div>
+            <a href="#contato" class="plano-cta destaque">QUERO ESSE!</a>
+          </div>
         </div>
+        <!-- Adicione mais planos aqui se desejar -->
+      </div>
+    </section>
 
-  </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- FAQ -->
+    <section id="faq" class="reveal">
+      <h2 class="section-title">DÚVIDAS FREQUENTES</h2>
+      <div class="faq-grid">
+        <div class="faq-item"><h3>Quanto tempo para resultados?</h3><p>De 1 a 3 meses, dependendo da estratégia.</p></div>
+        <div class="faq-item"><h3>Posso customizar um plano?</h3><p>Sim! Montamos combos personalizados.</p></div>
+        <div class="faq-item"><h3>Vocês cuidam de tudo?</h3><p>Sim, a BRAZA entrega tudo pronto e estratégico.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contato" class="reveal">
+    <h2 class="hero-title">BORA BOTAR FOGO?</h2>
+    <div class="social-links">
+      <a href="mailto:contato@braza.com" class="plano-cta destaque">MANDA UM EMAIL</a>
+      <a href="https://wa.me/5500000000000" class="plano-cta destaque">CHAMA NO WHATS</a>
+    </div>
+    <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
+  </footer>
+
+  <div id="video-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">×</span>
+      <div class="video-container">
+        <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
-  
   <script src="script.js" defer></script>
-</body></body>
+</body>
 </html>
