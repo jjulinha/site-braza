@@ -208,7 +208,7 @@ section, footer {
   animation-delay: 0.2s;
 }
 
-/* PROCESSO - LINHA DO TEMPO ANIMADA */
+/* PROCESSO - LINHA DO TEMPO ESTILIZADA E ANIMADA */
 .processo-timeline {
   display: flex;
   flex-direction: column;
@@ -223,13 +223,22 @@ section, footer {
   bottom: 0;
   width: 4px;
   background-color: rgba(255, 255, 255, 0.1);
-  transform: translateX(-50%);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  transition: transform 1.5s ease-in-out;
+}
+#como-fazemos.reveal.active .processo-timeline::after {
+    transform: translateX(-50%) scaleY(1);
 }
 .passo-item {
   padding: 10px 40px;
   position: relative;
   width: 50%;
   margin: 20px 0;
+  opacity: 0;
+}
+.passo-item.reveal.active {
+    opacity: 1;
 }
 .passo-item::after {
   content: '';
@@ -237,31 +246,52 @@ section, footer {
   width: 25px;
   height: 25px;
   right: -14.5px;
-  background-color: var(--cor-vermelho);
+  background-color: #1a1a1a;
   border: 4px solid var(--cor-acento-amarelo);
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0);
   border-radius: 50%;
   z-index: 1;
+  transition: transform 0.5s ease-in-out 0.5s;
+}
+.passo-item.reveal.active::after {
+    transform: translateY(-50%) scale(1);
 }
 .passo-item:nth-child(odd) {
   align-self: flex-start;
   padding-right: 70px;
   text-align: right;
+  animation: slide-in-left 1s ease-out forwards;
+  animation-delay: 0.5s;
 }
 .passo-item:nth-child(even) {
   align-self: flex-end;
   padding-left: 70px;
   text-align: left;
+  animation: slide-in-right 1s ease-out forwards;
+  animation-delay: 0.5s;
 }
 .passo-item:nth-child(even)::after {
   left: -14.5px;
+}
+@keyframes slide-in-left {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-in-right {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 .passo-content {
   padding: 20px 30px;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.passo-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(255, 179, 0, 0.15);
 }
 .passo-content h3 {
   font-family: var(--fonte-headline);
@@ -498,10 +528,15 @@ footer p {
     padding-left: 70px;
     padding-right: 25px;
     text-align: left;
+    animation: none;
+  }
+  .passo-item.reveal {
+      animation: slide-in-right 1s ease-out forwards;
   }
   .passo-item:nth-child(odd) {
     align-self: auto;
     text-align: left;
+    padding-right: 25px;
   }
   .passo-item::after {
     left: 15.5px;
