@@ -5,42 +5,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const video = document.getElementById('splash-video');
   if (splash && video) {
     const removeSplash = () => {
-      splash.classList.add('swoosh-out');
-      setTimeout(() => {
-        if (splash.parentNode) {
-            splash.parentNode.removeChild(splash);
-        }
-      }, 1000);
-    };
-    video.addEventListener('ended', removeSplash);
-    setTimeout(() => {
+      // Verifica se o splash ainda existe antes de tentar removê-lo
       if (document.body.contains(splash)) {
-        removeSplash();
+        splash.classList.add('swoosh-out');
+        setTimeout(() => {
+          if (splash.parentNode) {
+              splash.parentNode.removeChild(splash);
+          }
+        }, 1000); // Tempo da animação CSS
       }
-    }, 4000);
+    };
+
+    // Evento para quando o vídeo termina
+    video.addEventListener('ended', removeSplash);
+
+    // Fallback de 4 segundos para remover o splash caso o vídeo falhe ou não dispare o evento
+    setTimeout(removeSplash, 4000);
   }
 
   // Background VANTA FOG
-  VANTA.FOG({
-    el: "body",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    highlightColor: 0x6d0202,
-    midtoneColor: 0x0,
-    lowlightColor: 0x04040D,
-    baseColor: 0x0,
-    blurFactor: 0.50,
-    speed: 0.80,
-    zoom: 1.00
-  });
+  // Verifica se o elemento 'body' existe antes de aplicar o efeito
+  if (document.querySelector('body')) {
+    VANTA.FOG({
+      el: "body",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      highlightColor: 0x6d0202,
+      midtoneColor: 0x0,
+      lowlightColor: 0x04040D,
+      baseColor: 0x0,
+      blurFactor: 0.50,
+      speed: 0.80,
+      zoom: 1.00
+    });
+  }
 
   // HEADER ESCONDIDO AO ROLAR
-  let lastScrollTop = 0;
   const header = document.querySelector('header');
-  if(header){
+  if (header) {
+    let lastScrollTop = 0;
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > lastScrollTop && currentScroll > 100) {
@@ -52,9 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // SCROLL REVEAL DAS SEÇÕES (agora também anima os novos blocos de serviço)
+  // SCROLL REVEAL DAS SEÇÕES
   const revealElements = document.querySelectorAll('.reveal');
-  if (revealElements.length > 0){
+  if (revealElements.length > 0) {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeButton = document.querySelector('.close-button');
   const portfolioItems = document.querySelectorAll('.portfolio-item');
   
-  if(modal && iframe && closeButton && portfolioItems.length > 0) {
+  if (modal && iframe && closeButton && portfolioItems.length > 0) {
       portfolioItems.forEach(item => {
         item.addEventListener('click', () => {
           const videoId = item.getAttribute('data-video-id');
@@ -122,4 +128,5 @@ document.addEventListener('DOMContentLoaded', () => {
   heroTitles.forEach((el, i) => {
     setTimeout(() => el.classList.add('active'), i * 400);
   });
+
 });
