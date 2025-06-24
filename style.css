@@ -45,13 +45,11 @@ html, body {
   transform: translateY(-100%);
   opacity: 0;
 }
-
-/* HEADER FIXO, NO TOPO ESQUERDO E TRANSPARENTE */
 header {
   position: fixed;
   top: 20px;
   left: 40px;
-  background: transparent; /* Sem fundo */
+  background: transparent;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -59,7 +57,6 @@ header {
   transition: transform 0.4s ease-in-out;
 }
 
-/* Ocultar ao rolar */
 header.header-hidden {
   transform: translateY(-200%);
 }
