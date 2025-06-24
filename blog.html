@@ -1,41 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Braza</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - BRAZA</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                </ul>
-        </nav>
-    </header>
+  <header>
+    <div class="logo"><h1>BRAZA</h1></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">INÍCIO</a></li> <li><a href="index.html#servicos">O QUE A GENTE FAZ?</a></li>
+        <li><a href="index.html#portfolio">TRABALHOS NA BRAZA</a></li>
+        <li><a href="index.html#clientes">CLIENTES</a></li>
+        <li><a href="index.html#planos">NOSSOS COMBOS</a></li>
+        <li><a href="blog.html">BLOG</a></li>
+        <li><a href="index.html#contato">BORA FAZER FOGO?</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <h1>Nosso Blog</h1>
+  <main>
+    <section id="blog-lista" class="reveal" style="padding-top: 150px; text-align: center;">
+      <h2 class="section-title">BLOG DA BRAZA</h2>
+      <p class="descricao-clientes">Ideias, estratégias e conteúdos que conectam.</p>
 
-        <article>
-            <h2><a href="posts/primeiro-post.html">Título do seu primeiro post</a></h2>
-            <p>Publicado em 23 de junho de 2025</p>
-            <p>Este é um resumo ou as primeiras linhas do seu post no blog. Clique no título para ler o artigo completo...</p>
+      <div class="blog-posts-grid" style="text-align: left; max-width: 800px; margin: 50px auto; display: grid; gap: 40px;">
+
+        <article class="blog-post-item">
+            <h3><a href="/posts/nome-do-seu-artigo.html" style="color: #FFC700; text-decoration: none;">A importância de uma identidade visual forte</a></h3>
+            <p style="color: #ccc; font-size: 0.9em;">Publicado em 23 de junho de 2025</p>
+            <p>Uma identidade visual não é apenas um logo bonito. É a alma da sua marca, a primeira impressão que fica e a base para toda a sua comunicação...</p>
+            <a href="/posts/nome-do-seu-artigo.html" class="plano-cta">Ler mais</a>
+        </article>
+        
+        <article class="blog-post-item">
+            <h3><a href="#" style="color: #FFC700; text-decoration: none;">5 dicas para Reels que engajam</a></h3>
+            <p style="color: #ccc; font-size: 0.9em;">Publicado em 15 de junho de 2025</p>
+            <p>O Instagram Reels se tornou uma ferramenta poderosa para alcançar novos públicos. Mas como criar conteúdo que realmente prende a atenção? Confira 5 dicas práticas...</p>
+            <a href="#" class="plano-cta">Ler mais</a>
         </article>
 
-        <article>
-            <h2><a href="#">Título de um futuro post</a></h2>
-            <p>Em breve...</p>
-        </article>
+      </div>
+    </section>
+  </main>
 
-    </main>
+  <footer id="contato" class="reveal">
+    <h2 class="hero-title">BORA BOTAR FOGO?</h2>
+    <div class="social-links">
+      <a href="mailto:contato@braza.com" class="plano-cta destaque">MANDA UM EMAIL</a>
+      <a href="https://wa.me/5500000000000" class="plano-cta destaque">CHAMA NO WHATS</a>
+    </div>
+    <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
+  </footer>
 
-    <footer>
-        <p>&copy; 2025 Seu Nome ou Nome da Empresa</p>
-    </footer>
+  <script src="script.js" defer></script>
 
 </body>
 </html>
