@@ -1,88 +1,188 @@
-// PORTFÓLIO: FILTRO COM ANIMAÇÃO, MODAL DE VÍDEO E REVEAL SIMILAR AO INDEX
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio - Braza</title>
 
-// Aguarda carregamento do DOM
-document.addEventListener('DOMContentLoaded', () => {
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="styleportifa.css">
+  <style>
+    /* ===== Estilos Adicionais CSS Integrado ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
 
-  // === 1. FILTRO COM ANIMAÇÃO ===
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+    .reveal.reveal-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Atualiza botão ativo
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    .video-modal {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
 
-      const filter = btn.getAttribute('data-filter');
+    .video-modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
 
-      galleryItems.forEach(item => {
-        const category = item.getAttribute('data-category');
-        const match = filter === 'all' || filter === category;
+    .video-modal .modal-content {
+      position: relative;
+      max-width: 900px;
+      width: 90%;
+    }
 
-        if (match) {
-          item.style.display = 'block';
-          setTimeout(() => {
-            item.classList.add('visible');
-          }, 10);
-        } else {
-          item.classList.remove('visible');
-          setTimeout(() => {
-            item.style.display = 'none';
-          }, 300);
+    .video-modal .modal-content::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    .video-modal iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      font-size: 2rem;
+      color: var(--color-accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="main-nav">
+      <a href="index.html" class="logo">BRAZA</a>
+      <ul>
+        <li><a href="index.html#servicos">Serviços</a></li>
+        <li><a href="portfolio.html">Portfólio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <h1>Nosso Portfólio</h1>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="institucional">Institucional</button>
+    <button class="filter-btn" data-filter="eventos">Eventos</button>
+    <button class="filter-btn" data-filter="publicidade">Publicidade</button>
+  </div>
+
+  <section class="gallery" id="gallery">
+    <div class="gallery-item reveal" data-category="institucional" data-video-id="VIDEO_ID_1">
+      <img src="assets/eventos.png" alt="Institucional">
+      <div class="gallery-info">
+        <h3>Institucional 1</h3>
+        <p>Vídeo institucional com foco em branding.</p>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" data-category="eventos" data-video-id="VIDEO_ID_2">
+      <img src="assets/eventos.png" alt="Evento">
+      <div class="gallery-info">
+        <h3>Evento 1</h3>
+        <p>Captura de evento ao vivo para cliente X.</p>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" data-category="publicidade" data-video-id="VIDEO_ID_3">
+      <img src="assets/eventos.png" alt="Publicidade">
+      <div class="gallery-info">
+        <h3>Publicidade 1</h3>
+        <p>Campanha digital para lançamento de produto.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="video-modal" id="video-modal">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <iframe id="video-iframe" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Braza Produções - Todos os direitos reservados
+  </footer>
+
+  <script>
+    // Scroll Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('reveal-active');
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Filtro
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.filter-btn.active').classList.remove('active');
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        galleryItems.forEach(item => {
+          item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
+        });
+      });
+    });
+
+    // Modal Vídeo
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('video-iframe');
+    const closeBtn = document.querySelector('.close-modal');
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const videoId = item.getAttribute('data-video-id');
+        if (videoId) {
+          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+          modal.classList.add('active');
         }
       });
     });
-  });
 
-  // === 2. MODAL DE VÍDEO ===
-  const modal = document.createElement('div');
-  modal.className = 'video-modal';
-  modal.innerHTML = `
-    <div class="video-content">
-      <span class="close-video">&times;</span>
-      <div class="video-wrapper">
-        <iframe id="video-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(modal);
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      iframe.src = '';
+    });
 
-  const videoFrame = document.getElementById('video-frame');
-  const closeModal = () => {
-    modal.classList.remove('active');
-    videoFrame.src = '';
-  };
-  modal.querySelector('.close-video').addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  // Ativa modal ao clicar em item com data-video-id
-  document.querySelectorAll('.gallery-item[data-video-id]').forEach(item => {
-    item.addEventListener('click', () => {
-      const videoId = item.getAttribute('data-video-id');
-      if (videoId) {
-        videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-        modal.classList.add('active');
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        iframe.src = '';
       }
     });
-  });
-
-  // === 3. SCROLL REVEAL SIMILAR AO INDEX ===
-  const revealElements = document.querySelectorAll('.gallery-item');
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-active');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  revealElements.forEach(el => {
-    revealObserver.observe(el);
-  });
-
-});
+  </script>
+</body>
+</html>
