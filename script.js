@@ -16,21 +16,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // A inicialização do VANTA FOG foi movida para o index.html
   // para garantir a ordem de carregamento correta.
 
-  // HEADER ESCONDIDO AO ROLAR
+  // HEADER ESCONDIDO AO ROLAR (LÓGICA CORRIGIDA)
   let lastScrollTop = 0;
   const header = document.querySelector('header');
-  if (header) {
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScroll > lastScrollTop && currentScroll > 80) {
+  // Nosso novo alvo para o evento de rolagem
+  const contentWrapper = document.getElementById('wrapper-conteudo'); 
+
+  if (header && contentWrapper) {
+    // Agora, ouvimos o evento de rolagem no wrapper, e não na window
+    contentWrapper.addEventListener('scroll', function () {
+      // E pegamos a posição da rolagem a partir dele
+      let scrollTop = contentWrapper.scrollTop; 
+
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Rolando para baixo
         header.classList.add('header-hidden');
       } else {
+        // Rolando para cima
         header.classList.remove('header-hidden');
       }
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
   }
-
   // Scroll Reveal das Seções
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
