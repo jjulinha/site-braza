@@ -40,36 +40,35 @@ document.addEventListener('DOMContentLoaded', () => {
   // HEADER ESCONDIDO AO ROLAR
   let lastScrollTop = 0;
   const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (currentScroll > lastScrollTop && currentScroll > 100) {
-      header.classList.add('header-hidden');
-    } else {
-      header.classList.remove('header-hidden');
-    }
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
-  
-  // SCROLL REVEAL DAS SEÇÕES
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+  if(header){
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScrollTop && currentScroll > 100) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
       }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
-  }, {
-    threshold: 0.1
-  });
-  revealElements.forEach(elem => {
-    revealObserver.observe(elem);
-  });
-
-  // LÓGICA PARA A SEÇÃO DE SERVIÇOS STICKY
-
-    servicosTextos.forEach(item => servicosObserver.observe(item));
   }
-
+  
+  // SCROLL REVEAL DAS SEÇÕES (agora também anima os novos blocos de serviço)
+  const revealElements = document.querySelectorAll('.reveal');
+  if (revealElements.length > 0){
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    revealElements.forEach(elem => {
+      revealObserver.observe(elem);
+    });
+  }
+  
   // TILT 3D NOS CARDS DE PLANOS
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
@@ -93,25 +92,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const iframe = document.getElementById('video-iframe');
   const closeButton = document.querySelector('.close-button');
   const portfolioItems = document.querySelectorAll('.portfolio-item');
-  portfolioItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const videoId = item.getAttribute('data-video-id');
-      if (videoId) {
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-        modal.classList.add('active');
-      }
-    });
-  });
-  const closeModal = () => {
-    modal.classList.remove('active');
-    iframe.src = "";
-  };
-  closeButton.addEventListener('click', closeModal);
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
+  
+  if(modal && iframe && closeButton && portfolioItems.length > 0) {
+      portfolioItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const videoId = item.getAttribute('data-video-id');
+          if (videoId) {
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            modal.classList.add('active');
+          }
+        });
+      });
+
+      const closeModal = () => {
+        modal.classList.remove('active');
+        iframe.src = "";
+      };
+
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+  }
 
   // ANIMAÇÃO DOS TÍTULOS HERO
   const heroTitles = document.querySelectorAll('.hero-title');
