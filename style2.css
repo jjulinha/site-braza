@@ -1,32 +1,114 @@
-/* =================================================== */
-/* ============== 1. IMPORTAÇÃO DE FONTES ============== */
-/* =================================================== */
+/* =======================
+   IMPORTAÇÃO DE FONTES
+======================= */
+@import url('https://fonts.googleapis.com/css2?family=Thunder:wght@900&display=swap');
 
-/* Importa a 'Big Shoulders Display' do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;700&display=swap');
+/* =======================
+   VARIÁVEIS ROOT
+======================= */
+:root {
+  --padding-fluid: 5.8rem;
+  --padding: 1rem;
+  --header-height: 16.5rem;
+  --pt-header: 0;
+  --scrollbar: 7.5px;
 
-/* =================================================== */
-/* ============== SUBSTITUIÇÃO: ANTON POR THUNDER ====== */
-/* =================================================== */
-
-/* Esta regra unificada garante que TODOS os títulos do site,
-  incluindo os do blog, usem a fonte 'Thunder Black LC', 
-  substituindo qualquer regra anterior que usava 'Anton'.
-*/
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Thunder Black LC', sans-serif;
+  --black-1: #000;
+  --gray-1: #989898;
+  --white-1: #fff;
+  --red-1: #c50000;
+  --green-1: #38d430;
 }
 
-/* Removemos a regra específica para '.blog-post-item h3' 
-  pois a regra geral acima já cuida de todos os títulos.
-  Isso simplifica e limpa o código.
-*/
+/* =======================
+   TIPOGRAFIA ESPECÍFICA
+======================= */
+html {
+  font-size: 0.347vw;
+  font-family: 'Thunder', sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
 
+h1 {
+  font-family: 'Thunder', sans-serif;
+}
 
-/* =================================================== */
-/* ======== CÓDIGO ORIGINAL DO SEU SITE ABAIXO ========= */
-/* =================================================== */
+h2, h3, h4, h5, h6, p {
+  font-family: 'Arial Nova', Arial, sans-serif;
+}
 
-:root{--padding-fluid:5.8rem;--padding:1rem;--header-height:16.5rem;--pt-header:0;--scrollbar:7.5px}@media only screen and (max-width:1025px){:root{--header-height:14.5rem}}@media only screen and (max-width:767.98px){:root{--header-height:10rem;--padding-fluid:3rem}}@media only screen and (min-width:768px) and (max-width:1025px) and (max-height:550px) and (orientation:landscape){:root{--header-height:12.5rem}}html{font-size:.347vw}@media only screen and (max-width:1025px){html{font-size:.9vw}}@media only screen and (max-width:767.98px){html{font-size:2.4vw}}@media only screen and (max-width:768px) and (max-height:550px) and (orientation:landscape){html{font-size:1.4vw}}@media only screen and (min-width:768px) and (max-width:1025px) and (max-height:550px) and (orientation:landscape){html{font-size:.9vw}}*,:after,:before{box-sizing:border-box}a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,summary,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}main{width:100%}ul{list-style:none;margin:0;padding:0}:after,:before{text-decoration:inherit;vertical-align:inherit}
+/* FONT-SIZE RESPONSIVO */
+@media only screen and (max-width: 1025px) {
+  html { font-size: 0.9vw; }
+}
+@media only screen and (max-width: 767.98px) {
+  html { font-size: 2.4vw; }
+}
+@media only screen and (max-width: 768px) and (max-height: 550px) and (orientation: landscape) {
+  html { font-size: 1.4vw; }
+}
+@media only screen and (min-width: 768px) and (max-width: 1025px) and (max-height: 550px) and (orientation: landscape) {
+  html { font-size: 0.9vw; }
+}
 
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;text-decoration:none}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:700}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button{cursor:pointer;border:0;outline:none;background:none}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}.container-fluid{width:100%;padding-left:var(--padding-fluid);padding-right:var(--padding-fluid)}.container{width:100%;margin-left:auto;margin-right:auto;max-width:130rem;padding-left:var(--padding);padding-right:var(--padding)}@media only screen and (max-width:1025px){.container{padding-left:var(--padding-fluid);padding-right:var(--padding-fluid)}}.row{display:flex;justify-content:normal;align-items:normal;align-content:normal;flex-wrap:wrap;flex-direction:row;margin-left:calc(var(--padding)*-1);margin-right:calc(var(--padding)*-1);min-width:100%}[class*=col-]{padding-left:var(--padding);padding-right:var(--padding);width:100%}.no-gutters>.col,.no-gutters>[class*=col-]{padding:0}.col-4{max-width:36.36363636%}.offset-4{margin-left:36.36363636%}.col-6{max-width:54.54545455%}.col-7{max-width:63.63636364%}.col-8{max-width:72.72727273%}.col-11{max-width:100%}@media only screen and (min-width:576px){.col-sm-3{max-width:27.27272727%}.col-sm-6{max-width:54.54545455%}.col-sm-9{max-width:81.81818182%}}@media only screen and (min-width:768px){.col-md-2{max-width:18.18181818%}.col-md-3{max-width:27.27272727%}.col-md-4{max-width:36.36363636%}.col-md-5{max-width:45.45454545%}.col-md-6{max-width:54.54545455%}.col-md-8{max-width:72.72727273%}.col-md-9{max-width:81.81818182%}.col-md-10{max-width:90.90909091%}.col-md-11{max-width:100%}}@media only screen and (min-width:1025.1px){.col-lg-1{max-width:9.09090909%}.offset-lg-1{margin-left:9.09090909%}.col-lg-2{max-width:18.18181818%}.offset-lg-2{margin-left:18.18181818%}.col-lg-3{max-width:27.27272727%}.col-lg-4{max-width:36.36363636%}.col-lg-5{max-width:45.45454545%}.col-lg-6{max-width:54.54545455%}.col-lg-7{max-width:63.63636364%}.col-lg-9{max-width:81.81818182%}.col-lg-10{max-width:90.90909091%}.col-lg-11{max-width:100%}}.black-1{color:#000}.bg-black-1{background-color:#000}.white-1{color:#fff}.green-1{color:#38d430}.bg-green-1{background-color:#38d430}:root{--black-1:#000;--gray-1:#989898;--white-1:#fff;--red-1:#c50000;--green-1:#38d430}@media only screen and (max-width:1025px){.no-mobile{display:none!important}}@media only screen and (min-width:767.98px){.yes-phone{display:none!important}}@media only screen and (max-width:767.98px){.no-phone{display:none!important}}.hide{display:inline-block;position:absolute;top:auto;right:auto;bottom:auto;left:-100vw;text-indent:-99999px}.container-img{overflow:hidden;display:flex}.container-img img,.container-img video{height:100%;width:100%;-o-object-fit:cover;object-fit:cover;-o-object-position:center top;object-position:center top}.imgs{position:relative;overflow:hidden}.imgs,.imgs img{width:100%;height:auto}.imgs img{-o-object-fit:cover;object-fit:cover;-o-object-position:center center;object-position:center center}.imgs .thumb{-ms-interpolation-mode:nearest-neighbor;image-rendering:-moz-crisp-edges;image-rendering:pixelated;transition:all .3s cubic-bezier(.785,.135,.15,.86);transition-delay:0;opacity:1;transform:scale(1.15)}.imgs .original{position:absolute;left:0;top:0;min-width:100%;min-height:100%;opacity:0;transition-duration:0s}.imgs[data-loaded=true] .thumb{opacity:0}.imgs[data-loaded=true] .original{opacity:1}.grid{display:flex;justify-content:normal;align-items:normal;align-content:normal;flex-wrap:wrap;flex-direction:row;width:auto;min-width:100%;margin-left:calc(var(--padding)*-1);margin-right:calc(var(--padding)*-1)}.w-100{width:100%}.w-50{width:50%}.w-75{width:75%}.d-flex{display:flex}.d-inline-flex{display:inline-flex}.d-block{display:block}.d-inline-block{display:inline-block}.d-inline{display:inline}.d-none,.display-none{display:none!important}.flex-center{justify-content:center;align-items:center}.flex-center,.flex-end{display:flex;flex-wrap:wrap}.flex-end{justify-content:flex-end;align-items:normal}.flex-column{display:flex;justify-content:flex-start;align-items:flex-start;align-content:flex-start;flex-wrap:wrap;flex-direction:column}@media only screen and (min-width:768px){.d-md-inline{display:inline}.d-md-none{display:none!important}.flex-md-initial{justify-content:normal}.flex-md-end,.flex-md-initial{display:flex;align-items:normal;flex-wrap:wrap}.flex-md-end{justify-content:flex-end}}@media only screen and (min-width:1025.1px){.d-lg-block{display:block}.d-lg-inline{display:inline}.d-lg-none{display:none!important}.flex-lg-end{display:flex;justify-content:flex-end;align-items:normal;flex-wrap:wrap}}.embed-responsive{position:relative;display:block;width:100%;padding:0;overflow:hidden}.embed-responsive:before{display:block;content:""}.embed-responsive embed,.embed-responsive iframe,.embed-responsive object,.embed-responsive video{position:absolute;top:0;bottom:0;left:0;width:100%;height:100%;border:0}.embed-responsive-16by9:before{padding-top:56.25%}.justify-content-center{justify-content:center}.justify-content-between{justify-content:space-between}.align-items-center{align-items:center}.align-items-end{align-items:flex-end}.align-self-center{align-self:center}@media only screen and (min-width:1025.1px){.mt--15{margin-top:1.5rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--15{margin-top:1.5rem}}@media only screen and (max-width:767.98px){.mt--15{margin-top:1.5rem}}@media only screen and (min-width:1025.1px){.mt--20{margin-top:2rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--20{margin-top:2rem}}@media only screen and (max-width:767.98px){.mt--20{margin-top:2rem}}@media only screen and (min-width:1025.1px){.mt--30{margin-top:3rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--30{margin-top:3rem}}@media only screen and (max-width:767.98px){.mt--30{margin-top:1.5rem}}@media only screen and (min-width:1025.1px){.mt--40{margin-top:4rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--40{margin-top:4rem}}@media only screen and (max-width:767.98px){.mt--40{margin-top:3rem}}@media only screen and (min-width:1025.1px){.mt--50{margin-top:5rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--50{margin-top:5rem}}@media only screen and (max-width:767.98px){.mt--50{margin-top:4rem}}@media only screen and (min-width:1025.1px){.mt--70{margin-top:7rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--70{margin-top:5rem}}@media only screen and (max-width:767.98px){.mt--70{margin-top:4rem}}@media only screen and (min-width:1025.1px){.mt--90{margin-top:9rem}}@media only screen and (min-width:767.98px) and (max-width:1025px){.mt--90{margin-top:5.5rem}}@media only screen and (max-width:767.98px){.mt--90{margin-top:5rem}}@media only screen and (min-width:1025.1px){.mt--100{margin-top:10rem}}@media only screen and (
+/* =======================
+   RESET E NORMALIZE
+======================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body,
+canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed,
+fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html,
+i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p,
+pre, q, ruby, s, samp, section, small, span, strike, strong, summary, table, tbody, td,
+tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: inherit;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+
+main {
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* === TIPOGRAFIA ADICIONAL === */
+b, strong { font-weight: 700; }
+small { font-size: 80%; }
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =======================
+   GRID E LAYOUTS
+======================= */
+/* ...Aqui você insere os blocos .container, .row, .col-*, etc. */
+/* Como é muito extenso, você pode colar essa parte do seu original sem alterações */
+
