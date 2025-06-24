@@ -448,8 +448,9 @@ footer p {
 .reveal {
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1s ease;
-}
+  /* Aumentamos de 1s para 1.5s para um efeito mais suave e elegante */
+  transition: all 1.5s ease;
+}}
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
