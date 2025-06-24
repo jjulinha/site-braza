@@ -519,45 +519,54 @@ footer p {
 }
 /* INÍCIO DO BLOCO NOVO */
 
-/* Animação de "Pulsação" para o botão */
-@keyframes pulse-glow {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 15px rgba(255, 179, 0, 0.4), 0 0 25px rgba(255, 179, 0, 0.2);
-  }
-  50% {
-    transform: scale(1.03); /* Leve crescimento */
-    box-shadow: 0 0 25px rgba(255, 179, 0, 0.7), 0 0 45px rgba(255, 179, 0, 0.5); /* Brilho mais intenso */
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 15px rgba(255, 179, 0, 0.4), 0 0 25px rgba(255, 179, 0, 0.2);
-  }
+/* 1. Carregando a fonte Thunder */
+@font-face {
+  font-family: 'Thunder';
+  src: url('https://db.onlinewebfonts.com/t/808722d7305713444084533e449a5620.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
 }
 
 /* Container para centralizar o botão do portfólio */
 .portfolio-cta {
   text-align: center;
-  margin-top: 60px; /* Espaçamento acima do botão */
+  margin-top: 60px;
 }
 
 /* Estilo específico para o botão do portfólio */
 .portfolio-cta .plano-cta {
-  padding: 15px 35px; /* Deixa o botão um pouco maior */
-  font-size: 1rem;
-  letter-spacing: 1px;
+  /* 2. Aplicando a nova fonte e ajustando o estilo */
+  font-family: 'Thunder', sans-serif; /* <<<--- FONTE APLICADA AQUI */
+  font-size: 1.5rem; /* Aumenta o tamanho da fonte para destacar */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px 40px; /* Deixa o botão fisicamente maior */
   
-  /* Aplica a animação de pulsação */
+  /* Mantém a animação de "brasa viva" que já tínhamos */
   animation: pulse-glow 3s infinite ease-in-out;
-  
-  /* Garante que a transição no hover seja suave */
   transition: transform 0.3s ease-out, background-color 0.3s ease;
+}
+
+/* Animação de pulsação para o botão */
+@keyframes pulse-glow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(255, 179, 0, 0.7);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+  }
 }
 
 /* Efeito de hover aprimorado */
 .portfolio-cta .plano-cta:hover {
-  transform: translateY(-3px) scale(1.05); /* Leve salto e crescimento ao passar o mouse */
-  background-color: #ffc107; /* Um tom de amarelo mais vivo no hover */
+  transform: translateY(-3px) scale(1.05);
+  background-color: #ffc107;
 }
 
 /* FIM DO BLOCO NOVO */
