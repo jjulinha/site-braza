@@ -46,31 +46,39 @@ html, body {
   opacity: 0;
 }
 
-/* HEADER */
-
-/* HEADER FIXO COM DESAPARECIMENTO */
+/* HEADER FIXO, NO TOPO ESQUERDO E TRANSPARENTE */
 header {
   position: fixed;
   top: 20px;
   left: 40px;
-  background: transparent;
+  background: transparent; /* Sem fundo */
   display: flex;
-  gap: 60px;
   align-items: center;
+  gap: 40px;
   z-index: 1000;
   transition: transform 0.4s ease-in-out;
 }
 
+/* Ocultar ao rolar */
+header.header-hidden {
+  transform: translateY(-200%);
+}
+
+/* Logo */
 header .logo h1 {
   font-family: var(--fonte-headline);
   font-size: 2.5rem;
   color: var(--cor-acento-amarelo);
+  margin: 0;
 }
 
+/* Menu */
 header nav ul {
   list-style: none;
   display: flex;
   gap: 32px;
+  padding: 0;
+  margin: 0;
 }
 
 header nav ul li a {
@@ -83,10 +91,21 @@ header nav ul li a {
   letter-spacing: 1px;
 }
 
-header.header-hidden {
-  transform: translateY(-150%);
-}
+/* Responsivo - opcional */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    left: 20px;
+    top: 10px;
+  }
 
+  header nav ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
 /* GERAL */
 section, footer {
   padding: 100px 6%;
