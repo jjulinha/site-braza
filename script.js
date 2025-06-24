@@ -1,57 +1,103 @@
+// =================================================================
+// INÍCIO: CONFIGURAÇÃO E FUNÇÕES DO FIREBASE
+// =================================================================
+
+// 1. Configuração do Firebase (com as suas chaves)
+const firebaseConfig = {
+  apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
+  authDomain: "braza-portfolio.firebaseapp.com",
+  projectId: "braza-portfolio",
+  storageBucket: "braza-portfolio.appspot.com",
+  messagingSenderId: "504617854086",
+  appId: "1:504617854086:web:727bfb242c29a6d7345d07",
+  measurementId: "G-5KFT2C7ZCF"
+};
+
+// 2. Inicializa o Firebase e o Firestore
+// Usamos uma variável global 'db' para que a função construtora possa acessá-la
+let db;
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+} catch (e) {
+  console.error("Erro ao inicializar o Firebase. Verifique suas chaves de configuração.", e);
+}
+
+/**
+ * Adiciona um novo projeto à coleção 'projetos' no Firestore,
+ * garantindo que todos os projetos tenham uma estrutura padrão.
+ * Esta é a sua função "construtora" ou "molde".
+ *
+ * @param {string} titulo - O título do novo projeto.
+ * @param {string} imagemURL - O caminho para a imagem do projeto (ex: 'assets/novo-projeto.jpg').
+ * @param {string} descricao - A descrição detalhada do projeto.
+ */
+async function adicionarNovoProjeto(titulo, imagemURL, descricao) {
+  if (typeof db === 'undefined') {
+    console.error("Erro: A instância do Firestore 'db' não foi encontrada.");
+    return;
+  }
+
+  try {
+    // Objeto que representa o novo projeto com os campos padrão.
+    const novoProjeto = {
+      titulo: titulo,
+      imagemURL: imagemURL,
+      descricao: descricao,
+      dataDeCriacao: firebase.firestore.FieldValue.serverTimestamp(), // Pega a data/hora do servidor.
+    };
+
+    const docRef = await db.collection("projetos").add(novoProjeto);
+    console.log("Projeto adicionado com sucesso! ID do documento:", docRef.id);
+    alert("Projeto adicionado com sucesso!");
+
+  } catch (error) {
+    console.error("Erro ao adicionar novo projeto: ", error);
+    alert("Ocorreu um erro ao adicionar o projeto. Verifique o console.");
+  }
+}
+
+// =================================================================
+// FIM: CONFIGURAÇÃO E FUNÇÕES DO FIREBASE
+// =================================================================
+
+
+// --- LÓGICA PRINCIPAL DO SITE (executada após o carregamento da página) ---
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Sua configuração do Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
-    authDomain: "braza-portfolio.firebaseapp.com",
-    projectId: "braza-portfolio",
-    storageBucket: "braza-portfolio.appspot.com",
-    messagingSenderId: "504617854086",
-    appId: "1:504617854086:web:727bfb242c29a6d7345d07",
-    measurementId: "G-5KFT2C7ZCF"
-  };
-
-  // Inicializa o Firebase
-  try {
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    // NOVA LÓGICA: Buscar e exibir os projetos do Portfólio
-    const portfolioGrid = document.querySelector('.portfolio-grid');
-
-    if (portfolioGrid) {
-      db.collection("projetos")
-        .orderBy("dataDeCriacao", "desc") // Ordena pelos mais recentes
-        .limit(3) // Pega apenas os 3 primeiros
-        .get()
-        .then((querySnapshot) => {
-          let html = ""; 
-          if (querySnapshot.empty) {
-            portfolioGrid.innerHTML = "<p>Nenhum projeto encontrado. Adicione projetos no seu banco de dados Firebase.</p>";
-            return;
-          }
-          querySnapshot.forEach((doc) => {
-            const projeto = doc.data();
-            html += `
-              <div class="portfolio-item">
-                <img src="${projeto.imagemURL}" alt="${projeto.titulo}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/fff?text=Imagem+N%C3%A3o+Encontrada';">
-                <div class="overlay">
-                  <h3>${projeto.titulo}</h3>
-                </div>
+  // LÓGICA PARA BUSCAR PROJETOS DO FIREBASE
+  const portfolioGrid = document.querySelector('.portfolio-grid');
+  if (portfolioGrid && typeof db !== 'undefined') {
+    db.collection("projetos")
+      .orderBy("dataDeCriacao", "desc")
+      .limit(3)
+      .get()
+      .then((querySnapshot) => {
+        let html = "";
+        if (querySnapshot.empty) {
+          portfolioGrid.innerHTML = "<p style='text-align: center; width: 100%;'>Nenhum projeto encontrado.</p>";
+          return;
+        }
+        querySnapshot.forEach((doc) => {
+          const projeto = doc.data();
+          html += `
+            <div class="portfolio-item">
+              <img src="${projeto.imagemURL}" alt="${projeto.titulo}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/fff?text=Imagem+N%C3%A3o+Encontrada';">
+              <div class="overlay">
+                <h3>${projeto.titulo}</h3>
               </div>
-            `;
-          });
-          portfolioGrid.innerHTML = html;
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar projetos: ", error);
-          portfolioGrid.innerHTML = "<p>Não foi possível carregar os projetos no momento.</p>";
+            </div>
+          `;
         });
-    }
-
-  } catch (e) {
-    console.error("Erro ao inicializar o Firebase. Verifique suas chaves de configuração.", e);
+        portfolioGrid.innerHTML = html;
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar projetos: ", error);
+        portfolioGrid.innerHTML = "<p style='text-align: center; width: 100%;'>Não foi possível carregar os projetos.</p>";
+      });
   }
+
+  // --- Restante das funcionalidades do site ---
 
   // Splash Screen
   const splash = document.getElementById('splash-screen');
@@ -62,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         splash.classList.add('swoosh-out');
         setTimeout(() => {
           if (splash.parentNode) {
-              splash.parentNode.removeChild(splash);
+            splash.parentNode.removeChild(splash);
           }
         }, 1000);
       }
@@ -72,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Background VANTA FOG
-  if (document.querySelector('body')) {
+  if (typeof VANTA !== 'undefined') {
     VANTA.FOG({
       el: "body",
       mouseControls: true,
@@ -104,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
   }
-  
+
   // SCROLL REVEAL DAS SEÇÕES
   const revealElements = document.querySelectorAll('.reveal');
   if (revealElements.length > 0) {
@@ -123,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       revealObserver.observe(elem);
     });
   }
-  
+
   // TILT 3D NOS CARDS DE PLANOS
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
@@ -146,8 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('video-modal');
   const iframe = document.getElementById('video-iframe');
   const closeButton = document.querySelector('.close-button');
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
   
+  // Atenção: esta lógica só funcionará para os itens estáticos.
+  // Para funcionar com os itens dinâmicos do Firebase, precisaremos ajustá-la.
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
   if (modal && iframe && closeButton && portfolioItems.length > 0) {
     portfolioItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -163,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.remove('active');
       setTimeout(() => {
         iframe.src = "";
-      }, 300); 
+      }, 300);
     };
 
     closeButton.addEventListener('click', closeModal);
