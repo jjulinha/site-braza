@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
-// Splash Screen
+
+  // Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
   if (splash && video) {
@@ -8,10 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       splash.classList.add('swoosh-out');
       setTimeout(() => splash.remove(), 1000);
     };
-
     video.addEventListener('ended', removeSplash);
-
-    // Fallback total: vídeo bloqueado ou falhou
     setTimeout(() => {
       if (document.body.contains(splash)) removeSplash();
     }, 4000);
@@ -34,25 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     zoom: 1.00
   });
 
- // --- HEADER ESCONDIDO AO ROLAR ---
-let lastScrollTop = 0;
-const header = document.querySelector('header');
+  // HEADER ESCONDIDO AO ROLAR
+  let lastScrollTop = 0;
+  const header = document.querySelector('header');
 
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-  if (currentScroll > lastScrollTop && currentScroll > 100) {
-    // Rolando para baixo
-    header.classList.add('header-hidden');
-  } else {
-    // Rolando para cima
-    header.classList.remove('header-hidden');
-  }
+    if (currentScroll > lastScrollTop && currentScroll > 80) {
+      // Rolando para baixo
+      header.classList.add('header-hidden');
+    } else {
+      // Rolando para cima
+      header.classList.remove('header-hidden');
+    }
 
-  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-});
-  
-  // --- SCROLL REVEAL DAS SEÇÕES ---
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  // Scroll Reveal das Seções
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -68,7 +65,7 @@ window.addEventListener('scroll', () => {
     revealObserver.observe(elem);
   });
 
-  // Tilt 3D nos Cards
+  // Tilt nos Cards
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -120,4 +117,5 @@ window.addEventListener('scroll', () => {
   heroTitles.forEach((el, i) => {
     setTimeout(() => el.classList.add('active'), i * 400);
   });
+
 });
