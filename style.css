@@ -139,15 +139,17 @@ section, footer {
 .highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
 .highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 
-/* SERVIÇOS */
+/* SERVIÇOS - AJUSTE FINAL */
 #servicos { 
     background-color: #F5F5F5; /* Fundo claro para contraste */
+    position: relative; /* Essencial para o z-index funcionar */
+    z-index: 1; /* Coloca a seção acima da camada do Vanta.js */
 }
 #servicos .section-title {
     color: #111; /* Título da seção escuro */
 }
 
-/* --- ESTILOS PARA A SEÇÃO DE SERVIÇOS 'STICKY' --- */
+/* ESTILOS PARA A SEÇÃO DE SERVIÇOS 'STICKY' */
 .servicos-container {
   display: flex;
   gap: 60px;
@@ -171,14 +173,14 @@ section, footer {
   font-family: var(--fonte-headline);
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 15px;
-  color: var(--cor-vermelho); /* Títulos dos serviços em vermelho para bom contraste */
+  color: var(--cor-vermelho);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .servico-item-texto.is-active h2 {
     transform: scale(1.05);
 }
 .servico-item-texto p {
-  color: #555; /* Texto da descrição escuro */
+  color: #555;
   line-height: 1.6;
   max-width: 500px;
 }
@@ -224,17 +226,30 @@ section, footer {
   }
 }
 
-/* PROCESSO (Ajuste de cor de texto para fundo escuro) */
-#como-fazemos .passo h3, #como-fazemos .passo p, #como-fazemos .section-title {
-  color: #fff;
-}
-#como-fazemos .passo {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+/* PROCESSO */
+#como-fazemos .section-title {
+  color: #fff; /* Garante que o título seja branco no fundo escuro */
 }
 
-/* ... (Restante do seu CSS continua aqui) ... */
-/* PORTFÓLIO */
+/* ... (Restante do CSS) ... */
+
+.processo-grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.passo {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.passo h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
 .portfolio-grid {
   display: flex;
   gap: 30px;
@@ -267,7 +282,6 @@ section, footer {
   opacity: 1;
 }
 
-/* CLIENTES */
 .descricao-clientes {
   color: var(--cor-texto-secundario);
   text-align: center;
@@ -286,7 +300,6 @@ section, footer {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* PLANOS */
 .planos-grid {
   display: flex;
   gap: 30px;
@@ -362,7 +375,6 @@ section, footer {
   box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
 }
 
-/* FAQ */
 .faq-grid {
   display: flex;
   flex-direction: column;
@@ -376,7 +388,6 @@ section, footer {
   margin-top: 5px;
 }
 
-/* CONTATO */
 footer .social-links {
   display: flex;
   gap: 20px;
@@ -389,7 +400,6 @@ footer p {
   color: var(--cor-texto-secundario);
 }
 
-/* MODAL DE VÍDEO */
 .modal {
   position: fixed;
   z-index: 1000;
@@ -432,7 +442,6 @@ footer p {
   cursor: pointer;
 }
 
-/* REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -443,7 +452,6 @@ footer p {
   transform: translateY(0);
 }
 
-/* RESPONSIVO */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
