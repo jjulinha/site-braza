@@ -1,83 +1,88 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfólio - Braza</title>
-  
-    <link rel="stylesheet" href="styleportifa.css"> 
-  </head>
+// PORTFÓLIO: FILTRO COM ANIMAÇÃO, MODAL DE VÍDEO E REVEAL SIMILAR AO INDEX
 
-<body>
-    <header>
-    <nav class="main-nav">
-        <a href="index.html" class="logo">BRAZA</a>
-        <ul>
-            <li><a href="index.html#servicos">Serviços</a></li>
-            <li><a href="portfolio.html">Portfólio</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="index.html#contato">Contato</a></li>
-        </ul>
-    </nav>
-    <h1>Nosso Portfólio</h1>
-  </header>
+// Aguarda carregamento do DOM
+document.addEventListener('DOMContentLoaded', () => {
 
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">Todos</button>
-    <button class="filter-btn" data-filter="institucional">Institucional</button>
-    <button class="filter-btn" data-filter="eventos">Eventos</button>
-    <button class="filter-btn" data-filter="publicidade">Publicidade</button>
-  </div>
+  // === 1. FILTRO COM ANIMAÇÃO ===
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
 
-  <section class="gallery" id="gallery">
-        <div class="gallery-item" data-category="institucional">
-      <img src="assets/eventos.png" alt="Vídeo institucional com foco em branding">
-      <div class="gallery-info">
-        <h3>Institucional 1</h3>
-        <p>Vídeo institucional com foco em branding.</p>
-      </div>
-    </div>
-    <div class="gallery-item" data-category="eventos">
-      <img src="assets/eventos.png" alt="Captura de evento ao vivo para cliente X">
-      <div class="gallery-info">
-        <h3>Evento 1</h3>
-        <p>Captura de evento ao vivo para cliente X.</p>
-      </div>
-    </div>
-    <div class="gallery-item" data-category="publicidade">
-      <img src="assets/eventos.png" alt="Campanha digital para lançamento de produto">
-      <div class="gallery-info">
-        <h3>Publicidade 1</h3>
-        <p>Campanha digital para lançamento de produto.</p>
-      </div>
-    </div>
-class="gallery" id="gallery">
-        <div class="gallery-item" data-category="institucional">
-      <img src="assets/eventos.png" alt="Vídeo institucional com foco em branding">
-      <div class="gallery-info">
-        <h3>Institucional 1</h3>
-        <p>Vídeo institucional com foco em branding.</p>
-      </div>
-    </div>
-    <div class="gallery-item" data-category="eventos">
-      <img src="assets/eventos.png" alt="Captura de evento ao vivo para cliente X">
-      <div class="gallery-info">
-        <h3>Evento 1</h3>
-        <p>Captura de evento ao vivo para cliente X.</p>
-      </div>
-    </div>
-    <div class="gallery-item" data-category="publicidade">
-      <img src="assets/eventos.png" alt="Campanha digital para lançamento de produto">
-      <div class="gallery-info">
-        <h3>Publicidade 1</h3>
-        <p>Campanha digital para lançamento de produto.</p>
-      </div>
-    </div>w
-      </section>
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Atualiza botão ativo
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-  <footer>
-    © 2025 Braza Produções - Todos os direitos reservados
-  </footer>
-  
-  </body>
-</html>
+      const filter = btn.getAttribute('data-filter');
+
+      galleryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        const match = filter === 'all' || filter === category;
+
+        if (match) {
+          item.style.display = 'block';
+          setTimeout(() => {
+            item.classList.add('visible');
+          }, 10);
+        } else {
+          item.classList.remove('visible');
+          setTimeout(() => {
+            item.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+
+  // === 2. MODAL DE VÍDEO ===
+  const modal = document.createElement('div');
+  modal.className = 'video-modal';
+  modal.innerHTML = `
+    <div class="video-content">
+      <span class="close-video">&times;</span>
+      <div class="video-wrapper">
+        <iframe id="video-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const videoFrame = document.getElementById('video-frame');
+  const closeModal = () => {
+    modal.classList.remove('active');
+    videoFrame.src = '';
+  };
+  modal.querySelector('.close-video').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Ativa modal ao clicar em item com data-video-id
+  document.querySelectorAll('.gallery-item[data-video-id]').forEach(item => {
+    item.addEventListener('click', () => {
+      const videoId = item.getAttribute('data-video-id');
+      if (videoId) {
+        videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        modal.classList.add('active');
+      }
+    });
+  });
+
+  // === 3. SCROLL REVEAL SIMILAR AO INDEX ===
+  const revealElements = document.querySelectorAll('.gallery-item');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-active');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  revealElements.forEach(el => {
+    revealObserver.observe(el);
+  });
+
+});
