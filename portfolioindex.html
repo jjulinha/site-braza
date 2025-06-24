@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfólio - Braza</title>
 
   <!-- CSS Principal -->
-  <link rel="stylesheet" href="styleportifa.css">
+  <link rel="stylesheet" href="styleportifa.css" />
+
   <style>
     /* ===== Estilos Adicionais CSS Integrado ===== */
     .reveal {
@@ -74,19 +75,21 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
-    <nav class="main-nav">
-      <a href="index.html" class="logo">BRAZA</a>
-      <ul>
-        <li><a href="index.html#servicos">Serviços</a></li>
-        <li><a href="portfolio.html">Portfólio</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="index.html#contato">Contato</a></li>
-      </ul>
+    <div class="logo">BRAZA</div>
+    <nav>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="portfolio.html">Portfólio</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contato">Contato</a>
     </nav>
-    <h1>Nosso Portfólio</h1>
   </header>
 
+  <!-- TÍTULO DA PÁGINA -->
+  <h1 style="font-family: var(--font-title); text-align:center; margin: 6rem 0 2rem;">Nosso Portfólio</h1>
+
+  <!-- BOTÕES DE FILTRO -->
   <div class="filters">
     <button class="filter-btn active" data-filter="all">Todos</button>
     <button class="filter-btn" data-filter="institucional">Institucional</button>
@@ -94,6 +97,7 @@
     <button class="filter-btn" data-filter="publicidade">Publicidade</button>
   </div>
 
+  <!-- GALERIA -->
   <section class="gallery" id="gallery">
     <div class="gallery-item reveal" data-category="institucional" data-video-id="VIDEO_ID_1">
       <img src="assets/eventos.png" alt="Institucional">
@@ -120,6 +124,7 @@
     </div>
   </section>
 
+  <!-- MODAL DE VÍDEO -->
   <div class="video-modal" id="video-modal">
     <div class="modal-content">
       <button class="close-modal">&times;</button>
@@ -127,10 +132,12 @@
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
     © 2025 Braza Produções - Todos os direitos reservados
   </footer>
 
+  <!-- JS COMPORTAMENTOS -->
   <script>
     // Scroll Reveal
     const reveals = document.querySelectorAll('.reveal');
@@ -183,7 +190,20 @@
         iframe.src = '';
       }
     });
+
+    // Esconde/mostra header ao rolar
+    let lastScrollTop = 0;
+    const header = document.querySelector("header");
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+      lastScrollTop = scrollTop;
+    });
   </script>
-  <script src="portifajs.js"></script>
 </body>
 </html>
