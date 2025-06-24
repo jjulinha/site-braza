@@ -1,0 +1,75 @@
+/* =================================================== */
+/* ============== ESTILOS DA PÁGINA BLOG =============== */
+/* =================================================== */
+
+/* Define a área principal da lista de posts */
+#blog-lista {
+  padding-top: 120px; /* Espaçamento do topo */
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+/* Define o grid que segura os artigos */
+.blog-posts-grid {
+  text-align: left;
+  max-width: 800px;
+  margin: 50px auto;
+  display: grid;
+  gap: 50px; /* Espaço entre os posts */
+}
+
+/* Estiliza cada card de post do blog */
+.blog-post-item {
+  background-color: #1a1a1a; /* Um fundo escuro para destacar */
+  border: 2px solid #333;
+  padding: 25px 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de movimento */
+}
+
+/* EFEITO DE MOVIMENTO: Ao passar o mouse, o card levanta e gira um pouco */
+.blog-post-item:hover {
+  transform: translateY(-10px) rotate(-1.5deg); /* Leve inclinação para o estilo "colado" */
+  box-shadow: 10px 10px 0px #FFC700; /* Sombra forte e amarela, no estilo BRAZA */
+  border-color: #FFC700;
+}
+
+/* Título de cada post - Fonte 'Anton' para impacto */
+.blog-post-item h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 2.5rem; /* Tamanho grande */
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Estilo do link do título */
+.blog-post-item h3 a {
+  color: #FFC700; /* Cor amarela do seu site */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.blog-post-item:hover h3 a {
+  color: #fff; /* Muda a cor no hover para branco */
+}
+
+/* Metadados do post (data de publicação) */
+.blog-post-item .post-meta {
+  font-family: 'Permanent Marker', cursive; /* A fonte "grunge" */
+  color: #ccc;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+}
+
+/* Parágrafo de resumo do post (fonte 'Inter') */
+.blog-post-item p {
+  font-family: 'Inter', sans-serif;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+/* Ajuste no botão "Ler mais" para o contexto do blog */
+.blog-post-item .plano-cta {
+  display: inline-block; /* Garante que o espaçamento funcione */
+  margin-top: 20px;
+  text-decoration: none;
+}
