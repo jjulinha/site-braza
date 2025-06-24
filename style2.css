@@ -5,19 +5,21 @@
 /* Importa a 'Big Shoulders Display' do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;700&display=swap');
 
-/* Carrega a fonte 'Thunder' que deve estar na sua pasta de assets */
-@font-face {
-    font-family: 'Thunder Black LC';
-    src: url('assets/fonts/Thunder-Black-LC.woff2') format('woff2'),
-         url('assets/fonts/Thunder-Black-LC.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+/* =================================================== */
+/* ============== SUBSTITUIÇÃO: ANTON POR THUNDER ====== */
+/* =================================================== */
+
+/* Esta regra unificada garante que TODOS os títulos do site,
+  incluindo os do blog, usem a fonte 'Thunder Black LC', 
+  substituindo qualquer regra anterior que usava 'Anton'.
+*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Thunder Black LC', sans-serif;
 }
 
-/* NOTA SOBRE ARIAL NOVA: 
-   Arial Nova é uma fonte do sistema e pode não funcionar em todos os computadores. 
-   O código abaixo usará 'Arial Nova' se estiver instalada, caso contrário, usará 'Arial' que é mais comum.
+/* Removemos a regra específica para '.blog-post-item h3' 
+  pois a regra geral acima já cuida de todos os títulos.
+  Isso simplifica e limpa o código.
 */
 
 
