@@ -66,34 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // LÓGICA PARA A SEÇÃO DE SERVIÇOS STICKY
-  const servicosTextos = document.querySelectorAll('.servico-item-texto');
-  const imagemServico = document.querySelector('.servicos-imagem-sticky img');
-
-  if (servicosTextos.length > 0 && imagemServico) {
-    // Para a primeira imagem aparecer corretamente
-    imagemServico.style.opacity = '1';
-
-    const servicosObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-active');
-          const novaImagem = entry.target.getAttribute('data-image');
-          
-          if (imagemServico.src !== novaImagem) {
-            imagemServico.style.opacity = '0';
-            setTimeout(() => {
-              imagemServico.src = novaImagem;
-              imagemServico.style.opacity = '1';
-            }, 300);
-          }
-        } else {
-          entry.target.classList.remove('is-active');
-        }
-      });
-    }, {
-      threshold: 0.6,
-      rootMargin: "-30% 0px -30% 0px"
-    });
 
     servicosTextos.forEach(item => servicosObserver.observe(item));
   }
