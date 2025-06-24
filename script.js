@@ -24,22 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   }
 
-  // Background VANTA FOG
-  // Esta função aplica o efeito animado no fundo do corpo da página
+  // --- Background VANTA FOG (CONFIGURAÇÃO ATUALIZADA) ---
   VANTA.FOG({
-    el: "body",
+    el: "body", // Alvo continua sendo o body para preencher a tela toda
     mouseControls: true,
     touchControls: true,
     gyroControls: false,
     minHeight: 200.00,
     minWidth: 200.00,
-    highlightColor: 0xffb300,
-    midtoneColor: 0xe53935,
-    lowlightColor: 0x150202,
-    baseColor: 0x111111,
-    blurFactor: 0.50,
-    speed: 0.80,
-    zoom: 1.00
+    highlightColor: 0x6d0202, // Cor atualizada
+    midtoneColor: 0x0,         // Cor atualizada
+    lowlightColor: 0x04040D,   // Cor corrigida e atualizada
+    baseColor: 0x0,            // Cor atualizada
+    blurFactor: 0.50,          // Parâmetro mantido
+    speed: 0.80,               // Parâmetro mantido
+    zoom: 1.00                 // Parâmetro mantido
   });
 
   // --- HEADER ESCONDIDO AO ROLAR ---
@@ -63,20 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // --- ANIMAÇÃO DE REVELAÇÃO DAS SEÇÕES AO ROLAR ---
   const revealElements = document.querySelectorAll('.reveal');
-  // O IntersectionObserver é uma forma moderna e eficiente de detectar quando um elemento entra na tela
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Se o elemento estiver visível
       if (entry.isIntersecting) {
-        // Adiciona a classe 'active' que ativa a animação do CSS
         entry.target.classList.add('active');
       }
     });
   }, {
-    threshold: 0.1 // A animação ativa quando 10% do elemento estiver visível
+    threshold: 0.1
   });
 
-  // Aplica o observador a todos os elementos com a classe '.reveal'
   revealElements.forEach(elem => {
     revealObserver.observe(elem);
   });
@@ -84,21 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- EFEITO 3D NOS CARDS DE PLANOS ---
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
-    // Quando o mouse se move sobre o card
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left; // Posição X do mouse dentro do card
-      const y = e.clientY - rect.top;  // Posição Y do mouse dentro do card
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      // Calcula a rotação baseada na distância do mouse ao centro do card
-      const rotateX = ((y - centerY) / centerY) * -7; // Rotação no eixo X
-      const rotateY = ((x - centerX) / centerX) * 7;   // Rotação no eixo Y
+      const rotateX = ((y - centerY) / centerY) * -7;
+      const rotateY = ((x - centerX) / centerX) * 7;
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
-    // Quando o mouse sai do card, reseta a transformação
     card.addEventListener('mouseleave', () => {
       card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
     });
@@ -111,25 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioItems = document.querySelectorAll('.portfolio-item');
 
   portfolioItems.forEach(item => {
-    // Adiciona um evento de clique para cada item do portfólio
     item.addEventListener('click', () => {
       const videoId = item.getAttribute('data-video-id');
       if (videoId) {
-        // **CORREÇÃO AQUI:** Usamos a URL correta de embed do YouTube e o template literal `` com ${}
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-        modal.classList.add('active'); // Mostra o modal
+        modal.classList.add('active');
       }
     });
   });
 
-  // Função para fechar o modal
   const closeModal = () => {
     modal.classList.remove('active');
-    iframe.src = ""; // Para o vídeo ao fechar
+    iframe.src = "";
   };
 
   closeButton.addEventListener('click', closeModal);
-  // Fecha o modal se clicar fora do vídeo
   modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       closeModal();
@@ -138,9 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- ANIMAÇÃO DOS TÍTULOS NA SEÇÃO HERO ---
   const heroTitles = document.querySelectorAll('.hero-title');
-  // Adiciona a classe 'active' com um pequeno atraso entre cada título para um efeito escalonado
   heroTitles.forEach((el, i) => {
     setTimeout(() => el.classList.add('active'), i * 400);
   });
 
-}); // Fim do addEventListener 'DOMContentLoaded'
+});
