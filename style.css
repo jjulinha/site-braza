@@ -139,9 +139,6 @@ section, footer {
 .highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
 .highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 
-/* SERVIÇOS - AJUSTES DE RITMO E BACKGROUND */
-/* Início do Bloco para Substituir */
-
 /* SERVIÇOS - NOVO LAYOUT CENTRALIZADO */
 #servicos {
   position: relative;
@@ -174,12 +171,8 @@ section, footer {
   font-size: 1.1rem;
 }
 
-/* Fim do Bloco para Substituir */
-/* PROCESSO */
-#como-fazemos .section-title {
-  color: #fff; /* Garante que o título seja branco no fundo escuro */
-}
 
+/* PROCESSO */
 .processo-grid {
   display: flex;
   gap: 40px;
@@ -197,6 +190,7 @@ section, footer {
   margin-bottom: 10px;
 }
 
+/* PORTFÓLIO */
 .portfolio-grid {
   display: flex;
   gap: 30px;
@@ -229,6 +223,7 @@ section, footer {
   opacity: 1;
 }
 
+/* CLIENTES */
 .descricao-clientes {
   color: var(--cor-texto-secundario);
   text-align: center;
@@ -247,6 +242,7 @@ section, footer {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
+/* PLANOS */
 .planos-grid {
   display: flex;
   gap: 30px;
@@ -322,6 +318,7 @@ section, footer {
   box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
 }
 
+/* FAQ */
 .faq-grid {
   display: flex;
   flex-direction: column;
@@ -335,6 +332,7 @@ section, footer {
   margin-top: 5px;
 }
 
+/* CONTATO */
 footer .social-links {
   display: flex;
   gap: 20px;
@@ -347,6 +345,7 @@ footer p {
   color: var(--cor-texto-secundario);
 }
 
+/* MODAL DE VÍDEO */
 .modal {
   position: fixed;
   z-index: 1000;
@@ -389,6 +388,7 @@ footer p {
   cursor: pointer;
 }
 
+/* REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -399,6 +399,7 @@ footer p {
   transform: translateY(0);
 }
 
+/* RESPONSIVO */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
