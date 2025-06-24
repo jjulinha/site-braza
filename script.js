@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Splash Screen
+  
+// Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
   if (splash && video) {
@@ -7,38 +8,51 @@ document.addEventListener('DOMContentLoaded', () => {
       splash.classList.add('swoosh-out');
       setTimeout(() => splash.remove(), 1000);
     };
+
     video.addEventListener('ended', removeSplash);
+
+    // Fallback total: vídeo bloqueado ou falhou
     setTimeout(() => {
       if (document.body.contains(splash)) removeSplash();
     }, 4000);
   }
 
-  // A inicialização do VANTA FOG foi movida para o index.html
-  // para garantir a ordem de carregamento correta.
+  // Background VANTA FOG
+  VANTA.FOG({
+    el: "body",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    highlightColor: 0xffb300,
+    midtoneColor: 0xe53935,
+    lowlightColor: 0x150202,
+    baseColor: 0x111111,
+    blurFactor: 0.50,
+    speed: 0.80,
+    zoom: 1.00
+  });
 
-  // HEADER ESCONDIDO AO ROLAR (LÓGICA CORRIGIDA)
-  let lastScrollTop = 0;
-  const header = document.querySelector('header');
-  // Nosso novo alvo para o evento de rolagem
-  const contentWrapper = document.getElementById('wrapper-conteudo'); 
+ // --- HEADER ESCONDIDO AO ROLAR ---
+let lastScrollTop = 0;
+const header = document.querySelector('header');
 
-  if (header && contentWrapper) {
-    // Agora, ouvimos o evento de rolagem no wrapper, e não na window
-    contentWrapper.addEventListener('scroll', function () {
-      // E pegamos a posição da rolagem a partir dele
-      let scrollTop = contentWrapper.scrollTop; 
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // Rolando para baixo
-        header.classList.add('header-hidden');
-      } else {
-        // Rolando para cima
-        header.classList.remove('header-hidden');
-      }
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
+  if (currentScroll > lastScrollTop && currentScroll > 100) {
+    // Rolando para baixo
+    header.classList.add('header-hidden');
+  } else {
+    // Rolando para cima
+    header.classList.remove('header-hidden');
   }
-  // Scroll Reveal das Seções
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+  
+  // --- SCROLL REVEAL DAS SEÇÕES ---
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -49,11 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {
     threshold: 0.1
   });
+
   revealElements.forEach(elem => {
     revealObserver.observe(elem);
   });
 
-  // Tilt nos Cards
+  // Tilt 3D nos Cards
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -66,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rotateY = ((x - centerX) / centerX) * 7;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
+
     card.addEventListener('mouseleave', () => {
       card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
     });
@@ -76,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const iframe = document.getElementById('video-iframe');
   const closeButton = document.querySelector('.close-button');
   const portfolioItems = document.querySelectorAll('.portfolio-item');
+
   portfolioItems.forEach(item => {
     item.addEventListener('click', () => {
       const videoId = item.getAttribute('data-video-id');
@@ -85,12 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
   const closeModal = () => {
     modal.classList.remove('active');
     iframe.src = "";
   };
-  if(closeButton) closeButton.addEventListener('click', closeModal);
-  if(modal) modal.addEventListener('click', (event) => {
+
+  closeButton.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       closeModal();
     }
@@ -101,5 +120,4 @@ document.addEventListener('DOMContentLoaded', () => {
   heroTitles.forEach((el, i) => {
     setTimeout(() => el.classList.add('active'), i * 400);
   });
-
 });
