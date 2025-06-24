@@ -173,7 +173,60 @@ section, footer {
   line-height: 1.7;
   font-size: 1.1rem;
 }
+/* Posição: style.css */
+/* Adicione estas novas regras */
 
+.servico-grafico {
+  height: 80px;
+  width: 80px;
+  margin: 0 auto 30px auto;
+  opacity: 0.8;
+}
+
+.servico-grafico svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Animação Genérica para Desenhar o SVG */
+@keyframes draw-svg {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Aplica a animação quando o bloco entra na tela */
+.servico-bloco.reveal.active .servico-grafico svg path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-svg 2s ease-out forwards;
+  animation-delay: 0.3s; /* Um pequeno atraso para a animação começar */
+}
+
+/* Animação específica para a engrenagem (rotação) */
+@keyframes rotate-svg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animação específica para as barras do gráfico */
+@keyframes rise-bar {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.servico-bloco:nth-child(1).reveal.active .servico-grafico svg {
+  animation: rotate-svg 10s linear infinite;
+}
+
+.servico-bloco:nth-child(4).reveal.active .servico-grafico svg path {
+  transform-origin: bottom;
+  animation: rise-bar 1s ease-out forwards, draw-svg 2s ease-out forwards;
+  animation-delay: 0.3s;
+}
 
 /* PROCESSO */
 .processo-grid {
