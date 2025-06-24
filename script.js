@@ -59,22 +59,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // SCROLL REVEAL DAS SEÇÕES
-  const revealElements = document.querySelectorAll('.reveal');
-  if (revealElements.length > 0) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, {
-      threshold: 0.1
+const revealElements = document.querySelectorAll('.reveal');
+if (revealElements.length > 0) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Se o elemento está na tela, adiciona a classe para animar
+        entry.target.classList.add('active');
+      } else {
+        // <<-- AQUI A MÁGICA: Se o elemento saiu da tela, remove a classe para "resetar" a animação
+        entry.target.classList.remove('active');
+      }
     });
-    revealElements.forEach(elem => {
-      revealObserver.observe(elem);
-    });
-  }
-  
+  }, {
+    threshold: 0.1
+  });
+  revealElements.forEach(elem => {
+    revealObserver.observe(elem);
+  });
+}
   // TILT 3D NOS CARDS DE PLANOS
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
