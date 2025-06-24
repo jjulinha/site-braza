@@ -100,8 +100,9 @@ section, footer {
   padding: 100px 6%;
   max-width: 1600px;
   margin: 0 auto;
-}
-.section-title {
+  background-color: #111; /* Fundo das seções */
+  
+}.section-title {
   font-family: var(--fonte-headline);
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   text-transform: uppercase;
@@ -109,6 +110,7 @@ section, footer {
   border-bottom: 4px solid var(--cor-vermelho);
   display: inline-block;
 }
+
 
 /* HERO */
 #hero {
