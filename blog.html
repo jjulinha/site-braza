@@ -11,7 +11,7 @@
     :root {
       --red-1: #661e27;
       --yellow-1: #f9b406;
-      --padding-fluid: 4rem;
+      --padding-fluid: 2rem;
     }
 
     * {
@@ -24,79 +24,67 @@
       background-color: #f0f0f0;
       color: #333;
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
+      padding-top: 80px;
     }
 
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      background-color: #1a1a1a;
-      color: #fff;
+      left: 0;
+      width: 100%;
+      background-color: var(--red-1);
+      z-index: 999;
+      padding: 1.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 4rem;
-      z-index: 999;
       transition: transform 0.3s ease-in-out;
     }
 
-    header.hide {
+    header.header-hidden {
       transform: translateY(-100%);
     }
 
     header .logo h1 {
       font-family: 'Anton', sans-serif;
-      font-size: 3rem;
-      color: var(--red-1);
+      color: var(--yellow-1);
+      font-size: 3.6rem;
     }
 
-    nav ul {
-      list-style: none;
+    header nav ul {
       display: flex;
       gap: 2rem;
+      list-style: none;
     }
 
-    nav ul li a {
-      text-decoration: none;
+    header nav ul li a {
       color: #fff;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 1.6rem;
-      position: relative;
+      transition: color 0.2s ease;
     }
 
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      width: 0%;
-      height: 2px;
-      background: var(--yellow-1);
-      transition: width 0.3s ease-in-out;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
+    header nav ul li a:hover {
+      color: var(--yellow-1);
     }
 
     .page-title-section {
       background-color: #1a1a1a;
       color: #fff;
       text-align: center;
-      padding: 6rem var(--padding-fluid);
+      padding: 4rem var(--padding-fluid);
     }
-
     .page-title-section h2 {
       font-family: 'Anton', sans-serif;
-      font-size: 7rem;
+      font-size: 8rem;
       color: var(--red-1);
       margin-bottom: 1rem;
     }
-
     .page-title-section p {
       font-size: 2.2rem;
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.5;
     }
 
     .page-container {
@@ -128,21 +116,18 @@
       border: 1px solid #ddd;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s, box-shadow 0.3s;
-      border-radius: 12px;
-      overflow: hidden;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
-
     .single-blog-post:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
     .post-image-holder {
+      width: 100%;
       height: 200px;
       overflow: hidden;
     }
-
     .post-image-holder img {
       width: 100%;
       height: 100%;
@@ -159,12 +144,12 @@
     .post-content-wrapper h3 {
       font-family: 'Permanent Marker', cursive;
       font-size: 2.8rem;
+      line-height: 1.3;
       margin-bottom: 1rem;
     }
 
     .post-content-wrapper h3 a {
       color: #1a1a1a;
-      text-decoration: none;
     }
 
     .post-content-wrapper p.post-meta {
@@ -175,25 +160,24 @@
 
     .post-content-wrapper p {
       flex-grow: 1;
+      line-height: 1.6;
       font-size: 1.8rem;
     }
 
     .plano-cta {
       margin-top: 2rem;
-      background: var(--yellow-1);
-      color: #1a1a1a;
-      padding: 0.8rem 1.8rem;
-      font-weight: bold;
-      font-size: 1.4rem;
-      text-transform: uppercase;
-      border-radius: 5px;
-      transition: background 0.3s;
+      align-self: flex-start;
+      background-color: var(--red-1);
+      color: white;
+      padding: 0.8rem 2rem;
+      font-size: 1.6rem;
       text-decoration: none;
+      transition: background 0.3s ease;
     }
 
     .plano-cta:hover {
-      background: var(--red-1);
-      color: #fff;
+      background-color: var(--yellow-1);
+      color: #000;
     }
 
     .sidebar-widget {
@@ -201,7 +185,6 @@
       border: 1px solid #ddd;
       padding: 3rem;
       margin-bottom: 3rem;
-      border-radius: 12px;
     }
 
     .sidebar-title {
@@ -224,13 +207,17 @@
     .sidebar-widget ul li a {
       color: #555;
       font-size: 1.8rem;
-      text-decoration: none;
+      transition: color 0.2s;
       display: flex;
       justify-content: space-between;
     }
 
     .sidebar-widget ul li a:hover {
       color: var(--red-1);
+    }
+
+    .sidebar-widget ul li a span {
+      color: #999;
     }
 
     .tags-list {
@@ -245,9 +232,7 @@
       font-size: 1.4rem;
       color: #555;
       text-transform: uppercase;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: all 0.3s;
+      transition: all 0.2s;
     }
 
     .tags-list a:hover {
@@ -255,76 +240,60 @@
       color: #fff;
     }
 
-    footer {
-      background: #1a1a1a;
-      color: #fff;
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    footer .hero-title {
-      font-size: 4rem;
-      font-family: 'Anton', sans-serif;
-      color: var(--yellow-1);
-      margin-bottom: 2rem;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .copyright {
-      font-size: 1.4rem;
-      color: #aaa;
-    }
-
     @media (max-width: 992px) {
       .page-container {
         flex-direction: column;
       }
-
       .sidebar-side {
         max-width: 100%;
-      }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
       }
     }
 
     @media (max-width: 767.98px) {
       .page-title-section h2 {
-        font-size: 5rem;
+        font-size: 6rem;
       }
       .page-title-section p {
         font-size: 1.8rem;
+      }
+      .post-content-wrapper h3 {
+        font-size: 2.4rem;
       }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo"><h1>BRAZA</h1></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">INÍCIO</a></li>
+        <li><a href="index.html#servicos">O QUE A GENTE FAZ?</a></li>
+        <li><a href="index.html#portfolio">TRABALHOS NA BRAZA</a></li>
+        <li><a href="index.html#clientes">CLIENTES</a></li>
+        <li><a href="index.html#planos">NOSSOS COMBOS</a></li>
+        <li><a href="blog.html">BLOG</a></li>
+        <li><a href="index.html#contato">BORA FAZER FOGO?</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<!-- O restante do conteúdo permanece igual, mas o header agora está estilizado com o novo design e comportamento -->
+  <!-- Conteúdo principal vem aqui -->
 
-<script>
-  let prevScrollpos = window.pageYOffset;
-  window.onscroll = function () {
+  <script>
+    let lastScrollTop = 0;
     const header = document.querySelector("header");
-    const currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-      header.classList.remove("hide");
-    } else {
-      header.classList.add("hide");
-    }
-    prevScrollpos = currentScrollPos;
-  };
-</script>
 
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+      lastScrollTop = scrollTop;
+    });
+  </script>
 </body>
 </html>
