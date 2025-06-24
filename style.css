@@ -47,24 +47,26 @@ html, body {
 }
 
 /* HEADER */
-
-/* HEADER FIXO COM DESAPARECIMENTO */
+/* HEADER */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  border-radius: 0 0 30px 30px;
+  padding: 20px 6%;
+  /* Efeito de vidro fosco para a transparência */
+  background: rgba(17, 17, 17, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Para compatibilidade com Safari */
+  /* Organiza o logo na esquerda e o menu na direita */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 6%;
-  z-index: 1000;
-  transition: transform 0.4s ease-in-out;
+  z-index: 100;
+  transition: transform 0.4s ease-in-out; 
 }
 
+/* Regra que esconde o header ao rolar */
 header.header-hidden {
   transform: translateY(-100%);
 }
@@ -77,22 +79,23 @@ header .logo h1 {
 
 header nav ul {
   list-style: none;
-  display: flex;
-  gap: 32px;
-  margin: 0;
-  padding: 0;
+  display: flex; /* Garante que os itens fiquem na horizontal */
+  gap: 24px;
 }
 
 header nav ul li a {
-  font-family: var(--fonte-corpo);
-  font-weight: 700;
   color: var(--cor-texto-principal);
-  text-decoration: none;
+  font-weight: 700;
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 1px;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
+header nav ul li a:hover {
+    color: var(--cor-acento-amarelo);
+}
 /* GERAL */
 section, footer {
   padding: 100px 6%;
