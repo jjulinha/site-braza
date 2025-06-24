@@ -139,7 +139,6 @@ section, footer {
 .highlight-2 { clip-path: polygon(5% 10%, 98% 0, 100% 95%, 0 100%); }
 .highlight-3 { clip-path: polygon(0 15%, 95% 5%, 100% 85%, 2% 95%); }
 
-/* SERVIÇOS - AJUSTE FINAL */
 /* SERVIÇOS - AJUSTES DE RITMO E BACKGROUND */
 #servicos { 
     /* O fundo volta a ser transparente para mostrar a animação Vanta.js */
@@ -162,7 +161,6 @@ section, footer {
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* <<-- AQUI A MUDANÇA PRINCIPAL: Espaçamento reduzido para uma rolagem mais rápida */
   gap: 80px; 
 }
 
@@ -180,7 +178,7 @@ section, footer {
   font-family: var(--fonte-headline);
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 15px;
-  color: var(--cor-acento-amarelo); /* <<-- COR REVERTIDA */
+  color: var(--cor-acento-amarelo);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -189,7 +187,7 @@ section, footer {
 }
 
 .servico-item-texto p {
-  color: var(--cor-texto-secundario); /* <<-- COR REVERTIDA */
+  color: var(--cor-texto-secundario);
   line-height: 1.6;
   max-width: 500px;
 }
@@ -237,22 +235,12 @@ section, footer {
   .servicos-lista-texto {
     gap: 80px;
   }
-}  .servicos-imagem-sticky {
-    position: static;
-    height: auto;
-    margin-top: 40px;
-  }
-  .servicos-lista-texto {
-    gap: 80px;
-  }
 }
 
 /* PROCESSO */
 #como-fazemos .section-title {
   color: #fff; /* Garante que o título seja branco no fundo escuro */
 }
-
-/* ... (Restante do CSS) ... */
 
 .processo-grid {
   display: flex;
