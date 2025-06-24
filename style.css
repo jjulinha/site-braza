@@ -47,7 +47,7 @@ html, body {
   opacity: 0;
 }
 
-/* HEADER (CORRIGIDO) */
+/* HEADER */
 header {
   position: absolute; 
   top: 0;
@@ -63,24 +63,19 @@ header {
   z-index: 100;
   transition: transform 0.4s ease-in-out;
 }
-
-/* Regra que esconde o header ao rolar */
 header.header-hidden {
   transform: translateY(-100%);
 }
-
 header .logo h1 {
   font-family: var(--fonte-headline);
   font-size: 2.2rem;
   color: var(--cor-acento-amarelo);
 }
-
 header nav ul {
   list-style: none;
-  display: flex; /* Garante que os itens fiquem na horizontal */
+  display: flex;
   gap: 24px;
 }
-
 header nav ul li a {
   color: var(--cor-texto-principal);
   font-weight: 700;
@@ -90,7 +85,6 @@ header nav ul li a {
   text-decoration: none;
   transition: color 0.3s;
 }
-
 header nav ul li a:hover {
     color: var(--cor-acento-amarelo);
 }
@@ -147,89 +141,99 @@ section, footer {
 
 /* SERVIÇOS */
 #servicos { 
-    background-color: #1a1a1a;
-    padding-bottom: 80px;
+    background-color: #F5F5F5; /* Fundo claro para contraste */
 }
-.servicos-lista { 
-    display: flex; 
-    flex-direction: column; 
-    border-top: 1px solid #333;
-}
-.servico-item-lista {
-    display: flex; 
-    align-items: center; 
-    padding: 30px 20px; 
-    border-bottom: 1px solid #333;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+#servicos .section-title {
+    color: #111; /* Título da seção escuro */
 }
 
-.servico-item-lista::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--cor-primaria-vermelho);
-    z-index: 1;
-    transform: translateX(-101%);
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.servico-item-lista:hover::after {
-    transform: translateX(0);
-}
-
-.servico-texto { 
-    position: relative; 
-    z-index: 2;
-    transition: transform 0.4s ease;
-}
-
-.servico-item-lista:hover .servico-texto {
-    transform: translateX(10px);
-}
-
-.servico-texto h3 { 
-    font-family: var(--fonte-headline); 
-    font-size: clamp(2rem, 5vw, 3rem); 
-    letter-spacing: 1px; 
-    color: var(--cor-texto-principal); 
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
-}
-
-.servico-item-lista:hover .servico-texto h3 {
-    color: var(--cor-texto-principal);
-}
-
-.servico-texto p { 
-    font-family: var(--fonte-corpo); 
-    color: var(--cor-texto-secundario); 
-    line-height: 1.6; 
-    max-width: 800px;
-}
-
-/* PROCESSO */
-.processo-grid {
+/* --- ESTILOS PARA A SEÇÃO DE SERVIÇOS 'STICKY' --- */
+.servicos-container {
   display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+  gap: 60px;
+  margin-top: 80px;
 }
-.passo {
+.servicos-lista-texto {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+}
+.servico-item-texto {
+  padding: 20px;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+.servico-item-texto.is-active {
+  opacity: 1;
+}
+.servico-item-texto h2 {
+  font-family: var(--fonte-headline);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 15px;
+  color: var(--cor-vermelho); /* Títulos dos serviços em vermelho para bom contraste */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.servico-item-texto.is-active h2 {
+    transform: scale(1.05);
+}
+.servico-item-texto p {
+  color: #555; /* Texto da descrição escuro */
+  line-height: 1.6;
+  max-width: 500px;
+}
+.servicos-imagem-sticky {
+  flex: 1.2;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.servicos-imagem-sticky img {
+  width: 100%;
+  height: 70%;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 15px;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.5s ease-in-out;
+  animation: kenburns-effect 15s ease-in-out alternate infinite;
+}
+@keyframes kenburns-effect {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(1.1) translateY(-10px);
+  }
+}
+@media (max-width: 900px) {
+  .servicos-container {
+    flex-direction: column;
+  }
+  .servicos-imagem-sticky {
+    position: static;
+    height: auto;
+    margin-top: 40px;
+  }
+  .servicos-lista-texto {
+    gap: 80px;
+  }
+}
+
+/* PROCESSO (Ajuste de cor de texto para fundo escuro) */
+#como-fazemos .passo h3, #como-fazemos .passo p, #como-fazemos .section-title {
+  color: #fff;
+}
+#como-fazemos .passo {
   background: rgba(255,255,255,0.03);
-  padding: 30px;
-  border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.08);
 }
-.passo h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
 
+/* ... (Restante do seu CSS continua aqui) ... */
 /* PORTFÓLIO */
 .portfolio-grid {
   display: flex;
@@ -385,7 +389,7 @@ footer p {
   color: var(--cor-texto-secundario);
 }
 
-/* MODAL DE VÍDEO (Estilos que estavam faltando) */
+/* MODAL DE VÍDEO */
 .modal {
   position: fixed;
   z-index: 1000;
@@ -394,12 +398,12 @@ footer p {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  display: none; /* Começa escondido */
+  display: none;
   align-items: center;
   justify-content: center;
 }
 .modal.active {
-  display: flex; /* Fica visível quando a classe 'active' é adicionada */
+  display: flex;
 }
 .modal-content {
   position: relative;
@@ -408,7 +412,7 @@ footer p {
 }
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* Proporção 16:9 */
+  padding-bottom: 56.25%;
   height: 0;
 }
 .video-container iframe {
@@ -452,83 +456,5 @@ footer p {
   }
   .plano-card {
     max-width: 100%;
-  }
-}/* --- NOVOS ESTILOS PARA A SEÇÃO DE SERVIÇOS 'STICKY' --- */
-
-.servicos-container {
-  display: flex;
-  gap: 60px; /* Espaço entre a coluna de texto e a de imagem */
-  margin-top: 80px;
-}
-
-/* Coluna da esquerda com os textos */
-.servicos-lista-texto {
-  flex: 1; /* Ocupa metade do espaço */
-  display: flex;
-  flex-direction: column;
-  gap: 150px; /* Espaço generoso entre cada serviço para dar efeito no scroll */
-}
-
-.servico-item-texto {
-  padding: 20px;
-  opacity: 0.4; /* Itens não ativos ficam com menos destaque */
-  transition: opacity 0.4s ease;
-}
-
-/* Estilo que o JavaScript vai aplicar ao item visível */
-.servico-item-texto.is-active {
-  opacity: 1;
-}
-
-.servico-item-texto h2 {
-  font-family: var(--fonte-headline);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 15px;
-  color: var(--cor-acento-amarelo);
-}
-
-.servico-item-texto p {
-  color: var(--cor-texto-secundario);
-  line-height: 1.6;
-  max-width: 500px;
-}
-
-/* Coluna da direita com a imagem */
-.servicos-imagem-sticky {
-  flex: 1.2; /* Ocupa a outra metade, um pouco maior */
-  height: 100vh; /* Altura total da tela */
-  position: sticky; /* A mágica acontece aqui! */
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.servicos-imagem-sticky img {
-  width: 100%;
-  height: 70%;
-  max-height: 600px;
-  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-  border-radius: 15px;
-  transition: opacity 0.5s ease-in-out; /* Para o efeito de fade na troca */
-}
-
-/* Removemos o estilo antigo para não haver conflito */
-#servicos .servicos-lista, #servicos .servico-item-lista {
-  display: none;
-}
-
-/* Ajuste para telas menores */
-@media (max-width: 900px) {
-  .servicos-container {
-    flex-direction: column; /* Em telas pequenas, uma coluna fica em cima da outra */
-  }
-  .servicos-imagem-sticky {
-    position: static; /* Desativa o efeito sticky */
-    height: auto;
-    margin-top: 40px;
-  }
-  .servicos-lista-texto {
-    gap: 80px;
   }
 }
