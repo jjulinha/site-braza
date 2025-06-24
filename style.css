@@ -94,7 +94,9 @@ header nav ul li a {
 header nav ul li a:hover {
     color: var(--cor-acento-amarelo);
 }
-
+main {
+  padding-top: 100px; /* Empurra o conteúdo principal para baixo do header fixo */
+}
 /* GERAL */
 section, footer {
   padding: 100px 6%;
