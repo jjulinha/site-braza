@@ -101,7 +101,10 @@ section, footer {
   text-transform: uppercase;
   margin-bottom: 40px;
   border-bottom: 4px solid var(--cor-vermelho);
-  display: inline-block;
+  /* Ajustes para centralização */
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* HERO */
