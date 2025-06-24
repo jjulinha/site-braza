@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Splash Screen
+  
+// Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
-if (splash && video) {
-  const removeSplash = () => {
-    splash.classList.add('swoosh-out');
-    setTimeout(() => splash.remove(), 1000);
-  };
+  if (splash && video) {
+    const removeSplash = () => {
+      splash.classList.add('swoosh-out');
+      setTimeout(() => splash.remove(), 1000);
+    };
 
-  video.addEventListener('ended', removeSplash);
+    video.addEventListener('ended', removeSplash);
 
-  // Fallback total: vídeo bloqueado ou falhou
-  setTimeout(() => {
-    if (document.body.contains(splash)) removeSplash();
-  }, 4000);
-}
-
+    // Fallback total: vídeo bloqueado ou falhou
+    setTimeout(() => {
+      if (document.body.contains(splash)) removeSplash();
+    }, 4000);
+  }
 
   // Background VANTA FOG
   VANTA.FOG({
@@ -34,21 +34,25 @@ if (splash && video) {
     zoom: 1.00
   });
 
-  // Header Escondido ao Rolar
-  let lastScrollTop = 0;
-  const header = document.querySelector('header');
+ // --- HEADER ESCONDIDO AO ROLAR ---
+let lastScrollTop = 0;
+const header = document.querySelector('header');
 
-  window.addEventListener('scroll', function () {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      header.classList.add('header-hidden');
-    } else {
-      header.classList.remove('header-hidden');
-    }
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-  });
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-  // Scroll Reveal
+  if (currentScroll > lastScrollTop && currentScroll > 100) {
+    // Rolando para baixo
+    header.classList.add('header-hidden');
+  } else {
+    // Rolando para cima
+    header.classList.remove('header-hidden');
+  }
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+  
+  // --- SCROLL REVEAL DAS SEÇÕES ---
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -59,6 +63,7 @@ if (splash && video) {
   }, {
     threshold: 0.1
   });
+
   revealElements.forEach(elem => {
     revealObserver.observe(elem);
   });
@@ -101,7 +106,7 @@ if (splash && video) {
   const closeModal = () => {
     modal.classList.remove('active');
     iframe.src = "";
-  }
+  };
 
   closeButton.addEventListener('click', closeModal);
   modal.addEventListener('click', (event) => {
