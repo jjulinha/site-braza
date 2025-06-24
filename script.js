@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ... (código do Splash, Vanta e Header continua o mesmo) ...
-
   // Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
@@ -67,41 +65,40 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(elem);
   });
 
-  // --- LÓGICA PARA A SEÇÃO DE SERVIÇOS STICKY ---
+  // LÓGICA PARA A SEÇÃO DE SERVIÇOS STICKY
   const servicosTextos = document.querySelectorAll('.servico-item-texto');
   const imagemServico = document.querySelector('.servicos-imagem-sticky img');
 
   if (servicosTextos.length > 0 && imagemServico) {
+    // Para a primeira imagem aparecer corretamente
+    imagemServico.style.opacity = '1';
+
     const servicosObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // Se o item de texto estiver visível na tela
         if (entry.isIntersecting) {
-          // Adiciona a classe 'is-active' para dar destaque ao texto
           entry.target.classList.add('is-active');
           const novaImagem = entry.target.getAttribute('data-image');
           
-          // Troca a imagem com um efeito de fade
-          imagemServico.style.opacity = '0';
-          setTimeout(() => {
-            imagemServico.src = novaImagem;
-            imagemServico.style.opacity = '1';
-          }, 300); // tempo para o fade-out
-
+          if (imagemServico.src !== novaImagem) {
+            imagemServico.style.opacity = '0';
+            setTimeout(() => {
+              imagemServico.src = novaImagem;
+              imagemServico.style.opacity = '1';
+            }, 300);
+          }
         } else {
-          // Remove a classe de destaque quando o texto sai da tela
           entry.target.classList.remove('is-active');
         }
       });
     }, {
-      threshold: 0.6 // Ação é disparada quando 60% do item estiver visível
+      threshold: 0.6,
+      rootMargin: "-30% 0px -30% 0px"
     });
 
-    // Pede ao observador para "assistir" a cada um dos itens de texto
     servicosTextos.forEach(item => servicosObserver.observe(item));
   }
 
-
-  // --- (Restante do código: Tilt 3D, Modal de Vídeo, etc.) ---
+  // TILT 3D NOS CARDS DE PLANOS
   const planoCards = document.querySelectorAll('.plano-card');
   planoCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -119,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // MODAL DE VÍDEO DO PORTFÓLIO
   const modal = document.getElementById('video-modal');
   const iframe = document.getElementById('video-iframe');
   const closeButton = document.querySelector('.close-button');
@@ -143,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ANIMAÇÃO DOS TÍTULOS HERO
   const heroTitles = document.querySelectorAll('.hero-title');
   heroTitles.forEach((el, i) => {
     setTimeout(() => el.classList.add('active'), i * 400);
