@@ -209,22 +209,108 @@ section, footer {
 }
 
 /* PROCESSO */
-.processo-grid {
+/* INÍCIO DO BLOCO NOVO */
+
+/* PROCESSO - LINHA DO TEMPO ANIMADA */
+.processo-timeline {
   display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  position: relative;
+  margin: 40px 0;
 }
-.passo {
-  flex: 1;
-  background: rgba(255,255,255,0.03);
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+
+/* A linha vertical da timeline */
+.processo-timeline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%);
 }
-.passo h3 {
-  font-size: 1.5rem;
+
+.passo-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  margin: 20px 0;
+}
+
+/* Círculo na linha do tempo */
+.passo-item::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -14.5px;
+  background-color: var(--cor-vermelho);
+  border: 4px solid var(--cor-acento-amarelo);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Posiciona os itens à esquerda e à direita */
+.passo-item:nth-child(odd) {
+  align-self: flex-start;
+  padding-right: 70px;
+  text-align: right;
+}
+
+.passo-item:nth-child(even) {
+  align-self: flex-end;
+  padding-left: 70px;
+  text-align: left;
+}
+
+/* Inverte a posição do círculo para os itens da direita */
+.passo-item:nth-child(even)::after {
+  left: -14.5px;
+}
+
+.passo-content {
+  padding: 20px 30px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.passo-content h3 {
+  font-family: var(--fonte-headline);
+  font-size: 1.8rem;
+  color: var(--cor-acento-amarelo);
   margin-bottom: 10px;
 }
+
+.passo-content p {
+  color: var(--cor-texto-secundario);
+  line-height: 1.6;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .processo-timeline::after {
+    left: 30px; /* Move a linha para a esquerda */
+  }
+  .passo-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+    text-align: left;
+  }
+  .passo-item:nth-child(odd) {
+    align-self: auto;
+    text-align: left;
+  }
+  .passo-item::after {
+    left: 15.5px; /* Coloca todos os círculos na linha da esquerda */
+  }
+}
+
+/* FIM DO BLOCO NOVO */
 
 /* PORTFÓLIO */
 .portfolio-grid {
