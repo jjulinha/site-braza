@@ -49,21 +49,20 @@ html, body {
 
 /* HEADER */
 header {
-  position: fixed;
+header {
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 6%;
-  /* Efeito de vidro fosco para a transparência */
-  background: rgba(17, 17, 17, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Para compatibilidade com Safari */
-  /* Organiza o logo na esquerda e o menu na direita */
+  padding: 40px 6%;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  transition: transform 0.4s ease-in-out; 
+  transition: transform 0.4s ease-in-out;
 }
 
 /* Regra que esconde o header ao rolar */
