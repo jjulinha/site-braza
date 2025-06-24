@@ -121,3 +121,23 @@ window.addEventListener('scroll', () => {
     setTimeout(() => el.classList.add('active'), i * 400);
   });
 });
+<script>
+    // VANTA DEVE SER APLICADO NO BODY
+    <script src="three.r134.min.js"></script>
+<script src="vanta.fog.min.js"></script>
+<script>
+VANTA.FOG({
+  el: "#body",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  highlightColor: 0x6d0202,
+  midtoneColor: 0x0,
+  lowlightColor: 0x4040d,
+  baseColor: 0x0
+})
+</script>
+    })
+    </script>
