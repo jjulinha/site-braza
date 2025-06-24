@@ -1,7 +1,7 @@
 /* =======================
    IMPORTAÇÃO DE FONTES
 ======================= */
-@import url('https://fonts.googleapis.com/css2?family=Thunder:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 /* =======================
    VARIÁVEIS ROOT
@@ -21,94 +21,55 @@
 }
 
 /* =======================
-   TIPOGRAFIA ESPECÍFICA
+   FONTES POR ELEMENTO
 ======================= */
 html {
   font-size: 0.347vw;
-  font-family: 'Thunder', sans-serif;
+  font-family: 'Arial', sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
 }
 
 h1 {
-  font-family: 'Thunder', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 h2, h3, h4, h5, h6, p {
-  font-family: 'Arial Nova', Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
-/* FONT-SIZE RESPONSIVO */
+/* =======================
+   MEDIA QUERIES
+======================= */
 @media only screen and (max-width: 1025px) {
+  :root { --header-height: 14.5rem; }
   html { font-size: 0.9vw; }
 }
 @media only screen and (max-width: 767.98px) {
+  :root {
+    --header-height: 10rem;
+    --padding-fluid: 3rem;
+  }
   html { font-size: 2.4vw; }
 }
-@media only screen and (max-width: 768px) and (max-height: 550px) and (orientation: landscape) {
-  html { font-size: 1.4vw; }
-}
 @media only screen and (min-width: 768px) and (max-width: 1025px) and (max-height: 550px) and (orientation: landscape) {
+  :root { --header-height: 12.5rem; }
   html { font-size: 0.9vw; }
 }
 
 /* =======================
-   RESET E NORMALIZE
+   RESET BÁSICO
 ======================= */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body,
-canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed,
-fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html,
-i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p,
-pre, q, ruby, s, samp, section, small, span, strike, strong, summary, table, tbody, td,
-tfoot, th, thead, time, tr, tt, u, ul, var, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  outline: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-family: inherit;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
-  display: block;
-}
-
-main {
-  width: 100%;
-}
-
-ul {
-  list-style: none;
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
   margin: 0;
   padding: 0;
 }
 
-/* === TIPOGRAFIA ADICIONAL === */
-b, strong { font-weight: 700; }
-small { font-size: 80%; }
-sub, sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-sub { bottom: -0.25em; }
-sup { top: -0.5em; }
 a {
-  background-color: transparent;
   text-decoration: none;
   color: inherit;
 }
-
-/* =======================
-   GRID E LAYOUTS
-======================= */
-/* ...Aqui você insere os blocos .container, .row, .col-*, etc. */
-/* Como é muito extenso, você pode colar essa parte do seu original sem alterações */
-
