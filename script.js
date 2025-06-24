@@ -1,5 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Sua configuração do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
+    authDomain: "braza-portfolio.firebaseapp.com",
+    projectId: "braza-portfolio",
+    storageBucket: "braza-portfolio.appspot.com",
+    messagingSenderId: "504617854086",
+    appId: "1:504617854086:web:727bfb242c29a6d7345d07",
+    measurementId: "G-5KFT2C7ZCF"
+  };
+
+  // Inicializa o Firebase
+  try {
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // NOVA LÓGICA: Buscar e exibir os projetos do Portfólio
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+
+    if (portfolioGrid) {
+      db.collection("projetos")
+        .orderBy("dataDeCriacao", "desc") // Ordena pelos mais recentes
+        .limit(3) // Pega apenas os 3 primeiros
+        .get()
+        .then((querySnapshot) => {
+          let html = ""; 
+          if (querySnapshot.empty) {
+            portfolioGrid.innerHTML = "<p>Nenhum projeto encontrado. Adicione projetos no seu banco de dados Firebase.</p>";
+            return;
+          }
+          querySnapshot.forEach((doc) => {
+            const projeto = doc.data();
+            html += `
+              <div class="portfolio-item">
+                <img src="${projeto.imagemURL}" alt="${projeto.titulo}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/fff?text=Imagem+N%C3%A3o+Encontrada';">
+                <div class="overlay">
+                  <h3>${projeto.titulo}</h3>
+                </div>
+              </div>
+            `;
+          });
+          portfolioGrid.innerHTML = html;
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar projetos: ", error);
+          portfolioGrid.innerHTML = "<p>Não foi possível carregar os projetos no momento.</p>";
+        });
+    }
+
+  } catch (e) {
+    console.error("Erro ao inicializar o Firebase. Verifique suas chaves de configuração.", e);
+  }
+
   // Splash Screen
   const splash = document.getElementById('splash-screen');
   const video = document.getElementById('splash-video');
