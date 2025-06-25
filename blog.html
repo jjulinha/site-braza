@@ -9,7 +9,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     
-</head><body class="blog-page">
+</head>
+<body class="blog-page">
 
     <header>
         <div class="logo">
@@ -112,22 +113,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
-    <script src="script.js"></script> <script>
-        let lastScrollTop = 0;
-        const header = document.querySelector("header");
-
-        window.addEventListener("scroll", () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-                // Scroll para baixo
-                header.classList.add("header-hidden");
-            } else {
-                // Scroll para cima
-                header.classList.remove("header-hidden");
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        });
-    </script>
-</body>
+    <script src="script.js"></script>
+    
+    </body>
 </html>
