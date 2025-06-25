@@ -1189,246 +1189,126 @@ footer p {
   background-color: #ffc107;
 
 }
-
-
-
-
 /* ======================================================= */
-
 /* ===== INÍCIO DOS ESTILOS ESPECÍFICOS PARA O BLOG ===== */
-
 /* ======================================================= */
-
-
 
 /* 1. Corrige o posicionamento e o fundo do header APENAS na página do blog */
-
 .blog-page header {
-
-    position: fixed;
-
-    background: rgba(17, 17, 17, 0.8);
-
-    backdrop-filter: blur(10px);
-
-    padding-top: 20px;
-
-    padding-bottom: 20px;
-
+    position: fixed;
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-
-
 
 /* 2. Ajusta o espaçamento do conteúdo principal para compensar o header fixo */
-
 .blog-page main {
-
-    padding-top: 120px; 
-
+    padding-top: 120px; 
 }
-
-
 
 /* 3. Remove padding e margem do .page-container original para dar lugar ao novo layout */
-
 .blog-page .page-container {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+    padding: 0 6% 60px 6%;
+    max-width: 1600px;
+    margin: 0 auto;
 
-    padding: 0;
-
-    margin: 0;
-
-    max-width: none;
-
-    width: 100%;
-
-    padding: 0 6% 60px 6%;
-
-    max-width: 1600px;
-
-    margin: 0 auto;
-
-
-
-    /* A regra mais importante: ativa o layout de colunas */
-
-    display: flex;
-
-    flex-wrap: wrap; 
-
-    align-items: flex-start;
-
-    gap: 3.5rem; /* Espaçamento entre conteúdo e sidebar */
-
+    /* A regra mais importante: ativa o layout de colunas */
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: flex-start;
+    gap: 3.5rem; /* Espaçamento entre conteúdo e sidebar */
 }
-
-
 
 /* 4. Define as larguras das colunas */
-
 .blog-page .content-side {
-
-    flex: 1; /* Ocupa o espaço que sobrar */
-
-    min-width: 60%;
-
+    flex: 1; /* Ocupa o espaço que sobrar */
+    min-width: 60%;
 }
-
-
 
 .blog-page .sidebar-side {
-
-    flex-basis: 320px; /* Largura fixa para a sidebar */
-
+    flex-basis: 320px; /* Largura fixa para a sidebar */
 }
-
-
 
 /* 5. Força o grid de posts a ter apenas UMA coluna dentro do .content-side */
-
 .blog-page .blog-posts-grid-new {
-
-    grid-template-columns: 1fr;
-
+    grid-template-columns: 1fr;
 }
-
-
-
 
 
 /* 6. Estilos para os widgets (cartões) da sidebar */
-
 .blog-page .sidebar-widget {
-
-    background: rgba(26, 26, 26, 0.7);
-
-    backdrop-filter: blur(8px);
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    border-radius: 12px;
-
-    padding: 25px;
-
-    margin-bottom: 2rem;
-
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 2rem;
 }
-
-
 
 /* 7. Estilos para os títulos, listas e links dentro da sidebar */
-
 .blog-page .sidebar-title {
-
-    font-family: var(--fonte-headline);
-
-    color: var(--cor-acento-amarelo);
-
-    font-size: 1.6rem;
-
-    margin-bottom: 1.5rem;
-
-    border-bottom: 2px solid var(--cor-vermelho);
-
-    padding-bottom: 10px;
-
-    display: inline-block;
-
+    font-family: var(--fonte-headline);
+    color: var(--cor-acento-amarelo);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--cor-vermelho);
+    padding-bottom: 10px;
+    display: inline-block;
 }
-
-
 
 .blog-page .sidebar-widget ul {
-
-    list-style: none;
-
-    padding: 0;
-
+    list-style: none;
+    padding: 0;
 }
-
-
 
 .blog-page .sidebar-widget ul li a {
-
-    color: var(--cor-texto-secundario);
-
-    text-decoration: none;
-
-    display: block;
-
-    padding: 10px 5px;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-    transition: color 0.3s ease, background-color 0.3s ease;
-
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    display: block;
+    padding: 10px 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
-
-
 
 .blog-page .sidebar-widget ul li a:hover {
-
-    color: var(--cor-texto-principal);
-
-    background-color: rgba(255, 255, 255, 0.05);
-
+    color: var(--cor-texto-principal);
+    background-color: rgba(255, 255, 255, 0.05);
 }
-
-
 
 .blog-page .sidebar-widget ul li a span {
-
-    float: right;
-
-    background: var(--cor-vermelho);
-
-    color: var(--cor-texto-principal);
-
-    font-size: 0.75rem;
-
-    padding: 2px 8px;
-
-    border-radius: 5px;
-
+    float: right;
+    background: var(--cor-vermelho);
+    color: var(--cor-texto-principal);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 5px;
 }
-
-
 
 .blog-page .tags-list {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
-
-
 
 .blog-page .tags-list a {
-
-    background-color: rgba(255, 255, 255, 0.1);
-
-    color: var(--cor-texto-secundario);
-
-    padding: 8px 15px;
-
-    border-radius: 20px;
-
-    text-decoration: none;
-
-    font-size: 0.9rem;
-
-    transition: background-color 0.3s ease, color 0.3s ease;
-
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--cor-texto-secundario);
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
-
 .blog-page .tags-list a:hover {
-
-    background-color: var(--cor-acento-amarelo);
-
+    background-color: var(--cor-acento-amarelo);
+    color: #111;
+}
     color: #111;
 
 }
