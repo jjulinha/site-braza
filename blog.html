@@ -9,21 +9,24 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     
-</head>
-<body class="blog-page">
+</head><body class="blog-page">
 
     <header>
-    <a href="#" class="logo">Braza</a>
-    <div class="navegacao">
-        <div class="navegacao-items">
-            <a href="index.html" class="active">Home</a>
-            <a href="blog.html">Blog</a>
-            <a href="portfolioindex.html">Portfólio</a>
-            <a href="#">Contato</a>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none;">
+                <h1>BRAZA</h1>
+            </a>
         </div>
-    </div>
-</header>
-   
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="portfolioindex.html">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
     <main>
         <section class="page-title-section">
             <h2>BLOG DA BRAZA</h2>
@@ -31,10 +34,8 @@
         </section>
 
         <div class="page-container">
-
             <div class="content-side">
                 <div class="blog-posts-grid-new">
-
                     <article class="single-blog-post">
                         <div class="post-image-holder">
                             <a href="#"><img src="https://images.unsplash.com/photo-1554189097-9491a6042414?q=80&w=1974" alt="Post sobre identidade visual"></a>
@@ -70,8 +71,7 @@
                             <a href="#" class="plano-cta">Ler mais</a>
                         </div>
                     </article>
-                    
-                    </div>
+                </div>
             </div>
 
             <aside class="sidebar-side">
@@ -98,7 +98,6 @@
                     </div>
                 </div>
             </aside>
-
         </div>
     </main>
 
@@ -111,7 +110,9 @@
         <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
     </footer>
 
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script src="script.js"></script> <script>
         let lastScrollTop = 0;
         const header = document.querySelector("header");
 
@@ -128,6 +129,5 @@
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
     </script>
-
 </body>
 </html>
