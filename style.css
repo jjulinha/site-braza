@@ -193,14 +193,12 @@ section, footer {
   text-align: left;
 }
 
-/* Animação para Desenhar o SVG */
 @keyframes draw-svg {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-/* Aplica a animação de desenho a TODOS os ícones quando o bloco entra na tela */
 .servico-bloco.reveal.active .servico-grafico svg path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -584,18 +582,20 @@ footer p {
   background-color: #ffc107;
 }
 
-/* ========================================= */
-/* ESTILOS DA PÁGINA DO BLOG                 */
-/* ========================================= */
 
-.page-title-section {
+/* ======================================================= */
+/* ===== INÍCIO DOS ESTILOS ESPECÍFICOS PARA O BLOG ===== */
+/* ======================================================= */
+
+/* Título principal da página do blog */
+.blog-page .page-title-section {
     text-align: center;
     padding: 140px 6% 60px 6%;
     background-color: rgba(10, 10, 10, 0.5); 
     backdrop-filter: blur(5px);
 }
 
-.page-title-section h2 {
+.blog-page .page-title-section h2 {
     font-family: var(--fonte-headline);
     font-size: clamp(3rem, 10vw, 6rem);
     color: var(--cor-acento-amarelo);
@@ -603,44 +603,43 @@ footer p {
     text-transform: uppercase;
 }
 
-.page-title-section p {
+.blog-page .page-title-section p {
     font-size: clamp(1rem, 3vw, 1.5rem);
     color: var(--cor-texto-secundario);
     max-width: 600px;
     margin: 0 auto;
 }
 
-/* ===== INÍCIO DA CORREÇÃO E NOVOS ESTILOS ===== */
-
-/* 1. Layout Flex para o container da página */
-.page-container {
+/* Layout Flex para o container principal da página do blog */
+.blog-page .page-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que a sidebar passe para baixo em telas pequenas */
-    gap: 3.5rem; /* Espaço entre os posts e a sidebar */
-    padding: 60px 6%; /* Adiciona padding ao container geral */
+    flex-wrap: wrap; 
+    gap: 3.5rem; 
+    padding: 60px 6%;
+    align-items: flex-start; /* Alinha os itens no topo */
 }
 
-/* 2. Área principal dos posts */
-.content-side {
-    flex: 1; /* Faz esta área crescer e ocupar o espaço principal */
-    min-width: 65%; /* Garante que não fique muito estreita */
+/* Área principal dos posts no blog */
+.blog-page .content-side {
+    flex: 1; 
+    min-width: 65%;
 }
 
-/* 3. Barra Lateral (Sidebar) */
-.sidebar-side {
-    flex-basis: 300px; /* Largura inicial da sidebar */
-    flex-grow: 1; /* Permite que cresça se houver espaço */
+/* Barra Lateral (Sidebar) no blog */
+.blog-page .sidebar-side {
+    flex-basis: 300px; 
+    flex-grow: 1; 
 }
 
-/* Grid dos posts */
-.blog-posts-grid-new {
+/* Grid que segura os posts no blog */
+.blog-page .blog-posts-grid-new {
     display: grid;
-    grid-template-columns: 1fr; /* Apenas uma coluna de posts */
+    grid-template-columns: 1fr; /* Força uma única coluna para os posts */
     gap: 2.5rem;
 }
 
-/* Estilo para cada post individual */
-.single-blog-post {
+/* Estilo para cada post individual no blog */
+.blog-page .single-blog-post {
     background: rgba(26, 26, 26, 0.7);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -652,30 +651,30 @@ footer p {
     flex-direction: column;
 }
 
-.single-blog-post:hover {
+.blog-page .single-blog-post:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 40px rgba(255, 179, 0, 0.2);
 }
 
-.post-image-holder img {
+.blog-page .post-image-holder img {
     width: 100%;
     height: 220px;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
 
-.single-blog-post:hover .post-image-holder img {
+.blog-page .single-blog-post:hover .post-image-holder img {
     transform: scale(1.05);
 }
 
-.post-content-wrapper {
+.blog-page .post-content-wrapper {
     padding: 25px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.post-content-wrapper h3 a {
+.blog-page .post-content-wrapper h3 a {
     font-family: var(--fonte-headline);
     font-size: 1.8rem;
     color: var(--cor-texto-principal);
@@ -683,30 +682,29 @@ footer p {
     transition: color 0.3s ease;
 }
 
-.post-content-wrapper h3 a:hover {
+.blog-page .post-content-wrapper h3 a:hover {
     color: var(--cor-acento-amarelo);
 }
 
-.post-content-wrapper .post-meta {
+.blog-page .post-content-wrapper .post-meta {
     font-size: 0.9rem;
     color: var(--cor-texto-secundario);
     margin: 10px 0 15px 0;
 }
 
-.post-content-wrapper .post-excerpt {
+.blog-page .post-content-wrapper .post-excerpt {
     color: var(--cor-texto-secundario);
     line-height: 1.6;
     flex-grow: 1;
 }
 
-.post-content-wrapper .plano-cta {
+.blog-page .post-content-wrapper .plano-cta {
     margin-top: 20px;
     align-self: flex-start;
 }
 
-
-/* 4. Estilos para os Widgets da Sidebar */
-.sidebar-widget {
+/* Estilos para os Widgets da Sidebar no blog */
+.blog-page .sidebar-widget {
     background: rgba(26, 26, 26, 0.7);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -715,7 +713,7 @@ footer p {
     margin-bottom: 2rem;
 }
 
-.sidebar-title {
+.blog-page .sidebar-title {
     font-family: var(--fonte-headline);
     color: var(--cor-acento-amarelo);
     font-size: 1.6rem;
@@ -725,12 +723,12 @@ footer p {
     display: inline-block;
 }
 
-.sidebar-widget ul {
+.blog-page .sidebar-widget ul {
     list-style: none;
     padding: 0;
 }
 
-.sidebar-widget ul li a {
+.blog-page .sidebar-widget ul li a {
     color: var(--cor-texto-secundario);
     text-decoration: none;
     display: block;
@@ -739,12 +737,12 @@ footer p {
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.sidebar-widget ul li a:hover {
+.blog-page .sidebar-widget ul li a:hover {
     color: var(--cor-texto-principal);
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-.sidebar-widget ul li a span {
+.blog-page .sidebar-widget ul li a span {
     float: right;
     background: var(--cor-vermelho);
     color: var(--cor-texto-principal);
@@ -753,13 +751,13 @@ footer p {
     border-radius: 5px;
 }
 
-.tags-list {
+.blog-page .tags-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.tags-list a {
+.blog-page .tags-list a {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--cor-texto-secundario);
     padding: 8px 15px;
@@ -769,15 +767,15 @@ footer p {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.tags-list a:hover {
+.blog-page .tags-list a:hover {
     background-color: var(--cor-acento-amarelo);
     color: #111;
 }
 
-/* ===== FIM DA CORREÇÃO E NOVOS ESTILOS ===== */
+/* ========================================= */
+/* RESPONSIVO                                */
+/* ========================================= */
 
-
-/* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after {
     left: 30px;
@@ -801,8 +799,8 @@ footer p {
     left: 15.5px;
   }
 
-  /* Faz a sidebar ficar com largura total em telas menores */
-  .content-side, .sidebar-side {
+  /* Na página do blog, força a sidebar para baixo */
+  .blog-page .content-side, .blog-page .sidebar-side {
       min-width: 100%;
       flex-basis: auto;
   }
