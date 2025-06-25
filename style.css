@@ -602,56 +602,79 @@ footer p {
 
 /* Container principal dos cards do blog */
 .cards {
-    display: flex; /* Usa flexbox para alinhar os cards */
-    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo */
-    justify-content: center; /* Centraliza os cards na página */
-    gap: 2rem; /* Espaçamento entre os cards */
-    padding: 140px 100px; /* Espaçamento interno (140px no topo para não ficar atrás do header) */
-    position: relative; /* Necessário para que o conteúdo apareça sobre o fundo Vanta.js */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 140px 100px 50px 100px; /* Adicionado padding-bottom para respiro */
+    position: relative;
     z-index: 1;
-    min-height: 100vh; /* Garante que a seção ocupe a altura toda da tela */
+    min-height: 100vh;
+    background-color: #000; /* Cor de fundo sólida como fallback */
 }
 
 /* Estilo individual de cada card do blog */
 .card {
-    background: rgba(15, 12, 41, 0.5); /* Fundo escuro semi-transparente, da paleta do Vanta.js */
-    backdrop-filter: blur(5px); /* Efeito de vidro fosco, para destacar do fundo */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil para definir os limites */
-    border-radius: 12px; /* Bordas arredondadas */
-    width: 320px; /* Largura fixa para cada card */
-    overflow: hidden; /* Garante que a imagem não vaze das bordas arredondadas */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para o hover */
-    color: #fff; /* Cor do texto padrão será branca */
+    background: rgba(15, 12, 41, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    width: 320px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    display: flex; /* Adicionado para permitir flex-direction */
+    flex-direction: column; /* Garante que o conteúdo se empilhe verticalmente */
 }
 
 .card:hover {
-    transform: translateY(-8px); /* Eleva o card levemente ao passar o mouse */
-    box-shadow: 0 10px 30px rgba(106, 0, 255, 0.3); /* Sombra com o roxo do tema */
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(106, 0, 255, 0.3);
 }
 
-/* Ajustes na imagem do card */
-.card img.card-image {
+.card-image {
     width: 100%;
-    height: 200px; /* Altura fixa para a imagem */
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    height: 200px;
+    object-fit: cover;
 }
 
-/* Conteúdo de texto do card */
-.card .card-content {
+.card-content {
     padding: 25px;
+    flex-grow: 1; /* Faz esta área crescer para empurrar o botão para baixo */
+    display: flex;
+    flex-direction: column;
 }
 
-.card .card-content h3 {
+.card-content h3 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.card .card-content p {
-    color: #ccc; /* Um cinza claro para o texto descritivo, criando hierarquia */
+.card-content p {
+    color: #ccc;
     font-size: 1rem;
     line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Faz o parágrafo crescer */
 }
+
+/* Estilo para o botão que pode não ter sido contemplado antes */
+.card-content a.button, .card-content button {
+    display: inline-block;
+    background-color: #6a00ff; /* Roxo do tema */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.card-content a.button:hover, .card-content button:hover {
+    background-color: #ff00b2; /* Rosa/Magenta do tema no hover */
+}
+
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after {
