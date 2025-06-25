@@ -357,28 +357,33 @@ section, footer {
 }
 
 /* PLANOS */
+/* PLANOS */
 .planos-grid {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
+  align-items: stretch; /* Garante que os cards tenham a mesma altura */
 }
 .plano-card {
-  flex: 1;
+  flex: 1 1 300px; /* Base de 300px, mas pode crescer */
   background: rgba(255,255,255,0.02);
   padding: 30px;
   border-radius: 15px;
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  display: flex; /* Adicionado para controle interno */
+  flex-direction: column; /* Adicionado para empilhar conteúdo */
 }
 .plano-card:hover {
-  transform: scale(1.03);
+  transform: translateY(-10px) scale(1.03);
   box-shadow: 0 10px 40px rgba(255,179,0,0.2);
 }
 .etiqueta-topo {
   position: absolute;
   top: -12px;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--cor-acento-amarelo);
   color: #111;
   padding: 6px 12px;
@@ -386,33 +391,43 @@ section, footer {
   font-weight: bold;
   border-radius: 20px;
 }
+.plano-header {
+  text-align: center; /* <<< ALTERAÇÃO AQUI */
+}
 .plano-header h3 {
   font-size: 1.6rem;
 }
 .plano-header p {
   color: var(--cor-texto-secundario);
   font-size: 0.95rem;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  min-height: 50px; /* Garante altura mínima para alinhamento */
 }
 .plano-features {
   list-style: none;
-  margin: 20px 0;
   padding: 0;
+  margin: 0;
+  text-align: center; /* <<< ALTERAÇÃO AQUI */
+  flex-grow: 1; /* Faz esta área crescer para empurrar o footer para baixo */
 }
 .plano-features li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+.plano-footer {
+  text-align: center;
+  margin-top: 30px;
 }
 .plano-investimento span {
   font-size: 0.9rem;
   color: var(--cor-texto-secundario);
+  display: block;
 }
 .plano-investimento strong {
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: white;
-}
-.plano-footer {
-  text-align: center;
-  margin-top: 20px;
+  display: block;
+  margin-bottom: 20px;
 }
 .plano-cta {
   background: var(--cor-acento-amarelo);
@@ -431,7 +446,6 @@ section, footer {
 .plano-cta.destaque {
   box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
 }
-
 /* FAQ */
 .faq-grid {
   display: flex;
