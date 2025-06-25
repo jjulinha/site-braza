@@ -18,7 +18,7 @@ html, body {
   --cor-fundo: #111;
   --cor-texto-principal: #f5f5f5;
   --cor-texto-secundario: #b0b0b0;
-  --cor-acento-amarelo: #FFB300;
+  --cor-acento-amarelo: #f8b406; /* <<< COR AMARELA ATUALIZADA */
   --cor-vermelho: #E53935;
   --cor-primaria-vermelho: #E53935;
   --fonte-headline: 'Anton', sans-serif;
@@ -49,7 +49,7 @@ html, body {
 
 /* HEADER */
 header {
-  position: absolute; 
+  position: absolute;  
   top: 0;
   left: 0;
   width: 100%;
@@ -148,16 +148,16 @@ section, footer {
   background-color: #1a1a1a;
   padding-top: 120px;
   padding-bottom: 120px;
-  overflow: hidden; 
+  overflow: hidden;  
 }
 .servicos-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 120px; 
+  gap: 120px;  
   margin-top: 60px;
 }
 .servico-bloco {
-  max-width: 700px; 
+  max-width: 700px;  
   margin: 0 auto;
   position: relative;
   padding: 20px;
@@ -357,22 +357,21 @@ section, footer {
 }
 
 /* PLANOS */
-/* PLANOS - ESTILO DOS ITENS ATUALIZADO */
 .planos-grid {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
-  align-items: stretch; 
+  align-items: stretch;  
 }
 .plano-card {
-  flex: 1 1 300px; 
+  flex: 1 1 300px;  
   background: rgba(255,255,255,0.02);
   padding: 30px;
   border-radius: 15px;
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  display: flex; 
+  display: flex;  
   flex-direction: column;
 }
 .plano-card:hover {
@@ -408,9 +407,8 @@ section, footer {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; 
+  flex-grow: 1;  
 }
-/* NOVO ESTILO PARA OS ITENS DO PACOTE */
 .plano-features li {
   background-color: rgba(255, 255, 255, 0.04);
   padding: 12px 15px;
@@ -630,6 +628,20 @@ footer p {
     flex-wrap: wrap; 
     align-items: flex-start;
     gap: 3.5rem; /* Espaçamento entre conteúdo e sidebar */
+}
+
+/* Título principal da página do blog */
+.page-title-section h2 {
+    font-family: var(--fonte-headline);
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--cor-acento-amarelo);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* <<< NOVA REGRA ADICIONADA AQUI */
+.page-title-section h2 .title-highlight {
+    color: #f1f1f1;
 }
 
 /* 4. Define as larguras das colunas */
