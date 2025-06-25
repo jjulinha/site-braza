@@ -357,23 +357,23 @@ section, footer {
 }
 
 /* PLANOS */
-/* PLANOS */
+/* PLANOS - ESTILO DOS ITENS ATUALIZADO */
 .planos-grid {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
-  align-items: stretch; /* Garante que os cards tenham a mesma altura */
+  align-items: stretch; 
 }
 .plano-card {
-  flex: 1 1 300px; /* Base de 300px, mas pode crescer */
+  flex: 1 1 300px; 
   background: rgba(255,255,255,0.02);
   padding: 30px;
   border-radius: 15px;
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  display: flex; /* Adicionado para controle interno */
-  flex-direction: column; /* Adicionado para empilhar conteúdo */
+  display: flex; 
+  flex-direction: column;
 }
 .plano-card:hover {
   transform: translateY(-10px) scale(1.03);
@@ -392,7 +392,7 @@ section, footer {
   border-radius: 20px;
 }
 .plano-header {
-  text-align: center; /* <<< ALTERAÇÃO AQUI */
+  text-align: center;
 }
 .plano-header h3 {
   font-size: 1.6rem;
@@ -402,17 +402,28 @@ section, footer {
   font-size: 0.95rem;
   margin-top: 10px;
   margin-bottom: 20px;
-  min-height: 50px; /* Garante altura mínima para alinhamento */
+  min-height: 50px;
 }
 .plano-features {
   list-style: none;
   padding: 0;
   margin: 0;
-  text-align: center; /* <<< ALTERAÇÃO AQUI */
-  flex-grow: 1; /* Faz esta área crescer para empurrar o footer para baixo */
+  flex-grow: 1; 
 }
+/* NOVO ESTILO PARA OS ITENS DO PACOTE */
 .plano-features li {
-  margin-bottom: 12px;
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.plano-features li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.03);
 }
 .plano-footer {
   text-align: center;
@@ -446,6 +457,7 @@ section, footer {
 .plano-cta.destaque {
   box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
 }
+
 /* FAQ */
 .faq-grid {
   display: flex;
