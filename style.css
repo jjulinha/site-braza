@@ -640,10 +640,26 @@ footer p {
 }
 
 /* 5. Força o grid de posts a ter apenas UMA coluna dentro do .content-side */
+/* ======================================================= */
+/* ===== BLOCO CORRIGIDO PARA LISTA DE POSTS DO BLOG ===== */
+/* ======================================================= */
+
+/* 1. Define o contêiner como um grid e adiciona espaçamento */
 .blog-page .blog-posts-grid-new {
+    display: grid;            /* <-- A PROPRIEDADE QUE FALTAVA */
     grid-template-columns: 1fr;
+    gap: 2.5rem;              /* <-- USAREMOS 'GAP' PARA O ESPAÇAMENTO */
 }
 
+/* 2. Aplica o estilo de card a cada post individualmente */
+.blog-page .single-blog-post {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    overflow: hidden; /* Garante que o conteúdo respeite as bordas arredondadas */
+}
 
 /* 6. Estilos para os widgets (cartões) da sidebar */
 .blog-page .sidebar-widget {
