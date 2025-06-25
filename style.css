@@ -1263,10 +1263,6 @@ footer p {
     padding-bottom: 10px;
     display: inline-block;
 
-/* ESTA É A NOVA REGRA PARA O "BLABLA" */
-.blog-page .page-title-section h2 .title-highlight {
-    color: #f1f1f1;
-}
 }
 
 .blog-page .sidebar-widget ul {
