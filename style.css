@@ -49,7 +49,7 @@ html, body {
 
 /* HEADER */
 header {
-  position: absolute;  
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
@@ -148,16 +148,16 @@ section, footer {
   background-color: #1a1a1a;
   padding-top: 120px;
   padding-bottom: 120px;
-  overflow: hidden;  
+  overflow: hidden; 
 }
 .servicos-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 120px;  
+  gap: 120px; 
   margin-top: 60px;
 }
 .servico-bloco {
-  max-width: 700px;  
+  max-width: 700px; 
   margin: 0 auto;
   position: relative;
   padding: 20px;
@@ -193,12 +193,14 @@ section, footer {
   text-align: left;
 }
 
+/* Animação para Desenhar o SVG */
 @keyframes draw-svg {
   to {
     stroke-dashoffset: 0;
   }
 }
 
+/* Aplica a animação de desenho a TODOS os ícones quando o bloco entra na tela */
 .servico-bloco.reveal.active .servico-grafico svg path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -355,21 +357,22 @@ section, footer {
 }
 
 /* PLANOS */
+/* PLANOS - ESTILO DOS ITENS ATUALIZADO */
 .planos-grid {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
-  align-items: stretch;  
+  align-items: stretch; 
 }
 .plano-card {
-  flex: 1 1 300px;  
+  flex: 1 1 300px; 
   background: rgba(255,255,255,0.02);
   padding: 30px;
   border-radius: 15px;
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  display: flex;  
+  display: flex; 
   flex-direction: column;
 }
 .plano-card:hover {
@@ -405,8 +408,9 @@ section, footer {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1;  
+  flex-grow: 1; 
 }
+/* NOVO ESTILO PARA OS ITENS DO PACOTE */
 .plano-features li {
   background-color: rgba(255, 255, 255, 0.04);
   padding: 12px 15px;
@@ -539,7 +543,9 @@ footer p {
   opacity: 1;
   transform: translateY(0);
 }
+/* INÍCIO DO BLOCO NOVO */
 
+/* 1. Carregando a fonte Thunder */
 @font-face {
   font-family: 'Thunder';
   src: url('https://db.onlinewebfonts.com/t/808722d7305713444084533e449a5620.woff2') format('woff2');
@@ -547,21 +553,27 @@ footer p {
   font-style: normal;
 }
 
+/* Container para centralizar o botão do portfólio */
 .portfolio-cta {
   text-align: center;
   margin-top: 60px;
 }
 
+/* Estilo específico para o botão do portfólio */
 .portfolio-cta .plano-cta {
-  font-family: 'Thunder', sans-serif;
-  font-size: 1.5rem;
+  /* 2. Aplicando a nova fonte e ajustando o estilo */
+  font-family: 'Thunder', sans-serif; /* <<<--- FONTE APLICADA AQUI */
+  font-size: 1.5rem; /* Aumenta o tamanho da fonte para destacar */
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 18px 40px;
+  padding: 18px 40px; /* Deixa o botão fisicamente maior */
+  
+  /* Mantém a animação de "brasa viva" que já tínhamos */
   animation: pulse-glow 3s infinite ease-in-out;
   transition: transform 0.3s ease-out, background-color 0.3s ease;
 }
 
+/* Animação de pulsação para o botão */
 @keyframes pulse-glow {
   0% {
     transform: scale(1);
@@ -577,25 +589,35 @@ footer p {
   }
 }
 
+/* Efeito de hover aprimorado */
 .portfolio-cta .plano-cta:hover {
   transform: translateY(-3px) scale(1.05);
   background-color: #ffc107;
 }
 
+/* FIM DO BLOCO NOVO */
+/* ========================================= */
+/* ESTILOS HARMONIZADOS PARA A PÁGINA DO BLOG (VERSÃO CORRIGIDA) */
+/* ========================================= */
 
-/* ======================================================= */
-/* ===== INÍCIO DOS ESTILOS ESPECÍFICOS PARA O BLOG ===== */
-/* ======================================================= */
+/* Container principal dos posts do blog, usando a classe do seu HTML */
+.page-container {
+    padding: 120px 6% 60px 6%; /* Espaçamento para o topo e base */
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative; /* Garante que fica sobre o fundo animado */
+    z-index: 1;
+}
 
 /* Título principal da página do blog */
-.blog-page .page-title-section {
+.page-title-section {
     text-align: center;
     padding: 140px 6% 60px 6%;
-    background-color: rgba(10, 10, 10, 0.5); 
+    background-color: rgba(10, 10, 10, 0.5); /* Fundo semi-transparente */
     backdrop-filter: blur(5px);
 }
 
-.blog-page .page-title-section h2 {
+.page-title-section h2 {
     font-family: var(--fonte-headline);
     font-size: clamp(3rem, 10vw, 6rem);
     color: var(--cor-acento-amarelo);
@@ -603,44 +625,23 @@ footer p {
     text-transform: uppercase;
 }
 
-.blog-page .page-title-section p {
+.page-title-section p {
     font-size: clamp(1rem, 3vw, 1.5rem);
     color: var(--cor-texto-secundario);
     max-width: 600px;
     margin: 0 auto;
 }
 
-/* Layout Flex para o container principal da página do blog */
-.blog-page .page-container {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 3.5rem; 
-    padding: 60px 6%;
-    align-items: flex-start; /* Alinha os itens no topo */
-}
-
-/* Área principal dos posts no blog */
-.blog-page .content-side {
-    flex: 1; 
-    min-width: 65%;
-}
-
-/* Barra Lateral (Sidebar) no blog */
-.blog-page .sidebar-side {
-    flex-basis: 300px; 
-    flex-grow: 1; 
-}
-
-/* Grid que segura os posts no blog */
-.blog-page .blog-posts-grid-new {
+/* Grid que segura os posts, usando a classe do seu HTML */
+.blog-posts-grid-new {
     display: grid;
-    grid-template-columns: 1fr; /* Força uma única coluna para os posts */
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Layout responsivo */
+    gap: 2.5rem; /* Espaçamento entre os posts */
 }
 
-/* Estilo para cada post individual no blog */
-.blog-page .single-blog-post {
-    background: rgba(26, 26, 26, 0.7);
+/* Estilo para cada post individual, usando a classe do seu HTML */
+.single-blog-post {
+    background: rgba(26, 26, 26, 0.7); /* Fundo escuro #1a1a1a com transparência */
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
@@ -651,30 +652,32 @@ footer p {
     flex-direction: column;
 }
 
-.blog-page .single-blog-post:hover {
+.single-blog-post:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 40px rgba(255, 179, 0, 0.2);
+    box-shadow: 0 10px 40px rgba(255, 179, 0, 0.2); /* Sombra amarela para combinar com o tema */
 }
 
-.blog-page .post-image-holder img {
+/* Imagem do post, usando a classe do seu HTML */
+.post-image-holder img {
     width: 100%;
     height: 220px;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
 
-.blog-page .single-blog-post:hover .post-image-holder img {
-    transform: scale(1.05);
+.single-blog-post:hover .post-image-holder img {
+    transform: scale(1.05); /* Efeito de zoom na imagem ao passar o rato */
 }
 
-.blog-page .post-content-wrapper {
+/* Conteúdo de texto do post, usando a classe do seu HTML */
+.post-content-wrapper {
     padding: 25px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1; /* Faz esta área ocupar o espaço restante */
 }
 
-.blog-page .post-content-wrapper h3 a {
+.post-content-wrapper h3 a {
     font-family: var(--fonte-headline);
     font-size: 1.8rem;
     color: var(--cor-texto-principal);
@@ -682,28 +685,86 @@ footer p {
     transition: color 0.3s ease;
 }
 
-.blog-page .post-content-wrapper h3 a:hover {
-    color: var(--cor-acento-amarelo);
+.post-content-wrapper h3 a:hover {
+    color: var(--cor-acento-amarelo); /* Link fica amarelo ao passar o mouse */
 }
 
-.blog-page .post-content-wrapper .post-meta {
+.post-content-wrapper .post-meta {
     font-size: 0.9rem;
     color: var(--cor-texto-secundario);
     margin: 10px 0 15px 0;
 }
 
-.blog-page .post-content-wrapper .post-excerpt {
+.post-content-wrapper .post-excerpt {
     color: var(--cor-texto-secundario);
     line-height: 1.6;
-    flex-grow: 1;
+    flex-grow: 1; /* Empurra o botão "Ler mais" para baixo */
 }
 
-.blog-page .post-content-wrapper .plano-cta {
+/* Botão "Ler mais" já existente, usando a classe .plano-cta */
+.post-content-wrapper .plano-cta {
     margin-top: 20px;
-    align-self: flex-start;
+    align-self: flex-start; /* Alinha o botão à esquerda */
 }
 
-/* Estilos para os Widgets da Sidebar no blog */
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .processo-timeline::after {
+    left: 30px;
+  }
+  .passo-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+    text-align: left;
+    animation: none;
+  }
+  .passo-item.reveal {
+      animation: slide-in-right 1s ease-out forwards;
+  }
+  .passo-item:nth-child(odd) {
+    align-self: auto;
+    text-align: left;
+    padding-right: 25px;
+  }
+  .passo-item::after {
+    left: 15.5px;
+  }
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .planos-grid,
+  .portfolio-grid {
+    flex-direction: column;
+  }
+  .plano-card {
+    max-width: 100%;
+/* ======================================================= */
+/* ===== INÍCIO DOS ESTILOS APENAS PARA A PÁGINA DO BLOG ===== */
+/* ======================================================= */
+
+/* 1. Ativa o layout de duas colunas (colunas) no container principal do blog */
+.blog-page .page-container {
+    display: flex;
+    flex-wrap: wrap; /* Garante que em telas menores a sidebar passe para baixo */
+    align-items: flex-start; /* Alinha as colunas pelo topo */
+    gap: 2.5rem; /* Cria um espaçamento entre os posts e a sidebar */
+}
+
+/* 2. Define as larguras das colunas de conteúdo e da sidebar */
+.blog-page .content-side {
+    flex: 1; /* Ocupa o espaço principal */
+    min-width: 60%;
+}
+
+.blog-page .sidebar-side {
+    flex-basis: 320px; /* Largura base da sidebar */
+}
+
+/* 3. Estiliza os 'widgets' da sidebar para combinar com o design dos posts */
 .blog-page .sidebar-widget {
     background: rgba(26, 26, 26, 0.7);
     backdrop-filter: blur(8px);
@@ -713,6 +774,7 @@ footer p {
     margin-bottom: 2rem;
 }
 
+/* 4. Estilos para os títulos, listas e links dentro da sidebar */
 .blog-page .sidebar-title {
     font-family: var(--fonte-headline);
     color: var(--cor-acento-amarelo);
@@ -772,50 +834,11 @@ footer p {
     color: #111;
 }
 
-/* ========================================= */
-/* RESPONSIVO                                */
-/* ========================================= */
-
-@media (max-width: 900px) {
-  .processo-timeline::after {
-    left: 30px;
-  }
-  .passo-item {
-    width: 100%;
-    padding-left: 70px;
-    padding-right: 25px;
-    text-align: left;
-    animation: none;
-  }
-  .passo-item.reveal {
-      animation: slide-in-right 1s ease-out forwards;
-  }
-  .passo-item:nth-child(odd) {
-    align-self: auto;
-    text-align: left;
-    padding-right: 25px;
-  }
-  .passo-item::after {
-    left: 15.5px;
-  }
-
-  /* Na página do blog, força a sidebar para baixo */
-  .blog-page .content-side, .blog-page .sidebar-side {
-      min-width: 100%;
-      flex-basis: auto;
-  }
+/* 5. Ajuste para o header na página do blog, se necessário */
+.blog-page header {
+    position: fixed; /* Garante que o header se comporte como fixo no blog */
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(10px);
 }
-
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-    text-align: center;
-  }
-  .planos-grid,
-  .portfolio-grid {
-    flex-direction: column;
-  }
-  .plano-card {
-    max-width: 100%;
-  }
+  }
 }
