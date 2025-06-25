@@ -714,3 +714,22 @@ footer p {
     background-color: var(--cor-acento-amarelo);
     color: #111;
 }
+/* ======================================================= */
+/* ===== ADICIONE ESTA NOVA REGRA PARA OS POSTS DO BLOG ===== */
+/* ======================================================= */
+
+.blog-page .single-blog-post {
+    /* Usando um estilo similar ao da sidebar para manter a consistência */
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; /* Bordas arredondadas para o card */
+    padding: 25px;       /* Um respiro interno */
+    margin-bottom: 2.5rem; /* Espaço entre um post e outro */
+    overflow: hidden;    /* Garante que nada de dentro vaze */
+}
+
+/* Opcional: Remover a margem do último post para alinhar com o fim da sidebar */
+.blog-page .single-blog-post:last-child {
+    margin-bottom: 0;
+}
