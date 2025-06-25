@@ -18,7 +18,7 @@ html, body {
   --cor-fundo: #111;
   --cor-texto-principal: #f5f5f5;
   --cor-texto-secundario: #b0b0b0;
-  --cor-acento-amarelo: #f8b406; /* <<< COR AMARELA ATUALIZADA */
+  --cor-acento-amarelo: #f8b406; /* AMARELO ATUALIZADO */
   --cor-vermelho: #E53935;
   --cor-primaria-vermelho: #E53935;
   --fonte-headline: 'Anton', sans-serif;
@@ -193,14 +193,12 @@ section, footer {
   text-align: left;
 }
 
-/* Animação para Desenhar o SVG */
 @keyframes draw-svg {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-/* Aplica a animação de desenho a TODOS os ícones quando o bloco entra na tela */
 .servico-bloco.reveal.active .servico-grafico svg path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -450,7 +448,7 @@ section, footer {
   text-transform: uppercase;
 }
 .plano-cta:hover {
-  background: #ffc107;
+  background: #f8b406; /* AMARELO ATUALIZADO */
 }
 .plano-cta.destaque {
   box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
@@ -541,9 +539,7 @@ footer p {
   opacity: 1;
   transform: translateY(0);
 }
-/* INÍCIO DO BLOCO NOVO */
 
-/* 1. Carregando a fonte Thunder */
 @font-face {
   font-family: 'Thunder';
   src: url('https://db.onlinewebfonts.com/t/808722d7305713444084533e449a5620.woff2') format('woff2');
@@ -551,87 +547,70 @@ footer p {
   font-style: normal;
 }
 
-/* Container para centralizar o botão do portfólio */
 .portfolio-cta {
   text-align: center;
   margin-top: 60px;
 }
 
-/* Estilo específico para o botão do portfólio */
 .portfolio-cta .plano-cta {
-  /* 2. Aplicando a nova fonte e ajustando o estilo */
-  font-family: 'Thunder', sans-serif; /* <<<--- FONTE APLICADA AQUI */
-  font-size: 1.5rem; /* Aumenta o tamanho da fonte para destacar */
+  font-family: 'Thunder', sans-serif;
+  font-size: 1.5rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 18px 40px; /* Deixa o botão fisicamente maior */
-  
-  /* Mantém a animação de "brasa viva" que já tínhamos */
+  padding: 18px 40px;
   animation: pulse-glow 3s infinite ease-in-out;
   transition: transform 0.3s ease-out, background-color 0.3s ease;
 }
 
-/* Animação de pulsação para o botão */
 @keyframes pulse-glow {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+    box-shadow: 0 0 15px rgba(248, 180, 6, 0.4); /* AMARELO ATUALIZADO */
   }
   50% {
     transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(255, 179, 0, 0.7);
+    box-shadow: 0 0 25px rgba(248, 180, 6, 0.7); /* AMARELO ATUALIZADO */
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+    box-shadow: 0 0 15px rgba(248, 180, 6, 0.4); /* AMARELO ATUALIZADO */
   }
 }
 
-/* Efeito de hover aprimorado */
 .portfolio-cta .plano-cta:hover {
   transform: translateY(-3px) scale(1.05);
-  background-color: #ffc107;
+  background-color: #f8b406; /* AMARELO ATUALIZADO */
 }
 
-/* FIM DO BLOCO NOVO */
-/* ========================================= */
 /* ======================================================= */
 /* ===== INÍCIO DOS ESTILOS ESPECÍFICOS PARA O BLOG ===== */
 /* ======================================================= */
 
-/* 1. Corrige o posicionamento e o fundo do header APENAS na página do blog */
+/* Corrige o header para ser fixo e visível na página do blog */
 .blog-page header {
     position: fixed;
-    background: rgba(17, 17, 17, 0.8);
+    background: rgba(17, 17, 17, 0.85);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-/* 2. Ajusta o espaçamento do conteúdo principal para compensar o header fixo */
+/* Garante que o conteúdo principal não fique escondido atrás do header fixo */
 .blog-page main {
     padding-top: 120px; 
 }
 
-/* 3. Remove padding e margem do .page-container original para dar lugar ao novo layout */
-.blog-page .page-container {
-    padding: 0;
-    margin: 0;
-    max-width: none;
-    width: 100%;
-    padding: 0 6% 60px 6%;
-    max-width: 1600px;
-    margin: 0 auto;
-
-    /* A regra mais importante: ativa o layout de colunas */
-    display: flex;
-    flex-wrap: wrap; 
-    align-items: flex-start;
-    gap: 3.5rem; /* Espaçamento entre conteúdo e sidebar */
+/* Título principal da página do blog */
+.blog-page .page-title-section {
+    padding-top: 0;
+    padding-bottom: 60px;
+    text-align: center;
+    background-color: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
 }
 
-/* Título principal da página do blog */
-.page-title-section h2 {
+.blog-page .page-title-section h2 {
     font-family: var(--fonte-headline);
     font-size: clamp(3rem, 10vw, 6rem);
     color: var(--cor-acento-amarelo);
@@ -639,28 +618,111 @@ footer p {
     text-transform: uppercase;
 }
 
-/* <<< NOVA REGRA ADICIONADA AQUI */
-.page-title-section h2 .title-highlight {
-    color: #f1f1f1;
+.blog-page .page-title-section h2 .title-highlight {
+    color: #f1f1f1; /* COR ATUALIZADA */
 }
 
-/* 4. Define as larguras das colunas */
+.blog-page .page-title-section p {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--cor-texto-secundario);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Container que segura os posts e a sidebar */
+.blog-page .page-container {
+    padding: 60px 6%; /* Adiciona espaçamento vertical e horizontal */
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: flex-start;
+    gap: 3.5rem;
+}
+
+/* Coluna principal com os posts */
 .blog-page .content-side {
-    flex: 1; /* Ocupa o espaço que sobrar */
+    flex: 1; 
     min-width: 60%;
 }
 
+/* Coluna da sidebar */
 .blog-page .sidebar-side {
-    flex-basis: 320px; /* Largura fixa para a sidebar */
+    flex-basis: 320px;
+    flex-grow: 1;
 }
 
-/* 5. Força o grid de posts a ter apenas UMA coluna dentro do .content-side */
+/* Grid que segura os posts */
 .blog-page .blog-posts-grid-new {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: 1fr; /* Apenas uma coluna de posts */
+    gap: 2.5rem; 
 }
 
+/* Estilo para cada post individual */
+.blog-page .single-blog-post {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--cor-texto-principal);
+    display: flex;
+    flex-direction: column;
+}
 
-/* 6. Estilos para os widgets (cartões) da sidebar */
+.blog-page .single-blog-post:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 40px rgba(248, 180, 6, 0.2); /* AMARELO ATUALIZADO */
+}
+
+.blog-page .post-image-holder img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.blog-page .single-blog-post:hover .post-image-holder img {
+    transform: scale(1.05);
+}
+
+.blog-page .post-content-wrapper {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-page .post-content-wrapper h3 a {
+    font-family: var(--fonte-headline);
+    font-size: 1.8rem;
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-page .post-content-wrapper h3 a:hover {
+    color: var(--cor-acento-amarelo);
+}
+
+.blog-page .post-content-wrapper .post-meta {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin: 10px 0 15px 0;
+}
+
+.blog-page .post-content-wrapper .post-excerpt {
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.blog-page .post-content-wrapper .plano-cta {
+    margin-top: 20px;
+    align-self: flex-start;
+}
+
+/* Estilos para os widgets da sidebar */
 .blog-page .sidebar-widget {
     background: rgba(26, 26, 26, 0.7);
     backdrop-filter: blur(8px);
@@ -670,62 +732,7 @@ footer p {
     margin-bottom: 2rem;
 }
 
-/* 7. Estilos para os títulos, listas e links dentro da sidebar */
 .blog-page .sidebar-title {
     font-family: var(--fonte-headline);
     color: var(--cor-acento-amarelo);
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--cor-vermelho);
-    padding-bottom: 10px;
-    display: inline-block;
-}
-
-.blog-page .sidebar-widget ul {
-    list-style: none;
-    padding: 0;
-}
-
-.blog-page .sidebar-widget ul li a {
-    color: var(--cor-texto-secundario);
-    text-decoration: none;
-    display: block;
-    padding: 10px 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.blog-page .sidebar-widget ul li a:hover {
-    color: var(--cor-texto-principal);
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.blog-page .sidebar-widget ul li a span {
-    float: right;
-    background: var(--cor-vermelho);
-    color: var(--cor-texto-principal);
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 5px;
-}
-
-.blog-page .tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.blog-page .tags-list a {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--cor-texto-secundario);
-    padding: 8px 15px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.blog-page .tags-list a:hover {
-    background-color: var(--cor-acento-amarelo);
-    color: #111;
-}
+    font-size
