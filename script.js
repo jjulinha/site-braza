@@ -1,7 +1,16 @@
 // =================================================================
 // CONFIGURAÇÃO DO FIREBASE (sem alterações)
 // =================================================================
-const firebaseConfig = { /* ...suas chaves aqui... */ };
+// 1. Configuração do Firebase (VERSÃO CORRETA E COMPLETA)
+const firebaseConfig = {
+  apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
+  authDomain: "braza-portfolio.firebaseapp.com",
+  projectId: "braza-portfolio",
+  storageBucket: "braza-portfolio.appspot.com",
+  messagingSenderId: "504617854086",
+  appId: "1:504617854086:web:727bfb242c29a6d7345d07",
+  measurementId: "G-5KFT2C7ZCF"
+};
 let db;
 try {
     firebase.initializeApp(firebaseConfig);
