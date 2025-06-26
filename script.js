@@ -2,61 +2,90 @@
 // INÍCIO: CONFIGURAÇÃO E FUNÇÕES DO FIREBASE
 // =================================================================
 
-// 1. Configuração do Firebase (com as suas chaves)
+// 1. Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
-  authDomain: "braza-portfolio.firebaseapp.com",
-  projectId: "braza-portfolio",
-  storageBucket: "braza-portfolio.appspot.com",
-  messagingSenderId: "504617854086",
-  appId: "1:504617854086:web:727bfb242c29a6d7345d07",
-  measurementId: "G-5KFT2C7ZCF"
+    apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
+    authDomain: "braza-portfolio.firebaseapp.com",
+    projectId: "braza-portfolio",
+    storageBucket: "braza-portfolio.appspot.com",
+    messagingSenderId: "504617854086",
+    appId: "1:504617854086:web:727bfb242c29a6d7345d07",
+    measurementId: "G-5KFT2C7ZCF"
 };
 
 // 2. Inicializa o Firebase e o Firestore
-// Usamos uma variável global 'db' para que a função construtora possa acessá-la
 let db;
 try {
-  firebase.initializeApp(firebaseConfig);
-  db = firebase.firestore();
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
 } catch (e) {
-  console.error("Erro ao inicializar o Firebase. Verifique suas chaves de configuração.", e);
+    console.error("Erro ao inicializar o Firebase.", e);
 }
 
-/**
- * Adiciona um novo projeto à coleção 'projetos' no Firestore,
- * garantindo que todos os projetos tenham uma estrutura padrão.
- * Esta é a sua função "construtora" ou "molde".
- *
- * @param {string} titulo - O título do novo projeto.
- * @param {string} imagemURL - O caminho para a imagem do projeto (ex: 'assets/novo-projeto.jpg').
- * @param {string} descricao - A descrição detalhada do projeto.
- */
-async function adicionarNovoProjeto(titulo, imagemURL, descricao) {
-  if (typeof db === 'undefined') {
-    console.error("Erro: A instância do Firestore 'db' não foi encontrada.");
-    return;
-  }
+// =================================================================
+// FIM: CONFIGURAÇÃO DO FIREBASE
+// =================================================================
 
-  try {
-    // Objeto que representa o novo projeto com os campos padrão.
-    const novoProjeto = {
-      titulo: titulo,
-      imagemURL: imagemURL,
-      descricao: descricao,
-      dataDeCriacao: firebase.firestore.FieldValue.serverTimestamp(), // Pega a data/hora do servidor.
-    };
 
-    const docRef = await db.collection("projetos").add(novoProjeto);
-    console.log("Projeto adicionado com sucesso! ID do documento:", docRef.id);
-    alert("Projeto adicionado com sucesso!");
+// --- LÓGICA PRINCIPAL DO SITE (executada após o carregamento da página) ---
+document.addEventListener('DOMContentLoaded', () => {
 
-  } catch (error) {
-    console.error("Erro ao adicionar novo projeto: ", error);
-    alert("Ocorreu um erro ao adicionar o projeto. Verifique o console.");
-  }
-}
+    // --- LÓGICA INTELIGENTE PARA CARREGAR PROJETOS DO FIREBASE ---
 
+    // 1. Lógica para a PRÉ-VISUALIZAÇÃO na Página Inicial
+    const homePortfolioGrid = document.querySelector('.portfolio-grid');
+    if (homePortfolioGrid && typeof db !== 'undefined') {
+        db.collection("projetos")
+            .orderBy("dataDeCriacao", "desc")
+            .limit(3) // Mostra apenas os 3 mais recentes na home
+            .get()
+            .then((querySnapshot) => {
+                let html = "";
+                querySnapshot.forEach((doc) => {
+                    const projeto = doc.data();
+                    html += `
+                        <div class="portfolio-item">
+                            <img src="${projeto.imagemURL}" alt="${projeto.titulo}">
+                            <div class="overlay"><h3>${projeto.titulo}</h3></div>
+                        </div>
+                    `;
+                });
+                homePortfolioGrid.innerHTML = html;
+            })
+            .catch((error) => console.error("Erro ao buscar projetos para a home: ", error));
+    }
+
+    // 2. Lógica para a PÁGINA COMPLETA de Portfólio
+    const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
+    if (fullPortfolioGrid && typeof db !== 'undefined') {
+        db.collection("projetos")
+            .orderBy("dataDeCriacao", "desc") // Ordena pelos mais recentes
+            .get() // Sem limite, busca TODOS os projetos
+            .then((querySnapshot) => {
+                fullPortfolioGrid.innerHTML = ""; // Limpa qualquer conteúdo de exemplo
+                if (querySnapshot.empty) {
+                    fullPortfolioGrid.innerHTML = "<p style='color: white;'>Nenhum projeto encontrado.</p>";
+                    return;
+                }
+                querySnapshot.forEach((doc) => {
+                    const projeto = doc.data();
+                    // Cria o HTML com a estrutura CORRETA para a página de portfólio
+                    const itemHTML = `
+                        <a href="${projeto.link || '#'}" class="portfolio-item-new" target="_blank">
+                            <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
+                            <div class="portfolio-item-overlay">
+                                <div class="overlay-content">
+                                    <h3>${projeto.titulo}</h3>
+                                    <p>${projeto.descricao || 'Clique para ver mais'}</p>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    fullPortfolioGrid.innerHTML += itemHTML;
+                });
+            })
+            .catch((error) => console.error("Erro ao buscar projetos para a pág. de portfólio: ", error));
+    }
 // =================================================================
 // FIM: CONFIGURAÇÃO E FUNÇÕES DO FIREBASE
 // =================================================================
