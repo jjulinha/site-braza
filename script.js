@@ -47,16 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SCROLL REVEAL DAS SECÇÕES
+    // SCROLL REVEAL DAS SECÇÕES (VERSÃO CORRIGIDA QUE REPETE A ANIMAÇÃO)
     const revealElements = document.querySelectorAll('.reveal');
     if (revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // Se o elemento está visível, adiciona a classe para animar
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                } 
+                // Se o elemento NÃO está mais visível, remove a classe para "resetar"
+                else {
+                    entry.target.classList.remove('active');
                 }
             });
         }, { threshold: 0.1 });
+        
         revealElements.forEach(elem => {
             revealObserver.observe(elem);
         });
