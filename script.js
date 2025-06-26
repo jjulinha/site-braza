@@ -1,5 +1,5 @@
 // =================================================================
-// INÍCIO: CONFIGURAÇÃO E FUNÇÕES DO FIREBASE
+// INÍCIO: CONFIGURAÇÃO DO FIREBASE
 // =================================================================
 
 const firebaseConfig = {
@@ -25,17 +25,19 @@ try {
 // =================================================================
 
 
+// --- LÓGICA PRINCIPAL DO SITE ---
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA A PÁGINA COMPLETA DE PORTFÓLIO ---
-    const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
+    // --- LÓGICA PARA CARREGAR PROJETOS DO FIREBASE ---
 
+    // Lógica para a PÁGINA COMPLETA de Portfólio
+    const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
     if (fullPortfolioGrid && typeof db !== 'undefined') {
         db.collection("projetos")
             .orderBy("dataDeCriacao", "desc")
             .get()
             .then((querySnapshot) => {
-                fullPortfolioGrid.innerHTML = ""; // Limpa a grelha primeiro
+                fullPortfolioGrid.innerHTML = ""; 
 
                 if (querySnapshot.empty) {
                     fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
@@ -43,24 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 querySnapshot.forEach((doc) => {
-                    // **PASSO DE DEBUG:** Isto irá mostrar no console os dados de cada projeto que vêm do Firebase.
-                    console.log("Projeto encontrado:", doc.data()); 
-                    
                     const projeto = doc.data();
-
-                    // --- MÉTODO ROBUSTO PARA CRIAR ELEMENTOS ---
-                    // 1. Cria o elemento principal <a>
+                    
                     const itemLink = document.createElement('a');
                     itemLink.href = projeto.link || '#';
                     itemLink.className = 'portfolio-item-new';
                     itemLink.target = '_blank';
 
-                    // 2. Cria a imagem
                     const img = document.createElement('img');
                     img.src = projeto.imagemURL;
                     img.alt = `Imagem do Projeto ${projeto.titulo}`;
                     
-                    // 3. Cria o HTML do overlay
                     const overlayDiv = document.createElement('div');
                     overlayDiv.className = 'portfolio-item-overlay';
                     overlayDiv.innerHTML = `
@@ -70,24 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
 
-                    // 4. Monta a estrutura
                     itemLink.appendChild(img);
                     itemLink.appendChild(overlayDiv);
                     
-                    // 5. Adiciona o item completo e pronto à grelha
                     fullPortfolioGrid.appendChild(itemLink);
                 });
             })
             .catch((error) => {
-                console.error("Erro CRÍTICO ao buscar projetos para a pág. de portfólio: ", error);
-                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Ocorreu um erro ao carregar os projetos.</p>";
+                console.error("Erro ao buscar projetos para a pág. de portfólio: ", error);
             });
     }
 
-    // A lógica para a pré-visualização da página inicial pode ser adicionada aqui se necessário,
-    // mas vamos focar-nos em fazer a página de portfólio funcionar primeiro.
-
     // --- Restante das funcionalidades do site ---
+    
+    // Background VANTA FOG
     if (typeof VANTA !== 'undefined') {
         VANTA.FOG({
             el: "body",
@@ -106,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // HEADER ESCONDIDO AO ROLAR
     const header = document.querySelector('header');
     if (header) {
         let lastScrollTop = 0;
@@ -119,4 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
         });
     }
+
+// A CHAVE DE FECHO MAIS IMPORTANTE!
 });
