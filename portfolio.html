@@ -73,137 +73,69 @@
     }
   </style>
 </head>
-<body>
+<body class="portfolio-page">
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">BRAZA</div>
-    <nav>
-      <a href="index.html#servicos">Serviços</a>
-      <a href="portfolio.html">Portfólio</a>
-      <a href="blog.html">Blog</a>
-      <a href="index.html#contato">Contato</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none;">
+                <h1>BRAZA</h1>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="portfolioindex.html">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="page-title-section">
+            <h2>NOSSOS PROJETOS EM CHAMAS</h2>
+            <p>Trabalhos que incendeiam marcas e geram resultados.</p>
+        </section>
 
-  <!-- TÍTULO DA PÁGINA -->
-  <h1 style="font-family: var(--font-title); text-align:center; margin: 6rem 0 2rem;">Nosso Portfólio</h1>
+        <div class="page-container">
+            <div class="portfolio-grid-new">
 
-  <!-- BOTÕES DE FILTRO -->
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">Todos</button>
-    <button class="filter-btn" data-filter="institucional">Institucional</button>
-    <button class="filter-btn" data-filter="eventos">Eventos</button>
-    <button class="filter-btn" data-filter="publicidade">Publicidade</button>
-  </div>
+                <a href="#" class="portfolio-item-new">
+                    <img src="https://images.unsplash.com/photo-1618788372246-79faff0c3742?q=80&w=1964" alt="Imagem do Projeto 1">
+                    <div class="portfolio-item-overlay">
+                        <div class="overlay-content">
+                            <h3>Nome do Cliente</h3>
+                            <p>Branding & Identidade Visual</p>
+                        </div>
+                    </div>
+                </a>
 
-  <!-- GALERIA -->
-  <section class="gallery" id="gallery">
-    <div class="gallery-item reveal" data-category="institucional" data-video-id="VIDEO_ID_1">
-      <img src="assets/eventos.png" alt="Institucional">
-      <div class="gallery-info">
-        <h3>Institucional 1</h3>
-        <p>Vídeo institucional com foco em branding.</p>
-      </div>
-    </div>
+                <a href="#" class="portfolio-item-new">
+                    <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=2069" alt="Imagem do Projeto 2">
+                    <div class="portfolio-item-overlay">
+                        <div class="overlay-content">
+                            <h3>Outro Cliente</h3>
+                            <p>Gestão de Redes Sociais</p>
+                        </div>
+                    </div>
+                </a>
 
-    <div class="gallery-item reveal" data-category="eventos" data-video-id="VIDEO_ID_2">
-      <img src="assets/eventos.png" alt="Evento">
-      <div class="gallery-info">
-        <h3>Evento 1</h3>
-        <p>Captura de evento ao vivo para cliente X.</p>
-      </div>
-    </div>
+                </div>
+        </div>
+    </main>
 
-    <div class="gallery-item reveal" data-category="publicidade" data-video-id="VIDEO_ID_3">
-      <img src="assets/eventos.png" alt="Publicidade">
-      <div class="gallery-info">
-        <h3>Publicidade 1</h3>
-        <p>Campanha digital para lançamento de produto.</p>
-      </div>
-    </div>
-  </section>
+    <footer id="contato">
+        <h2>BORA BOTAR FOGO?</h2>
+        <div class="social-links">
+            <a href="mailto:contato@braza.com" class="plano-cta destaque">MANDA UM EMAIL</a>
+            <a href="https://wa.me/554891879579" class="plano-cta destaque">CHAMA NO WHATS</a>
+        </div>
+        <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
+    </footer>
 
-  <!-- MODAL DE VÍDEO -->
-  <div class="video-modal" id="video-modal">
-    <div class="modal-content">
-      <button class="close-modal">&times;</button>
-      <iframe id="video-iframe" src="" allowfullscreen></iframe>
-    </div>
-  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script src="script.js"></script>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2025 Braza Produções - Todos os direitos reservados
-  </footer>
-
-  <!-- JS COMPORTAMENTOS -->
-  <script>
-    // Scroll Reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('reveal-active');
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => revealObserver.observe(el));
-
-    // Filtro
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelector('.filter-btn.active').classList.remove('active');
-        btn.classList.add('active');
-
-        const filter = btn.dataset.filter;
-        galleryItems.forEach(item => {
-          item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
-        });
-      });
-    });
-
-    // Modal Vídeo
-    const modal = document.getElementById('video-modal');
-    const iframe = document.getElementById('video-iframe');
-    const closeBtn = document.querySelector('.close-modal');
-
-    galleryItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const videoId = item.getAttribute('data-video-id');
-        if (videoId) {
-          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-          modal.classList.add('active');
-        }
-      });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
-      iframe.src = '';
-    });
-
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-        iframe.src = '';
-      }
-    });
-
-    // Esconde/mostra header ao rolar
-    let lastScrollTop = 0;
-    const header = document.querySelector("header");
-
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      if (scrollTop > lastScrollTop) {
-        header.classList.add("header-hidden");
-      } else {
-        header.classList.remove("header-hidden");
-      }
-      lastScrollTop = scrollTop;
-    });
-  </script>
 </body>
 </html>
