@@ -121,19 +121,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
- // --- LÓGICA ESPECÍFICA PARA A PÁGINA DE PORTFÓLIO ---
+// --- LÓGICA ESPECÍFICA PARA A PÁGINA DE PORTFÓLIO ---
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
     if (fullPortfolioGrid && typeof db !== 'undefined') {
         const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
-        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA ---
+        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA COM PADRÃO DE LAYOUT ---
         function renderPortfolio(projectsToRender) {
             fullPortfolioGrid.innerHTML = "";
             if (projectsToRender.length === 0) {
-                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
+                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
                 return;
             }
+
+            // Define o nosso padrão de layout. Pode ajustá-lo como quiser!
+            // 'item-large' ocupa 4x2, 'item-wide' 2x1, 'item-standard' 1x1.
+            const layoutPattern = [
+                'item-large', 
+                'item-standard', 
+                'item-standard', 
+                'item-wide', 
+                'item-standard',
+                'item-standard',
+                'item-wide'
+            ];
 
             projectsToRender.forEach((projeto, index) => {
                 const itemLink = document.createElement('a');
@@ -141,12 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemLink.className = 'portfolio-item-new'; // Classe base
                 itemLink.target = '_blank';
 
-                // Adiciona classes especiais com base na posição do item
-                if (index === 0) {
-                    itemLink.classList.add('item-large'); // O primeiro item é grande
-                } else if (index === 3 || index === 7) {
-                    itemLink.classList.add('item-wide'); // Alguns itens são largos
-                }
+                // Aplica a classe do padrão de forma cíclica
+                const patternClass = layoutPattern[index % layoutPattern.length];
+                itemLink.classList.add(patternClass);
 
                 itemLink.innerHTML = `
                     <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
@@ -173,10 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const filterValue = button.getAttribute('data-filter');
-                const filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
-                // ATENÇÃO: A filtragem irá remover o layout de colagem.
-                // Para manter o layout, a lógica de filtro precisaria ser mais complexa.
-                // Por enquanto, a filtragem mostrará os itens num layout uniforme.
+                
+                const filteredProjects = filterValue === 'all' 
+                    ? allProjects 
+                    : allProjects.filter(p => p.categoria === filterValue);
+                
+                // Agora, ao renderizar, o padrão será aplicado corretamente aos itens filtrados
                 renderPortfolio(filteredProjects);
             });
         });
