@@ -68,7 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+// ...código do Scroll Reveal...
 
+    // LÓGICA DO ACORDEÃO PARA A FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+            const question = item.querySelector('h3');
+            question.addEventListener('click', () => {
+                // Fecha todos os outros itens para manter apenas um aberto de cada vez
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Abre ou fecha o item clicado
+                item.classList.toggle('active');
+            });
+        });
+    }
+
+    // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
+    // ...resto do seu script...
     // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
 
     // 1. SÓ PARA A PÁGINA INICIAL (index.html)
