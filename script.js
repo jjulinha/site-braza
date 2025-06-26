@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SCROLL REVEAL DAS SECÇÕES (O CÓDIGO QUE ESTAVA EM FALTA)
+    // SCROLL REVEAL DAS SECÇÕES
     const revealElements = document.querySelectorAll('.reveal');
     if (revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries) => {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(removeSplash, 5000);
         }
 
-        // Animação dos Títulos HERO para fazê-los aparecer
+        // Animação dos Títulos HERO
         const heroTitles = document.querySelectorAll('.hero-title');
         heroTitles.forEach((el, i) => {
             setTimeout(() => el.classList.add('active'), i * 400);
