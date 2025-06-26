@@ -96,7 +96,57 @@ document.addEventListener('DOMContentLoaded', () => {
         portfolioGrid.innerHTML = "<p style='text-align: center; width: 100%;'>Não foi possível carregar os projetos.</p>";
       });
   }
+// =================================================================
+// INÍCIO: LÓGICA PARA A PÁGINA COMPLETA DE PORTFÓLIO
+// =================================================================
+document.addEventListener('DOMContentLoaded', () => {
 
+    // Seleciona a grelha da página de portfólio (com a classe correta)
+    const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
+
+    // Esta lógica só corre se encontrar a grelha da página de portfólio
+    if (fullPortfolioGrid && typeof db !== 'undefined') {
+        
+        db.collection("projetos")
+          .orderBy("dataDeCriacao", "desc") // Ordena pelos mais recentes
+          // SEM LIMITE: .limit(3) foi removido para mostrar todos os projetos
+          .get()
+          .then((querySnapshot) => {
+            
+            // Limpa a grelha caso tenha conteúdo de exemplo
+            fullPortfolioGrid.innerHTML = ""; 
+
+            if (querySnapshot.empty) {
+                fullPortfolioGrid.innerHTML = "<p style='text-align: center; width: 100%; color: white;'>Nenhum projeto encontrado no momento.</p>";
+                return;
+            }
+
+            querySnapshot.forEach((doc) => {
+                const projeto = doc.data();
+
+                // Cria o HTML com a estrutura CORRETA que o nosso CSS espera
+                const portfolioItemHTML = `
+                    <a href="${projeto.link || '#'}" class="portfolio-item-new" target="_blank">
+                        <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
+                        <div class="portfolio-item-overlay">
+                            <div class="overlay-content">
+                                <h3>${projeto.titulo}</h3>
+                                <p>${projeto.descricao || 'Clique para ver mais'}</p>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                
+                // Insere o novo item na grelha
+                fullPortfolioGrid.innerHTML += portfolioItemHTML;
+            });
+          })
+          .catch((error) => {
+            console.error("Erro ao buscar projetos para a página de portfólio: ", error);
+            fullPortfolioGrid.innerHTML = "<p style='text-align: center; width: 100%; color: white;'>Não foi possível carregar os projetos.</p>";
+          });
+    }
+});
   // --- Restante das funcionalidades do site ---
 
   // Splash Screen
