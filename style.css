@@ -771,9 +771,14 @@ footer p {
     transform: scale(1.05); /* Ligeiramente maior que os outros itens */
 }
 
-/* Centraliza o título do rodapé */
-footer h2 {
-    text-align: center;
+/* ========================================= */
+/* AJUSTES DE ALINHAMENTO DO RODAPÉ */
+/* ========================================= */
+
+footer#contato {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* RESPONSIVO */
