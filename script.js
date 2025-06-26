@@ -47,17 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SCROLL REVEAL DAS SECÇÕES (VERSÃO CORRIGIDA QUE REPETE A ANIMAÇÃO)
+    // SCROLL REVEAL DAS SECÇÕES (REPETE A ANIMAÇÃO)
     const revealElements = document.querySelectorAll('.reveal');
     if (revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Se o elemento está visível, adiciona a classe para animar
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                } 
-                // Se o elemento NÃO está mais visível, remove a classe para "resetar"
-                else {
+                } else {
                     entry.target.classList.remove('active');
                 }
             });
@@ -68,36 +65,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-// ...código do Scroll Reveal...
-
     // LÓGICA DO ACORDEÃO PARA A FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length > 0) {
         faqItems.forEach(item => {
             const question = item.querySelector('h3');
             question.addEventListener('click', () => {
-                // Fecha todos os outros itens para manter apenas um aberto de cada vez
                 faqItems.forEach(otherItem => {
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
                 });
-                
-                // Abre ou fecha o item clicado
                 item.classList.toggle('active');
             });
         });
     }
 
     // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
-    // ...resto do seu script...
-    // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
 
     // 1. SÓ PARA A PÁGINA INICIAL (index.html)
     const homePageIdentifier = document.getElementById('hero');
     if (homePageIdentifier) {
         
-        // Lógica do Splash Screen
+        // Lógica do Splash Screen (com duração fixa de 4 segundos)
         const splashScreen = document.getElementById('splash-screen');
         if (splashScreen) {
             const removeSplash = () => {
@@ -106,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
                 }
             };
-            window.addEventListener('load', removeSplash);
-            setTimeout(removeSplash, 5000);
+            // Define um temporizador fixo para remover o splash após 4 segundos
+            setTimeout(removeSplash, 4000);
         }
 
         // Animação dos Títulos HERO
