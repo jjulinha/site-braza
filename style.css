@@ -782,30 +782,32 @@ footer#contato {
 }
 
 /* ========================================= */
-/* ESTILOS CORRIGIDOS PARA O PORTFÓLIO */
+/* ESTILOS DO PORTFÓLIO ALINHADOS COM A MARCA */
 /* ========================================= */
 
-/* Aplica a fonte Thunder ao título principal da página */
+/* Título principal da página do portfólio */
 .portfolio-page .page-title-section h2 {
-    font-family: 'Thunder', sans-serif;
-    letter-spacing: 2px;
+    font-family: var(--fonte-headline); /* Usa a fonte de título da marca */
+    color: var(--cor-texto-principal);
+    letter-spacing: 1.5px;
 }
 
+/* Grelha de projetos */
 .portfolio-grid-new {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
 }
 
+/* Item individual do portfólio */
 .portfolio-item-new {
     position: relative;
     display: block;
     overflow: hidden;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Adiciona uma proporção para evitar que o layout quebre antes de a imagem carregar */
     aspect-ratio: 4 / 3; 
-    background-color: #1a1a1a; /* Cor de fundo enquanto a imagem carrega */
+    background-color: #1a1a1a;
 }
 
 .portfolio-item-new img {
@@ -815,6 +817,7 @@ footer#contato {
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Camada de sobreposição (overlay) */
 .portfolio-item-overlay {
     position: absolute;
     top: 0;
@@ -835,16 +838,18 @@ footer#contato {
     transition: transform 0.5s ease;
 }
 
-/* Aplica a fonte Thunder ao nome do cliente no overlay */
+/* Título do projeto no overlay */
 .overlay-content h3 {
-    font-family: 'Thunder', sans-serif;
+    font-family: var(--fonte-headline); /* Usa a fonte de título da marca */
     font-size: 2.2rem;
     letter-spacing: 1px;
-    color: var(--cor-acento-amarelo);
+    color: var(--cor-acento-amarelo); /* Usa a cor de acento da marca */
     margin-bottom: 5px;
 }
 
+/* Descrição do projeto no overlay */
 .overlay-content p {
+    font-family: var(--fonte-corpo); /* Usa a fonte de corpo da marca */
     color: var(--cor-texto-principal);
     font-weight: 500;
 }
