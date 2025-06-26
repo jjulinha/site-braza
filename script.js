@@ -1,17 +1,7 @@
 // =================================================================
-// INÍCIO: CONFIGURAÇÃO DO FIREBASE
+// CONFIGURAÇÃO DO FIREBASE (sem alterações)
 // =================================================================
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
-    authDomain: "braza-portfolio.firebaseapp.com",
-    projectId: "braza-portfolio",
-    storageBucket: "braza-portfolio.appspot.com",
-    messagingSenderId: "504617854086",
-    appId: "1:504617854086:web:727bfb242c29a6d7345d07",
-    measurementId: "G-5KFT2C7ZCF"
-};
-
+const firebaseConfig = { /* ...suas chaves aqui... */ };
 let db;
 try {
     firebase.initializeApp(firebaseConfig);
@@ -21,61 +11,73 @@ try {
 }
 
 // =================================================================
-// FIM: CONFIGURAÇÃO DO FIREBASE
+// LÓGICA PRINCIPAL DO SITE
 // =================================================================
-
-
-// --- LÓGICA PRINCIPAL DO SITE ---
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA CARREGAR PROJETOS DO FIREBASE ---
-
-    // Lógica para a PÁGINA COMPLETA de Portfólio
+    // --- LÓGICA DO PORTFÓLIO COM FILTROS ---
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    let allProjects = []; // Array para guardar todos os projetos
+
+    // Função para renderizar os projetos na grelha
+    function renderPortfolio(projectsToRender) {
+        fullPortfolioGrid.innerHTML = ""; // Limpa a grelha
+        if (projectsToRender.length === 0) {
+            fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
+            return;
+        }
+        projectsToRender.forEach(projeto => {
+            const itemLink = document.createElement('a');
+            itemLink.href = projeto.link || '#';
+            itemLink.className = 'portfolio-item-new';
+            itemLink.target = '_blank';
+            itemLink.innerHTML = `
+                <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
+                <div class="portfolio-item-overlay">
+                    <div class="overlay-content">
+                        <h3>${projeto.titulo}</h3>
+                        <p>${projeto.descricao || 'Clique para ver mais'}</p>
+                    </div>
+                </div>
+            `;
+            fullPortfolioGrid.appendChild(itemLink);
+        });
+    }
+
+    // Lógica principal que só corre na página de portfólio
     if (fullPortfolioGrid && typeof db !== 'undefined') {
         db.collection("projetos")
             .orderBy("dataDeCriacao", "desc")
             .get()
             .then((querySnapshot) => {
-                fullPortfolioGrid.innerHTML = ""; 
-
-                if (querySnapshot.empty) {
-                    fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
-                    return;
-                }
-
-                querySnapshot.forEach((doc) => {
-                    const projeto = doc.data();
-                    
-                    const itemLink = document.createElement('a');
-                    itemLink.href = projeto.link || '#';
-                    itemLink.className = 'portfolio-item-new';
-                    itemLink.target = '_blank';
-
-                    const img = document.createElement('img');
-                    img.src = projeto.imagemURL;
-                    img.alt = `Imagem do Projeto ${projeto.titulo}`;
-                    
-                    const overlayDiv = document.createElement('div');
-                    overlayDiv.className = 'portfolio-item-overlay';
-                    overlayDiv.innerHTML = `
-                        <div class="overlay-content">
-                            <h3>${projeto.titulo}</h3>
-                            <p>${projeto.descricao || 'Clique para ver mais'}</p>
-                        </div>
-                    `;
-
-                    itemLink.appendChild(img);
-                    itemLink.appendChild(overlayDiv);
-                    
-                    fullPortfolioGrid.appendChild(itemLink);
-                });
+                // Guarda todos os projetos no nosso array
+                allProjects = querySnapshot.docs.map(doc => doc.data());
+                // Renderiza todos os projetos inicialmente
+                renderPortfolio(allProjects);
             })
-            .catch((error) => {
-                console.error("Erro ao buscar projetos para a pág. de portfólio: ", error);
-            });
-    }
+            .catch((error) => console.error("Erro ao buscar projetos: ", error));
 
+        // Adiciona o listener de clique aos botões de filtro
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove a classe 'active' de todos os botões
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Adiciona a classe 'active' ao botão clicado
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+                
+                if (filterValue === 'all') {
+                    renderPortfolio(allProjects); // Mostra todos
+                } else {
+                    // Filtra o array de projetos
+                    const filteredProjects = allProjects.filter(p => p.categoria === filterValue);
+                    renderPortfolio(filteredProjects); // Mostra apenas os filtrados
+                }
+            });
+        });
+    }
     // --- Restante das funcionalidades do site ---
     
     // Background VANTA FOG
