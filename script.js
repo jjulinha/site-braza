@@ -47,8 +47,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA ESPECÍFICA PARA A PÁGINA INICIAL ---
-    const homePageIdentifier = document.getElementById('hero'); // Usar um elemento que só existe na home
+    // SCROLL REVEAL DAS SECÇÕES (O CÓDIGO QUE ESTAVA EM FALTA)
+    const revealElements = document.querySelectorAll('.reveal');
+    if (revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(elem => {
+            revealObserver.observe(elem);
+        });
+    }
+
+
+    // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
+
+    // 1. SÓ PARA A PÁGINA INICIAL (index.html)
+    const homePageIdentifier = document.getElementById('hero');
     if (homePageIdentifier) {
         
         // Lógica do Splash Screen
@@ -85,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- LÓGICA ESPECÍFICA PARA A PÁGINA DE PORTFÓLIO ---
+    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
     if (fullPortfolioGrid && typeof db !== 'undefined') {
         const filterButtons = document.querySelectorAll('.filter-btn');
