@@ -121,24 +121,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
+ // --- LÓGICA ESPECÍFICA PARA A PÁGINA DE PORTFÓLIO ---
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
     if (fullPortfolioGrid && typeof db !== 'undefined') {
         const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
+        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA ---
         function renderPortfolio(projectsToRender) {
             fullPortfolioGrid.innerHTML = "";
             if (projectsToRender.length === 0) {
                 fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
                 return;
             }
-            projectsToRender.forEach(projeto => {
+
+            projectsToRender.forEach((projeto, index) => {
                 const itemLink = document.createElement('a');
                 itemLink.href = projeto.link || '#';
-                itemLink.className = 'portfolio-item-new';
+                itemLink.className = 'portfolio-item-new'; // Classe base
                 itemLink.target = '_blank';
-                itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
+
+                // Adiciona classes especiais com base na posição do item
+                if (index === 0) {
+                    itemLink.classList.add('item-large'); // O primeiro item é grande
+                } else if (index === 3 || index === 7) {
+                    itemLink.classList.add('item-wide'); // Alguns itens são largos
+                }
+
+                itemLink.innerHTML = `
+                    <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
+                    <div class="portfolio-item-overlay">
+                        <div class="overlay-content">
+                            <h3>${projeto.titulo}</h3>
+                            <p>${projeto.descricao || 'Clique para ver mais'}</p>
+                        </div>
+                    </div>
+                `;
                 fullPortfolioGrid.appendChild(itemLink);
             });
         }
@@ -156,6 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 button.classList.add('active');
                 const filterValue = button.getAttribute('data-filter');
                 const filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
+                // ATENÇÃO: A filtragem irá remover o layout de colagem.
+                // Para manter o layout, a lógica de filtro precisaria ser mais complexa.
+                // Por enquanto, a filtragem mostrará os itens num layout uniforme.
                 renderPortfolio(filteredProjects);
             });
         });
