@@ -47,46 +47,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
+    // --- LÓGICA ESPECÍFICA PARA A PÁGINA INICIAL ---
+    const homePageIdentifier = document.getElementById('hero'); // Usar um elemento que só existe na home
+    if (homePageIdentifier) {
+        
+        // Lógica do Splash Screen
+        const splashScreen = document.getElementById('splash-screen');
+        if (splashScreen) {
+            const removeSplash = () => {
+                if (document.body.contains(splashScreen)) {
+                    splashScreen.classList.add('swoosh-out');
+                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
+                }
+            };
+            window.addEventListener('load', removeSplash);
+            setTimeout(removeSplash, 5000);
+        }
 
-    // 1. SÓ PARA A PÁGINA INICIAL (index.html)
-    const splashScreen = document.getElementById('splash-screen');
-    const homePortfolioGrid = document.querySelector('.portfolio-grid'); // Seletor da pré-visualização
-
-    if (splashScreen) { // Se encontrar o splash, está na home
-        const removeSplash = () => {
-            if (document.body.contains(splashScreen)) {
-                splashScreen.classList.add('swoosh-out');
-                setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
-            }
-        };
-        window.addEventListener('load', removeSplash);
-        setTimeout(removeSplash, 5000);
-
-        // Animação dos Títulos HERO (só na home)
+        // Animação dos Títulos HERO para fazê-los aparecer
         const heroTitles = document.querySelectorAll('.hero-title');
         heroTitles.forEach((el, i) => {
             setTimeout(() => el.classList.add('active'), i * 400);
         });
-    }
 
-    if (homePortfolioGrid && typeof db !== 'undefined') { // Se encontrar a grelha de preview
-        db.collection("projetos").orderBy("dataDeCriacao", "desc").limit(3).get()
-            .then((querySnapshot) => {
-                let html = "";
-                querySnapshot.forEach((doc) => {
-                    const projeto = doc.data();
-                    html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+        // Lógica da Pré-visualização do Portfólio
+        const homePortfolioGrid = document.querySelector('.portfolio-grid');
+        if (homePortfolioGrid && typeof db !== 'undefined') {
+            db.collection("projetos").orderBy("dataDeCriacao", "desc").limit(3).get()
+                .then((querySnapshot) => {
+                    let html = "";
+                    querySnapshot.forEach((doc) => {
+                        const projeto = doc.data();
+                        html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                    });
+                    homePortfolioGrid.innerHTML = html;
                 });
-                homePortfolioGrid.innerHTML = html;
-            });
+        }
     }
 
-    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
+    // --- LÓGICA ESPECÍFICA PARA A PÁGINA DE PORTFÓLIO ---
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-
-    if (fullPortfolioGrid && typeof db !== 'undefined') { // Se encontrar a grelha completa
+    if (fullPortfolioGrid && typeof db !== 'undefined') {
+        const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
         function renderPortfolio(projectsToRender) {
