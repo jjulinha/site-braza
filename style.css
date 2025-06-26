@@ -740,7 +740,36 @@ footer p {
     margin-top: 20px;
     align-self: flex-start; /* Alinha o botão à esquerda */
 }
+/* ========================================= */
+/* ESTILOS DE DESTAQUE PARA OS PLANOS */
+/* ========================================= */
 
+/* Alinha os cartões ao centro verticalmente, o que ajuda com o scaling */
+.planos-grid {
+    align-items: center;
+}
+
+/* Estilo para o cartão em destaque */
+.plano-card.destaque {
+    transform: scale(1.1); /* Aumenta o cartão em 10% */
+    z-index: 10; /* Garante que ele fique por cima dos outros */
+    border-color: var(--cor-acento-amarelo); /* Borda amarela para mais destaque */
+    box-shadow: 0 15px 50px rgba(255, 179, 0, 0.25); /* Sombra mais pronunciada */
+}
+
+/* Remove a animação de hover do cartão destaque, pois ele já está destacado */
+.plano-card.destaque:hover {
+    transform: scale(1.1); /* Mantém o tamanho ao passar o rato */
+}
+
+/* Nova classe para destacar um tópico específico dentro da lista de features */
+.plano-features li.feature-highlight {
+    background-color: var(--cor-acento-amarelo); /* Fundo amarelo */
+    color: var(--cor-fundo); /* Texto escuro para contraste */
+    font-weight: 700; /* Texto a negrito */
+    border-color: var(--cor-acento-amarelo);
+    transform: scale(1.05); /* Ligeiramente maior que os outros itens */
+}
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after {
