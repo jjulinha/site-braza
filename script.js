@@ -24,15 +24,12 @@ try {
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- FUNCIONALIDADES GERAIS (EXECUTADAS EM TODAS AS PÁGINAS) ---
-
-    // Background VANTA FOG
     if (typeof VANTA !== 'undefined') {
         VANTA.FOG({
             el: "body", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, highlightColor: 0x6d0202, midtoneColor: 0x0, lowlightColor: 0x04040D, baseColor: 0x0, blurFactor: 0.50, speed: 0.80, zoom: 1.00
         });
     }
 
-    // HEADER ESCONDIDO AO ROLAR
     const header = document.querySelector('header');
     if (header) {
         let lastScrollTop = 0;
@@ -47,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SCROLL REVEAL DAS SECÇÕES (REPETE A ANIMAÇÃO)
     const revealElements = document.querySelectorAll('.reveal');
     if (revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries) => {
@@ -59,13 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, { threshold: 0.1 });
-        
         revealElements.forEach(elem => {
             revealObserver.observe(elem);
         });
     }
 
-    // LÓGICA DO ACORDEÃO PARA A FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length > 0) {
         faqItems.forEach(item => {
@@ -81,32 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
 
-    // 1. SÓ PARA A PÁGINA INICIAL (index.html)
     const homePageIdentifier = document.getElementById('hero');
     if (homePageIdentifier) {
-        
-        // Lógica do Splash Screen da Home
         const splashScreen = document.getElementById('splash-screen');
         if (splashScreen) {
-            const removeSplash = () => {
-                if (document.body.contains(splashScreen)) {
-                    splashScreen.classList.add('swoosh-out');
-                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
-                }
-            };
-            setTimeout(removeSplash, 4000);
+            setTimeout(() => {
+                splashScreen.classList.add('swoosh-out');
+                setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
+            }, 4000);
         }
 
-        // Animação dos Títulos HERO
         const heroTitles = document.querySelectorAll('.hero-title');
         heroTitles.forEach((el, i) => {
-            setTimeout(() => el.classList.add('active'), i * 400);
+            setTimeout(() => el.classList.add('active'), 500 + (i * 400));
         });
 
-        // Lógica da Pré-visualização do Portfólio
         const homePortfolioGrid = document.querySelector('.portfolio-grid');
         if (homePortfolioGrid && typeof db !== 'undefined') {
             db.collection("projetos").where("isCapa", "==", false).orderBy("dataDeCriacao", "desc").limit(3).get()
@@ -120,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         }
     }
-// 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
+
     const portfolioPageIdentifier = document.querySelector('.portfolio-grid-new');
     if (portfolioPageIdentifier) {
         const portfolioSplash = document.getElementById('splash-screen-portfolio');
@@ -130,3 +115,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => { if (portfolioSplash.parentNode) portfolioSplash.parentNode.removeChild(portfolioSplash); }, 1000);
             }, 4000);
         }
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        let allProjects = [];
+
+        function renderPortfolio(projectsToRender) {
+            portfolioPageIdentifier.innerHTML = "";
+            if (projectsToRender.length === 0) {
+                portfolioPageIdentifier.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
+                return;
+            }
+            projectsToRender.forEach(projeto => {
+                const itemLink = document.createElement('a');
+                itemLink.href = projeto.link || '#';
+                itemLink.className = 'portfolio-item-new';
+                itemLink.target = '_blank';
+                if (projeto.isCapa === true) {
+                    itemLink.classList.add('item-large');
+                }
+                itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
+                portfolioPageIdentifier.appendChild(itemLink);
+            });
+        }
+
+        db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
+            .then((querySnapshot) => {
+                allProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                allProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
+                renderPortfolio(allProjects);
+            })
+            .catch((error) => console.error("Erro ao buscar projetos: ", error));
+
+        if (filterButtons.length > 0) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filterValue = button.getAttribute('data-filter');
+                    let filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
+                    filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
+                    renderPortfolio(filteredProjects);
+                });
+            });
+        }
+    }
+});
