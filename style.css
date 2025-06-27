@@ -319,9 +319,11 @@ section, footer {
   animation: scroll-left 25s linear infinite;
 }
 .cliente-logo {
-  height: 80px;
-  margin: 0 10px;
+  height: 90px;
+  margin: 0 30px;
   vertical-align: middle;
+  filter: brightness(0) invert(0);
+  opacity: 0.9;
 }
 @keyframes scroll-left {
   0% {
@@ -331,7 +333,8 @@ section, footer {
     transform: translateX(-100%);
   }
 }
-</style>
+
+
 .cliente-logo:hover { opacity: 1; }
 
 /* PLANOS */
