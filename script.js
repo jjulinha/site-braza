@@ -1,4 +1,4 @@
-// script.js (VERSÃO FINAL, COMPLETA E COM TODAS AS ANIMAÇÕES)
+// script.js (VERSÃO FINAL E COMPLETA)
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -13,101 +13,39 @@ const firebaseConfig = {
     appId: "YOUR_APP_ID"
 };
 
-// Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES NO SITE ---
+// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES ---
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ---- ANIMAÇÃO DE FUNDO VANTA.JS (NEVOEIRO) RESTAURADA ----
+    // Animação de Fundo Vanta.js
     if (document.getElementById('hero')) {
         VANTA.FOG({
-            el: "#hero",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            highlightColor: 0xffc300,
-            midtoneColor: 0xff1f00,
-            lowlightColor: 0x2d2d2d,
-            baseColor: 0x0,
-            blurFactor: 0.90,
-            speed: 1.5,
-            zoom: 0.4
+            el: "#hero", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00,
+            minWidth: 200.00, highlightColor: 0xffc300, midtoneColor: 0xff1f00, lowlightColor: 0x2d2d2d,
+            baseColor: 0x0, blurFactor: 0.90, speed: 1.5, zoom: 0.4
         });
     }
 
-    // ---- ANIMAÇÕES DE SCROLL (RESTAURADAS) ----
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    // Animações de Scroll
+    const animatedElements = document.querySelectorAll('.animate-on-scroll, .timeline, .icon-svg');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
             }
         });
-    }, {
-        threshold: 0.1
-    });
+    }, { threshold: 0.2 }); // Ajustado o threshold para melhor disparo
     animatedElements.forEach(el => observer.observe(el));
     
-    // Inicializa o menu
-    handleMenu('main-menu', 'menu-button');
-
-    // Inicializa o acordeão
-    if (document.getElementById('faq-accordion')) {
-        handleAccordion('faq-accordion');
-    }
-    
-    // Inicializa o splash da PÁGINA INICIAL
-    if (document.getElementById('splash-screen')) {
-        handleSplash('splash-screen', 'splash-video');
-    }
-
-    // Inicializa a galeria do PORTFÓLIO
-    if (document.getElementById('gallery-julinha')) {
-        handleGallery('gallery-julinha', 'julinha');
-    }
-    
-    // Inicializa o splash do PORTFÓLIO
-    if (document.getElementById('splash-screen-portfolio')) {
-        handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
-    }
+    // Chamadas de Funções
+    if (document.getElementById('splash-screen')) handleSplash('splash-screen', 'splash-video');
+    if (document.getElementById('gallery-julinha')) handleGallery('gallery-julinha', 'julinha');
+    if (document.getElementById('splash-screen-portfolio')) handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
 });
 
-
-// Função para controlar o menu de navegação (mobile)
-function handleMenu(menuId, buttonId) {
-    const menu = document.getElementById(menuId);
-    const button = document.getElementById(buttonId);
-    if (menu && button) {
-        button.addEventListener('click', () => {
-            menu.classList.toggle('active');
-        });
-    }
-}
-
-// Função para controlar o comportamento de acordeão (accordion)
-function handleAccordion(accordionId) {
-    const accordion = document.getElementById(accordionId);
-    if (accordion) {
-        const items = accordion.querySelectorAll('.accordion-item');
-        items.forEach(item => {
-            const header = item.querySelector('.accordion-header');
-            header.addEventListener('click', () => {
-                items.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                item.classList.toggle('active');
-            });
-        });
-    }
-}
-
-// Função CORRIGIDA para o splash screen
+// Função para o splash screen (versão robusta)
 function handleSplash(splashId, videoId) {
     const splash = document.getElementById(splashId);
     const video = document.getElementById(videoId);
@@ -123,13 +61,9 @@ function handleSplash(splashId, videoId) {
     const removeSplash = () => {
         if (splashRemoved) return;
         splashRemoved = true;
-        
-        splash.classList.add('swoosh-out');
-        
+        splash.style.opacity = '0';
         setTimeout(() => {
-            if (splash.parentElement) {
-                splash.remove();
-            }
+            if (splash.parentElement) splash.remove();
             document.body.classList.remove('loading');
         }, 1000);
     };
@@ -139,26 +73,28 @@ function handleSplash(splashId, videoId) {
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
-        playPromise.catch(error => {
-            removeSplash();
-        });
+        playPromise.catch(() => removeSplash());
     }
 
-    const fallbackTimeout = setTimeout(removeSplash, 10000);
-    video.addEventListener('ended', () => clearTimeout(fallbackTimeout));
-    video.addEventListener('error', () => clearTimeout(fallbackTimeout));
+    const fallbackTimeout = setTimeout(removeSplash, 8000); // Timeout de segurança
+    video.addEventListener('canplaythrough', () => clearTimeout(fallbackTimeout));
 }
 
-// Função CORRIGIDA para a galeria do portfólio
+// Função para a galeria do portfólio (versão corrigida)
 function handleGallery(galleryId, collectionName) {
     const galleryElement = document.getElementById(galleryId);
     if (!galleryElement) return;
 
-    galleryElement.innerHTML = ''; 
+    galleryElement.innerHTML = '<p>Carregando galeria...</p>'; 
     const collectionRef = collection(db, collectionName);
 
     getDocs(collectionRef)
         .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+                galleryElement.innerHTML = '<p>Nenhum item encontrado na galeria.</p>';
+                return;
+            }
+
             let coverItem = null;
             const otherItems = [];
 
@@ -187,6 +123,6 @@ function handleGallery(galleryId, collectionName) {
         })
         .catch((error) => {
             console.error("Erro ao buscar a galeria do Firebase: ", error);
-            galleryElement.innerHTML = '<p>Não foi possível carregar a galeria.</p>';
+            galleryElement.innerHTML = '<p>Não foi possível carregar a galeria. Verifique a consola para mais detalhes.</p>';
         });
 }
