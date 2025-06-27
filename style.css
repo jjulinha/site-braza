@@ -1008,7 +1008,7 @@ footer#contato {
 }
 
 /* ======================================================== */
-/* ESTILOS PARA O SPLASH SCREEN DO PORTFÓLIO */
+/* ESTILOS PARA O SPLASH SCREEN DE VÍDEO DO PORTFÓLIO */
 /* ======================================================== */
 
 #splash-screen-portfolio {
@@ -1017,36 +1017,24 @@ footer#contato {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--cor-fundo); /* Usa a cor de fundo preta */
+  background-color: var(--cor-fundo); /* Cor de fundo caso o vídeo demore a carregar */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  /* Aplica a animação de entrada que criaremos abaixo */
-  animation: zoomIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Animação de entrada (Zoom In) */
-@keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* Garante que o vídeo cubra todo o ecrã */
+#splash-screen-portfolio video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cobre o ecrã sem distorcer o vídeo */
 }
 
-/* Animação de saída (será adicionada via JavaScript) */
+/* Animação de saída (fade-out) */
 #splash-screen-portfolio.swoosh-out {
   opacity: 0;
-  transition: opacity 0.7s ease-out;
-}
-
-/* Ajusta o tamanho do logo no splash do portfólio */
-#splash-screen-portfolio .logo h1 {
-    font-size: clamp(3rem, 15vw, 8rem);
+  transition: opacity 0.8s ease-out; /* Transição suave */
 }
 
 /* RESPONSIVO */
