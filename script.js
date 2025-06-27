@@ -1,22 +1,81 @@
-// script.js (VERSÃO FINAL, COMPLETA E CORRIGIDA)
+// script.js (VERSÃO FINAL, COMPLETA E COM TODAS AS ANIMAÇÕES)
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Configuração do Firebase (Lembre-se de preencher com as suas chaves, se aplicável)
+// Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
-  authDomain: "braza-portfolio.firebaseapp.com",
-  projectId: "braza-portfolio",
-  storageBucket: "braza-portfolio.firebasestorage.app",
-  messagingSenderId: "504617854086",
-  appId: "1:504617854086:web:727bfb242c29a6d7345d07",
-  measurementId: "G-5KFT2C7ZCF"
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "braza-ag",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
 };
 
-// Inicializa o Firebase e o Firestore
+// Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES NO SITE ---
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // ---- ANIMAÇÃO DE FUNDO VANTA.JS (NEVOEIRO) RESTAURADA ----
+    if (document.getElementById('hero')) {
+        VANTA.FOG({
+            el: "#hero",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            highlightColor: 0xffc300,
+            midtoneColor: 0xff1f00,
+            lowlightColor: 0x2d2d2d,
+            baseColor: 0x0,
+            blurFactor: 0.90,
+            speed: 1.5,
+            zoom: 0.4
+        });
+    }
+
+    // ---- ANIMAÇÕES DE SCROLL (RESTAURADAS) ----
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // Inicializa o menu
+    handleMenu('main-menu', 'menu-button');
+
+    // Inicializa o acordeão
+    if (document.getElementById('faq-accordion')) {
+        handleAccordion('faq-accordion');
+    }
+    
+    // Inicializa o splash da PÁGINA INICIAL
+    if (document.getElementById('splash-screen')) {
+        handleSplash('splash-screen', 'splash-video');
+    }
+
+    // Inicializa a galeria do PORTFÓLIO
+    if (document.getElementById('gallery-julinha')) {
+        handleGallery('gallery-julinha', 'julinha');
+    }
+    
+    // Inicializa o splash do PORTFÓLIO
+    if (document.getElementById('splash-screen-portfolio')) {
+        handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
+    }
+});
+
 
 // Função para controlar o menu de navegação (mobile)
 function handleMenu(menuId, buttonId) {
@@ -48,7 +107,7 @@ function handleAccordion(accordionId) {
     }
 }
 
-// Função CORRIGIDA para o splash screen (resolve o loop infinito)
+// Função CORRIGIDA para o splash screen
 function handleSplash(splashId, videoId) {
     const splash = document.getElementById(splashId);
     const video = document.getElementById(videoId);
@@ -75,25 +134,22 @@ function handleSplash(splashId, videoId) {
         }, 1000);
     };
 
-    video.addEventListener('ended', () => {
-        removeSplash();
-    });
+    video.addEventListener('ended', removeSplash);
+    video.addEventListener('error', removeSplash);
 
-    video.addEventListener('canplay', () => {
-        video.play().catch(e => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
             removeSplash();
         });
-    });
+    }
 
-    const fallbackTimeout = setTimeout(() => {
-        removeSplash();
-    }, 15000);
-
+    const fallbackTimeout = setTimeout(removeSplash, 10000);
     video.addEventListener('ended', () => clearTimeout(fallbackTimeout));
     video.addEventListener('error', () => clearTimeout(fallbackTimeout));
 }
 
-// Função CORRIGIDA para a galeria do portfólio (layout de capa)
+// Função CORRIGIDA para a galeria do portfólio
 function handleGallery(galleryId, collectionName) {
     const galleryElement = document.getElementById(galleryId);
     if (!galleryElement) return;
@@ -116,80 +172,21 @@ function handleGallery(galleryId, collectionName) {
             });
 
             let galleryHTML = '<div class="gallery-layout">';
-
             if (coverItem) {
-                galleryHTML += `
-                  <div class="gallery-item gallery-item-cover">
-                    <a href="${coverItem.link}" target="_blank">
-                      <img src="${coverItem.imageUrl}" alt="Imagem de capa do projeto">
-                    </a>
-                  </div>
-                `;
+                galleryHTML += `<div class="gallery-item gallery-item-cover"><a href="${coverItem.link}" target="_blank"><img src="${coverItem.imageUrl}" alt="Imagem de capa do projeto"></a></div>`;
             }
-
             if (otherItems.length > 0) {
                 galleryHTML += '<div class="gallery-thumbnails">';
                 otherItems.forEach(item => {
-                    galleryHTML += `
-                      <div class="gallery-item gallery-item-thumbnail">
-                        <a href="${item.link}" target="_blank">
-                          <img src="${item.imageUrl}" alt="Imagem do projeto">
-                        </a>
-                      </div>
-                    `;
+                    galleryHTML += `<div class="gallery-item gallery-item-thumbnail"><a href="${item.link}" target="_blank"><img src="${item.imageUrl}" alt="Imagem do projeto"></a></div>`;
                 });
                 galleryHTML += '</div>';
             }
-            
             galleryHTML += '</div>';
             galleryElement.innerHTML = galleryHTML;
         })
         .catch((error) => {
             console.error("Erro ao buscar a galeria do Firebase: ", error);
-            galleryElement.innerHTML = '<p>Não foi possível carregar a galeria. Tente novamente mais tarde.</p>';
+            galleryElement.innerHTML = '<p>Não foi possível carregar a galeria.</p>';
         });
 }
-
-// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES NO SITE ---
-document.addEventListener('DOMContentLoaded', () => {
-    // ---- FUNÇÕES E ANIMAÇÕES ORIGINAIS RESTAURADAS ----
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
-    // ---------------------------------------------------
-
-    // Inicializa o menu
-    handleMenu('main-menu', 'menu-button');
-
-    // Inicializa o acordeão (se existir na página)
-    if (document.getElementById('faq-accordion')) {
-        handleAccordion('faq-accordion');
-    }
-    
-    // Inicializa o splash da PÁGINA INICIAL (index.html)
-    if (document.getElementById('splash-screen')) {
-        handleSplash('splash-screen', 'splash-video');
-    }
-
-    // Inicializa a galeria do PORTFÓLIO
-    if (document.getElementById('gallery-julinha')) {
-        handleGallery('gallery-julinha', 'julinha');
-    }
-    
-    // Inicializa o splash do PORTFÓLIO
-    if (document.getElementById('splash-screen-portfolio')) {
-        handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
-    }
-});
