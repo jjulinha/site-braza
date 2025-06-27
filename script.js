@@ -120,64 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         }
     }
-
-    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
+// 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
     const portfolioPageIdentifier = document.querySelector('.portfolio-grid-new');
     if (portfolioPageIdentifier) {
-
-        // Lógica do Splash Screen do Portfólio
         const portfolioSplash = document.getElementById('splash-screen-portfolio');
         if (portfolioSplash) {
-            const removePortfolioSplash = () => {
-                if (document.body.contains(portfolioSplash)) {
-                    portfolioSplash.classList.add('swoosh-out');
-                    setTimeout(() => { if (portfolioSplash.parentNode) portfolioSplash.parentNode.removeChild(portfolioSplash); }, 1000);
-                }
-            };
-            setTimeout(removePortfolioSplash, 4000);
+            setTimeout(() => {
+                portfolioSplash.classList.add('swoosh-out');
+                setTimeout(() => { if (portfolioSplash.parentNode) portfolioSplash.parentNode.removeChild(portfolioSplash); }, 1000);
+            }, 4000);
         }
-
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        let allProjects = [];
-
-        function renderPortfolio(projectsToRender) {
-            portfolioPageIdentifier.innerHTML = "";
-            if (projectsToRender.length === 0) {
-                portfolioPageIdentifier.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
-                return;
-            }
-            projectsToRender.forEach(projeto => {
-                const itemLink = document.createElement('a');
-                itemLink.href = projeto.link || '#';
-                itemLink.className = 'portfolio-item-new';
-                itemLink.target = '_blank';
-                if (projeto.isCapa === true) {
-                    itemLink.classList.add('item-large');
-                }
-                itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
-                portfolioPageIdentifier.appendChild(itemLink);
-            });
-        }
-
-        db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
-            .then((querySnapshot) => {
-                allProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                allProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
-                renderPortfolio(allProjects);
-            })
-            .catch((error) => console.error("Erro ao buscar projetos: ", error));
-
-        if (filterButtons.length > 0) {
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    const filterValue = button.getAttribute('data-filter');
-                    let filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
-                    filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
-                    renderPortfolio(filteredProjects);
-                });
-            });
-        }
-    }
-});
