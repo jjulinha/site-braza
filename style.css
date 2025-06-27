@@ -34,10 +34,14 @@ html, body { width: 100%; font-family: 'Inter', sans-serif; background-color: #1
 /* ======================================================== */
 /* ESTILOS UNIFICADOS PARA OS SPLASH SCREENS (CORRIGIDO) */
 /* ======================================================== */
-#splash-screen, #splash-screen-portfolio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1s ease-in-out; }
+#splash-screen, #splash-screen-portfolio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 999; transition: opacity 1s ease-in-out; }
 #splash-screen video, #splash-screen-portfolio video { width: 100%; height: 100%; object-fit: cover; }
 #splash-screen-portfolio { animation: zoomInEffect 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 @keyframes zoomInEffect { from { transform: scale(1.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+body.loading {
+  overflow: hidden;
+  height: 100vh;
+}
 #splash-screen.swoosh-out, #splash-screen-portfolio.swoosh-out { opacity: 0; pointer-events: none; }
 
 /* ======================================================== */
