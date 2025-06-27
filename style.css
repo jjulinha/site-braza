@@ -550,6 +550,16 @@ footer p.copyright {
     font-family: var(--fonte-corpo); font-weight: 500;
 }
 
+body.loading *:not(#splash-screen-portfolio) {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+}
+body:not(.loading) * {
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}
+
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after { left: 30px; }
