@@ -19,13 +19,32 @@ try {
 
 document.addEventListener("DOMContentLoaded", () => {
   // === SPLASH FIX ===
-  const splashScreen = document.getElementById("splash-screen");
-  if (splashScreen) {
-    setTimeout(() => {
-      splashScreen.classList.add("swoosh-out");
-      setTimeout(() => splashScreen.remove(), 1000);
-    }, 4000);
-  }
+ const splashScreen = document.getElementById("splash-screen");
+const splashVideo = document.getElementById("splash-video");
+
+function removeSplash() {
+  if (!splashScreen) return;
+  splashScreen.classList.add("swoosh-out");
+  setTimeout(() => {
+    if (splashScreen.parentNode) splashScreen.remove();
+  }, 1000);
+}
+
+if (splashScreen && splashVideo) {
+  let splashTimeout = setTimeout(removeSplash, 4000);
+
+  splashVideo.addEventListener("loadeddata", () => {
+    splashVideo.play().catch(() => {});
+  });
+
+  splashVideo.addEventListener("ended", () => {
+    clearTimeout(splashTimeout);
+    removeSplash();
+  });
+
+  // Se o vídeo não terminar em 7s, remove o splash mesmo assim (fallback)
+  setTimeout(removeSplash, 7000);
+}
 
   // === HERO TEXT ANIMAÇÃO ===
   const heroTitles = document.querySelectorAll(".hero-title");
