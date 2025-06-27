@@ -566,15 +566,37 @@ footer p.copyright {
     font-family: var(--fonte-corpo); font-weight: 500;
 }
 
-body.loading *:not(#splash-screen-portfolio) {
-  pointer-events: none;
-  user-select: none;
-  opacity: 0;
+/* ======================================================== */
+/* ESTILOS PARA OCULTAR CONTEÚDO DURANTE O LOADING (CORRIGIDO) */
+/* ======================================================== */
+
+/*
+  DOCUMENTAÇÃO:
+  Esta regra é a chave da correção. Ela faz o seguinte:
+  - 'body.loading > *': Seleciona apenas os filhos DIRETOS do body.
+    Isso impede que a regra afete elementos aninhados dentro do splash.
+  - ':not(#splash-screen):not(#splash-screen-portfolio)': Cria uma exceção
+    para AMBOS os IDs dos ecrãs de splash.
+  - Como resultado, o header, main e footer ficam com opacidade 0, mas
+    os ecrãs de splash permanecem 100% visíveis.
+*/
+body.loading > *:not(#splash-screen):not(#splash-screen-portfolio) {
+    opacity: 0;
+    pointer-events: none; /* Impede cliques nos elementos escondidos */
+    user-select: none;   /* Impede a seleção de texto nos elementos escondidos */
 }
+
+/*
+  DOCUMENTAÇÃO:
+  Esta regra garante que, assim que a classe 'loading' for removida
+  do body via JavaScript, todos os elementos voltem a ter opacidade 1
+  com uma transição suave.
+*/
 body:not(.loading) * {
   opacity: 1;
   transition: opacity 0.4s ease-in;
 }
+
 
 /* RESPONSIVO */
 @media (max-width: 900px) {
