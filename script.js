@@ -92,7 +92,9 @@ function handleSplash(splashId, videoId) {
   const splash = document.getElementById(splashId);
   const video = document.getElementById(videoId);
 
+  // Se o splash ou o vídeo não existirem na página, não faz nada.
   if (!splash || !video) {
+    // Garante que a classe 'loading' seja removida se o splash não for encontrado.
     if (!splash) document.body.classList.remove('loading');
     return;
   }
@@ -105,41 +107,44 @@ function handleSplash(splashId, videoId) {
     if (splashRemoved) return; // Se já foi removido, não faz mais nada
     splashRemoved = true;
     console.log(`Debug Braza: A remover o splash '${splashId}'.`);
-    splash.classList.add('swoosh-out');
+    splash.classList.add('swoosh-out'); // Adiciona a classe para o efeito de fade-out
+    
+    // Remove o elemento da página após a animação de saída.
     setTimeout(() => {
       if (splash && splash.parentElement) {
         splash.remove();
       }
+      // Remove a classe 'loading' do body para mostrar o conteúdo do site.
       document.body.classList.remove('loading');
-    }, 1000);
+    }, 1000); // Tempo igual à duração da transição no CSS.
   };
 
-  // EVENTO PRINCIPAL: Ouve pelo evento 'canplay' que indica que o vídeo tem dados suficientes para tocar.
+  // EVENTO PRINCIPAL: Disparado quando o vídeo pode ser reproduzido.
   video.addEventListener('canplay', () => {
     console.log(`Debug Braza: Vídeo '${videoId}' pronto para tocar (evento 'canplay').`);
-    // Tenta iniciar o vídeo de forma programática. É mais garantido que o 'autoplay'.
+    
+    // Tenta reproduzir o vídeo. O .catch() é importante para lidar com políticas de autoplay dos navegadores.
     video.play()
       .then(() => {
         console.log(`Debug Braza: O vídeo '${videoId}' começou a tocar com sucesso.`);
-        // Espera um tempo definido (4s) com o vídeo a tocar antes de remover o splash.
+        // Espera 4 segundos com o vídeo a tocar antes de remover o splash.
         setTimeout(removeSplash, 4000);
       })
       .catch(e => {
         console.error(`Debug Braza: Ocorreu um erro ao tentar tocar o vídeo: `, e);
-        removeSplash(); // Se houver erro ao tocar, remove o splash
+        removeSplash(); // Se houver um erro ao tocar, remove o splash imediatamente.
       });
   });
 
-  // EVENTO DE ERRO: Se o browser não conseguir descodificar ou encontrar o vídeo.
+  // EVENTO DE ERRO: Disparado se o vídeo não carregar (ex: caminho errado).
   video.addEventListener('error', (e) => {
-    console.error(`Debug Braza: ERRO GERAL no elemento de vídeo '${videoId}'.`, e);
-    removeSplash();
+    console.error(`Debug Braza: ERRO GERAL no elemento de vídeo '${videoId}'. Verifique o caminho do ficheiro.`, e);
+    removeSplash(); // Remove o splash para não bloquear o site.
   });
 
-  // TEMPO LIMITE DE SEGURANÇA: Aumentado para 15 segundos.
-  // Se nada acontecer em 15 segundos (nem 'canplay', nem 'error'), remove o splash para não bloquear o site.
+  // TEMPO LIMITE DE SEGURANÇA: Se nada acontecer em 15 segundos, remove o splash.
   setTimeout(() => {
-    console.warn("Debug Braza: Timeout de segurança atingido. A remover o splash.");
+    console.warn("Debug Braza: Timeout de segurança atingido. A remover o splash para evitar bloqueio.");
     removeSplash();
   }, 15000); // Aumentámos o tempo de espera para 15 segundos.
 }
