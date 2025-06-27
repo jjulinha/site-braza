@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, { threshold: 0.1 });
+        
         revealElements.forEach(elem => {
             revealObserver.observe(elem);
         });
@@ -87,16 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const homePageIdentifier = document.getElementById('hero');
     if (homePageIdentifier) {
         
-        // Lógica do Splash Screen (com duração fixa de 4 segundos)
+        // Lógica do Splash Screen da Home
         const splashScreen = document.getElementById('splash-screen');
         if (splashScreen) {
             const removeSplash = () => {
                 if (document.body.contains(splashScreen)) {
                     splashScreen.classList.add('swoosh-out');
-                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000); // Duração da animação de saída
+                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
                 }
             };
-            setTimeout(removeSplash, 4000); // Duração do splash
+            setTimeout(removeSplash, 4000);
         }
 
         // Animação dos Títulos HERO
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let html = "";
                     querySnapshot.forEach((doc) => {
                         const projeto = doc.data();
-                        html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                        html += `<a href="portfolio.html" class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></a>`;
                     });
                     homePortfolioGrid.innerHTML = html;
                 });
@@ -121,15 +122,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
-    const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
-    if (fullPortfolioGrid && typeof db !== 'undefined') {
+    const portfolioPageIdentifier = document.querySelector('.portfolio-grid-new');
+    if (portfolioPageIdentifier) {
+
+        // Lógica do Splash Screen do Portfólio
+        const portfolioSplash = document.getElementById('splash-screen-portfolio');
+        if (portfolioSplash) {
+            const removePortfolioSplash = () => {
+                if (document.body.contains(portfolioSplash)) {
+                    portfolioSplash.classList.add('swoosh-out');
+                    setTimeout(() => { if (portfolioSplash.parentNode) portfolioSplash.parentNode.removeChild(portfolioSplash); }, 1000);
+                }
+            };
+            setTimeout(removePortfolioSplash, 4000);
+        }
+
         const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
         function renderPortfolio(projectsToRender) {
-            fullPortfolioGrid.innerHTML = "";
+            portfolioPageIdentifier.innerHTML = "";
             if (projectsToRender.length === 0) {
-                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
+                portfolioPageIdentifier.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
                 return;
             }
             projectsToRender.forEach(projeto => {
@@ -141,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     itemLink.classList.add('item-large');
                 }
                 itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
-                fullPortfolioGrid.appendChild(itemLink);
+                portfolioPageIdentifier.appendChild(itemLink);
             });
         }
 
