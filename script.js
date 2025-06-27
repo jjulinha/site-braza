@@ -157,48 +157,76 @@ function handleSplash(splashId, videoId) {
     handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
   }
 
-  // === LÓGICA DE PORTFÓLIO ===
-  const portfolioPageIdentifier = document.querySelector('.portfolio-grid-new');
-  if (portfolioPageIdentifier) {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    let allProjects = [];
+ // script.js (SUBSTITUA A FUNÇÃO ANTERIOR POR ESTA VERSÃO CORRIGIDA)
 
-    function renderPortfolio(projectsToRender) {
-      portfolioPageIdentifier.innerHTML = "";
-      if (projectsToRender.length === 0) {
-        portfolioPageIdentifier.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
-        return;
-      }
-      projectsToRender.forEach(projeto => {
-        const itemLink = document.createElement('a');
-        itemLink.href = projeto.link || '#';
-        itemLink.className = 'portfolio-item-new';
-        itemLink.target = '_blank';
-        if (projeto.isCapa === true) {
-          itemLink.classList.add('item-large');
+function handleGallery(galleryId, collectionName) {
+  const galleryElement = document.getElementById(galleryId);
+  if (!galleryElement) return;
+
+  // Limpa a galeria para evitar duplicados ao recarregar
+  galleryElement.innerHTML = ''; 
+
+  // Pega a referência da coleção no Firebase
+  const collectionRef = collection(db, collectionName);
+
+  getDocs(collectionRef)
+    .then((querySnapshot) => {
+      let coverItem = null; // Para armazenar o item de capa
+      const otherItems = []; // Para armazenar os outros itens
+
+      querySnapshot.forEach((doc) => {
+        const item = { id: doc.id, ...doc.data() };
+        // Separa o item de capa dos demais
+        if (item.tag === 'capa') {
+          coverItem = item;
+        } else {
+          otherItems.push(item);
         }
-        itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
-        portfolioPageIdentifier.appendChild(itemLink);
       });
-    }
 
-    db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
-      .then((querySnapshot) => {
-        allProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        allProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
-        renderPortfolio(allProjects);
-      })
-      .catch((error) => console.error("Erro ao buscar projetos: ", error));
+      // --- Início da Lógica de Construção do HTML ---
 
-    if (filterButtons.length > 0) {
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          const filterValue = button.getAttribute('data-filter');
-          let filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
-          filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
-          renderPortfolio(filteredProjects);
+      let galleryHTML = '<div class="gallery-layout">';
+
+      // 1. Adiciona a imagem de capa (maior)
+      if (coverItem) {
+        galleryHTML += `
+          <div class="gallery-item gallery-item-cover">
+            <a href="${coverItem.link}" target="_blank">
+              <img src="${coverItem.imageUrl}" alt="Imagem de capa do projeto">
+            </a>
+          </div>
+        `;
+      }
+
+      // 2. Cria um container para as imagens menores
+      if (otherItems.length > 0) {
+        galleryHTML += '<div class="gallery-thumbnails">';
+        otherItems.forEach(item => {
+          galleryHTML += `
+            <div class="gallery-item gallery-item-thumbnail">
+              <a href="${item.link}" target="_blank">
+                <img src="${item.imageUrl}" alt="Imagem do projeto">
+              </a>
+            </div>
+          `;
+        });
+        galleryHTML += '</div>'; // Fecha o container das thumbnails
+      }
+      
+      galleryHTML += '</div>'; // Fecha o gallery-layout
+
+      // Insere o HTML gerado no elemento da galeria
+      galleryElement.innerHTML = galleryHTML;
+
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar a galeria do Firebase: ", error);
+      galleryElement.innerHTML = '<p>Não foi possível carregar a galeria. Tente novamente mais tarde.</p>';
+    });
+}
+
+          
         });
       });
     }
