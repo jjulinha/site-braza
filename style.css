@@ -1006,6 +1006,13 @@ footer#contato {
     margin-top: 20px;
     transition: max-height 1s ease-in-out, opacity 0.5s ease, margin-top 0.3s ease;
 }
+
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after {
