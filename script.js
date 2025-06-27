@@ -51,55 +51,62 @@ function handleAccordion(accordionId) {
     }
 }
 
-// Função corrigida para o splash screen
+// script.js - Substitua a função handleSplash por esta versão
+
 function handleSplash(splashId, videoId) {
     const splash = document.getElementById(splashId);
     const video = document.getElementById(videoId);
 
+    // Se os elementos não existirem, termina a execução para evitar erros.
     if (!splash || !video) {
         if (!splash) document.body.classList.remove('loading');
         return;
     }
+    
+    // Garante via JavaScript que o vídeo não entre em loop.
+    video.loop = false; 
 
-    console.log(`Debug Braza: A aguardar o vídeo '${videoId}' ficar pronto...`);
     let splashRemoved = false;
-
     const removeSplash = () => {
         if (splashRemoved) return;
         splashRemoved = true;
+        
         console.log(`Debug Braza: A remover o splash '${splashId}'.`);
         splash.classList.add('swoosh-out');
         
+        // Remove o elemento da página e a classe de loading após a animação.
         setTimeout(() => {
-            if (splash && splash.parentElement) {
+            if (splash.parentElement) {
                 splash.remove();
             }
             document.body.classList.remove('loading');
-        }, 1000);
+        }, 1000); // Duração da animação de fade-out
     };
 
-    video.addEventListener('canplay', () => {
-        console.log(`Debug Braza: Vídeo '${videoId}' pronto para tocar (evento 'canplay').`);
-        video.play()
-            .then(() => {
-                console.log(`Debug Braza: O vídeo '${videoId}' começou a tocar com sucesso.`);
-                setTimeout(removeSplash, 4000);
-            })
-            .catch(e => {
-                console.error(`Debug Braza: Ocorreu um erro ao tentar tocar o vídeo: `, e);
-                removeSplash();
-            });
-    });
-
-    video.addEventListener('error', (e) => {
-        console.error(`Debug Braza: ERRO GERAL no elemento de vídeo '${videoId}'. Verifique o caminho do ficheiro.`, e);
+    // GATILHO PRINCIPAL: Quando o vídeo terminar de tocar, remove o splash.
+    video.addEventListener('ended', () => {
+        console.log("Debug Braza: Vídeo terminou (evento 'ended'). A remover o splash.");
         removeSplash();
     });
 
-    setTimeout(() => {
-        console.warn("Debug Braza: Timeout de segurança atingido. A remover o splash para evitar bloqueio.");
+    // Tenta iniciar o vídeo assim que ele estiver pronto.
+    video.addEventListener('canplay', () => {
+        video.play().catch(e => {
+            // Se o navegador bloquear o autoplay, remove o splash imediatamente.
+            console.error("Debug Braza: Autoplay bloqueado. A remover o splash.", e);
+            removeSplash();
+        });
+    });
+
+    // GATILHO DE SEGURANÇA: Se o vídeo não carregar ou não tocar em 15 segundos, remove o splash.
+    const fallbackTimeout = setTimeout(() => {
+        console.warn("Debug Braza: Timeout de segurança de 15s atingido. A remover o splash.");
         removeSplash();
     }, 15000);
+
+    // Se o vídeo terminar, cancelamos o gatilho de segurança para não haver redundância.
+    video.addEventListener('ended', () => clearTimeout(fallbackTimeout));
+    video.addEventListener('error', () => clearTimeout(fallbackTimeout));
 }
 
 // Função corrigida para a galeria do portfólio
