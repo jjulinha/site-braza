@@ -1090,6 +1090,119 @@ footer#contato {
   margin: 0;
 }
 
+/* ==== PORTFÓLIO AGRUPADO: CAPA + FILHOS AJUSTADO === */
+.portfolio-group {
+  margin-bottom: 100px;
+}
+
+.portfolio-group .item-capa {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  height: auto;
+  border: 4px solid var(--cor-acento-amarelo);
+  position: relative;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.portfolio-group .item-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio-filhos-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+.portfolio-item-child {
+  flex: 1 1 calc(25% - 16px);
+  max-width: calc(25% - 16px);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item-child img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-item-child:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-item-child:hover img {
+  transform: scale(1.05);
+}
+
+.portfolio-item-child .portfolio-item-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1));
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-item-child:hover .portfolio-item-overlay {
+  opacity: 1;
+}
+
+.portfolio-item-child .overlay-content {
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.portfolio-item-child:hover .overlay-content {
+  transform: translateY(0);
+}
+
+.portfolio-item-child .overlay-content h3 {
+  color: var(--cor-acento-amarelo);
+  font-size: 1.1rem;
+  margin: 0;
+  font-family: var(--fonte-headline);
+  line-height: 1.3;
+}
+
+/* Responsivo para filhos */
+@media (max-width: 1024px) {
+  .portfolio-item-child {
+    flex: 1 1 calc(33.33% - 12px);
+    max-width: calc(33.33% - 12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-item-child {
+    flex: 1 1 calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-item-child {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
 
 /* RESPONSIVO */
 @media (max-width: 900px) {
