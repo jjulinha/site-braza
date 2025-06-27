@@ -5,12 +5,13 @@ import { getFirestore, collection, getDocs } from "https://www.gstatic.com/fireb
 
 // Configuração do Firebase
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "braza-ag",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
+  authDomain: "braza-portfolio.firebaseapp.com",
+  projectId: "braza-portfolio",
+  storageBucket: "braza-portfolio.firebasestorage.app",
+  messagingSenderId: "504617854086",
+  appId: "1:504617854086:web:727bfb242c29a6d7345d07",
+  measurementId: "G-5KFT2C7ZCF"
 };
 
 const app = initializeApp(firebaseConfig);
