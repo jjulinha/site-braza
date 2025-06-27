@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // HEADER ESCONDIDO AO ROLAR
+  // HEADER ESCONDIDO
   const header = document.querySelector('header');
   if (header) {
     let lastScrollTop = 0;
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // REVEAL
+  // REVEAL SECTIONS
   const revealElements = document.querySelectorAll('.reveal');
   if (revealElements.length > 0) {
     const revealObserver = new IntersectionObserver((entries) => {
@@ -86,52 +86,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // SPLASH INDEX
-  const homePageIdentifier = document.getElementById('hero');
-  if (homePageIdentifier) {
-    const splashScreen = document.getElementById('splash-screen');
-    if (splashScreen) {
-      setTimeout(() => {
-        splashScreen.classList.add('swoosh-out');
+  // === SPLASH GENÉRICO PARA AMBAS AS PÁGINAS ===
+  function handleSplash(splashId, videoId) {
+    const splash = document.getElementById(splashId);
+    const video = document.getElementById(videoId);
+    if (splash && video) {
+      video.addEventListener('loadeddata', () => {
         setTimeout(() => {
-          if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen);
+          splash.classList.add('swoosh-out');
+          setTimeout(() => {
+            splash.remove();
+            document.body.classList.remove('loading');
+          }, 1000);
+        }, 4000);
+      });
+      video.addEventListener('error', () => {
+        console.error(`Erro ao carregar o vídeo do splash: ${videoId}`);
+        splash.classList.add('swoosh-out');
+        setTimeout(() => {
+          splash.remove();
           document.body.classList.remove('loading');
         }, 1000);
-      }, 4000);
+      });
     }
   }
 
-  // SPLASH PORTFOLIO
+  // Detecta qual splash usar:
+  if (document.getElementById('splash-screen')) {
+    handleSplash('splash-screen', 'splash-video');
+  }
+  if (document.getElementById('splash-screen-portfolio')) {
+    handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
+  }
+
+  // === LÓGICA DE PORTFÓLIO ===
   const portfolioPageIdentifier = document.querySelector('.portfolio-grid-new');
   if (portfolioPageIdentifier) {
-    const portfolioSplash = document.getElementById('splash-screen-portfolio');
-    const splashVideo = document.getElementById('splash-video-portfolio');
-
-    const removeSplash = () => {
-      if (portfolioSplash) {
-        portfolioSplash.classList.add('swoosh-out');
-        setTimeout(() => {
-          if (portfolioSplash.parentNode) {
-            portfolioSplash.parentNode.removeChild(portfolioSplash);
-          }
-          document.body.classList.remove('loading');
-        }, 1000);
-      }
-    };
-
-    if (splashVideo) {
-      splashVideo.addEventListener('loadeddata', () => {
-        setTimeout(removeSplash, 4000);
-      });
-      splashVideo.addEventListener('error', (e) => {
-        console.error("Erro ao carregar o vídeo de splash:", e);
-        removeSplash();
-      });
-    } else {
-      setTimeout(removeSplash, 5000);
-    }
-
-    // FILTROS
     const filterButtons = document.querySelectorAll('.filter-btn');
     let allProjects = [];
 
