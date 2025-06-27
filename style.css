@@ -597,7 +597,49 @@ body:not(.loading) * {
   transition: opacity 0.4s ease-in;
 }
 
+/* style.css - Adicione ou verifique se estas regras existem */
 
+.gallery-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Espaçamento entre a imagem de capa e as miniaturas */
+}
+
+.gallery-item-cover {
+  width: 100%;
+}
+
+.gallery-item-cover img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.gallery-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas para as miniaturas */
+  gap: 1rem; /* Espaçamento entre as miniaturas */
+}
+
+.gallery-item-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Para tornar responsivo em telas menores */
+@media (max-width: 768px) {
+  .gallery-thumbnails {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-thumbnails {
+    grid-template-columns: 1fr; /* 1 coluna em telemóveis */
+  }
+}
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after { left: 30px; }
