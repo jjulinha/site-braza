@@ -47,67 +47,147 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // SCROLL REVEAL DAS SECÇÕES (REPETE A ANIMAÇÃO)
+    const revealElements = document.querySelectorAll('.reveal');
+    if (revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(elem => {
+            revealObserver.observe(elem);
+        });
+    }
+
+    // LÓGICA DO ACORDEÃO PARA A FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+            const question = item.querySelector('h3');
+            question.addEventListener('click', () => {
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                item.classList.toggle('active');
+            });
+        });
+    }
+
     // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
 
     // 1. SÓ PARA A PÁGINA INICIAL (index.html)
-    const splashScreen = document.getElementById('splash-screen');
-    const homePortfolioGrid = document.querySelector('.portfolio-grid'); // Seletor da pré-visualização
+    const homePageIdentifier = document.getElementById('hero');
+    if (homePageIdentifier) {
+        
+        // Lógica do Splash Screen (com duração fixa de 4 segundos)
+        const splashScreen = document.getElementById('splash-screen');
+        if (splashScreen) {
+            const removeSplash = () => {
+                if (document.body.contains(splashScreen)) {
+                    splashScreen.classList.add('swoosh-out');
+                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
+                }
+            };
+            // Define um temporizador fixo para remover o splash após 4 segundos
+            setTimeout(removeSplash, 4000);
+        }
 
-    if (splashScreen) { // Se encontrar o splash, está na home
-        const removeSplash = () => {
-            if (document.body.contains(splashScreen)) {
-                splashScreen.classList.add('swoosh-out');
-                setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
-            }
-        };
-        window.addEventListener('load', removeSplash);
-        setTimeout(removeSplash, 5000);
-
-        // Animação dos Títulos HERO (só na home)
+        // Animação dos Títulos HERO
         const heroTitles = document.querySelectorAll('.hero-title');
         heroTitles.forEach((el, i) => {
             setTimeout(() => el.classList.add('active'), i * 400);
         });
+
+        // Lógica da Pré-visualização do Portfólio
+        const homePortfolioGrid = document.querySelector('.portfolio-grid');
+        if (homePortfolioGrid && typeof db !== 'undefined') {
+            db.collection("projetos").orderBy("dataDeCriacao", "desc").limit(3).get()
+                .then((querySnapshot) => {
+                    let html = "";
+                    querySnapshot.forEach((doc) => {
+                        const projeto = doc.data();
+                        html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                    });
+                    homePortfolioGrid.innerHTML = html;
+                });
+        }
     }
 
-    if (homePortfolioGrid && typeof db !== 'undefined') { // Se encontrar a grelha de preview
-        db.collection("projetos").orderBy("dataDeCriacao", "desc").limit(3).get()
-            .then((querySnapshot) => {
-                let html = "";
-                querySnapshot.forEach((doc) => {
-                    const projeto = doc.data();
-                    html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
-                });
-                homePortfolioGrid.innerHTML = html;
-            });
+ // Lógica da Pré-visualização do Portfólio (ATUALIZADA)
+        const homePortfolioGrid = document.querySelector('.portfolio-grid');
+        if (homePortfolioGrid && typeof db !== 'undefined') {
+            db.collection("projetos")
+              .where("isCapa", "==", false) // <<< SÓ PEGA PROJETOS QUE NÃO SÃO DE CAPA
+              .orderBy("dataDeCriacao", "desc")
+              .limit(3)
+              .get()
+              .then((querySnapshot) => {
+                  let html = "";
+                  querySnapshot.forEach((doc) => {
+                      const projeto = doc.data();
+                      html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                  });
+                  homePortfolioGrid.innerHTML = html;
+              });
+        }
     }
 
     // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-
-    if (fullPortfolioGrid && typeof db !== 'undefined') { // Se encontrar a grelha completa
+    if (fullPortfolioGrid && typeof db !== 'undefined') {
+        const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
+        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA COM LÓGICA DE CAPA ---
         function renderPortfolio(projectsToRender) {
             fullPortfolioGrid.innerHTML = "";
             if (projectsToRender.length === 0) {
                 fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
                 return;
             }
+
             projectsToRender.forEach(projeto => {
                 const itemLink = document.createElement('a');
                 itemLink.href = projeto.link || '#';
-                itemLink.className = 'portfolio-item-new';
+                itemLink.className = 'portfolio-item-new'; // Classe base
                 itemLink.target = '_blank';
-                itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
+
+                // Aplica a classe 'item-large' se o projeto for de capa
+                if (projeto.isCapa === true) {
+                    itemLink.classList.add('item-large');
+                }
+
+                itemLink.innerHTML = `
+                    <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
+                    <div class="portfolio-item-overlay">
+                        <div class="overlay-content">
+                            <h3>${projeto.titulo}</h3>
+                            <p>${projeto.descricao || 'Clique para ver mais'}</p>
+                        </div>
+                    </div>
+                `;
                 fullPortfolioGrid.appendChild(itemLink);
             });
         }
 
         db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
             .then((querySnapshot) => {
-                allProjects = querySnapshot.docs.map(doc => doc.data());
+                allProjects = querySnapshot.docs.map(doc => {
+                    // Adiciona o ID do documento aos dados para referência, se necessário
+                    return { id: doc.id, ...doc.data() };
+                });
+
+                // Ordena para que os itens de capa apareçam primeiro
+                allProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
+
                 renderPortfolio(allProjects);
             })
             .catch((error) => console.error("Erro ao buscar projetos: ", error));
@@ -117,7 +197,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const filterValue = button.getAttribute('data-filter');
-                const filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
+                
+                const filteredProjects = filterValue === 'all' 
+                    ? allProjects 
+                    : allProjects.filter(p => p.categoria === filterValue);
+                
+                // Reordena e renderiza os projetos filtrados
+                filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
                 renderPortfolio(filteredProjects);
             });
         });
