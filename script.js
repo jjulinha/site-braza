@@ -86,59 +86,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-// script.js (Substituir a função handleSplash)
+// script.js (SUBSTITUA A FUNÇÃO ANTERIOR POR ESTA VERSÃO MELHORADA)
 
-// === SPLASH GENÉRICO PARA AMBAS AS PÁGINAS (COM MELHOR DEBUG) ===
 function handleSplash(splashId, videoId) {
   const splash = document.getElementById(splashId);
   const video = document.getElementById(videoId);
 
-  // Se o splash ou o vídeo não existirem na página, não fazemos nada.
   if (!splash || !video) {
-    console.log(`Debug Braza: Elemento de splash ('${splashId}') ou vídeo ('${videoId}') não encontrado nesta página.`);
-    // Se o splash não existir, garantimos que o body não fica 'loading'
     if (!splash) document.body.classList.remove('loading');
     return;
   }
 
-  console.log(`Debug Braza: A tentar carregar o vídeo: ${video.querySelector('source').src}`);
+  console.log(`Debug Braza: A aguardar o vídeo '${videoId}' ficar pronto...`);
 
-  // Evento para quando o vídeo carrega com sucesso
-  video.addEventListener('loadeddata', () => {
-    console.log(`Debug Braza: Vídeo '${videoId}' carregado com SUCESSO! A mostrar o splash.`);
-    setTimeout(() => {
-      console.log(`Debug Braza: A remover o splash '${splashId}'.`);
-      splash.classList.add('swoosh-out');
-      setTimeout(() => {
-        splash.remove();
-        document.body.classList.remove('loading');
-      }, 1000); // Duração da animação de saída
-    }, 4000); // Tempo que o vídeo fica visível
-  });
+  let splashRemoved = false; // Variável de controlo para não remover o splash duas vezes
 
-  // Evento para quando ocorre um ERRO ao carregar o vídeo
-  video.addEventListener('error', () => {
-    // AQUI ESTÁ A CHAVE: Este evento está a ser acionado.
-    console.error(`Debug Braza: ERRO! Não foi possível carregar o ficheiro do vídeo: ${video.querySelector('source').src}. Verifique se o caminho e o nome do ficheiro estão corretos.`);
-    
-    // Escondemos o splash imediatamente para não bloquear o site.
+  const removeSplash = () => {
+    if (splashRemoved) return; // Se já foi removido, não faz mais nada
+    splashRemoved = true;
+    console.log(`Debug Braza: A remover o splash '${splashId}'.`);
     splash.classList.add('swoosh-out');
     setTimeout(() => {
-      splash.remove();
+      if (splash && splash.parentElement) {
+        splash.remove();
+      }
       document.body.classList.remove('loading');
-    }, 500); // Remove mais rápido em caso de erro
+    }, 1000);
+  };
+
+  // EVENTO PRINCIPAL: Ouve pelo evento 'canplay' que indica que o vídeo tem dados suficientes para tocar.
+  video.addEventListener('canplay', () => {
+    console.log(`Debug Braza: Vídeo '${videoId}' pronto para tocar (evento 'canplay').`);
+    // Tenta iniciar o vídeo de forma programática. É mais garantido que o 'autoplay'.
+    video.play()
+      .then(() => {
+        console.log(`Debug Braza: O vídeo '${videoId}' começou a tocar com sucesso.`);
+        // Espera um tempo definido (4s) com o vídeo a tocar antes de remover o splash.
+        setTimeout(removeSplash, 4000);
+      })
+      .catch(e => {
+        console.error(`Debug Braza: Ocorreu um erro ao tentar tocar o vídeo: `, e);
+        removeSplash(); // Se houver erro ao tocar, remove o splash
+      });
   });
 
-  // Garantia extra: se o vídeo não carregar por algum motivo em 7 segundos, removemos o splash.
-  setTimeout(() => {
-    if (splash.parentElement) { // Verifica se o splash ainda existe no DOM
-      console.warn("Debug Braza: O vídeo demorou demasiado a carregar. A remover o splash por segurança.");
-      splash.remove();
-      document.body.classList.remove('loading');
-    }
-  }, 7000);
-}
+  // EVENTO DE ERRO: Se o browser não conseguir descodificar ou encontrar o vídeo.
+  video.addEventListener('error', (e) => {
+    console.error(`Debug Braza: ERRO GERAL no elemento de vídeo '${videoId}'.`, e);
+    removeSplash();
+  });
 
+  // TEMPO LIMITE DE SEGURANÇA: Aumentado para 15 segundos.
+  // Se nada acontecer em 15 segundos (nem 'canplay', nem 'error'), remove o splash para não bloquear o site.
+  setTimeout(() => {
+    console.warn("Debug Braza: Timeout de segurança atingido. A remover o splash.");
+    removeSplash();
+  }, 15000); // Aumentámos o tempo de espera para 15 segundos.
+}
+  
   // Detecta qual splash usar:
   if (document.getElementById('splash-screen')) {
     handleSplash('splash-screen', 'splash-video');
