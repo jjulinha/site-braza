@@ -40,7 +40,7 @@ html, body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  transition: opacity 1s ease-in-out; /* Transição de saída suave */
+  transition: opacity 1s ease-in-out; 
 }
 
 #splash-screen video, 
@@ -50,7 +50,6 @@ html, body {
   object-fit: cover;
 }
 
-/* Animação de ZOOM IN (só para o splash do portfólio) */
 #splash-screen-portfolio {
     animation: zoomInEffect 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
@@ -66,11 +65,10 @@ html, body {
   }
 }
 
-/* Regra de saída para AMBOS os splashes */
 #splash-screen.swoosh-out, 
 #splash-screen-portfolio.swoosh-out {
   opacity: 0;
-  pointer-events: none; /* Impede que o ecrã invisível bloqueie cliques */
+  pointer-events: none; 
 }
 
 
