@@ -92,41 +92,26 @@ if (splashScreen && splashVideo) {
       `;
 
       // FILHOS
-      const filhos = allProjects.filter(p => p.descricao === capa.descricao && !p.isCapa);
-      filhos.forEach(filho => {
-        const filhoElem = document.createElement("a");
-        filhoElem.href = filho.link || "#";
-        filhoElem.className = "portfolio-item-new portfolio-item-child";
-        filhoElem.target = "_blank";
-        filhoElem.innerHTML = `
-          <img src="${filho.imagemURL}" alt="${filho.titulo}">
-          <div class="portfolio-item-overlay">
-            <div class="overlay-content">
-              <h3>${filho.titulo}</h3>
-              <p>${filho.descricao}</p>
-            </div>
-          </div>
-        `;
-        capaElem.appendChild(filhoElem);
-      });
+const filhos = allProjects.filter(p => p.descricao === capa.descricao && !p.isCapa);
 
-      grid.appendChild(capaElem);
-    });
-  }
+// ENVOLVE OS FILHOS EM UM DIV
+const filhosWrapper = document.createElement("div");
+filhosWrapper.className = "portfolio-filhos-wrapper"; // pode estilizar se quiser
 
-  if (grid && db) {
-    db.collection("projetos").orderBy("dataDeCriacao", "desc").get().then(snapshot => {
-      allProjects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      renderPortfolioGrouped("all");
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          filterBtns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          const categoria = btn.dataset.filter;
-          renderPortfolioGrouped(categoria);
-        });
-      });
-    });
-  }
+filhos.forEach(filho => {
+  const filhoElem = document.createElement("a");
+  filhoElem.href = filho.link || "#";
+  filhoElem.className = "portfolio-item-new portfolio-item-child";
+  filhoElem.target = "_blank";
+  filhoElem.innerHTML = `
+    <img src="${filho.imagemURL}" alt="${filho.titulo}">
+    <div class="portfolio-item-overlay">
+      <div class="overlay-content">
+        <h3>${filho.titulo}</h3>
+      </div>
+    </div>
+  `;
+  filhosWrapper.appendChild(filhoElem);
 });
+
+capaElem.appendChild(filhosWrapper);
