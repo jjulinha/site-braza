@@ -640,6 +640,29 @@ body:not(.loading) * {
     grid-template-columns: 1fr; /* 1 coluna em telemóveis */
   }
 }
+
+/* Adicionar ao style.css se não existir */
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Garante que a secção #hero tenha altura para a animação de fundo */
+#hero {
+    min-height: 100vh; /* ou a altura que desejar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Garante que o texto seja visível sobre o fundo */
+}
+
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .processo-timeline::after { left: 30px; }
