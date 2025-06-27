@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderPortfolioGrouped("all");
   });
 
-  // Filtros
+    // Filtros
   filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       const categoria = btn.getAttribute("data-filter");
@@ -131,5 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
       renderPortfolioGrouped(categoria);
     });
   });
+
+}); // <-- ESTA LINHA FALTAVA
+
 
 });
