@@ -86,30 +86,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === SPLASH GENÉRICO PARA AMBAS AS PÁGINAS ===
-  function handleSplash(splashId, videoId) {
-    const splash = document.getElementById(splashId);
-    const video = document.getElementById(videoId);
-    if (splash && video) {
-      video.addEventListener('loadeddata', () => {
-        setTimeout(() => {
-          splash.classList.add('swoosh-out');
-          setTimeout(() => {
-            splash.remove();
-            document.body.classList.remove('loading');
-          }, 1000);
-        }, 4000);
-      });
-      video.addEventListener('error', () => {
-        console.error(`Erro ao carregar o vídeo do splash: ${videoId}`);
-        splash.classList.add('swoosh-out');
-        setTimeout(() => {
-          splash.remove();
-          document.body.classList.remove('loading');
-        }, 1000);
-      });
-    }
+// script.js (Substituir a função handleSplash)
+
+// === SPLASH GENÉRICO PARA AMBAS AS PÁGINAS (COM MELHOR DEBUG) ===
+function handleSplash(splashId, videoId) {
+  const splash = document.getElementById(splashId);
+  const video = document.getElementById(videoId);
+
+  // Se o splash ou o vídeo não existirem na página, não fazemos nada.
+  if (!splash || !video) {
+    console.log(`Debug Braza: Elemento de splash ('${splashId}') ou vídeo ('${videoId}') não encontrado nesta página.`);
+    // Se o splash não existir, garantimos que o body não fica 'loading'
+    if (!splash) document.body.classList.remove('loading');
+    return;
   }
+
+  console.log(`Debug Braza: A tentar carregar o vídeo: ${video.querySelector('source').src}`);
+
+  // Evento para quando o vídeo carrega com sucesso
+  video.addEventListener('loadeddata', () => {
+    console.log(`Debug Braza: Vídeo '${videoId}' carregado com SUCESSO! A mostrar o splash.`);
+    setTimeout(() => {
+      console.log(`Debug Braza: A remover o splash '${splashId}'.`);
+      splash.classList.add('swoosh-out');
+      setTimeout(() => {
+        splash.remove();
+        document.body.classList.remove('loading');
+      }, 1000); // Duração da animação de saída
+    }, 4000); // Tempo que o vídeo fica visível
+  });
+
+  // Evento para quando ocorre um ERRO ao carregar o vídeo
+  video.addEventListener('error', () => {
+    // AQUI ESTÁ A CHAVE: Este evento está a ser acionado.
+    console.error(`Debug Braza: ERRO! Não foi possível carregar o ficheiro do vídeo: ${video.querySelector('source').src}. Verifique se o caminho e o nome do ficheiro estão corretos.`);
+    
+    // Escondemos o splash imediatamente para não bloquear o site.
+    splash.classList.add('swoosh-out');
+    setTimeout(() => {
+      splash.remove();
+      document.body.classList.remove('loading');
+    }, 500); // Remove mais rápido em caso de erro
+  });
+
+  // Garantia extra: se o vídeo não carregar por algum motivo em 7 segundos, removemos o splash.
+  setTimeout(() => {
+    if (splash.parentElement) { // Verifica se o splash ainda existe no DOM
+      console.warn("Debug Braza: O vídeo demorou demasiado a carregar. A remover o splash por segurança.");
+      splash.remove();
+      document.body.classList.remove('loading');
+    }
+  }, 7000);
+}
 
   // Detecta qual splash usar:
   if (document.getElementById('splash-screen')) {
