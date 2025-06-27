@@ -780,7 +780,7 @@ footer#contato {
 }
 
 /* ======================================================== */
-/* ESTILOS DO PORTFÓLIO (VERSÃO COLAGEM / MASONRY) */
+/* ESTILOS DO PORTFÓLIO (VERSÃO COLAGEM / SEM CANTOS) */
 /* ======================================================== */
 
 .portfolio-page .page-title-section h2 {
@@ -789,14 +789,12 @@ footer#contato {
     letter-spacing: 1.5px;
 }
 
-/* A nova grelha do portfólio */
+/* A grelha do portfólio */
 .portfolio-grid-new {
     display: grid;
-    /* Cria uma grelha flexível de 4 colunas */
     grid-template-columns: repeat(4, 1fr);
-    /* Define uma altura base para cada "célula" da grelha */
     grid-auto-rows: 280px;
-    gap: 1.5rem; /* Espaçamento entre os itens */
+    gap: 0.5rem; /* <<< GAP REDUZIDO para os itens ficarem bem juntos */
 }
 
 /* Estilo padrão de cada item */
@@ -804,31 +802,26 @@ footer#contato {
     position: relative;
     display: block;
     overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0; /* <<< CANTOS REMOVIDOS */
+    border: none;     /* <<< BORDAS REMOVIDAS para um visual mais limpo */
     background-color: #1a1a1a;
 }
 
-/* MODIFICADORES DE TAMANHO */
-/* Para o item principal, que será maior */
+/* MODIFICADORES DE TAMANHO (sem alterações) */
 .portfolio-item-new.item-large {
-    grid-column: span 4; /* Ocupa 4 colunas */
-    grid-row: span 2;    /* Ocupa 2 linhas de altura */
+    grid-column: span 4;
+    grid-row: span 2;
 }
-/* Para itens largos */
 .portfolio-item-new.item-wide {
-    grid-column: span 2; /* Ocupa 2 colunas */
+    grid-column: span 2;
 }
-/* Para itens altos */
 .portfolio-item-new.item-tall {
-    grid-row: span 2; /* Ocupa 2 linhas de altura */
+    grid-row: span 2;
 }
 
 /* O resto dos estilos (imagem, overlay, etc.) permanecem os mesmos */
 .portfolio-item-new img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .portfolio-item-overlay {
@@ -850,7 +843,6 @@ footer#contato {
 .portfolio-item-new:hover img { transform: scale(1.08); }
 .portfolio-item-new:hover .portfolio-item-overlay { opacity: 1; }
 .portfolio-item-new:hover .overlay-content { transform: translateY(0); }
-
 
 /* ========================================= */
 /* ESTILOS PARA OS FILTROS DO PORTFÓLIO */
