@@ -1,9 +1,9 @@
-// script.js (VERSÃO COMPLETA E CORRIGIDA)
+// script.js (VERSÃO FINAL, COMPLETA E CORRIGIDA)
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Configuração do Firebase (Lembre-se de preencher com as suas chaves)
+// Configuração do Firebase (Lembre-se de preencher com as suas chaves, se aplicável)
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_AUTH_DOMAIN",
@@ -21,10 +21,9 @@ const db = getFirestore(app);
 function handleMenu(menuId, buttonId) {
     const menu = document.getElementById(menuId);
     const button = document.getElementById(buttonId);
-
     if (menu && button) {
         button.addEventListener('click', () => {
-            menu.classList.toggle('active'); // Adiciona ou remove a classe 'active'
+            menu.classList.toggle('active');
         });
     }
 }
@@ -32,38 +31,32 @@ function handleMenu(menuId, buttonId) {
 // Função para controlar o comportamento de acordeão (accordion)
 function handleAccordion(accordionId) {
     const accordion = document.getElementById(accordionId);
-
     if (accordion) {
         const items = accordion.querySelectorAll('.accordion-item');
         items.forEach(item => {
             const header = item.querySelector('.accordion-header');
             header.addEventListener('click', () => {
-                // Fecha todos os outros itens
                 items.forEach(otherItem => {
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
                 });
-                // Abre ou fecha o item clicado
                 item.classList.toggle('active');
             });
         });
     }
 }
 
-// script.js - Substitua a função handleSplash por esta versão
-
+// Função CORRIGIDA para o splash screen (resolve o loop infinito)
 function handleSplash(splashId, videoId) {
     const splash = document.getElementById(splashId);
     const video = document.getElementById(videoId);
 
-    // Se os elementos não existirem, termina a execução para evitar erros.
     if (!splash || !video) {
         if (!splash) document.body.classList.remove('loading');
         return;
     }
     
-    // Garante via JavaScript que o vídeo não entre em loop.
     video.loop = false; 
 
     let splashRemoved = false;
@@ -71,50 +64,40 @@ function handleSplash(splashId, videoId) {
         if (splashRemoved) return;
         splashRemoved = true;
         
-        console.log(`Debug Braza: A remover o splash '${splashId}'.`);
         splash.classList.add('swoosh-out');
         
-        // Remove o elemento da página e a classe de loading após a animação.
         setTimeout(() => {
             if (splash.parentElement) {
                 splash.remove();
             }
             document.body.classList.remove('loading');
-        }, 1000); // Duração da animação de fade-out
+        }, 1000);
     };
 
-    // GATILHO PRINCIPAL: Quando o vídeo terminar de tocar, remove o splash.
     video.addEventListener('ended', () => {
-        console.log("Debug Braza: Vídeo terminou (evento 'ended'). A remover o splash.");
         removeSplash();
     });
 
-    // Tenta iniciar o vídeo assim que ele estiver pronto.
     video.addEventListener('canplay', () => {
         video.play().catch(e => {
-            // Se o navegador bloquear o autoplay, remove o splash imediatamente.
-            console.error("Debug Braza: Autoplay bloqueado. A remover o splash.", e);
             removeSplash();
         });
     });
 
-    // GATILHO DE SEGURANÇA: Se o vídeo não carregar ou não tocar em 15 segundos, remove o splash.
     const fallbackTimeout = setTimeout(() => {
-        console.warn("Debug Braza: Timeout de segurança de 15s atingido. A remover o splash.");
         removeSplash();
     }, 15000);
 
-    // Se o vídeo terminar, cancelamos o gatilho de segurança para não haver redundância.
     video.addEventListener('ended', () => clearTimeout(fallbackTimeout));
     video.addEventListener('error', () => clearTimeout(fallbackTimeout));
 }
 
-// Função corrigida para a galeria do portfólio
+// Função CORRIGIDA para a galeria do portfólio (layout de capa)
 function handleGallery(galleryId, collectionName) {
     const galleryElement = document.getElementById(galleryId);
     if (!galleryElement) return;
 
-    galleryElement.innerHTML = ''; // Limpa a galeria
+    galleryElement.innerHTML = ''; 
     const collectionRef = collection(db, collectionName);
 
     getDocs(collectionRef)
@@ -166,9 +149,26 @@ function handleGallery(galleryId, collectionName) {
         });
 }
 
-
-// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES ---
+// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES NO SITE ---
 document.addEventListener('DOMContentLoaded', () => {
+    // ---- FUNÇÕES E ANIMAÇÕES ORIGINAIS RESTAURADAS ----
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+    // ---------------------------------------------------
+
     // Inicializa o menu
     handleMenu('main-menu', 'menu-button');
 
@@ -176,14 +176,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('faq-accordion')) {
         handleAccordion('faq-accordion');
     }
+    
+    // Inicializa o splash da PÁGINA INICIAL (index.html)
+    if (document.getElementById('splash-screen')) {
+        handleSplash('splash-screen', 'splash-video');
+    }
 
-    // Inicializa a galeria (se existir na página)
+    // Inicializa a galeria do PORTFÓLIO
     if (document.getElementById('gallery-julinha')) {
         handleGallery('gallery-julinha', 'julinha');
     }
     
-    // Inicializa o splash (se existir na página)
-    if (document.getElementById('splash-portfolio')) {
-        handleSplash('splash-portfolio', 'splash-video-portfolio');
+    // Inicializa o splash do PORTFÓLIO
+    if (document.getElementById('splash-screen-portfolio')) {
+        handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
     }
 });
