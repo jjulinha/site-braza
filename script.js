@@ -22,6 +22,7 @@ try {
 // LÓGICA PRINCIPAL DO SITE
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
+document.body.classList.add('loading');
 
     // --- FUNCIONALIDADES GERAIS (EXECUTADAS EM TODAS AS PÁGINAS) ---
 
@@ -89,11 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const splashScreen = document.getElementById('splash-screen');
         if (splashScreen) {
-            setTimeout(() => {
-                splashScreen.classList.add('swoosh-out');
-                setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
-            }, 4000);
-        }
+setTimeout(() => {
+    portfolioSplash.classList.add('swoosh-out');
+    setTimeout(() => {
+        if (portfolioSplash.parentNode) portfolioSplash.parentNode.removeChild(portfolioSplash);
+        document.body.classList.remove('loading'); // ✅ Libera scroll e layout após splash
+    }, 1000);
+}, 4000);
 
         const heroTitles = document.querySelectorAll('.hero-title');
         heroTitles.forEach((el, i) => {
