@@ -810,71 +810,6 @@ footer#contato {
   align-items: center;
 }
 
-/* ======================================================== */
-/* ESTILOS DO PORTFÓLIO (VERSÃO COLAGEM / SEM CANTOS) */
-/* ======================================================== */
-
-.portfolio-page .page-title-section h2 {
-    font-family: var(--fonte-headline);
-    color: var(--cor-texto-principal);
-    letter-spacing: 1.5px;
-}
-
-/* A grelha do portfólio */
-.portfolio-grid-new {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 280px;
-    gap: 0.5rem; /* <<< GAP REDUZIDO para os itens ficarem bem juntos */
-}
-
-/* Estilo padrão de cada item */
-.portfolio-item-new {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    border-radius: 0; /* <<< CANTOS REMOVIDOS */
-    border: none;     /* <<< BORDAS REMOVIDAS para um visual mais limpo */
-    background-color: #1a1a1a;
-}
-
-/* MODIFICADORES DE TAMANHO (sem alterações) */
-.portfolio-item-new.item-large {
-    grid-column: span 4;
-    grid-row: span 2;
-}
-.portfolio-item-new.item-wide {
-    grid-column: span 2;
-}
-.portfolio-item-new.item-tall {
-    grid-row: span 2;
-}
-
-/* O resto dos estilos (imagem, overlay, etc.) permanecem os mesmos */
-.portfolio-item-new img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.portfolio-item-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.1) 100%);
-    display: flex; align-items: flex-end; padding: 25px;
-    opacity: 0; transition: opacity 0.5s ease;
-}
-.overlay-content {
-    transform: translateY(20px); transition: transform 0.5s ease;
-}
-.overlay-content h3 {
-    font-family: var(--fonte-headline); font-size: 2.2rem;
-    letter-spacing: 1px; color: var(--cor-acento-amarelo); margin-bottom: 5px;
-}
-.overlay-content p {
-    font-family: var(--fonte-corpo); color: var(--cor-texto-principal); font-weight: 500;
-}
-.portfolio-item-new:hover img { transform: scale(1.08); }
-.portfolio-item-new:hover .portfolio-item-overlay { opacity: 1; }
-.portfolio-item-new:hover .overlay-content { transform: translateY(0); }
-
 /* ========================================= */
 /* ESTILOS PARA OS FILTROS DO PORTFÓLIO */
 /* ========================================= */
@@ -1032,13 +967,22 @@ footer#contato {
 }
 
 .portfolio-group .item-capa {
-  grid-column: 1 / -1;
-  height: 480px;
-  border: 4px solid var(--cor-acento-amarelo);
+  display: block;
+  width: 100%;
+  height: 70vh; /* Ocupa 70% da altura da tela */
+  max-height: none;
+  border: 6px solid var(--cor-acento-amarelo);
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
+.portfolio-group .item-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 .portfolio-group .portfolio-item-child {
   display: inline-block;
   width: calc(25% - 10px);
@@ -1093,38 +1037,19 @@ footer#contato {
   margin-bottom: 100px;
 }
 
-/* CAPA MAIOR — pode até preencher quase toda a tela */
-.portfolio-group .item-capa {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 7; /* Força proporção larga */
-  border: 6px solid var(--cor-acento-amarelo);
-  position: relative;
-  margin-bottom: 24px;
-  overflow: hidden;
-  border-radius: 16px;
-}
-
-.portfolio-group .item-capa img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 
 /* FILHAS — com grid flexível e destaque maior */
 .portfolio-filhos-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
 }
 
-/* Cada filho com tamanho maior */
 .portfolio-item-child {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 10px;
   background: #1a1a1a;
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1133,7 +1058,7 @@ footer#contato {
 .portfolio-item-child img {
   display: block;
   width: 100%;
-  height: 240px;
+  height: 220px;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
