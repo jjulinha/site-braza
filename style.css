@@ -893,6 +893,28 @@ footer#contato {
     border-color: var(--cor-acento-amarelo);
     box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
 }
+
+/* ======================================================== */
+/* AJUSTES FINAIS DE FONTE E DESTAQUE DO TÍTULO DO PORTFÓLIO */
+/* ======================================================== */
+
+.portfolio-page .page-title-section h2 {
+    font-family: var(--fonte-headline); /* Garante o uso da fonte 'Anton' */
+    border-bottom: none; /* Remove a linha de borda que não fica bem com o fundo */
+    font-size: clamp(3rem, 10vw, 6rem); /* Mantém o tamanho consistente */
+    color: var(--cor-texto-principal);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Garante que os spans do marca-texto funcionem bem aqui */
+.portfolio-page .page-title-section .highlight {
+    color: var(--cor-fundo);
+    background-color: var(--cor-acento-amarelo);
+    padding: 0.1em 0.3em;
+    display: inline-block;
+}
+
 /* ========================================= */
 /* ESTILOS PARA A SECÇÃO DE FAQ INTERATIVA */
 /* ========================================= */
