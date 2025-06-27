@@ -115,3 +115,26 @@ filhos.forEach(filho => {
 });
 
 capaElem.appendChild(filhosWrapper);
+
+            grid.appendChild(capaElem);
+    });
+  }
+
+  // Carrega dados do Firebase
+  db.collection("projetos").orderBy("dataDeCriacao", "desc").get().then(snapshot => {
+    allProjects = snapshot.docs.map(doc => doc.data());
+    renderPortfolioGrouped("all"); // mostra todos por padrão
+  });
+
+  // Filtro por categoria
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const categoria = btn.getAttribute("data-filter");
+      filterBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderPortfolioGrouped(categoria);
+    });
+  });
+
+});
+
