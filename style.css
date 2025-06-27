@@ -337,26 +337,57 @@ section, footer {
   opacity: 1;
 }
 
-/* CLIENTES */
-.descricao-clientes {
-  color: var(--cor-texto-secundario);
-  text-align: center;
-  margin-bottom: 30px;
-}
-.clientes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-  text-align: center;
-}
-.cliente-logo {
-  background: rgba(255,255,255,0.03);
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.1);
+/* ======================================================== */
+/* ESTILOS ATUALIZADOS PARA A SECÇÃO DE CLIENTES */
+/* ======================================================== */
+
+.clientes-marquee-section {
+  background-color: #ffffff; /* Fundo alterado para branco */
+  overflow: hidden;
+  padding: 80px 0; /* Aumenta o espaçamento vertical para mais respiro */
 }
 
-/* PLANOS */
+/* Nova regra para mudar a cor do título APENAS nesta secção */
+.clientes-marquee-section .section-title {
+  color: var(--cor-fundo); /* Usa a variável de cor de fundo (preto/escuro) */
+  border-bottom-color: var(--cor-vermelho); /* Garante que a linha vermelha continue visível */
+}
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 25s linear infinite;
+}
+
+.cliente-logo {
+  display: inline-block;
+  height: 60px;
+  margin: 0 4rem;
+  object-fit: contain;
+  /* Adiciona um filtro para melhorar a visibilidade de logos claros no fundo branco */
+  filter: brightness(0.1);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.cliente-logo:hover {
+    opacity: 1;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}/* PLANOS */
 /* PLANOS - ESTILO DOS ITENS ATUALIZADO */
 .planos-grid {
   display: flex;
@@ -647,12 +678,10 @@ footer p {
 .page-title-section {
     text-align: center;
     padding: 140px 6% 60px 6%;
-    background-color: rgba(10, 10, 10, 0.5); /* Fundo semi-transparente */
-    backdrop-filter: blur(5px);
 }
 
 .page-title-section h2 {
-    font-family: var(--fonte-headline);
+    font-family: thunder(--fonte-headline);
     font-size: clamp(3rem, 10vw, 6rem);
     color: var(--cor-acento-amarelo);
     margin-bottom: 1rem;
@@ -660,7 +689,7 @@ footer p {
 }
 
 .page-title-section p {
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: thunder(1rem, 3vw, 1.5rem);
     color: var(--cor-texto-secundario);
     max-width: 600px;
     margin: 0 auto;
@@ -781,86 +810,71 @@ footer#contato {
   align-items: center;
 }
 
-/* ========================================= */
-/* ESTILOS CORRIGIDOS PARA O PORTFÓLIO */
-/* ========================================= */
+/* ======================================================== */
+/* ESTILOS DO PORTFÓLIO (VERSÃO COLAGEM / SEM CANTOS) */
+/* ======================================================== */
 
-/* Aplica a fonte Thunder ao título principal da página */
 .portfolio-page .page-title-section h2 {
-    font-family: 'Thunder', sans-serif;
-    letter-spacing: 2px;
+    font-family: var(--fonte-headline);
+    color: var(--cor-texto-principal);
+    letter-spacing: 1.5px;
 }
 
+/* A grelha do portfólio */
 .portfolio-grid-new {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 280px;
+    gap: 0.5rem; /* <<< GAP REDUZIDO para os itens ficarem bem juntos */
 }
 
+/* Estilo padrão de cada item */
 .portfolio-item-new {
     position: relative;
     display: block;
     overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Adiciona uma proporção para evitar que o layout quebre antes de a imagem carregar */
-    aspect-ratio: 4 / 3; 
-    background-color: #1a1a1a; /* Cor de fundo enquanto a imagem carrega */
+    border-radius: 0; /* <<< CANTOS REMOVIDOS */
+    border: none;     /* <<< BORDAS REMOVIDAS para um visual mais limpo */
+    background-color: #1a1a1a;
 }
 
+/* MODIFICADORES DE TAMANHO (sem alterações) */
+.portfolio-item-new.item-large {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+.portfolio-item-new.item-wide {
+    grid-column: span 2;
+}
+.portfolio-item-new.item-tall {
+    grid-row: span 2;
+}
+
+/* O resto dos estilos (imagem, overlay, etc.) permanecem os mesmos */
 .portfolio-item-new img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .portfolio-item-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.1) 100%);
-    display: flex;
-    align-items: flex-end;
-    padding: 25px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    display: flex; align-items: flex-end; padding: 25px;
+    opacity: 0; transition: opacity 0.5s ease;
 }
-
 .overlay-content {
-    color: var(--cor-texto-principal);
-    transform: translateY(20px);
-    transition: transform 0.5s ease;
+    transform: translateY(20px); transition: transform 0.5s ease;
 }
-
-/* Aplica a fonte Thunder ao nome do cliente no overlay */
 .overlay-content h3 {
-    font-family: 'Thunder', sans-serif;
-    font-size: 2.2rem;
-    letter-spacing: 1px;
-    color: var(--cor-acento-amarelo);
-    margin-bottom: 5px;
+    font-family: var(--fonte-headline); font-size: 2.2rem;
+    letter-spacing: 1px; color: var(--cor-acento-amarelo); margin-bottom: 5px;
 }
-
 .overlay-content p {
-    color: var(--cor-texto-principal);
-    font-weight: 500;
+    font-family: var(--fonte-corpo); color: var(--cor-texto-principal); font-weight: 500;
 }
+.portfolio-item-new:hover img { transform: scale(1.08); }
+.portfolio-item-new:hover .portfolio-item-overlay { opacity: 1; }
+.portfolio-item-new:hover .overlay-content { transform: translateY(0); }
 
-/* EFEITOS DE HOVER */
-.portfolio-item-new:hover img {
-    transform: scale(1.08);
-}
-
-.portfolio-item-new:hover .portfolio-item-overlay {
-    opacity: 1;
-}
-
-.portfolio-item-new:hover .overlay-content {
-    transform: translateY(0);
-}
 /* ========================================= */
 /* ESTILOS PARA OS FILTROS DO PORTFÓLIO */
 /* ========================================= */
@@ -899,6 +913,98 @@ footer#contato {
     color: var(--cor-fundo);
     border-color: var(--cor-acento-amarelo);
     box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+}
+
+/* ======================================================== */
+/* AJUSTES FINAIS DE FONTE E DESTAQUE DO TÍTULO DO PORTFÓLIO */
+/* ======================================================== */
+
+.portfolio-page .page-title-section h2 {
+    font-family: var(--fonte-headline); /* Garante o uso da fonte 'Anton' */
+    border-bottom: none; /* Remove a linha de borda que não fica bem com o fundo */
+    font-size: clamp(3rem, 10vw, 6rem); /* Mantém o tamanho consistente */
+    color: var(--cor-texto-principal);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Garante que os spans do marca-texto funcionem bem aqui */
+.portfolio-page .page-title-section .highlight {
+    color: var(--cor-fundo);
+    background-color: var(--cor-acento-amarelo);
+    padding: 0.1em 0.3em;
+    display: inline-block;
+}
+
+/* ========================================= */
+/* ESTILOS PARA A SECÇÃO DE FAQ INTERATIVA */
+/* ========================================= */
+
+.faq-grid {
+    max-width: 800px; /* Limita a largura para melhor legibilidade */
+    margin: 40px auto 0 auto; /* Centraliza a secção */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+}
+
+.faq-item h3 {
+    font-family: var(--fonte-corpo);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.faq-item h3:hover {
+    color: var(--cor-acento-amarelo);
+}
+
+/* Ícone de '+' e '-' */
+.faq-item h3::after {
+    content: '+';
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--cor-texto-secundario);
+    transition: transform 0.3s ease;
+}
+
+/* Estilo da resposta (escondida por defeito) */
+.faq-item p {
+    color: var(--cor-texto-secundario);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+/* ---- ESTADOS ATIVOS (QUANDO CLICADO) ---- */
+
+.faq-item.active h3 {
+    color: var(--cor-acento-amarelo);
+}
+
+/* Transforma o '+' num '-' */
+.faq-item.active h3::after {
+    content: '−'; /* Caractere de subtração */
+    transform: rotate(180deg);
+}
+
+/* Mostra a resposta */
+.faq-item.active p {
+    opacity: 1;
+    max-height: 300px; /* Um valor alto o suficiente para caber o texto */
+    margin-top: 20px;
+    transition: max-height 1s ease-in-out, opacity 0.5s ease, margin-top 0.3s ease;
 }
 /* RESPONSIVO */
 @media (max-width: 900px) {
