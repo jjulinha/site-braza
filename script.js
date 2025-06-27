@@ -1,129 +1,125 @@
-// script.js (VERSÃO FINAL E COMPLETA)
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// Configuração do Firebase
+// =================================================================
+// CONFIGURAÇÃO DO FIREBASE
+// =================================================================
 const firebaseConfig = {
-  apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
-  authDomain: "braza-portfolio.firebaseapp.com",
-  projectId: "braza-portfolio",
-  storageBucket: "braza-portfolio.firebasestorage.app",
-  messagingSenderId: "504617854086",
-  appId: "1:504617854086:web:727bfb242c29a6d7345d07",
-  measurementId: "G-5KFT2C7ZCF"
+    apiKey: "AIzaSyBXcwxROjcGbjDcJ5ZvFvr_GsNAFg9_N3c",
+    authDomain: "braza-portfolio.firebaseapp.com",
+    projectId: "braza-portfolio",
+    storageBucket: "braza-portfolio.appspot.com",
+    messagingSenderId: "504617854086",
+    appId: "1:504617854086:web:727bfb242c29a6d7345d07",
+    measurementId: "G-5KFT2C7ZCF"
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES ---
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // Animação de Fundo Vanta.js
-    if (document.getElementById('hero')) {
-        VANTA.FOG({
-            el: "#hero", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00,
-            minWidth: 200.00, highlightColor: 0xffc300, midtoneColor: 0xff1f00, lowlightColor: 0x2d2d2d,
-            baseColor: 0x0, blurFactor: 0.90, speed: 1.5, zoom: 0.4
-        });
-    }
-
-    // Animações de Scroll
-    const animatedElements = document.querySelectorAll('.animate-on-scroll, .timeline, .icon-svg');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, { threshold: 0.2 }); // Ajustado o threshold para melhor disparo
-    animatedElements.forEach(el => observer.observe(el));
-    
-    // Chamadas de Funções
-    if (document.getElementById('splash-screen')) handleSplash('splash-screen', 'splash-video');
-    if (document.getElementById('gallery-julinha')) handleGallery('gallery-julinha', 'julinha');
-    if (document.getElementById('splash-screen-portfolio')) handleSplash('splash-screen-portfolio', 'splash-video-portfolio');
-});
-
-// Função para o splash screen (versão robusta)
-function handleSplash(splashId, videoId) {
-    const splash = document.getElementById(splashId);
-    const video = document.getElementById(videoId);
-
-    if (!splash || !video) {
-        if (!splash) document.body.classList.remove('loading');
-        return;
-    }
-    
-    video.loop = false; 
-
-    let splashRemoved = false;
-    const removeSplash = () => {
-        if (splashRemoved) return;
-        splashRemoved = true;
-        splash.style.opacity = '0';
-        setTimeout(() => {
-            if (splash.parentElement) splash.remove();
-            document.body.classList.remove('loading');
-        }, 1000);
-    };
-
-    video.addEventListener('ended', removeSplash);
-    video.addEventListener('error', removeSplash);
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(() => removeSplash());
-    }
-
-    const fallbackTimeout = setTimeout(removeSplash, 8000); // Timeout de segurança
-    video.addEventListener('canplaythrough', () => clearTimeout(fallbackTimeout));
+let db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+} catch (e) {
+    console.error("Erro ao inicializar o Firebase.", e);
 }
 
-// Função para a galeria do portfólio (versão corrigida)
-function handleGallery(galleryId, collectionName) {
-    const galleryElement = document.getElementById(galleryId);
-    if (!galleryElement) return;
+// =================================================================
+// LÓGICA PRINCIPAL DO SITE
+// =================================================================
+document.addEventListener('DOMContentLoaded', () => {
 
-    galleryElement.innerHTML = '<p>Carregando galeria...</p>'; 
-    const collectionRef = collection(db, collectionName);
+    // --- FUNCIONALIDADES GERAIS (EXECUTADAS EM TODAS AS PÁGINAS) ---
 
-    getDocs(collectionRef)
-        .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-                galleryElement.innerHTML = '<p>Nenhum item encontrado na galeria.</p>';
+    // Background VANTA FOG
+    if (typeof VANTA !== 'undefined') {
+        VANTA.FOG({
+            el: "body", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, highlightColor: 0x6d0202, midtoneColor: 0x0, lowlightColor: 0x04040D, baseColor: 0x0, blurFactor: 0.50, speed: 0.80, zoom: 1.00
+        });
+    }
+
+    // HEADER ESCONDIDO AO ROLAR
+    const header = document.querySelector('header');
+    if (header) {
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScroll > lastScrollTop && currentScroll > 100) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+    }
+
+    // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
+
+    // 1. SÓ PARA A PÁGINA INICIAL (index.html)
+    const splashScreen = document.getElementById('splash-screen');
+    const homePortfolioGrid = document.querySelector('.portfolio-grid'); // Seletor da pré-visualização
+
+    if (splashScreen) { // Se encontrar o splash, está na home
+        const removeSplash = () => {
+            if (document.body.contains(splashScreen)) {
+                splashScreen.classList.add('swoosh-out');
+                setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
+            }
+        };
+        window.addEventListener('load', removeSplash);
+        setTimeout(removeSplash, 5000);
+
+        // Animação dos Títulos HERO (só na home)
+        const heroTitles = document.querySelectorAll('.hero-title');
+        heroTitles.forEach((el, i) => {
+            setTimeout(() => el.classList.add('active'), i * 400);
+        });
+    }
+
+    if (homePortfolioGrid && typeof db !== 'undefined') { // Se encontrar a grelha de preview
+        db.collection("projetos").orderBy("dataDeCriacao", "desc").limit(3).get()
+            .then((querySnapshot) => {
+                let html = "";
+                querySnapshot.forEach((doc) => {
+                    const projeto = doc.data();
+                    html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                });
+                homePortfolioGrid.innerHTML = html;
+            });
+    }
+
+    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
+    const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    if (fullPortfolioGrid && typeof db !== 'undefined') { // Se encontrar a grelha completa
+        let allProjects = [];
+
+        function renderPortfolio(projectsToRender) {
+            fullPortfolioGrid.innerHTML = "";
+            if (projectsToRender.length === 0) {
+                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
                 return;
             }
-
-            let coverItem = null;
-            const otherItems = [];
-
-            querySnapshot.forEach((doc) => {
-                const item = { id: doc.id, ...doc.data() };
-                if (item.tag === 'capa') {
-                    coverItem = item;
-                } else {
-                    otherItems.push(item);
-                }
+            projectsToRender.forEach(projeto => {
+                const itemLink = document.createElement('a');
+                itemLink.href = projeto.link || '#';
+                itemLink.className = 'portfolio-item-new';
+                itemLink.target = '_blank';
+                itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
+                fullPortfolioGrid.appendChild(itemLink);
             });
+        }
 
-            let galleryHTML = '<div class="gallery-layout">';
-            if (coverItem) {
-                galleryHTML += `<div class="gallery-item gallery-item-cover"><a href="${coverItem.link}" target="_blank"><img src="${coverItem.imageUrl}" alt="Imagem de capa do projeto"></a></div>`;
-            }
-            if (otherItems.length > 0) {
-                galleryHTML += '<div class="gallery-thumbnails">';
-                otherItems.forEach(item => {
-                    galleryHTML += `<div class="gallery-item gallery-item-thumbnail"><a href="${item.link}" target="_blank"><img src="${item.imageUrl}" alt="Imagem do projeto"></a></div>`;
-                });
-                galleryHTML += '</div>';
-            }
-            galleryHTML += '</div>';
-            galleryElement.innerHTML = galleryHTML;
-        })
-        .catch((error) => {
-            console.error("Erro ao buscar a galeria do Firebase: ", error);
-            galleryElement.innerHTML = '<p>Não foi possível carregar a galeria. Verifique a consola para mais detalhes.</p>';
+        db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
+            .then((querySnapshot) => {
+                allProjects = querySnapshot.docs.map(doc => doc.data());
+                renderPortfolio(allProjects);
+            })
+            .catch((error) => console.error("Erro ao buscar projetos: ", error));
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filterValue = button.getAttribute('data-filter');
+                const filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
+                renderPortfolio(filteredProjects);
+            });
         });
-}
+    }
+});
