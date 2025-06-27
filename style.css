@@ -1012,6 +1012,20 @@ footer#contato {
   transform: none !important;
 }
 
+/* ==== PORTFÓLIO AGRUPADO: CAPA + FILHOS ==== */
+.portfolio-group {
+  margin-bottom: 80px;
+}
+.portfolio-item-new.item-capa {
+  grid-column: span 4;
+  grid-row: span 2;
+  border: 3px solid var(--cor-acento-amarelo);
+}
+.portfolio-item-child {
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+
 
 /* RESPONSIVO */
 @media (max-width: 900px) {
