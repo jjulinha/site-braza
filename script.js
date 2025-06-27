@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
 
     // 1. SÓ PARA A PÁGINA INICIAL (index.html)
@@ -96,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
                 }
             };
-            // Define um temporizador fixo para remover o splash após 4 segundos
             setTimeout(removeSplash, 4000);
         }
 
@@ -106,26 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => el.classList.add('active'), i * 400);
         });
 
-        // Lógica da Pré-visualização do Portfólio
-        const homePortfolioGrid = document.querySelector('.portfolio-grid');
-        if (homePortfolioGrid && typeof db !== 'undefined') {
-            db.collection("projetos").orderBy("dataDeCriacao", "desc").limit(3).get()
-                .then((querySnapshot) => {
-                    let html = "";
-                    querySnapshot.forEach((doc) => {
-                        const projeto = doc.data();
-                        html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
-                    });
-                    homePortfolioGrid.innerHTML = html;
-                });
-        }
-    }
-
- // Lógica da Pré-visualização do Portfólio (ATUALIZADA)
+        // Lógica da Pré-visualização do Portfólio (Corrigida e Unificada)
         const homePortfolioGrid = document.querySelector('.portfolio-grid');
         if (homePortfolioGrid && typeof db !== 'undefined') {
             db.collection("projetos")
-              .where("isCapa", "==", false) // <<< SÓ PEGA PROJETOS QUE NÃO SÃO DE CAPA
+              .where("isCapa", "==", false) // Só pega projetos que NÃO são de capa
               .orderBy("dataDeCriacao", "desc")
               .limit(3)
               .get()
@@ -146,66 +131,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
-        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA COM LÓGICA DE CAPA ---
         function renderPortfolio(projectsToRender) {
             fullPortfolioGrid.innerHTML = "";
             if (projectsToRender.length === 0) {
-                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
+                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
                 return;
             }
-
             projectsToRender.forEach(projeto => {
                 const itemLink = document.createElement('a');
                 itemLink.href = projeto.link || '#';
-                itemLink.className = 'portfolio-item-new'; // Classe base
+                itemLink.className = 'portfolio-item-new';
                 itemLink.target = '_blank';
-
-                // Aplica a classe 'item-large' se o projeto for de capa
                 if (projeto.isCapa === true) {
                     itemLink.classList.add('item-large');
                 }
-
-                itemLink.innerHTML = `
-                    <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
-                    <div class="portfolio-item-overlay">
-                        <div class="overlay-content">
-                            <h3>${projeto.titulo}</h3>
-                            <p>${projeto.descricao || 'Clique para ver mais'}</p>
-                        </div>
-                    </div>
-                `;
+                itemLink.innerHTML = `<img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="portfolio-item-overlay"><div class="overlay-content"><h3>${projeto.titulo}</h3><p>${projeto.descricao || 'Clique para ver mais'}</p></div></div>`;
                 fullPortfolioGrid.appendChild(itemLink);
             });
         }
 
         db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
             .then((querySnapshot) => {
-                allProjects = querySnapshot.docs.map(doc => {
-                    // Adiciona o ID do documento aos dados para referência, se necessário
-                    return { id: doc.id, ...doc.data() };
-                });
-
-                // Ordena para que os itens de capa apareçam primeiro
+                allProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 allProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
-
                 renderPortfolio(allProjects);
             })
             .catch((error) => console.error("Erro ao buscar projetos: ", error));
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                const filterValue = button.getAttribute('data-filter');
-                
-                const filteredProjects = filterValue === 'all' 
-                    ? allProjects 
-                    : allProjects.filter(p => p.categoria === filterValue);
-                
-                // Reordena e renderiza os projetos filtrados
-                filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
-                renderPortfolio(filteredProjects);
+        if (filterButtons.length > 0) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filterValue = button.getAttribute('data-filter');
+                    let filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
+                    filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
+                    renderPortfolio(filteredProjects);
+                });
             });
-        });
+        }
     }
 });
