@@ -134,5 +134,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 }); // <-- ESTA LINHA FALTAVA
 
-
-});
