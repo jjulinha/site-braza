@@ -121,41 +121,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-// --- LÓGICA ESPECÍFICA PARA A PÁGINA DE PORTFÓLIO ---
+ // Lógica da Pré-visualização do Portfólio (ATUALIZADA)
+        const homePortfolioGrid = document.querySelector('.portfolio-grid');
+        if (homePortfolioGrid && typeof db !== 'undefined') {
+            db.collection("projetos")
+              .where("isCapa", "==", false) // <<< SÓ PEGA PROJETOS QUE NÃO SÃO DE CAPA
+              .orderBy("dataDeCriacao", "desc")
+              .limit(3)
+              .get()
+              .then((querySnapshot) => {
+                  let html = "";
+                  querySnapshot.forEach((doc) => {
+                      const projeto = doc.data();
+                      html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                  });
+                  homePortfolioGrid.innerHTML = html;
+              });
+        }
+    }
+
+    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
     const fullPortfolioGrid = document.querySelector('.portfolio-grid-new');
     if (fullPortfolioGrid && typeof db !== 'undefined') {
         const filterButtons = document.querySelectorAll('.filter-btn');
         let allProjects = [];
 
-        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA COM PADRÃO DE LAYOUT ---
+        // --- FUNÇÃO DE RENDERIZAÇÃO ATUALIZADA COM LÓGICA DE CAPA ---
         function renderPortfolio(projectsToRender) {
             fullPortfolioGrid.innerHTML = "";
             if (projectsToRender.length === 0) {
-                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
+                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
                 return;
             }
 
-            // Define o nosso padrão de layout. Pode ajustá-lo como quiser!
-            // 'item-large' ocupa 4x2, 'item-wide' 2x1, 'item-standard' 1x1.
-            const layoutPattern = [
-                'item-large', 
-                'item-standard', 
-                'item-standard', 
-                'item-wide', 
-                'item-standard',
-                'item-standard',
-                'item-wide'
-            ];
-
-            projectsToRender.forEach((projeto, index) => {
+            projectsToRender.forEach(projeto => {
                 const itemLink = document.createElement('a');
                 itemLink.href = projeto.link || '#';
                 itemLink.className = 'portfolio-item-new'; // Classe base
                 itemLink.target = '_blank';
 
-                // Aplica a classe do padrão de forma cíclica
-                const patternClass = layoutPattern[index % layoutPattern.length];
-                itemLink.classList.add(patternClass);
+                // Aplica a classe 'item-large' se o projeto for de capa
+                if (projeto.isCapa === true) {
+                    itemLink.classList.add('item-large');
+                }
 
                 itemLink.innerHTML = `
                     <img src="${projeto.imagemURL}" alt="Imagem do Projeto ${projeto.titulo}">
@@ -172,7 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         db.collection("projetos").orderBy("dataDeCriacao", "desc").get()
             .then((querySnapshot) => {
-                allProjects = querySnapshot.docs.map(doc => doc.data());
+                allProjects = querySnapshot.docs.map(doc => {
+                    // Adiciona o ID do documento aos dados para referência, se necessário
+                    return { id: doc.id, ...doc.data() };
+                });
+
+                // Ordena para que os itens de capa apareçam primeiro
+                allProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
+
                 renderPortfolio(allProjects);
             })
             .catch((error) => console.error("Erro ao buscar projetos: ", error));
@@ -187,7 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? allProjects 
                     : allProjects.filter(p => p.categoria === filterValue);
                 
-                // Agora, ao renderizar, o padrão será aplicado corretamente aos itens filtrados
+                // Reordena e renderiza os projetos filtrados
+                filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
                 renderPortfolio(filteredProjects);
             });
         });
