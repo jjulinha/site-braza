@@ -26,7 +26,7 @@ function removeSplash() {
   if (!splashScreen) return;
   splashScreen.classList.add("swoosh-out");
   setTimeout(() => {
-    if (splashScreen.parentNode) splashScreen.remove();
+    if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen);
   }, 1000);
 }
 
