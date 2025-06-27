@@ -286,15 +286,27 @@ section, footer {
   text-transform: uppercase; padding: 18px 40px;
 }
 
-/* CLIENTES */
+/* clientes */
 .clientes-marquee-section {
-  background-color: #ffffff;
-  overflow: hidden;
-  padding: 80px 0;
+  background-color: transparent;
+  padding: 80px 0 40px;
 }
 .clientes-marquee-section .section-title {
   color: var(--cor-fundo);
   border-bottom-color: var(--cor-vermelho);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.marquee-wrapper {
+  background-color: #f1f1f1;
+  overflow: hidden;
+  padding: 20px 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 .marquee {
   white-space: nowrap;
@@ -306,19 +318,20 @@ section, footer {
   padding-left: 100%;
   animation: scroll-left 25s linear infinite;
 }
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
 .cliente-logo {
-  display: inline-block;
-  height: 60px;
-  margin: 0 4rem;
-  object-fit: contain;
-  filter: brightness(0.1);
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
+  height: 80px;
+  margin: 0 10px;
+  vertical-align: middle;
 }
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+</style>
 .cliente-logo:hover { opacity: 1; }
 
 /* PLANOS */
