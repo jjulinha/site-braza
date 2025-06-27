@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, { threshold: 0.1 });
-        
         revealElements.forEach(elem => {
             revealObserver.observe(elem);
         });
@@ -94,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const removeSplash = () => {
                 if (document.body.contains(splashScreen)) {
                     splashScreen.classList.add('swoosh-out');
-                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000);
+                    setTimeout(() => { if (splashScreen.parentNode) splashScreen.parentNode.removeChild(splashScreen); }, 1000); // Duração da animação de saída
                 }
             };
-            setTimeout(removeSplash, 4000);
+            setTimeout(removeSplash, 4000); // Duração do splash
         }
 
         // Animação dos Títulos HERO
@@ -106,22 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => el.classList.add('active'), i * 400);
         });
 
-        // Lógica da Pré-visualização do Portfólio (Corrigida e Unificada)
+        // Lógica da Pré-visualização do Portfólio
         const homePortfolioGrid = document.querySelector('.portfolio-grid');
         if (homePortfolioGrid && typeof db !== 'undefined') {
-            db.collection("projetos")
-              .where("isCapa", "==", false) // Só pega projetos que NÃO são de capa
-              .orderBy("dataDeCriacao", "desc")
-              .limit(3)
-              .get()
-              .then((querySnapshot) => {
-                  let html = "";
-                  querySnapshot.forEach((doc) => {
-                      const projeto = doc.data();
-                      html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
-                  });
-                  homePortfolioGrid.innerHTML = html;
-              });
+            db.collection("projetos").where("isCapa", "==", false).orderBy("dataDeCriacao", "desc").limit(3).get()
+                .then((querySnapshot) => {
+                    let html = "";
+                    querySnapshot.forEach((doc) => {
+                        const projeto = doc.data();
+                        html += `<div class="portfolio-item"><img src="${projeto.imagemURL}" alt="${projeto.titulo}"><div class="overlay"><h3>${projeto.titulo}</h3></div></div>`;
+                    });
+                    homePortfolioGrid.innerHTML = html;
+                });
         }
     }
 
@@ -134,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderPortfolio(projectsToRender) {
             fullPortfolioGrid.innerHTML = "";
             if (projectsToRender.length === 0) {
-                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado nesta categoria.</p>";
+                fullPortfolioGrid.innerHTML = "<p style='color: white; text-align: center;'>Nenhum projeto encontrado.</p>";
                 return;
             }
             projectsToRender.forEach(projeto => {
@@ -167,28 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     let filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
                     filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
                     renderPortfolio(filteredProjects);
-
-                    // 3. SÓ PARA A PÁGINA DE PORTFÓLIO (Splash Screen)
-    const portfolioSplash = document.getElementById('splash-screen-portfolio');
-    if (portfolioSplash) {
-        const removePortfolioSplash = () => {
-            if (document.body.contains(portfolioSplash)) {
-                portfolioSplash.classList.add('swoosh-out'); // Adiciona a classe para a animação de saída
-                
-                // Remove o elemento da página após a animação
-                setTimeout(() => {
-                    if (portfolioSplash.parentNode) {
-                        portfolioSplash.parentNode.removeChild(portfolioSplash);
-                    }
-                }, 700); // Duração igual à transição no CSS
-            }
-        };
-
-        // Define o temporizador fixo para 4 segundos
-        setTimeout(removePortfolioSplash, 4000);
-    }
-
-});
                 });
             });
         }
