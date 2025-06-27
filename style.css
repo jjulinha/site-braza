@@ -337,26 +337,57 @@ section, footer {
   opacity: 1;
 }
 
-/* CLIENTES */
-.descricao-clientes {
-  color: var(--cor-texto-secundario);
-  text-align: center;
-  margin-bottom: 30px;
-}
-.clientes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-  text-align: center;
-}
-.cliente-logo {
-  background: rgba(255,255,255,0.03);
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.1);
+/* ======================================================== */
+/* ESTILOS ATUALIZADOS PARA A SECÇÃO DE CLIENTES */
+/* ======================================================== */
+
+.clientes-marquee-section {
+  background-color: #ffffff; /* Fundo alterado para branco */
+  overflow: hidden;
+  padding: 80px 0; /* Aumenta o espaçamento vertical para mais respiro */
 }
 
-/* PLANOS */
+/* Nova regra para mudar a cor do título APENAS nesta secção */
+.clientes-marquee-section .section-title {
+  color: var(--cor-fundo); /* Usa a variável de cor de fundo (preto/escuro) */
+  border-bottom-color: var(--cor-vermelho); /* Garante que a linha vermelha continue visível */
+}
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 25s linear infinite;
+}
+
+.cliente-logo {
+  display: inline-block;
+  height: 60px;
+  margin: 0 4rem;
+  object-fit: contain;
+  /* Adiciona um filtro para melhorar a visibilidade de logos claros no fundo branco */
+  filter: brightness(0.1);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.cliente-logo:hover {
+    opacity: 1;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}/* PLANOS */
 /* PLANOS - ESTILO DOS ITENS ATUALIZADO */
 .planos-grid {
   display: flex;
