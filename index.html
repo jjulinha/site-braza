@@ -12,7 +12,7 @@
 <body>
 
   <div id="splash-screen">
-    <video id="splash-video" autoplay muted playsinline>
+    <video id="splash-video" autoplay muted playsinline loop>
       <source src="assets/splash.mp4" type="video/mp4">
       Seu navegador não suporta vídeo.
     </video>
@@ -40,7 +40,7 @@
       </div>
     </section>
 
-    <section id="servicos">
+    <section id="servicos" class="reveal">
       <h2 class="section-title">O QUE A GENTE FAZ?</h2>
       <div class="servicos-wrapper">
         <div class="servico-bloco reveal"><div class="servico-grafico"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 12L15 25V55C15 75 50 88 50 88C50 88 85 75 85 55V25L50 12Z" stroke="var(--cor-texto-secundario)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 62C50 62 60 56 60 50C60 44 50 34 50 34C50 34 40 44 40 50C40 56 50 62 50 62Z" stroke="var(--cor-acento-amarelo)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>FORJANDO SUA MARCA</h2><hr><p>Uma marca forte não nasce do acaso, ela é forjada. Mergulhamos no DNA do seu negócio para construir uma identidade sólida e um posicionamento claro no mercado. O resultado é uma marca autêntica, que ressoa com seu público e serve como alicerce para todas as futuras ações de marketing e vendas.</p></div>
@@ -65,29 +65,9 @@
       <div class="portfolio-cta"><a href="portfolio.html" class="plano-cta destaque">VEJA O INCÊNDIO COMPLETO</a></div>
     </section>
 
-  <section id="clientes" class="clientes-marquee-section reveal">
-  <h2 class="section-title">QUEM JÁ ASCENDEU COM A GENTE?</h2>
-  
-  <div class="marquee">
-    <div class="marquee-content">
-      </div>
-  </div>
-</section>
-      <div class="marquee">
-        <div class="marquee-content">
-          <img src="assets/toyota.png" alt="Toyota" class="cliente-logo" />
-          <img src="assets/gallpack.png" alt="Gallpack" class="cliente-logo" />
-          <img src="assets/proposta-verde.png" alt="Proposta Verde" class="cliente-logo" />
-          <img src="assets/engemuller.png" alt="Engemüller" class="cliente-logo" />
-          <img src="assets/tservice.png" alt="T-Service" class="cliente-logo" />
-          <img src="assets/ultramel.png" alt="Ultra mel" class="cliente-logo" />
-          <img src="assets/metzler.png" alt="Metzler Metal Mecânica" class="cliente-logo" />
-          <img src="assets/ciasucos.png" alt="CiaSucos" class="cliente-logo" />
-          <img src="logos/toyota.png" alt="Toyota" class="cliente-logo" />
-          <img src="logos/gallpack.png" alt="Gallpack" class="cliente-logo" />
-          <img src="logos/proposta-verde.png" alt="Proposta Verde" class="cliente-logo" />
-          <img src="logos/engemuller.png" alt="Engemüller" class="cliente-logo" />
-        </div></div>
+    <section id="clientes" class="clientes-marquee-section reveal">
+      <h2 class="section-title">QUEM JÁ ASCENDEU COM A GENTE?</h2>
+      <div class="marquee"><div class="marquee-content"><img src="assets/toyota.png" alt="Toyota" class="cliente-logo" /><img src="assets/gallpack.png" alt="Gallpack" class="cliente-logo" /><img src="assets/proposta-verde.png" alt="Proposta Verde" class="cliente-logo" /><img src="assets/engemuller.png" alt="Engemüller" class="cliente-logo" /><img src="assets/tservice.png" alt="T-Service" class="cliente-logo" /><img src="assets/ultramel.png" alt="Ultra mel" class="cliente-logo" /><img src="assets/metzler.png" alt="Metzler Metal Mecânica" class="cliente-logo" /><img src="assets/ciasucos.png" alt="CiaSucos" class="cliente-logo" /><img src="assets/toyota.png" alt="Toyota" class="cliente-logo" /><img src="assets/gallpack.png" alt="Gallpack" class="cliente-logo" /><img src="assets/proposta-verde.png" alt="Proposta Verde" class="cliente-logo" /><img src="assets/engemuller.png" alt="Engemüller" class="cliente-logo" /></div></div>
     </section>
 
     <section id="planos" class="reveal">
@@ -117,15 +97,6 @@
     </div>
     <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
   </footer>
-
-  <div id="video-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-button">×</span>
-      <div class="video-container">
-        <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
