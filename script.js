@@ -167,6 +167,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     let filteredProjects = filterValue === 'all' ? allProjects : allProjects.filter(p => p.categoria === filterValue);
                     filteredProjects.sort((a, b) => (b.isCapa || false) - (a.isCapa || false));
                     renderPortfolio(filteredProjects);
+
+                    // 3. SÓ PARA A PÁGINA DE PORTFÓLIO (Splash Screen)
+    const portfolioSplash = document.getElementById('splash-screen-portfolio');
+    if (portfolioSplash) {
+        const removePortfolioSplash = () => {
+            if (document.body.contains(portfolioSplash)) {
+                portfolioSplash.classList.add('swoosh-out'); // Adiciona a classe para a animação de saída
+                
+                // Remove o elemento da página após a animação
+                setTimeout(() => {
+                    if (portfolioSplash.parentNode) {
+                        portfolioSplash.parentNode.removeChild(portfolioSplash);
+                    }
+                }, 700); // Duração igual à transição no CSS
+            }
+        };
+
+        // Define o temporizador fixo para 4 segundos
+        setTimeout(removePortfolioSplash, 4000);
+    }
+
+});
                 });
             });
         }
