@@ -647,12 +647,10 @@ footer p {
 .page-title-section {
     text-align: center;
     padding: 140px 6% 60px 6%;
-    background-color: rgba(10, 10, 10, 0.5); /* Fundo semi-transparente */
-    backdrop-filter: blur(5px);
 }
 
 .page-title-section h2 {
-    font-family: var(--fonte-headline);
+    font-family: thunder(--fonte-headline);
     font-size: clamp(3rem, 10vw, 6rem);
     color: var(--cor-acento-amarelo);
     margin-bottom: 1rem;
@@ -660,7 +658,7 @@ footer p {
 }
 
 .page-title-section p {
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: thunder(1rem, 3vw, 1.5rem);
     color: var(--cor-texto-secundario);
     max-width: 600px;
     margin: 0 auto;
