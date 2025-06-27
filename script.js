@@ -24,12 +24,15 @@ try {
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- FUNCIONALIDADES GERAIS (EXECUTADAS EM TODAS AS PÁGINAS) ---
+
+    // Background VANTA FOG
     if (typeof VANTA !== 'undefined') {
         VANTA.FOG({
             el: "body", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, highlightColor: 0x6d0202, midtoneColor: 0x0, lowlightColor: 0x04040D, baseColor: 0x0, blurFactor: 0.50, speed: 0.80, zoom: 1.00
         });
     }
 
+    // HEADER ESCONDIDO AO ROLAR
     const header = document.querySelector('header');
     if (header) {
         let lastScrollTop = 0;
@@ -44,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // SCROLL REVEAL DAS SECÇÕES (REPETE A ANIMAÇÃO)
     const revealElements = document.querySelectorAll('.reveal');
     if (revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries) => {
@@ -60,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // LÓGICA DO ACORDEÃO PARA A FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length > 0) {
         faqItems.forEach(item => {
@@ -75,10 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     // --- LÓGICA ESPECÍFICA PARA CADA PÁGINA ---
 
+    // 1. SÓ PARA A PÁGINA INICIAL (index.html)
     const homePageIdentifier = document.getElementById('hero');
     if (homePageIdentifier) {
+        
         const splashScreen = document.getElementById('splash-screen');
         if (splashScreen) {
             setTimeout(() => {
@@ -106,8 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 2. SÓ PARA A PÁGINA DE PORTFÓLIO (portfolio.html)
     const portfolioPageIdentifier = document.querySelector('.portfolio-grid-new');
     if (portfolioPageIdentifier) {
+
         const portfolioSplash = document.getElementById('splash-screen-portfolio');
         if (portfolioSplash) {
             setTimeout(() => {
