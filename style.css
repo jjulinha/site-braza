@@ -1171,6 +1171,16 @@ footer#contato {
   line-height: 1.3;
 }
 
+/* Remover cantos arredondados das imagens de portfólio */
+.portfolio-group .item-capa,
+.portfolio-item-child,
+.portfolio-item-child img,
+.portfolio-item,
+.portfolio-item img {
+  border-radius: 0 !important;
+}
+
+
 /* Responsivo extra */
 @media (max-width: 1024px) {
   .portfolio-filhos-wrapper {
