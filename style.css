@@ -377,8 +377,8 @@ section, footer {
 
 .cliente-logo {
     display: inline-block;
-    height: 60px;
-    margin: 0 50px; /* Espaçamento entre os logos */
+ height: 80px; /* ALTERADO: Aumentamos de 60px para 80px */
+    margin: 0 60px; /* ALTERADO: Aumentamos a margem para dar mais espaço */
     object-fit: contain;
     vertical-align: middle;
     /* Filtro para escurecer os logos e dar uniformidade */
