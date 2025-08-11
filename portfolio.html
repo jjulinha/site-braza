@@ -1,92 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfólio - Braza</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfólio - Braza</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="portfolio-page loading">
 
-  <div id="splash-screen">
-  <video id="splash-video" autoplay muted playsinline>
-    <source src="assets/splash.mp4" type="video/mp4" />
-    Seu navegador não suporta vídeo HTML5.
-  </video>
-</div>
-
-
-  <header>
-    <div class="logo"><h1>BRAZA</h1></div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="portfolio.html">Portfólio</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section class="page-title-section">
-      <h2>NOSSOS <span class="highlight highlight-1">PROJETOS</span> EM <span class="highlight highlight-2">CHAMAS</span></h2>
-      <p>Trabalhos que incendeiam marcas e geram resultados.</p>
-    </section>
-
-    <div class="portfolio-filters">
-      <button class="filter-btn active" data-filter="all">Todos</button>
-      <button class="filter-btn" data-filter="eventos">Eventos</button>
-      <button class="filter-btn" data-filter="produtos">Produtos</button>
-      <button class="filter-btn" data-filter="videos">Vídeos</button>
-      <button class="filter-btn" data-filter="institucional">Institucional</button>
-      <button class="filter-btn" data-filter="social-media">Social Media</button>
-      <button class="filter-btn" data-filter="design">Design</button>
+    <div id="splash-screen">
+        <video id="splash-video" autoplay muted playsinline>
+            <source src="assets/splash.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo HTML5.
+        </video>
     </div>
 
-    <div class="page-container">
-      <div class="portfolio-grid-new"></div>
-    </div>
-  </main>
+    <header>
+        <div class="logo"><h1>BRAZA</h1></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="page-title-section">
+            <h2>NOSSOS <span class="highlight highlight-1">PROJETOS</span> EM <span class="highlight highlight-2">CHAMAS</span></h2>
+            <p>Trabalhos que incendeiam marcas e geram resultados.</p>
+        </section>
 
-  <footer id="contato" class="reveal">
-    <h2 class="hero-title">BORA BOTAR FOGO?</h2>
-    <div class="social-links">
-      <a href="mailto:contato@brza.studio" class="plano-cta destaque">MANDA UM EMAIL</a>
-      <a href="https://wa.me/554891879579" class="plano-cta destaque">CHAMA NO WHATS</a>
-    </div>
-    <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
-  </footer>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="eventos">Eventos</button>
+            <button class="filter-btn" data-filter="produtos">Produtos</button>
+            <button class="filter-btn" data-filter="videos">Vídeos</button>
+            <button class="filter-btn" data-filter="institucional">Institucional</button>
+            <button class="filter-btn" data-filter="social-media">Social Media</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+        </div>
 
-  <!-- Three.js (obrigatório antes do Vanta) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+        <div class="page-container">
+            <div class="portfolio-grid-new"></div>
+        </div>
+    </main>
 
-<!-- Vanta.js efeito FOG -->
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <footer id="contato" class="reveal">
+        <h2 class="hero-title">BORA BOTAR FOGO?</h2>
+        <div class="social-links">
+            <a href="mailto:contato@brza.studio" class="plano-cta destaque">MANDA UM EMAIL</a>
+            <a href="https://wa.me/554891879579" class="plano-cta destaque">CHAMA NO WHATS</a>
+        </div>
+        <p class="copyright">© 2025 BRAZA. FEITO NO CALOR DO MOMENTO.</p>
+    </footer>
 
-<!-- Inicialização -->
-<script>
-  VANTA.FOG({
-    el: "body",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    highlightColor: 0xb90000,
-    midtoneColor: 0x140f00,
-    lowlightColor: 0xbb0808,
-    baseColor: 0x000000
-  });
-</script>
-
-
-
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
-  <script type="module" src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <script src="script.js"></script>
 
 </body>
 </html>
