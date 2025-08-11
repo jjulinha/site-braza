@@ -962,6 +962,13 @@ footer#contato {
   transform: none !important;
 }
 
+/* Adicione esta regra ao seu style.css se o novo ícone não se ajustar bem */
+.servico-grafico img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Garante que o ícone caiba sem distorcer */
+}
+
 /* ==== PORTFÓLIO AGRUPADO: CAPA + FILHOS ==== */
 .portfolio-group {
   margin-bottom: 80px;
