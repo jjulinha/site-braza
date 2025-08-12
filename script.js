@@ -29,10 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     // === INICIALIZAÇÃO DO VANTA.JS ===
-    // Movido do HTML para cá para melhor organização
-    if (typeof VANTA !== 'undefined') {
+    if (typeof VANTA !== 'undefined' && document.querySelector('#hero')) {
         VANTA.FOG({
-            el: "body",
+            el: "#hero", // <-- CORRIGIDO AQUI
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
