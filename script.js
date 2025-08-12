@@ -18,6 +18,16 @@ try {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+// === ANIMAÇÃO DO TEXTO DO TOPO (HERO) ===
+    const heroTitles = document.querySelectorAll(".hero-title");
+    if (heroTitles.length > 0) {
+        heroTitles.forEach((title, index) => {
+            // Adiciona a classe 'active' com um pequeno atraso para criar um efeito de cascata
+            setTimeout(() => {
+                title.classList.add("active");
+            }, index * 300); 
+        });
+    }
     // === INICIALIZAÇÃO DO VANTA.JS ===
     // Movido do HTML para cá para melhor organização
     if (typeof VANTA !== 'undefined') {
