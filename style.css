@@ -108,16 +108,24 @@ section, footer {
 
 /* HERO */
 #hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* ADICIONADO: Remove os limites herdados da tag <section> */
+    padding: 0;
+    max-width: 100%; 
 }
 .hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative; /* ADICIONADO: Ativa o z-index */
-  z-index: 2;         /* Garante que o conteúdo fique por cima da animação */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+    /* ADICIONADO: Aplica os limites de layout diretamente no conteúdo */
+    width: 100%;
+    max-width: 1600px; /* Mantém o limite de largura do seu site */
+    margin: 0 auto;    /* Centra o conteúdo */
+    padding: 0 6%;     /* Adiciona o espaçamento lateral */
 }
 }
 .hero-title {
