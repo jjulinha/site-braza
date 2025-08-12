@@ -116,7 +116,9 @@ section, footer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  z-index: 2;
+  position: relative; /* ADICIONADO: Ativa o z-index */
+  z-index: 2;         /* Garante que o conteúdo fique por cima da animação */
+}
 }
 .hero-title {
   font-family: var(--fonte-headline);
