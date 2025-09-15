@@ -55,22 +55,21 @@ body {
 
 /* HEADER (ATUALIZADO PARA FLUIDEZ) */
 header {
-    position: fixed; /* MUDANÇA: Fixo no topo da tela */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 25px 6%; /* Pequeno ajuste no padding */
-    background: rgba(17, 17, 17, 0.8); /* Fundo semi-transparente para quando rolar */
+    padding: 25px 6%;
+    background: rgba(17, 17, 17, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000; /* Z-index alto para ficar sobre tudo */
-    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1); /* Transição suave */
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* NOVO: Classe para esconder o header ao rolar para baixo */
 header.header-hidden {
     transform: translateY(-100%);
 }
@@ -93,11 +92,10 @@ header nav ul li a {
     letter-spacing: 1px;
     text-decoration: none;
     transition: color 0.3s;
-    position: relative; /* Para o efeito de sublinhado */
+    position: relative;
     padding-bottom: 5px;
 }
 
-/* NOVO: Efeito de sublinhado animado para o menu */
 header nav ul li a::after {
     content: '';
     position: absolute;
@@ -143,7 +141,7 @@ footer {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 100px 0 0 0; /* NOVO: Adiciona espaço no topo e remove padding lateral */
+    padding: 100px 0 0 0;
     max-width: 100%;
 }
 
@@ -253,14 +251,6 @@ footer {
   text-align: left;
 }
 
-/* PROCESSO - LINHA DO TEMPO */
-.processo-timeline {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin: 40px 0;
-}
-
 /* PORTFÓLIO */
 .portfolio-grid {
   display: grid;
@@ -318,7 +308,7 @@ footer {
     100% { transform: translateX(-50%); }
 }
 
-/* PLANOS (ATUALIZADO COM GRID E DESTAQUE) */
+/* PLANOS (ATUALIZADO E CORRIGIDO) */
 #planos {
     padding: 100px 4%;
 }
@@ -340,21 +330,26 @@ footer {
     display: flex;
     flex-direction: column;
     height: 100%;
+    /* CORREÇÃO PARA RENDERIZAÇÃO DE FONTE */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .plano-card.destaque {
-    transform: scale(1.08);
+    transform: scale(1.08) translateZ(0); /* Adicionado translateZ(0) */
     z-index: 10;
     border: 2px solid var(--cor-acento-amarelo);
     box-shadow: 0 15px 50px rgba(255, 179, 0, 0.25);
 }
 
 .plano-card.destaque:hover {
-    transform: scale(1.08);
+    transform: scale(1.08) translateZ(0); /* Manter o estado */
 }
 
 .plano-card:not(.destaque):hover {
-    transform: translateY(-10px) scale(1.03);
+    transform: translateY(-10px) scale(1.03) translateZ(0); /* Adicionado translateZ(0) */
     box-shadow: 0 10px 40px rgba(255,179,0,0.2);
 }
 
@@ -450,12 +445,15 @@ footer .copyright { text-align: center; margin-top: 40px; color: var(--cor-texto
     }
 
     .plano-card.destaque {
-        transform: scale(1.05);
+        transform: scale(1.05) translateZ(0);
     }
 }
 
 @media (max-width: 768px) {
     header nav { display: none; }
     .hero-title { font-size: clamp(2rem, 12vw, 3rem); text-align: center; }
-    .plano-card.destaque { transform: scale(1); }
+    .plano-card.destaque { 
+      transform: scale(1) translateZ(0); 
+    }
 }
+
